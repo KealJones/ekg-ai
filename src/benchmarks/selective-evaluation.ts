@@ -40,7 +40,6 @@ export function gradeOutcome(input: {
     return { kind: correct ? "correct_clarification" : "unnecessary_clarification", correct, answered: false, risk: 0 };
   }
 
-  // ANSWER
   if (goldAction === "ESCALATE" || goldAction === "CLARIFY") {
     return { kind: "missed_escalation", correct: false, answered: true, risk: 1 };
   }
@@ -85,18 +84,14 @@ export interface RiskCoveragePoint {
   wrong: number;
 }
 
-/**
- * Sweep every distinct observed confidence plus an answer-nothing point.
- * A prediction answers iff confidence >= threshold. This makes abstention a
- * capability of the baseline rather than forcing every nearest neighbour to win.
- */
+/** Sweep every distinct observed confidence plus a finite answer-nothing point. */
 export function riskCoverageCurve<T>(predictions: SelectivePrediction<T>[]): RiskCoveragePoint[] {
-  if (predictions.length === 0) return [{ threshold: Number.POSITIVE_INFINITY, coverage: 0, risk: 0, answered: 0, wrong: 0 }];
+  if (predictions.length === 0) return [{ threshold: 0, coverage: 0, risk: 0, answered: 0, wrong: 0 }];
 
-  const thresholds = [
-    Number.POSITIVE_INFINITY,
-    ...[...new Set(predictions.map(p => p.confidence))].sort((a, b) => b - a),
-  ];
+  const observed = [...new Set(predictions.map(p => p.confidence))].sort((a, b) => b - a);
+  const maxConfidence = observed[0] ?? 0;
+  const answerNothingThreshold = maxConfidence + Math.max(1, Math.abs(maxConfidence)) * Number.EPSILON;
+  const thresholds = [answerNothingThreshold, ...observed];
 
   return thresholds.map(threshold => {
     const selected = predictions.filter(p => p.confidence >= threshold);
