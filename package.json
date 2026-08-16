@@ -18,6 +18,7 @@
     "benchmark:language-curriculum": "npm run build && node benchmarks/v0-language-curriculum.mjs",
     "benchmark:filesystem-milestone": "npm run build && node benchmarks/v0-filesystem-milestone.mjs",
     "benchmark:falsification-pilot": "npm run build && node benchmarks/v1-falsification-pilot.mjs",
-    "benchmark:pilot-audit": "npm run build && node benchmarks/v1-pilot-audit.mjs"
+    "benchmark:pilot-audit": "npm run build && node benchmarks/v1-pilot-audit.mjs",
+    "benchmark:tiny-semantic": "npm run build && node benchmarks/v0-tiny-semantic-probe.mjs"
   }
 }
