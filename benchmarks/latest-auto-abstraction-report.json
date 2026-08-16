@@ -1,0 +1,156 @@
+{
+  "version": "auto-abstraction-v0.1",
+  "generatedAt": "2026-08-15T21:21:52.878Z",
+  "discovery": [
+    {
+      "task": "discovery.triple",
+      "candidates": 5,
+      "programId": "learned.discovery.triple",
+      "body": {
+        "kind": "call",
+        "capabilityId": "core.add_int",
+        "args": [
+          {
+            "kind": "input",
+            "index": 0,
+            "type": {
+              "kind": "int"
+            }
+          },
+          {
+            "kind": "call",
+            "capabilityId": "core.add_int",
+            "args": [
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "int"
+                }
+              },
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "int"
+                }
+              }
+            ],
+            "type": {
+              "kind": "int"
+            }
+          }
+        ],
+        "type": {
+          "kind": "int"
+        }
+      }
+    },
+    {
+      "task": "discovery.quadruple",
+      "candidates": 9,
+      "programId": "learned.discovery.quadruple",
+      "body": {
+        "kind": "call",
+        "capabilityId": "core.add_int",
+        "args": [
+          {
+            "kind": "call",
+            "capabilityId": "core.add_int",
+            "args": [
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "int"
+                }
+              },
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "int"
+                }
+              }
+            ],
+            "type": {
+              "kind": "int"
+            }
+          },
+          {
+            "kind": "call",
+            "capabilityId": "core.add_int",
+            "args": [
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "int"
+                }
+              },
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "int"
+                }
+              }
+            ],
+            "type": {
+              "kind": "int"
+            }
+          }
+        ],
+        "type": {
+          "kind": "int"
+        }
+      }
+    }
+  ],
+  "minedCandidate": {
+    "occurrences": 3,
+    "independentPrograms": [
+      "learned.discovery.triple",
+      "learned.discovery.quadruple"
+    ],
+    "nodeCount": 3,
+    "compressionGainNodes": 2,
+    "expression": {
+      "kind": "call",
+      "capabilityId": "core.add_int",
+      "args": [
+        {
+          "kind": "input",
+          "index": 0,
+          "type": {
+            "kind": "int"
+          }
+        },
+        {
+          "kind": "input",
+          "index": 0,
+          "type": {
+            "kind": "int"
+          }
+        }
+      ],
+      "type": {
+        "kind": "int"
+      }
+    }
+  },
+  "validation": {
+    "baselineCandidates": 99,
+    "promotedCandidates": 86,
+    "searchSavings": 13,
+    "decision": "promoted"
+  },
+  "finalUntouched": {
+    "baselineSolved": 1,
+    "promotedSolved": 1,
+    "baselineCandidates": 434,
+    "promotedCandidates": 82,
+    "searchSavings": 352,
+    "candidateProgramId": "abstract.auto.double"
+  }
+}

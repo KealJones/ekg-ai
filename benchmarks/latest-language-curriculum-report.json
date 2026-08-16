@@ -1,0 +1,354 @@
+{
+  "suite": "language-curriculum-v0.1",
+  "before": {
+    "summary": {
+      "total": 13,
+      "statusCorrect": 13,
+      "teacherRequired": 5,
+      "teacherFreeRate": 0.6153846153846154,
+      "executableCorrect": 6,
+      "executableTotal": 6,
+      "falseExecutions": 0
+    },
+    "rows": [
+      {
+        "id": "known.multiply-six",
+        "utterance": "multiply this number by six",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 42,
+        "expectedOutput": 42,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "known.times-four",
+        "utterance": "4 times this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 20,
+        "expectedOutput": 20,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "known.double",
+        "utterance": "double this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 18,
+        "expectedOutput": 18,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "known.add-three",
+        "utterance": "add three to this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 11,
+        "expectedOutput": 11,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "known.plus-two",
+        "utterance": "plus two to this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 6,
+        "expectedOutput": 6,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "compose.add-multiply",
+        "utterance": "add three then multiply by six",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 30,
+        "expectedOutput": 30,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "clarify.missing-factor",
+        "utterance": "multiply this number",
+        "status": "clarify",
+        "expectedStatus": "clarify",
+        "statusCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "clarify.bigger",
+        "utterance": "make this number bigger",
+        "status": "clarify",
+        "expectedStatus": "clarify",
+        "statusCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "unknown.reverse",
+        "utterance": "reverse this number",
+        "status": "teacher",
+        "expectedStatus": "teacher",
+        "statusCorrect": true,
+        "teacherRequired": true
+      },
+      {
+        "id": "unknown.substring",
+        "utterance": "address this number by six",
+        "status": "teacher",
+        "expectedStatus": "teacher",
+        "statusCorrect": true,
+        "teacherRequired": true
+      },
+      {
+        "id": "learnable.sixfold",
+        "utterance": "sixfold this number",
+        "status": "teacher",
+        "expectedStatus": "teacher",
+        "statusCorrect": true,
+        "expectedOutput": 42,
+        "teacherRequired": true
+      },
+      {
+        "id": "learnable.quadruple",
+        "utterance": "quadruple this number",
+        "status": "teacher",
+        "expectedStatus": "teacher",
+        "statusCorrect": true,
+        "expectedOutput": 20,
+        "teacherRequired": true
+      },
+      {
+        "id": "learnable.decuple",
+        "utterance": "decuple this number",
+        "status": "teacher",
+        "expectedStatus": "teacher",
+        "statusCorrect": true,
+        "expectedOutput": 40,
+        "teacherRequired": true
+      }
+    ]
+  },
+  "autonomousBehavioralLessons": [
+    {
+      "case": "learnable.sixfold",
+      "accepted": true,
+      "candidate": {
+        "relation": "Multiply",
+        "impliedValue": 6
+      },
+      "reason": "unique behavioral grounding"
+    },
+    {
+      "case": "learnable.quadruple",
+      "accepted": true,
+      "candidate": {
+        "relation": "Multiply",
+        "impliedValue": 4
+      },
+      "reason": "unique behavioral grounding"
+    },
+    {
+      "case": "learnable.decuple",
+      "accepted": true,
+      "candidate": {
+        "relation": "Multiply",
+        "impliedValue": 10
+      },
+      "reason": "unique behavioral grounding"
+    }
+  ],
+  "after": {
+    "summary": {
+      "total": 13,
+      "statusCorrect": 13,
+      "teacherRequired": 2,
+      "teacherFreeRate": 0.8461538461538461,
+      "executableCorrect": 9,
+      "executableTotal": 9,
+      "falseExecutions": 0
+    },
+    "rows": [
+      {
+        "id": "known.multiply-six",
+        "utterance": "multiply this number by six",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 42,
+        "expectedOutput": 42,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "known.times-four",
+        "utterance": "4 times this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 20,
+        "expectedOutput": 20,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "known.double",
+        "utterance": "double this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 18,
+        "expectedOutput": 18,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "known.add-three",
+        "utterance": "add three to this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 11,
+        "expectedOutput": 11,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "known.plus-two",
+        "utterance": "plus two to this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 6,
+        "expectedOutput": 6,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "compose.add-multiply",
+        "utterance": "add three then multiply by six",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 30,
+        "expectedOutput": 30,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "clarify.missing-factor",
+        "utterance": "multiply this number",
+        "status": "clarify",
+        "expectedStatus": "clarify",
+        "statusCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "clarify.bigger",
+        "utterance": "make this number bigger",
+        "status": "clarify",
+        "expectedStatus": "clarify",
+        "statusCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "unknown.reverse",
+        "utterance": "reverse this number",
+        "status": "teacher",
+        "expectedStatus": "teacher",
+        "statusCorrect": true,
+        "teacherRequired": true
+      },
+      {
+        "id": "unknown.substring",
+        "utterance": "address this number by six",
+        "status": "teacher",
+        "expectedStatus": "teacher",
+        "statusCorrect": true,
+        "teacherRequired": true
+      },
+      {
+        "id": "learnable.sixfold",
+        "utterance": "sixfold this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 42,
+        "expectedOutput": 42,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "learnable.quadruple",
+        "utterance": "quadruple this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 20,
+        "expectedOutput": 20,
+        "outputCorrect": true,
+        "teacherRequired": false
+      },
+      {
+        "id": "learnable.decuple",
+        "utterance": "decuple this number",
+        "status": "executed",
+        "expectedStatus": "executed",
+        "statusCorrect": true,
+        "output": 40,
+        "expectedOutput": 40,
+        "outputCorrect": true,
+        "teacherRequired": false
+      }
+    ]
+  },
+  "learnedPhraseKnowledge": [
+    {
+      "id": "phrase:sixfold",
+      "relation": "Multiply",
+      "impliedValue": 6,
+      "confidence": 0.85,
+      "provenance": [
+        "benchmark:language-curriculum-v0.1",
+        "case:learnable.sixfold",
+        "learned-from:behavioral-examples"
+      ]
+    },
+    {
+      "id": "phrase:quadruple",
+      "relation": "Multiply",
+      "impliedValue": 4,
+      "confidence": 0.85,
+      "provenance": [
+        "benchmark:language-curriculum-v0.1",
+        "case:learnable.quadruple",
+        "learned-from:behavioral-examples"
+      ]
+    },
+    {
+      "id": "phrase:decuple",
+      "relation": "Multiply",
+      "impliedValue": 10,
+      "confidence": 0.85,
+      "provenance": [
+        "benchmark:language-curriculum-v0.1",
+        "case:learnable.decuple",
+        "learned-from:behavioral-examples"
+      ]
+    }
+  ],
+  "displacement": {
+    "teacherRequiredBefore": 5,
+    "teacherRequiredAfter": 2,
+    "reduction": 3
+  }
+}

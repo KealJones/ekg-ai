@@ -1,0 +1,15 @@
+{
+  "system_contract": "Use the repository TeacherAdapter system contract.",
+  "context": {
+    "rawGoal": "Decide whether to activate the retrieved abstract.double procedure before paying for both search arms.",
+    "taskId": "real-teacher.activation.unknown-cost",
+    "observation": "The learner retrieved abstract.double with score 150, but has no historical utility observations and no reliable primitive search-depth estimate. The current online activation policy abstains because it lacks evidence.",
+    "impasse": "How can the learner decide whether to activate relevant learned knowledge when historical utility is absent and primitive search difficulty is not yet known, without simply running both complete search arms every time?",
+    "failedAttempts": [
+      "Always activate relevant learned knowledge: previously increased search cost on easy tasks.",
+      "Always use primitive search when history is absent: can miss large savings on harder tasks.",
+      "Use primitiveDepthHint: currently supplied externally and unavailable before search in this fixture."
+    ],
+    "knownStrategyIds": []
+  }
+}

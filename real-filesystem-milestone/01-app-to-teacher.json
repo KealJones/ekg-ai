@@ -1,0 +1,14 @@
+{
+  "faculty": "file-intent-grounding",
+  "rawUtterance": "find the file with the longest filename in this folder",
+  "interpreterResult": {
+    "status": "teacher",
+    "reason": "no learned file-extreme intent pattern"
+  },
+  "availableHostCapabilities": [
+    "fs.list_filenames: FolderPath -> List<String>",
+    "core.argmax_string_len: List<String> -> String",
+    "core.argmin_string_len: List<String> -> String"
+  ],
+  "request": "Teach the minimum reusable intent pattern needed to ground this request, preferably generalizing to the contrasting 'shortest filename' request. Do not provide a finished host-language solution; the learner will synthesize and validate the executable Blueprint."
+}

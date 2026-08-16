@@ -1,0 +1,66 @@
+{
+  "teachingTrace": {
+    "id": "teach.real.intent.twice.001",
+    "taskId": "intent-grounding:twice",
+    "observation": "The intent interpreter cannot ground the action phrase in 'twice this number', even though its numeric lexicon can represent the value 2.",
+    "impasse": "The language layer lacks a mapping from the phrase 'twice' to the Multiply relation, so the planner never receives an Intent.",
+    "teacherQuestion": "Does 'twice' consistently express multiplication by a factor of two in the current numeric command domain?",
+    "hypotheses": [
+      {
+        "statement": "'twice' expresses Multiply with factor 2 for numeric transformation commands.",
+        "status": "proposed"
+      },
+      {
+        "statement": "'twice' should be treated as an opaque task-family label.",
+        "status": "rejected",
+        "reason": "Intent should ground signals/goal/constraints directly rather than recreate the old label hack."
+      }
+    ],
+    "experiments": [
+      {
+        "question": "Validate the proposed phrase grounding on 'twice this number' and 'make this number twice'.",
+        "expectedDiscrimination": "Both should resolve to Multiply with constant 2; otherwise reject the mapping."
+      }
+    ],
+    "conclusion": "Teach the interpreter a reusable phrase grounding 'twice' -> Multiply; let the existing lexical factor logic provide constant 2.",
+    "extractedKnowledge": [
+      {
+        "kind": "concept",
+        "id": "language.twice.multiply",
+        "description": "In numeric transformation commands, the phrase 'twice' expresses the Multiply relation with factor 2."
+      }
+    ],
+    "nextQuestion": "Can future validated phrase groundings be learned from successful intent/execution episodes without Teacher intervention?",
+    "teacherInterventions": 1,
+    "provenance": [
+      "teacher:gpt-5.6-sol:conversation",
+      "app-request:real-intent-teacher-run/01-app-teacher-request.json"
+    ]
+  },
+  "groundingLesson": {
+    "id": "lesson.twice.001",
+    "phrase": "twice",
+    "relation": "Multiply",
+    "confidence": 0.96,
+    "validationExamples": [
+      {
+        "utterance": "twice this number",
+        "relation": "Multiply",
+        "constants": [
+          2
+        ]
+      },
+      {
+        "utterance": "make this number twice",
+        "relation": "Multiply",
+        "constants": [
+          2
+        ]
+      }
+    ],
+    "provenance": [
+      "teacher:gpt-5.6-sol:conversation",
+      "teach.real.intent.twice.001"
+    ]
+  }
+}

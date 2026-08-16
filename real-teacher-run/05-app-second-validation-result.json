@@ -1,0 +1,118 @@
+{
+  "teacherTraceValidated": true,
+  "experiment": "activation.explore-then-exploit",
+  "rows": [
+    {
+      "context": "easy-scale",
+      "phase": "explore",
+      "task": "explore.easy.1",
+      "primitive": {
+        "solved": true,
+        "candidates": 5
+      },
+      "learned": {
+        "solved": true,
+        "candidates": 10
+      }
+    },
+    {
+      "context": "easy-scale",
+      "phase": "explore",
+      "task": "explore.easy.2",
+      "primitive": {
+        "solved": true,
+        "candidates": 5
+      },
+      "learned": {
+        "solved": true,
+        "candidates": 10
+      }
+    },
+    {
+      "context": "easy-scale",
+      "phase": "exploit",
+      "task": "exploit.easy.3",
+      "prior": {
+        "taskFamily": "easy-scale",
+        "programId": "abstract.double",
+        "observations": 2,
+        "meanSavings": -5,
+        "learnedWins": 0,
+        "primitiveWins": 2,
+        "solveRegressions": 0
+      },
+      "decision": {
+        "mode": "primitive-only",
+        "confidence": 0.9,
+        "reasons": [
+          "prior-nonpositive-savings:-5"
+        ]
+      },
+      "measuredArm": "primitive",
+      "measured": {
+        "solved": true,
+        "candidates": 5
+      }
+    },
+    {
+      "context": "hard-scale",
+      "phase": "explore",
+      "task": "explore.hard.1",
+      "primitive": {
+        "solved": true,
+        "candidates": 99
+      },
+      "learned": {
+        "solved": true,
+        "candidates": 86
+      }
+    },
+    {
+      "context": "hard-scale",
+      "phase": "explore",
+      "task": "explore.hard.2",
+      "primitive": {
+        "solved": true,
+        "candidates": 99
+      },
+      "learned": {
+        "solved": true,
+        "candidates": 86
+      }
+    },
+    {
+      "context": "hard-scale",
+      "phase": "exploit",
+      "task": "exploit.hard.3",
+      "prior": {
+        "taskFamily": "hard-scale",
+        "programId": "abstract.double",
+        "observations": 2,
+        "meanSavings": 13,
+        "learnedWins": 2,
+        "primitiveWins": 0,
+        "solveRegressions": 0
+      },
+      "decision": {
+        "mode": "learned-first",
+        "confidence": 0.73,
+        "reasons": [
+          "prior-positive-savings:13"
+        ]
+      },
+      "measuredArm": "learned",
+      "measured": {
+        "solved": true,
+        "candidates": 86
+      }
+    }
+  ],
+  "dualArmMeasurements": 4,
+  "exploitDecisions": 2,
+  "proposedCriterion": {
+    "id": "activation.explore-then-exploit",
+    "accepted": true,
+    "reason": "After two exploration observations per context, graph-derived priors chose primitive-only for the harmful easy context and learned-first for the beneficial hard context; exploit episodes measured only the chosen arm and both solved."
+  },
+  "teacherInterventionsForThisProposal": 1
+}

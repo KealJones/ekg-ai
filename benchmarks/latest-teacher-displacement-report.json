@@ -1,0 +1,46 @@
+{
+  "version": "teacher-displacement-v0.1",
+  "faculty": "question-selection",
+  "caveat": "Teacher is scripted/mock in this benchmark; this measures architecture-level displacement, not frontier-LLM quality.",
+  "rows": [
+    {
+      "index": 0,
+      "impasse": "cold.activation",
+      "source": "teacher",
+      "teacherInterventions": 1,
+      "strategy": "teacher.compare-regimes"
+    },
+    {
+      "index": 1,
+      "impasse": "warm.cache",
+      "source": "learner",
+      "teacherInterventions": 0,
+      "strategy": "knowledge:teacher.compare-regimes",
+      "question": "What differs between the cases where this strategy succeeds and where it fails?"
+    },
+    {
+      "index": 2,
+      "impasse": "warm.batch",
+      "source": "learner",
+      "teacherInterventions": 0,
+      "strategy": "knowledge:teacher.compare-regimes",
+      "question": "What differs between the cases where this strategy succeeds and where it fails?"
+    },
+    {
+      "index": 3,
+      "impasse": "warm.index",
+      "source": "learner",
+      "teacherInterventions": 0,
+      "strategy": "knowledge:teacher.compare-regimes",
+      "question": "What differs between the cases where this strategy succeeds and where it fails?"
+    }
+  ],
+  "summary": {
+    "coldTeacherInterventions": 1,
+    "coldTasks": 1,
+    "warmTeacherInterventions": 0,
+    "warmTasks": 3,
+    "totalTeacherCalls": 1,
+    "warmIndependentRate": 1
+  }
+}

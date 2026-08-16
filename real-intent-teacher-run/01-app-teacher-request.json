@@ -1,0 +1,17 @@
+{
+  "faculty": "intent-grounding",
+  "rawUtterance": "twice this number",
+  "interpreterResult": {
+    "status": "teacher",
+    "reason": "no grounded action phrase"
+  },
+  "knownSeedPhrases": [
+    "multiply",
+    "times",
+    "double",
+    "add",
+    "plus",
+    "largest"
+  ],
+  "request": "Propose the minimum reusable phrase grounding needed to interpret this utterance. Include validation examples. The learner will reject the proposal if examples do not ground to the expected relation/constants."
+}

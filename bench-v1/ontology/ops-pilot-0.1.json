@@ -1,0 +1,54 @@
+{
+  "version": "pilot-0.1",
+  "types": [
+    "Int",
+    "Str",
+    "Dir",
+    "File",
+    "List<File>",
+    "List<Str>",
+    "Hole<T>"
+  ],
+  "ops": [
+    {
+      "name": "input",
+      "signature": "T -> T"
+    },
+    {
+      "name": "literal",
+      "signature": "T -> T"
+    },
+    {
+      "name": "add",
+      "signature": "Int x Int -> Int"
+    },
+    {
+      "name": "mul",
+      "signature": "Int x Int -> Int"
+    },
+    {
+      "name": "fs.children",
+      "signature": "Dir -> List<File>"
+    },
+    {
+      "name": "basename",
+      "signature": "File -> Str"
+    },
+    {
+      "name": "strlen",
+      "signature": "Str -> Int"
+    },
+    {
+      "name": "argmax",
+      "signature": "List<T> x (T->K) -> T"
+    },
+    {
+      "name": "argmin",
+      "signature": "List<T> x (T->K) -> T"
+    },
+    {
+      "name": "hole",
+      "signature": "Type -> Hole<T>"
+    }
+  ]
+}

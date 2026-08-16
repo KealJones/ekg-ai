@@ -1,0 +1,232 @@
+{
+  "suite": "v0.1",
+  "generatedAt": "2026-08-15T20:43:38.167Z",
+  "rows": [
+    {
+      "split": "train",
+      "task": "train.identity",
+      "decision": "BUILD",
+      "success": true,
+      "candidates": 1
+    },
+    {
+      "split": "train",
+      "task": "train.double",
+      "decision": "ADAPT",
+      "success": true,
+      "candidates": 3
+    },
+    {
+      "split": "train",
+      "task": "train.square",
+      "decision": "ADAPT",
+      "success": true,
+      "candidates": 9
+    },
+    {
+      "split": "train",
+      "task": "train.max2",
+      "decision": "BUILD",
+      "success": true,
+      "candidates": 12
+    },
+    {
+      "split": "train",
+      "task": "train.string-length",
+      "decision": "BUILD",
+      "success": true,
+      "candidates": 1
+    },
+    {
+      "split": "test",
+      "task": "test.triple",
+      "decision": "ADAPT",
+      "success": true,
+      "candidates": 9
+    },
+    {
+      "split": "test",
+      "task": "test.quadruple",
+      "decision": "ADAPT",
+      "success": true,
+      "candidates": 15
+    },
+    {
+      "split": "test",
+      "task": "test.max2-new-cases",
+      "decision": "RUN",
+      "success": true,
+      "candidates": 0
+    },
+    {
+      "split": "test",
+      "task": "test.string-length-new-cases",
+      "decision": "RUN",
+      "success": true,
+      "candidates": 0
+    },
+    {
+      "split": "test",
+      "task": "test.reverse-string-gap",
+      "decision": "TEACH",
+      "success": false,
+      "candidates": 1
+    }
+  ],
+  "summary": {
+    "testSolved": 4,
+    "testTotal": 5,
+    "memorizeSolved": 0,
+    "testCandidates": 25,
+    "programCount": 7,
+    "episodeCount": 10
+  },
+  "usage": [
+    {
+      "programId": "learned.train.max2",
+      "selectedUses": 2,
+      "calledByBlueprints": 0,
+      "parentProgramIds": [],
+      "taskUses": 2,
+      "successes": 2,
+      "zeroSearchRuns": 1
+    },
+    {
+      "programId": "learned.train.string-length",
+      "selectedUses": 2,
+      "calledByBlueprints": 0,
+      "parentProgramIds": [],
+      "taskUses": 2,
+      "successes": 2,
+      "zeroSearchRuns": 1
+    },
+    {
+      "programId": "learned.train.identity",
+      "selectedUses": 1,
+      "calledByBlueprints": 0,
+      "parentProgramIds": [],
+      "taskUses": 1,
+      "successes": 1,
+      "zeroSearchRuns": 0
+    },
+    {
+      "programId": "learned.train.double",
+      "selectedUses": 1,
+      "calledByBlueprints": 0,
+      "parentProgramIds": [],
+      "taskUses": 1,
+      "successes": 1,
+      "zeroSearchRuns": 0
+    },
+    {
+      "programId": "learned.train.square",
+      "selectedUses": 1,
+      "calledByBlueprints": 0,
+      "parentProgramIds": [],
+      "taskUses": 1,
+      "successes": 1,
+      "zeroSearchRuns": 0
+    },
+    {
+      "programId": "learned.test.triple",
+      "selectedUses": 1,
+      "calledByBlueprints": 0,
+      "parentProgramIds": [],
+      "taskUses": 1,
+      "successes": 1,
+      "zeroSearchRuns": 0
+    },
+    {
+      "programId": "learned.test.quadruple",
+      "selectedUses": 1,
+      "calledByBlueprints": 0,
+      "parentProgramIds": [],
+      "taskUses": 1,
+      "successes": 1,
+      "zeroSearchRuns": 0
+    }
+  ],
+  "abstractionCandidates": [
+    {
+      "occurrences": 2,
+      "programIds": [
+        "learned.test.triple",
+        "learned.test.quadruple"
+      ],
+      "nodeCount": 5,
+      "recurrenceScore": 10,
+      "expression": {
+        "kind": "call",
+        "capabilityId": "core.add_int",
+        "args": [
+          {
+            "kind": "input",
+            "index": 0,
+            "type": {
+              "kind": "int"
+            }
+          },
+          {
+            "kind": "call",
+            "capabilityId": "core.add_int",
+            "args": [
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "int"
+                }
+              },
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "int"
+                }
+              }
+            ],
+            "type": {
+              "kind": "int"
+            }
+          }
+        ],
+        "type": {
+          "kind": "int"
+        }
+      }
+    },
+    {
+      "occurrences": 3,
+      "programIds": [
+        "learned.train.double",
+        "learned.test.triple",
+        "learned.test.quadruple"
+      ],
+      "nodeCount": 3,
+      "recurrenceScore": 9,
+      "expression": {
+        "kind": "call",
+        "capabilityId": "core.add_int",
+        "args": [
+          {
+            "kind": "input",
+            "index": 0,
+            "type": {
+              "kind": "int"
+            }
+          },
+          {
+            "kind": "input",
+            "index": 0,
+            "type": {
+              "kind": "int"
+            }
+          }
+        ],
+        "type": {
+          "kind": "int"
+        }
+      }
+    }
+  ]
+}

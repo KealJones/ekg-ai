@@ -1,0 +1,814 @@
+{
+  "version": "intent-v0.1",
+  "before": {
+    "summary": {
+      "total": 5,
+      "teacherFree": 4,
+      "correctlyExecuted": 4,
+      "teacherFreeRate": 0.8
+    },
+    "rows": [
+      {
+        "utterance": "multiply this number by six",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 6,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Multiply",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "seed:english"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.mul_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 6,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 42,
+        "expected": 42,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 135,
+            "reasons": [
+              "type-compatible",
+              "semantic:scale"
+            ]
+          }
+        ]
+      },
+      {
+        "utterance": "double this number",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 2,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Multiply",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "seed:english"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.mul_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 2,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 18,
+        "expected": 18,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 135,
+            "reasons": [
+              "type-compatible",
+              "semantic:scale"
+            ]
+          }
+        ]
+      },
+      {
+        "utterance": "add three to this number",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 3,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Add",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "seed:english"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.add_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 3,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 11,
+        "expected": 11,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 100,
+            "reasons": [
+              "type-compatible"
+            ]
+          }
+        ]
+      },
+      {
+        "utterance": "4 times this number",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 4,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Multiply",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "seed:english"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.mul_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 4,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 20,
+        "expected": 20,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 135,
+            "reasons": [
+              "type-compatible",
+              "semantic:scale"
+            ]
+          }
+        ]
+      },
+      {
+        "utterance": "twice this number",
+        "status": "teacher",
+        "teacherFree": false
+      }
+    ]
+  },
+  "teacherHandoff": {
+    "lessonAccepted": true,
+    "failures": [],
+    "teacherInterventions": 1
+  },
+  "after": {
+    "summary": {
+      "total": 5,
+      "teacherFree": 5,
+      "correctlyExecuted": 5,
+      "teacherFreeRate": 1
+    },
+    "rows": [
+      {
+        "utterance": "multiply this number by six",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 6,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Multiply",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "seed:english"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.mul_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 6,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 42,
+        "expected": 42,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 135,
+            "reasons": [
+              "type-compatible",
+              "semantic:scale"
+            ]
+          }
+        ]
+      },
+      {
+        "utterance": "double this number",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 2,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Multiply",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "seed:english"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.mul_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 2,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 18,
+        "expected": 18,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 135,
+            "reasons": [
+              "type-compatible",
+              "semantic:scale"
+            ]
+          }
+        ]
+      },
+      {
+        "utterance": "add three to this number",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 3,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Add",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "seed:english"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.add_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 3,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 11,
+        "expected": 11,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 100,
+            "reasons": [
+              "type-compatible"
+            ]
+          }
+        ]
+      },
+      {
+        "utterance": "4 times this number",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 4,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Multiply",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "seed:english"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.mul_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 4,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 20,
+        "expected": 20,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 135,
+            "reasons": [
+              "type-compatible",
+              "semantic:scale"
+            ]
+          }
+        ]
+      },
+      {
+        "utterance": "twice this number",
+        "status": "resolved",
+        "teacherFree": true,
+        "intent": {
+          "signals": [
+            {
+              "id": "signal.input0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "binding": "input",
+              "inputIndex": 0,
+              "provenance": [
+                "utterance:implicit-number-input"
+              ]
+            },
+            {
+              "id": "signal.const0",
+              "concept": "Number",
+              "type": {
+                "kind": "int"
+              },
+              "value": 2,
+              "provenance": [
+                "utterance:number"
+              ]
+            }
+          ],
+          "goal": {
+            "concept": "Number",
+            "type": {
+              "kind": "int"
+            }
+          },
+          "constraints": [
+            {
+              "relation": "Multiply",
+              "args": [
+                "signal.input0",
+                "signal.const0"
+              ],
+              "provenance": [
+                "teacher:gpt-5.6-sol:conversation",
+                "teach.real.intent.twice.001",
+                "lesson:lesson.twice.001"
+              ]
+            }
+          ]
+        },
+        "plan": {
+          "kind": "call",
+          "capabilityId": "core.mul_int",
+          "args": [
+            {
+              "kind": "input",
+              "index": 0,
+              "type": {
+                "kind": "int"
+              }
+            },
+            {
+              "kind": "const",
+              "value": 2,
+              "type": {
+                "kind": "int"
+              }
+            }
+          ],
+          "type": {
+            "kind": "int"
+          }
+        },
+        "output": 22,
+        "expected": 22,
+        "correct": true,
+        "retrieved": [
+          {
+            "id": "abstract.double",
+            "score": 135,
+            "reasons": [
+              "type-compatible",
+              "semantic:scale"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyCheck": {
+    "utterance": "multiply this number by six",
+    "manualTaskFamilyOrLabelsUsed": false,
+    "expectedIntentRelation": "Multiply",
+    "expectedConstant": 6,
+    "learnedDoubleRetrieved": true
+  }
+}

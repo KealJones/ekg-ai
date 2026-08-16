@@ -1,0 +1,36 @@
+{
+  "version": "promotion-v0.1",
+  "generatedAt": "2026-08-15T21:21:55.257Z",
+  "helpful": {
+    "baselineCandidates": 5,
+    "promotedCandidates": 2,
+    "baselineSolved": 1,
+    "promotedSolved": 1,
+    "decision": {
+      "candidateKey": "triple",
+      "promoted": true,
+      "reason": "promoted",
+      "independentPrograms": 2,
+      "compressionGainNodes": 6,
+      "heldoutSearchSavings": 3,
+      "baselineSolved": 1,
+      "promotedSolved": 1
+    }
+  },
+  "harmful": {
+    "baselineCandidates": 9,
+    "promotedCandidates": 21,
+    "baselineSolved": 1,
+    "promotedSolved": 1,
+    "decision": {
+      "candidateKey": "self-max",
+      "promoted": false,
+      "reason": "no-heldout-utility",
+      "independentPrograms": 2,
+      "compressionGainNodes": 6,
+      "heldoutSearchSavings": -12,
+      "baselineSolved": 1,
+      "promotedSolved": 1
+    }
+  }
+}
