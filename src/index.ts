@@ -15,6 +15,7 @@ export * from "./controller.js";
 export * from "./baselines/memorize.js";
 export * from "./benchmarks/fingerprint.js";
 export * from "./benchmarks/v0-suite.js";
+export * from "./benchmarks/selective-evaluation.js";
 
 export * from "./learning/abstraction-miner.js";
 export * from "./telemetry/program-usage.js";
