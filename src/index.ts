@@ -47,6 +47,7 @@ export * from "./intent/behavioral-grounding.js";
 export * from "./intent/language-impasse.js";
 export * from "./intent/language-controller.js";
 export * from "./intent/language-session.js";
+export * from "./intent/semantic-encoder.js";
 export * from "./runtime/filesystem-capabilities.js";
 export * from "./domains/file-intent.js";
 export * from "./benchmarks/semantic-frame.js";
