@@ -1,0 +1,717 @@
+{
+  "version": "falsification-pilot-v0.2",
+  "note": "Pilot only; not publication-scale and gold was authored in this session, not independent-human adjudicated.",
+  "curriculum": {
+    "n": 8,
+    "teacherInterventions": 1,
+    "learnedArtifacts": 3,
+    "programs": [
+      "learned.pilot.file-longest",
+      "learned.pilot.file-shortest"
+    ]
+  },
+  "systems": {
+    "checkpoint0": {
+      "n": 13,
+      "correct": 7,
+      "accuracy": 0.5384615384615384,
+      "meanCost": 0.23076923076923078,
+      "wrongAnswers": 0,
+      "escalations": 8
+    },
+    "full": {
+      "n": 13,
+      "correct": 13,
+      "accuracy": 1,
+      "meanCost": 0,
+      "wrongAnswers": 0,
+      "escalations": 2
+    },
+    "exact": {
+      "n": 13,
+      "correct": 2,
+      "accuracy": 0.15384615384615385,
+      "meanCost": 0.4230769230769231,
+      "wrongAnswers": 0,
+      "escalations": 13
+    },
+    "knn": {
+      "n": 13,
+      "correct": 8,
+      "accuracy": 0.6153846153846154,
+      "meanCost": 1.1538461538461537,
+      "wrongAnswers": 5,
+      "escalations": 0
+    }
+  },
+  "learningCurve": {
+    "checkpoint0Accuracy": 0.5384615384615384,
+    "checkpointAfterCurriculumAccuracy": 1,
+    "delta": 0.46153846153846156,
+    "teacherInterventionsDuringCurriculum": 1,
+    "testTimeTeacherInterventions": 0
+  },
+  "stratified": {
+    "structuralComposition": {
+      "ekg": {
+        "n": 2,
+        "correct": 2,
+        "accuracy": 1
+      },
+      "knn": {
+        "n": 2,
+        "correct": 0,
+        "accuracy": 0
+      }
+    },
+    "lexicalNear": {
+      "ekg": {
+        "n": 8,
+        "correct": 8,
+        "accuracy": 1
+      },
+      "knn": {
+        "n": 8,
+        "correct": 7,
+        "accuracy": 0.875
+      }
+    }
+  },
+  "compression": {
+    "successfulHeldoutAnswers": 10,
+    "learnedArtifacts": 3,
+    "successesPerLearnedArtifact": 3.3333333333333335
+  },
+  "knockout": {
+    "fileIntentPattern": {
+      "summary": {
+        "n": 13,
+        "correct": 7,
+        "accuracy": 0.5384615384615384,
+        "meanCost": 0.23076923076923078,
+        "wrongAnswers": 0,
+        "escalations": 8
+      },
+      "dependentItems": [
+        "te.longest.near1",
+        "te.longest.near2",
+        "te.longest.near3",
+        "te.shortest.near1",
+        "te.shortest.near2",
+        "te.shortest.near3"
+      ]
+    },
+    "learnedFilePrograms": {
+      "summary": {
+        "n": 13,
+        "correct": 7,
+        "accuracy": 0.5384615384615384,
+        "meanCost": 0.23076923076923078,
+        "wrongAnswers": 0,
+        "escalations": 8
+      },
+      "dependentItems": [
+        "te.longest.near1",
+        "te.longest.near2",
+        "te.longest.near3",
+        "te.shortest.near1",
+        "te.shortest.near2",
+        "te.shortest.near3"
+      ]
+    },
+    "attributionRate": 0.46153846153846156,
+    "fileAttributionRate": 1,
+    "dependencySpecificity": {
+      "precision": 1,
+      "recall": 1
+    },
+    "reuseDepth": {
+      "intent-pattern:file-extreme-filename": 6,
+      "learned.pilot.file-longest": 3,
+      "learned.pilot.file-shortest": 3
+    }
+  },
+  "integrity": {
+    "teacherOff": true,
+    "testTimeTeacherCalls": 0,
+    "testTimeLearningDisabled": true,
+    "multiFixtureDenotation": true,
+    "fixtureCountPerAnswer": 3
+  },
+  "rows": {
+    "full": [
+      {
+        "id": "te.mul6.near",
+        "surface": "six times this number",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            12,
+            30,
+            66
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          12,
+          30,
+          66
+        ],
+        "got": [
+          12,
+          30,
+          66
+        ]
+      },
+      {
+        "id": "te.add3.near",
+        "surface": "three plus this number",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            5,
+            8,
+            14
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          5,
+          8,
+          14
+        ],
+        "got": [
+          5,
+          8,
+          14
+        ]
+      },
+      {
+        "id": "te.mul4add3.comp",
+        "surface": "multiply by four then add three",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            11,
+            23,
+            47
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          11,
+          23,
+          47
+        ],
+        "got": [
+          11,
+          23,
+          47
+        ]
+      },
+      {
+        "id": "te.add2double.comp",
+        "surface": "add two then double this number",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            8,
+            14,
+            26
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          8,
+          14,
+          26
+        ],
+        "got": [
+          8,
+          14,
+          26
+        ]
+      },
+      {
+        "id": "te.longest.near1",
+        "surface": "which file has the longest filename in this directory",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "this-is-the-longest-name.json",
+            "absurdly_lengthy_filename_for_test.bin",
+            "three-three-three.css"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ],
+        "got": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ]
+      },
+      {
+        "id": "te.longest.near2",
+        "surface": "find the longest file name in this folder",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "this-is-the-longest-name.json",
+            "absurdly_lengthy_filename_for_test.bin",
+            "three-three-three.css"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ],
+        "got": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ]
+      },
+      {
+        "id": "te.longest.near3",
+        "surface": "which file in this folder has the longest filename",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "this-is-the-longest-name.json",
+            "absurdly_lengthy_filename_for_test.bin",
+            "three-three-three.css"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ],
+        "got": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ]
+      },
+      {
+        "id": "te.shortest.near1",
+        "surface": "which file has the shortest filename in this folder",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "a.txt",
+            "tiny",
+            "one.js"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ],
+        "got": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ]
+      },
+      {
+        "id": "te.shortest.near2",
+        "surface": "find the shortest filename in this directory",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "a.txt",
+            "tiny",
+            "one.js"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ],
+        "got": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ]
+      },
+      {
+        "id": "te.shortest.near3",
+        "surface": "which file in this directory has the shortest file name",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "a.txt",
+            "tiny",
+            "one.js"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ],
+        "got": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ]
+      },
+      {
+        "id": "te.ambiguous",
+        "surface": "make this number larger",
+        "goldAction": "CLARIFY",
+        "result": {
+          "action": "CLARIFY",
+          "denotations": []
+        },
+        "correct": true,
+        "cost": 0
+      },
+      {
+        "id": "te.adversarial",
+        "surface": "address this number by six",
+        "goldAction": "ESCALATE",
+        "result": {
+          "action": "ESCALATE",
+          "denotations": []
+        },
+        "correct": true,
+        "cost": 0
+      },
+      {
+        "id": "te.unsupported.file",
+        "surface": "find the largest file in this folder",
+        "goldAction": "ESCALATE",
+        "result": {
+          "action": "ESCALATE",
+          "denotations": []
+        },
+        "correct": true,
+        "cost": 0
+      }
+    ],
+    "knn": [
+      {
+        "id": "te.mul6.near",
+        "surface": "six times this number",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            12,
+            30,
+            66
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          12,
+          30,
+          66
+        ],
+        "got": [
+          12,
+          30,
+          66
+        ]
+      },
+      {
+        "id": "te.add3.near",
+        "surface": "three plus this number",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            5,
+            8,
+            14
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          5,
+          8,
+          14
+        ],
+        "got": [
+          5,
+          8,
+          14
+        ]
+      },
+      {
+        "id": "te.mul4add3.comp",
+        "surface": "multiply by four then add three",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            30,
+            48,
+            84
+          ]
+        },
+        "correct": false,
+        "cost": 3,
+        "expected": [
+          11,
+          23,
+          47
+        ],
+        "got": [
+          30,
+          48,
+          84
+        ]
+      },
+      {
+        "id": "te.add2double.comp",
+        "surface": "add two then double this number",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            4,
+            10,
+            22
+          ]
+        },
+        "correct": false,
+        "cost": 3,
+        "expected": [
+          8,
+          14,
+          26
+        ],
+        "got": [
+          4,
+          10,
+          22
+        ]
+      },
+      {
+        "id": "te.longest.near1",
+        "surface": "which file has the longest filename in this directory",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "this-is-the-longest-name.json",
+            "absurdly_lengthy_filename_for_test.bin",
+            "three-three-three.css"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ],
+        "got": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ]
+      },
+      {
+        "id": "te.longest.near2",
+        "surface": "find the longest file name in this folder",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "this-is-the-longest-name.json",
+            "absurdly_lengthy_filename_for_test.bin",
+            "three-three-three.css"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ],
+        "got": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ]
+      },
+      {
+        "id": "te.longest.near3",
+        "surface": "which file in this folder has the longest filename",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "this-is-the-longest-name.json",
+            "absurdly_lengthy_filename_for_test.bin",
+            "three-three-three.css"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ],
+        "got": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ]
+      },
+      {
+        "id": "te.shortest.near1",
+        "surface": "which file has the shortest filename in this folder",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "this-is-the-longest-name.json",
+            "absurdly_lengthy_filename_for_test.bin",
+            "three-three-three.css"
+          ]
+        },
+        "correct": false,
+        "cost": 3,
+        "expected": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ],
+        "got": [
+          "this-is-the-longest-name.json",
+          "absurdly_lengthy_filename_for_test.bin",
+          "three-three-three.css"
+        ]
+      },
+      {
+        "id": "te.shortest.near2",
+        "surface": "find the shortest filename in this directory",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "a.txt",
+            "tiny",
+            "one.js"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ],
+        "got": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ]
+      },
+      {
+        "id": "te.shortest.near3",
+        "surface": "which file in this directory has the shortest file name",
+        "goldAction": "ANSWER",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "a.txt",
+            "tiny",
+            "one.js"
+          ]
+        },
+        "correct": true,
+        "cost": 0,
+        "expected": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ],
+        "got": [
+          "a.txt",
+          "tiny",
+          "one.js"
+        ]
+      },
+      {
+        "id": "te.ambiguous",
+        "surface": "make this number larger",
+        "goldAction": "CLARIFY",
+        "result": {
+          "action": "CLARIFY",
+          "denotations": []
+        },
+        "correct": true,
+        "cost": 0
+      },
+      {
+        "id": "te.adversarial",
+        "surface": "address this number by six",
+        "goldAction": "ESCALATE",
+        "result": {
+          "action": "ANSWER",
+          "denotations": []
+        },
+        "correct": false,
+        "cost": 3
+      },
+      {
+        "id": "te.unsupported.file",
+        "surface": "find the largest file in this folder",
+        "goldAction": "ESCALATE",
+        "result": {
+          "action": "ANSWER",
+          "denotations": [
+            "this-is-the-longest-name.json",
+            "absurdly_lengthy_filename_for_test.bin",
+            "three-three-three.css"
+          ]
+        },
+        "correct": false,
+        "cost": 3
+      }
+    ]
+  }
+}

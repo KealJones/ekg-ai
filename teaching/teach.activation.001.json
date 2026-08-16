@@ -1,0 +1,51 @@
+{
+  "id": "teach.activation.001",
+  "taskId": "retrieval.heldout.triple",
+  "observation": "A contextually relevant learned Double procedure increased search cost on an easy 3x task.",
+  "impasse": "Relevance alone does not imply that activating retrieved knowledge is computationally useful.",
+  "teacherQuestion": "What distinguishes cases where retrieved knowledge helps from cases where it hurts?",
+  "hypotheses": [
+    {
+      "statement": "Always use relevant learned knowledge.",
+      "status": "rejected",
+      "reason": "Easy 3x: primitive-only explored 5 candidates; retrieved learned-first explored 10."
+    },
+    {
+      "statement": "Activate retrieved knowledge only when expected utility exceeds its overhead.",
+      "status": "supported",
+      "reason": "Hard 8x: primitive-only explored 434 candidates; learned-first explored 82."
+    }
+  ],
+  "experiments": [
+    {
+      "question": "Compare primitive-only and retrieved learned-first search on easy and harder tasks.",
+      "expectedDiscrimination": "If relevance is sufficient, learned-first should win both; if utility is separate, it may win only some regimes.",
+      "result": "Easy 3x: 5 vs 10; hard 8x: 434 vs 82."
+    }
+  ],
+  "conclusion": "Retrieval and activation are separate cognitive decisions.",
+  "extractedKnowledge": [
+    {
+      "kind": "criterion",
+      "id": "activation.expected-utility",
+      "description": "Use retrieved knowledge only when expected benefit exceeds activation/search overhead."
+    },
+    {
+      "kind": "concept",
+      "id": "activation.abstention",
+      "description": "A relevant procedure may be deliberately ignored when primitive execution/search is expected to be cheaper."
+    },
+    {
+      "kind": "question-strategy",
+      "id": "teacher.compare-regimes",
+      "description": "When a strategy helps in one case and hurts in another, ask what feature distinguishes the regimes and construct discriminating examples."
+    }
+  ],
+  "nextQuestion": "How can expected search utility be predicted before paying the cost of running both search arms?",
+  "teacherInterventions": 2,
+  "provenance": [
+    "conversation:teacher",
+    "benchmark:retrieval-v0.1",
+    "benchmark:activation-v0.1"
+  ]
+}

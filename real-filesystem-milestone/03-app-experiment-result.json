@@ -1,0 +1,203 @@
+{
+  "version": "filesystem-milestone-v0.1",
+  "initial": {
+    "rawUtterance": "find the file with the longest filename in this folder",
+    "interpretationStatus": "teacher",
+    "teacherInterventionsNeeded": 1
+  },
+  "teaching": {
+    "realTeacherTraceId": "teach.real.files.extreme-filename.001",
+    "teacherInterventions": 1,
+    "patternAccepted": true,
+    "learnedPatternEntity": {
+      "id": "intent-pattern:file-extreme-filename",
+      "kind": "concept",
+      "labels": [
+        "intent-pattern",
+        "file",
+        "extreme",
+        "filename"
+      ],
+      "attrs": {
+        "patternId": "file-extreme-filename",
+        "provenance": [
+          "teacher:gpt-5.6-sol:conversation",
+          "teach.real.files.extreme-filename.001",
+          "lesson:lesson.file-extreme-filename.001"
+        ],
+        "validatedExamples": 2
+      }
+    }
+  },
+  "firstNovelTask": {
+    "rawUtterance": "find the file with the longest filename in this folder",
+    "relation": "LongestFilename",
+    "learnerDecision": "BUILD",
+    "searchCandidates": 3,
+    "searchDepth": 2,
+    "learnedProgram": {
+      "id": "learned.filesystem.longest-filename",
+      "name": "Synthesized filesystem.longest-filename",
+      "inputs": [
+        {
+          "kind": "string"
+        }
+      ],
+      "output": {
+        "kind": "string"
+      },
+      "body": {
+        "kind": "call",
+        "capabilityId": "core.argmax_string_len",
+        "args": [
+          {
+            "kind": "call",
+            "capabilityId": "fs.list_filenames",
+            "args": [
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "string"
+                }
+              }
+            ],
+            "type": {
+              "kind": "list",
+              "item": {
+                "kind": "string"
+              }
+            }
+          }
+        ],
+        "type": {
+          "kind": "string"
+        }
+      },
+      "provenance": [
+        "synthesis:filesystem.longest-filename"
+      ]
+    },
+    "heldoutFolder": "real-filesystem-milestone/fixtures/heldout",
+    "heldoutOutput": "the-heldout-super-long-filename.data",
+    "heldoutExpected": "the-heldout-super-long-filename.data",
+    "correct": true
+  },
+  "repeatedTask": {
+    "teacherInterventions": 0,
+    "learnerDecision": "RUN",
+    "searchCandidates": 0,
+    "correct": true
+  },
+  "relatedUnseenTask": {
+    "rawUtterance": "find the shortest file name in this directory",
+    "teacherInterventions": 0,
+    "relation": "ShortestFilename",
+    "learnerDecision": "ADAPT",
+    "searchCandidates": 4,
+    "searchDepth": 1,
+    "learnedProgram": {
+      "id": "learned.filesystem.shortest-filename",
+      "name": "Synthesized filesystem.shortest-filename",
+      "inputs": [
+        {
+          "kind": "string"
+        }
+      ],
+      "output": {
+        "kind": "string"
+      },
+      "body": {
+        "kind": "call",
+        "capabilityId": "core.argmin_string_len",
+        "args": [
+          {
+            "kind": "call",
+            "capabilityId": "fs.list_filenames",
+            "args": [
+              {
+                "kind": "input",
+                "index": 0,
+                "type": {
+                  "kind": "string"
+                }
+              }
+            ],
+            "type": {
+              "kind": "list",
+              "item": {
+                "kind": "string"
+              }
+            }
+          }
+        ],
+        "type": {
+          "kind": "string"
+        }
+      },
+      "provenance": [
+        "synthesis:filesystem.shortest-filename",
+        "adapted-from:learned.filesystem.longest-filename"
+      ]
+    },
+    "heldoutOutput": "z",
+    "heldoutExpected": "z",
+    "correct": true
+  },
+  "safety": {
+    "unsupportedNeighborStatus": "teacher",
+    "falseExecutionAvoided": true
+  },
+  "totals": {
+    "realTeacherInterventions": 1,
+    "laterRelatedTeacherInterventions": 0,
+    "programsLearned": 2,
+    "episodes": [
+      {
+        "id": "episode.1",
+        "taskId": "filesystem.longest-filename",
+        "decision": "BUILD",
+        "retrievedProgramIds": [],
+        "selectedProgramId": "learned.filesystem.longest-filename",
+        "success": true,
+        "synthesized": true,
+        "reusedSeedProgramIds": [],
+        "searchCandidatesExplored": 3,
+        "searchDepthReached": 2,
+        "timestamp": "2026-08-16T04:30:15.903Z"
+      },
+      {
+        "id": "episode.2",
+        "taskId": "filesystem.longest-filename-heldout",
+        "decision": "RUN",
+        "retrievedProgramIds": [
+          "learned.filesystem.longest-filename"
+        ],
+        "selectedProgramId": "learned.filesystem.longest-filename",
+        "success": true,
+        "synthesized": false,
+        "reusedSeedProgramIds": [],
+        "searchCandidatesExplored": 0,
+        "searchDepthReached": 0,
+        "timestamp": "2026-08-16T04:30:15.903Z"
+      },
+      {
+        "id": "episode.3",
+        "taskId": "filesystem.shortest-filename",
+        "decision": "ADAPT",
+        "retrievedProgramIds": [
+          "learned.filesystem.longest-filename"
+        ],
+        "selectedProgramId": "learned.filesystem.shortest-filename",
+        "success": true,
+        "synthesized": true,
+        "reusedSeedProgramIds": [
+          "learned.filesystem.longest-filename"
+        ],
+        "searchCandidatesExplored": 4,
+        "searchDepthReached": 1,
+        "timestamp": "2026-08-16T04:30:15.904Z"
+      }
+    ]
+  }
+}

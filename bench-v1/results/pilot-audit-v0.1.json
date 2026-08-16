@@ -1,0 +1,26 @@
+{
+  "version": "pilot-audit-v0.1",
+  "warning": "Pilot is deliberately too small for publication-grade leakage gates.",
+  "counts": {
+    "train": 8,
+    "test": 13
+  },
+  "crossSplitFourGramPairs": 5,
+  "exactSfOverlapTestItems": [
+    "te.mul6.near",
+    "te.add3.near",
+    "te.longest.near1",
+    "te.longest.near2",
+    "te.longest.near3",
+    "te.shortest.near1",
+    "te.shortest.near2",
+    "te.shortest.near3"
+  ],
+  "structuralCompositionExactSfOverlap": [],
+  "lengthDepthCorrelation": -0.17857434876715197,
+  "gates": {
+    "structuralCompSfDisjoint": true,
+    "lengthDepthAbsBelow03": true,
+    "fourGramStrictGate": false
+  }
+}

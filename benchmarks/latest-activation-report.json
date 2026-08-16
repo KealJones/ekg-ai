@@ -1,0 +1,87 @@
+{
+  "version": "activation-v0.1",
+  "labeled": [
+    {
+      "id": "easy-triple",
+      "primitive": {
+        "solved": true,
+        "candidates": 5
+      },
+      "learned": {
+        "solved": true,
+        "candidates": 10
+      },
+      "features": {
+        "primitiveDepthHint": 2,
+        "retrievedScore": 150,
+        "librarySize": 13,
+        "retrievedCount": 1
+      },
+      "oracle": {
+        "mode": "primitive-only",
+        "reason": "abstain-no-benefit",
+        "candidateSavings": -5
+      },
+      "policy": {
+        "mode": "primitive-only",
+        "confidence": 0.7,
+        "reasons": [
+          "insufficient-evidence"
+        ]
+      }
+    },
+    {
+      "id": "hard-octuple",
+      "primitive": {
+        "solved": true,
+        "candidates": 434
+      },
+      "learned": {
+        "solved": true,
+        "candidates": 82
+      },
+      "features": {
+        "primitiveDepthHint": 4,
+        "retrievedScore": 150,
+        "librarySize": 13,
+        "retrievedCount": 1
+      },
+      "oracle": {
+        "mode": "learned-first",
+        "reason": "learned-reduces-search",
+        "candidateSavings": 352
+      },
+      "policy": {
+        "mode": "learned-first",
+        "confidence": 0.65,
+        "reasons": [
+          "harder-search",
+          "strong-context-match",
+          "small-retrieved-set"
+        ]
+      }
+    }
+  ],
+  "learnedPolicy": [
+    {
+      "id": "easy-triple-after-history",
+      "decision": {
+        "mode": "primitive-only",
+        "confidence": 0.9,
+        "reasons": [
+          "prior-nonpositive-savings:-5"
+        ]
+      }
+    },
+    {
+      "id": "hard-octuple-after-history",
+      "decision": {
+        "mode": "learned-first",
+        "confidence": 0.95,
+        "reasons": [
+          "prior-positive-savings:352"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "teach.real.activation-probe.002",
+  "taskId": "real-teacher.activation.unknown-cost",
+  "observation": "The bounded shallow-probe proposal was validated on contrasting easy and hard cases. It predicted the easy case correctly, but produced no decisive signal on the hard sextuple case before the point where search was already becoming expensive.",
+  "impasse": "A shallow symmetric probe is not a reliable universal activation criterion. In the hard case, early candidate counts actually favored primitive search even though learned-first was cheaper at successful completion.",
+  "teacherQuestion": "If early search cost can be misleading, can uncertainty itself trigger controlled exploration across repeated similar contexts so the learner pays comparison cost only until it has enough empirical utility evidence?",
+  "hypotheses": [
+    {
+      "statement": "Increase the shallow probe depth until it becomes decisive.",
+      "status": "rejected",
+      "reason": "That risks degenerating into running both full searches, defeating the purpose of the probe."
+    },
+    {
+      "statement": "Use early candidate-count advantage as the activation signal.",
+      "status": "rejected",
+      "reason": "On the hard sextuple case at depth 2, primitive search explored 49 candidates versus 81 learned-first, yet learned-first eventually won 86 versus 99."
+    },
+    {
+      "statement": "When no prior exists, deliberately explore both modes on a bounded number of representative episodes, store contextual utility evidence, then exploit the learned prior on later similar episodes.",
+      "status": "proposed",
+      "reason": "The system already supports graph-stored utility evidence and can stop paying comparison cost once evidence becomes sufficient."
+    }
+  ],
+  "experiments": [
+    {
+      "question": "Simulate a sequence of repeated tasks within two contexts: one where learned-first is harmful and one where it is beneficial. For the first two observations in each context, measure both arms and store utility evidence. On subsequent observations, derive the graph prior and let the activation policy choose without running both arms. Verify that teacher/comparison interventions fall while the chosen arm matches the empirically better mode.",
+      "expectedDiscrimination": "If bounded exploration plus contextual utility memory works, only the cold-start observations should require dual-arm measurement; later tasks should select the correct mode from stored evidence. If later decisions remain wrong or still require both arms, reject the strategy."
+    }
+  ],
+  "conclusion": "The failed shallow-probe experiment suggests that activation under uncertainty should be treated as an exploration/exploitation problem rather than a one-shot heuristic. Use a small empirical exploration budget, then reuse graph-stored contextual utility.",
+  "extractedKnowledge": [
+    {
+      "kind": "criterion",
+      "id": "activation.explore-then-exploit",
+      "description": "When contextual activation utility is unknown and no cheap validated discriminator exists, spend a bounded number of episodes measuring both search modes, store the outcomes as contextual utility evidence, then stop dual-arm comparison and exploit the derived prior."
+    },
+    {
+      "kind": "question-strategy",
+      "id": "teacher.convert-uncertainty-to-exploration",
+      "description": "When no reliable pre-decision feature predicts which action is better, ask whether a bounded exploration phase can gather reusable evidence and amortize uncertainty over future similar decisions."
+    }
+  ],
+  "nextQuestion": "What contextual key is specific enough for utility priors to transfer without overfitting or mixing easy and hard regimes?",
+  "teacherInterventions": 1,
+  "provenance": [
+    "teacher:gpt-5.6-sol:conversation",
+    "app-validation:real-teacher-run/03-app-validation-result.json",
+    "teacher-parent:teach.real.activation-probe.001"
+  ]
+}

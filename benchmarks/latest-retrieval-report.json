@@ -1,0 +1,27 @@
+{
+  "version": "retrieval-v0.1",
+  "librarySize": 13,
+  "retrieved": [
+    {
+      "id": "abstract.double",
+      "score": 150,
+      "reasons": [
+        "type-compatible",
+        "labels:scaling",
+        "family:multiply-family"
+      ]
+    }
+  ],
+  "primitiveOnly": {
+    "solved": true,
+    "candidates": 5
+  },
+  "blindWholeLibrary": {
+    "solved": true,
+    "candidates": 238
+  },
+  "retrievedLearnedFirst": {
+    "solved": true,
+    "candidates": 10
+  }
+}

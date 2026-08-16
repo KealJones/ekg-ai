@@ -1,0 +1,116 @@
+{
+  "teacherTraceValidated": true,
+  "graphCounts": {
+    "teachingTraces": 1,
+    "hypotheses": 3,
+    "experiments": 1,
+    "questionStrategies": 1
+  },
+  "experimentResults": [
+    {
+      "case": "easy-triple",
+      "probes": [
+        {
+          "depth": 1,
+          "primitive": {
+            "solved": false,
+            "candidates": 4,
+            "depthReached": 1
+          },
+          "learned": {
+            "solved": false,
+            "candidates": 5,
+            "depthReached": 1
+          }
+        },
+        {
+          "depth": 2,
+          "primitive": {
+            "solved": true,
+            "candidates": 5,
+            "depthReached": 2
+          },
+          "learned": {
+            "solved": true,
+            "candidates": 10,
+            "depthReached": 2
+          }
+        }
+      ],
+      "full": {
+        "primitive": {
+          "solved": true,
+          "candidates": 5
+        },
+        "learned": {
+          "solved": true,
+          "candidates": 10
+        },
+        "eventualBetter": "primitive"
+      }
+    },
+    {
+      "case": "hard-sextuple",
+      "probes": [
+        {
+          "depth": 1,
+          "primitive": {
+            "solved": false,
+            "candidates": 4,
+            "depthReached": 1
+          },
+          "learned": {
+            "solved": false,
+            "candidates": 5,
+            "depthReached": 1
+          }
+        },
+        {
+          "depth": 2,
+          "primitive": {
+            "solved": false,
+            "candidates": 49,
+            "depthReached": 2
+          },
+          "learned": {
+            "solved": false,
+            "candidates": 81,
+            "depthReached": 2
+          }
+        }
+      ],
+      "full": {
+        "primitive": {
+          "solved": true,
+          "candidates": 99
+        },
+        "learned": {
+          "solved": true,
+          "candidates": 86
+        },
+        "eventualBetter": "learned"
+      }
+    }
+  ],
+  "validation": [
+    {
+      "case": "easy-triple",
+      "firstDecisive": {
+        "depth": 2,
+        "choice": "primitive"
+      },
+      "eventualBetter": "primitive",
+      "predictedCorrectly": true
+    },
+    {
+      "case": "hard-sextuple",
+      "eventualBetter": "learned",
+      "predictedCorrectly": false
+    }
+  ],
+  "proposedCriterion": {
+    "id": "activation.unknown-prior-probe",
+    "accepted": false,
+    "reason": "The proposed bounded probe did not reliably predict the eventual better arm across contrasting validation cases; do not promote it yet."
+  }
+}

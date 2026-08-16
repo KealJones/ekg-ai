@@ -1,0 +1,49 @@
+{
+  "id": "teach.real.activation-probe.001",
+  "taskId": "real-teacher.activation.unknown-cost",
+  "observation": "The learner retrieved abstract.double with score 150, but has no historical utility observations and no reliable primitive search-depth estimate. The current online activation policy abstains because it lacks evidence.",
+  "impasse": "How can the learner decide whether to activate relevant learned knowledge when historical utility is absent and primitive search difficulty is not yet known, without simply running both complete search arms every time?",
+  "teacherQuestion": "Can a small, symmetric search probe reveal which search mode is promising before paying for either complete search?",
+  "hypotheses": [
+    {
+      "statement": "When utility history is absent, always choosing primitive-only is the safest policy.",
+      "status": "proposed",
+      "reason": "It avoids learned-library overhead, but may systematically miss large savings on harder tasks."
+    },
+    {
+      "statement": "A bounded equal-budget probe of primitive-only and retrieved-learned search can provide useful activation evidence more cheaply than fully running both arms.",
+      "status": "proposed",
+      "reason": "Search already exposes candidates explored and depth, so partial progress can be compared without requiring a semantic guess."
+    },
+    {
+      "statement": "Retrieval score alone is sufficient to decide activation.",
+      "status": "rejected",
+      "reason": "Prior experiments already showed a highly relevant Double procedure can hurt an easy task while helping a harder one."
+    }
+  ],
+  "experiments": [
+    {
+      "question": "On at least one known easy case where learned-first previously hurt and one harder case where it helped, run primitive-only and retrieved-learned search under the same shallow depth budgets (depth 1, then depth 2 if needed). Record whether either arm solves, candidates explored, and whether the shallow result predicts the cheaper successful full-search arm.",
+      "expectedDiscrimination": "If bounded probing is useful, it should either resolve some cases early or produce a progress/cost signal correlated with the eventual cheaper successful arm. If shallow probes provide no discriminating signal across contrasting regimes, do not promote the strategy."
+    }
+  ],
+  "conclusion": "Do not replace missing history with another fixed activation guess. Treat 'no utility prior' as an information-gathering impasse and test whether a bounded symmetric probe can cheaply generate activation evidence.",
+  "extractedKnowledge": [
+    {
+      "kind": "criterion",
+      "id": "activation.unknown-prior-probe",
+      "description": "When relevant learned knowledge has no contextual utility history, prefer a bounded symmetric comparison probe over an unconditional primitive-only or learned-first choice, but only if held-out experiments show the probe predicts or cheaply resolves the eventual better search mode."
+    },
+    {
+      "kind": "question-strategy",
+      "id": "teacher.seek-cheap-discriminator",
+      "description": "When the correct choice is knowable only after comparing two expensive alternatives, ask whether a cheaper bounded measurement can discriminate between them before paying full cost."
+    }
+  ],
+  "nextQuestion": "What probe signal\u2014early solution, candidates-per-depth, frontier growth, or another feature\u2014best predicts the eventual cheaper successful search arm across held-out task families?",
+  "teacherInterventions": 1,
+  "provenance": [
+    "teacher:gpt-5.6-sol:conversation",
+    "app-request:real-teacher-run/01-app-teacher-request.json"
+  ]
+}

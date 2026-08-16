@@ -1,0 +1,63 @@
+{
+  "teachingTrace": {
+    "id": "teach.real.files.extreme-filename.001",
+    "taskId": "file-intent:extreme-filename",
+    "observation": "The learner can list filenames and compute extrema by string length, but raw language about 'the file with the longest filename in this folder' is not grounded to a typed Intent.",
+    "impasse": "The language layer lacks a reusable pattern connecting folder references, filename as the measured property, and longest/shortest as an extremum objective.",
+    "teacherQuestion": "Can 'longest/shortest filename in a folder' be represented as one reusable extreme-over-filename pattern rather than separate memorized commands?",
+    "hypotheses": [
+      {
+        "statement": "Treat each full sentence as a separate opaque command.",
+        "status": "rejected",
+        "reason": "That would memorize wording and would not transfer to shortest or paraphrases."
+      },
+      {
+        "statement": "Ground folder as the input signal, Filename as the goal concept, and longest/shortest as contrasting extremum relations over filename length.",
+        "status": "proposed"
+      }
+    ],
+    "experiments": [
+      {
+        "question": "Validate the pattern on one longest-filename utterance and one shortest-filename utterance, then synthesize executable programs from filesystem/list primitives and test on folders not used to choose the wording.",
+        "expectedDiscrimination": "A reusable pattern should ground both extremum directions while refusing unsupported requests such as 'largest file' where the measured property is not filename length."
+      }
+    ],
+    "conclusion": "Teach one file-extreme-filename Intent pattern with contrasting LongestFilename and ShortestFilename relations; leave executable program discovery to the learner.",
+    "extractedKnowledge": [
+      {
+        "kind": "concept",
+        "id": "intent.file-extreme-filename",
+        "description": "A folder supplies a collection of filenames; 'longest filename' and 'shortest filename' specify opposite extrema of filename length and request the selected Filename as output."
+      },
+      {
+        "kind": "question-strategy",
+        "id": "teacher.teach-contrast-pair",
+        "description": "When two language requests differ by an opposing operator such as longest/shortest, teach one parameterized pattern using contrasting validation examples rather than two opaque commands."
+      }
+    ],
+    "nextQuestion": "After learning one executable extreme-filename procedure, can related folder requests reuse its structure with zero Teacher intervention and reduced search?",
+    "teacherInterventions": 1,
+    "provenance": [
+      "teacher:gpt-5.6-sol:conversation",
+      "app-request:real-filesystem-milestone/01-app-to-teacher.json"
+    ]
+  },
+  "fileIntentLesson": {
+    "id": "lesson.file-extreme-filename.001",
+    "patternId": "file-extreme-filename",
+    "provenance": [
+      "teacher:gpt-5.6-sol:conversation",
+      "teach.real.files.extreme-filename.001"
+    ],
+    "validationExamples": [
+      {
+        "utterance": "find the file with the longest filename in this folder",
+        "expectedRelation": "LongestFilename"
+      },
+      {
+        "utterance": "find the shortest file name in this directory",
+        "expectedRelation": "ShortestFilename"
+      }
+    ]
+  }
+}

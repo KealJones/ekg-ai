@@ -1,0 +1,800 @@
+{
+  "version": "pilot-0.1",
+  "curriculum": [
+    {
+      "id": "tr.add3",
+      "surface": "add three to this number",
+      "kind": "numeric",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "i",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c0",
+            "op": "literal",
+            "args": {
+              "value": 3
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o0",
+            "op": "add",
+            "args": {
+              "left": "i",
+              "right": "c0"
+            },
+            "type": "Int"
+          }
+        ],
+        "root": "o0",
+        "result_type": "Int",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "tr.mul6",
+      "surface": "multiply this number by six",
+      "kind": "numeric",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "i",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c0",
+            "op": "literal",
+            "args": {
+              "value": 6
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o0",
+            "op": "mul",
+            "args": {
+              "left": "i",
+              "right": "c0"
+            },
+            "type": "Int"
+          }
+        ],
+        "root": "o0",
+        "result_type": "Int",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "tr.double",
+      "surface": "double this number",
+      "kind": "numeric",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "i",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c0",
+            "op": "literal",
+            "args": {
+              "value": 2
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o0",
+            "op": "mul",
+            "args": {
+              "left": "i",
+              "right": "c0"
+            },
+            "type": "Int"
+          }
+        ],
+        "root": "o0",
+        "result_type": "Int",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "tr.add3mul6",
+      "surface": "add three then multiply by six",
+      "kind": "numeric",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "i",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c0",
+            "op": "literal",
+            "args": {
+              "value": 3
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o0",
+            "op": "add",
+            "args": {
+              "left": "i",
+              "right": "c0"
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c1",
+            "op": "literal",
+            "args": {
+              "value": 6
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o1",
+            "op": "mul",
+            "args": {
+              "left": "o0",
+              "right": "c1"
+            },
+            "type": "Int"
+          }
+        ],
+        "root": "o1",
+        "result_type": "Int",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "tr.longest",
+      "surface": "find the file with the longest filename in this folder",
+      "kind": "file-longest",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "d",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Dir"
+          },
+          {
+            "id": "f",
+            "op": "fs.children",
+            "args": {
+              "dir": "d",
+              "recursive": false,
+              "kind": "File"
+            },
+            "type": "List<File>"
+          },
+          {
+            "id": "x",
+            "op": "argmax",
+            "args": {
+              "xs": "f",
+              "key": {
+                "op": "strlen",
+                "args": {
+                  "s": {
+                    "op": "basename",
+                    "args": {
+                      "of": "$x"
+                    }
+                  }
+                }
+              },
+              "ties": "first"
+            },
+            "type": "File"
+          }
+        ],
+        "root": "x",
+        "result_type": "File",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "tr.shortest",
+      "surface": "find the shortest file name in this directory",
+      "kind": "file-shortest",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "d",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Dir"
+          },
+          {
+            "id": "f",
+            "op": "fs.children",
+            "args": {
+              "dir": "d",
+              "recursive": false,
+              "kind": "File"
+            },
+            "type": "List<File>"
+          },
+          {
+            "id": "x",
+            "op": "argmin",
+            "args": {
+              "xs": "f",
+              "key": {
+                "op": "strlen",
+                "args": {
+                  "s": {
+                    "op": "basename",
+                    "args": {
+                      "of": "$x"
+                    }
+                  }
+                }
+              },
+              "ties": "first"
+            },
+            "type": "File"
+          }
+        ],
+        "root": "x",
+        "result_type": "File",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "tr.clarify",
+      "surface": "make this number bigger",
+      "kind": "ambiguous",
+      "gold_action": "CLARIFY"
+    },
+    {
+      "id": "tr.unsupported",
+      "surface": "reverse this number",
+      "kind": "unsupported",
+      "gold_action": "ESCALATE"
+    }
+  ],
+  "test": [
+    {
+      "id": "te.mul6.near",
+      "surface": "six times this number",
+      "kind": "numeric",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "i",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c0",
+            "op": "literal",
+            "args": {
+              "value": 6
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o0",
+            "op": "mul",
+            "args": {
+              "left": "i",
+              "right": "c0"
+            },
+            "type": "Int"
+          }
+        ],
+        "root": "o0",
+        "result_type": "Int",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.add3.near",
+      "surface": "three plus this number",
+      "kind": "numeric",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "i",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c0",
+            "op": "literal",
+            "args": {
+              "value": 3
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o0",
+            "op": "add",
+            "args": {
+              "left": "i",
+              "right": "c0"
+            },
+            "type": "Int"
+          }
+        ],
+        "root": "o0",
+        "result_type": "Int",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.mul4add3.comp",
+      "surface": "multiply by four then add three",
+      "kind": "numeric",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "i",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c0",
+            "op": "literal",
+            "args": {
+              "value": 4
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o0",
+            "op": "mul",
+            "args": {
+              "left": "i",
+              "right": "c0"
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c1",
+            "op": "literal",
+            "args": {
+              "value": 3
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o1",
+            "op": "add",
+            "args": {
+              "left": "o0",
+              "right": "c1"
+            },
+            "type": "Int"
+          }
+        ],
+        "root": "o1",
+        "result_type": "Int",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.add2double.comp",
+      "surface": "add two then double this number",
+      "kind": "numeric",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "i",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c0",
+            "op": "literal",
+            "args": {
+              "value": 2
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o0",
+            "op": "add",
+            "args": {
+              "left": "i",
+              "right": "c0"
+            },
+            "type": "Int"
+          },
+          {
+            "id": "c1",
+            "op": "literal",
+            "args": {
+              "value": 2
+            },
+            "type": "Int"
+          },
+          {
+            "id": "o1",
+            "op": "mul",
+            "args": {
+              "left": "o0",
+              "right": "c1"
+            },
+            "type": "Int"
+          }
+        ],
+        "root": "o1",
+        "result_type": "Int",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.longest.near1",
+      "surface": "which file has the longest filename in this directory",
+      "kind": "file-longest",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "d",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Dir"
+          },
+          {
+            "id": "f",
+            "op": "fs.children",
+            "args": {
+              "dir": "d",
+              "recursive": false,
+              "kind": "File"
+            },
+            "type": "List<File>"
+          },
+          {
+            "id": "x",
+            "op": "argmax",
+            "args": {
+              "xs": "f",
+              "key": {
+                "op": "strlen",
+                "args": {
+                  "s": {
+                    "op": "basename",
+                    "args": {
+                      "of": "$x"
+                    }
+                  }
+                }
+              },
+              "ties": "first"
+            },
+            "type": "File"
+          }
+        ],
+        "root": "x",
+        "result_type": "File",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.longest.near2",
+      "surface": "find the longest file name in this folder",
+      "kind": "file-longest",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "d",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Dir"
+          },
+          {
+            "id": "f",
+            "op": "fs.children",
+            "args": {
+              "dir": "d",
+              "recursive": false,
+              "kind": "File"
+            },
+            "type": "List<File>"
+          },
+          {
+            "id": "x",
+            "op": "argmax",
+            "args": {
+              "xs": "f",
+              "key": {
+                "op": "strlen",
+                "args": {
+                  "s": {
+                    "op": "basename",
+                    "args": {
+                      "of": "$x"
+                    }
+                  }
+                }
+              },
+              "ties": "first"
+            },
+            "type": "File"
+          }
+        ],
+        "root": "x",
+        "result_type": "File",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.longest.near3",
+      "surface": "which file in this folder has the longest filename",
+      "kind": "file-longest",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "d",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Dir"
+          },
+          {
+            "id": "f",
+            "op": "fs.children",
+            "args": {
+              "dir": "d",
+              "recursive": false,
+              "kind": "File"
+            },
+            "type": "List<File>"
+          },
+          {
+            "id": "x",
+            "op": "argmax",
+            "args": {
+              "xs": "f",
+              "key": {
+                "op": "strlen",
+                "args": {
+                  "s": {
+                    "op": "basename",
+                    "args": {
+                      "of": "$x"
+                    }
+                  }
+                }
+              },
+              "ties": "first"
+            },
+            "type": "File"
+          }
+        ],
+        "root": "x",
+        "result_type": "File",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.shortest.near1",
+      "surface": "which file has the shortest filename in this folder",
+      "kind": "file-shortest",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "d",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Dir"
+          },
+          {
+            "id": "f",
+            "op": "fs.children",
+            "args": {
+              "dir": "d",
+              "recursive": false,
+              "kind": "File"
+            },
+            "type": "List<File>"
+          },
+          {
+            "id": "x",
+            "op": "argmin",
+            "args": {
+              "xs": "f",
+              "key": {
+                "op": "strlen",
+                "args": {
+                  "s": {
+                    "op": "basename",
+                    "args": {
+                      "of": "$x"
+                    }
+                  }
+                }
+              },
+              "ties": "first"
+            },
+            "type": "File"
+          }
+        ],
+        "root": "x",
+        "result_type": "File",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.shortest.near2",
+      "surface": "find the shortest filename in this directory",
+      "kind": "file-shortest",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "d",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Dir"
+          },
+          {
+            "id": "f",
+            "op": "fs.children",
+            "args": {
+              "dir": "d",
+              "recursive": false,
+              "kind": "File"
+            },
+            "type": "List<File>"
+          },
+          {
+            "id": "x",
+            "op": "argmin",
+            "args": {
+              "xs": "f",
+              "key": {
+                "op": "strlen",
+                "args": {
+                  "s": {
+                    "op": "basename",
+                    "args": {
+                      "of": "$x"
+                    }
+                  }
+                }
+              },
+              "ties": "first"
+            },
+            "type": "File"
+          }
+        ],
+        "root": "x",
+        "result_type": "File",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.shortest.near3",
+      "surface": "which file in this directory has the shortest file name",
+      "kind": "file-shortest",
+      "gold_action": "ANSWER",
+      "sf": {
+        "nodes": [
+          {
+            "id": "d",
+            "op": "input",
+            "args": {
+              "index": 0
+            },
+            "type": "Dir"
+          },
+          {
+            "id": "f",
+            "op": "fs.children",
+            "args": {
+              "dir": "d",
+              "recursive": false,
+              "kind": "File"
+            },
+            "type": "List<File>"
+          },
+          {
+            "id": "x",
+            "op": "argmin",
+            "args": {
+              "xs": "f",
+              "key": {
+                "op": "strlen",
+                "args": {
+                  "s": {
+                    "op": "basename",
+                    "args": {
+                      "of": "$x"
+                    }
+                  }
+                }
+              },
+              "ties": "first"
+            },
+            "type": "File"
+          }
+        ],
+        "root": "x",
+        "result_type": "File",
+        "effect": "pure"
+      }
+    },
+    {
+      "id": "te.ambiguous",
+      "surface": "make this number larger",
+      "kind": "ambiguous",
+      "gold_action": "CLARIFY"
+    },
+    {
+      "id": "te.adversarial",
+      "surface": "address this number by six",
+      "kind": "unsupported",
+      "gold_action": "ESCALATE"
+    },
+    {
+      "id": "te.unsupported.file",
+      "surface": "find the largest file in this folder",
+      "kind": "unsupported-file",
+      "gold_action": "ESCALATE"
+    }
+  ]
+}

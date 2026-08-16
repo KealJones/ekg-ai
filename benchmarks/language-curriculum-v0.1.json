@@ -1,0 +1,140 @@
+{
+  "version": "language-curriculum-v0.1",
+  "cases": [
+    {
+      "id": "known.multiply-six",
+      "utterance": "multiply this number by six",
+      "input": 7,
+      "expectedStatus": "executed",
+      "expectedOutput": 42
+    },
+    {
+      "id": "known.times-four",
+      "utterance": "4 times this number",
+      "input": 5,
+      "expectedStatus": "executed",
+      "expectedOutput": 20
+    },
+    {
+      "id": "known.double",
+      "utterance": "double this number",
+      "input": 9,
+      "expectedStatus": "executed",
+      "expectedOutput": 18
+    },
+    {
+      "id": "known.add-three",
+      "utterance": "add three to this number",
+      "input": 8,
+      "expectedStatus": "executed",
+      "expectedOutput": 11
+    },
+    {
+      "id": "known.plus-two",
+      "utterance": "plus two to this number",
+      "input": 4,
+      "expectedStatus": "executed",
+      "expectedOutput": 6
+    },
+    {
+      "id": "compose.add-multiply",
+      "utterance": "add three then multiply by six",
+      "input": 2,
+      "expectedStatus": "executed",
+      "expectedOutput": 30
+    },
+    {
+      "id": "clarify.missing-factor",
+      "utterance": "multiply this number",
+      "input": 3,
+      "expectedStatus": "clarify"
+    },
+    {
+      "id": "clarify.bigger",
+      "utterance": "make this number bigger",
+      "input": 3,
+      "expectedStatus": "clarify"
+    },
+    {
+      "id": "unknown.reverse",
+      "utterance": "reverse this number",
+      "input": 3,
+      "expectedStatus": "teacher"
+    },
+    {
+      "id": "unknown.substring",
+      "utterance": "address this number by six",
+      "input": 3,
+      "expectedStatus": "teacher"
+    },
+    {
+      "id": "learnable.sixfold",
+      "utterance": "sixfold this number",
+      "input": 7,
+      "expectedStatus": "teacher",
+      "afterStatus": "executed",
+      "expectedOutput": 42,
+      "behavior": [
+        {
+          "input": 2,
+          "output": 12
+        },
+        {
+          "input": 3,
+          "output": 18
+        },
+        {
+          "input": 7,
+          "output": 42
+        }
+      ],
+      "phrase": "sixfold"
+    },
+    {
+      "id": "learnable.quadruple",
+      "utterance": "quadruple this number",
+      "input": 5,
+      "expectedStatus": "teacher",
+      "afterStatus": "executed",
+      "expectedOutput": 20,
+      "behavior": [
+        {
+          "input": 2,
+          "output": 8
+        },
+        {
+          "input": 3,
+          "output": 12
+        },
+        {
+          "input": 7,
+          "output": 28
+        }
+      ],
+      "phrase": "quadruple"
+    },
+    {
+      "id": "learnable.decuple",
+      "utterance": "decuple this number",
+      "input": 4,
+      "expectedStatus": "teacher",
+      "afterStatus": "executed",
+      "expectedOutput": 40,
+      "behavior": [
+        {
+          "input": 2,
+          "output": 20
+        },
+        {
+          "input": 3,
+          "output": 30
+        },
+        {
+          "input": 7,
+          "output": 70
+        }
+      ],
+      "phrase": "decuple"
+    }
+  ]
+}
