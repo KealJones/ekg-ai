@@ -13,6 +13,7 @@ export * from "./episode.js";
 export * from "./controller.js";
 
 export * from "./baselines/memorize.js";
+export * from "./baselines/selective-knn.js";
 export * from "./benchmarks/fingerprint.js";
 export * from "./benchmarks/v0-suite.js";
 export * from "./benchmarks/selective-evaluation.js";
