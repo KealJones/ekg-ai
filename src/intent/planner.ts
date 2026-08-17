@@ -2,6 +2,8 @@ import type { Intent } from "./intent.js";
 import type { ProgramBlueprint, Expr } from "../ir/blueprint.js";
 import type { CapabilityRegistry } from "../runtime/capabilities.js";
 import { typeEquals } from "../ir/types.js";
+import type { GraphStore } from "../graph/graph.js";
+import { resolveCapabilityForRelation } from "./semantic-catalog.js";
 
 export interface IntentPlanResult {
   status:"planned"|"unsupported";
@@ -10,7 +12,7 @@ export interface IntentPlanResult {
 }
 
 /** Typed symbolic planner for a sequential Intent constraint chain. */
-export function planIntent(intent:Intent,caps:CapabilityRegistry):IntentPlanResult{
+export function planIntent(intent:Intent,caps:CapabilityRegistry,store?:GraphStore):IntentPlanResult{
   if(intent.constraints.length===0) return {status:"unsupported",reason:"intent has no constraints"};
   const relationToCapability:Record<string,string>={
     Multiply:"core.mul_int",
@@ -21,10 +23,6 @@ export function planIntent(intent:Intent,caps:CapabilityRegistry):IntentPlanResu
 
   for(let ci=0;ci<intent.constraints.length;ci++){
     const c=intent.constraints[ci]!;
-    const capId=relationToCapability[c.relation];
-    if(!capId) return {status:"unsupported",reason:`no planner mapping for relation ${c.relation}`};
-    let cap;
-    try{cap=caps.get(capId);}catch{return {status:"unsupported",reason:`capability ${capId} unavailable`};}
     const args:Expr[]=[];
     for(const argId of c.args){
       const resultMatch=/^result\.(\d+)$/.exec(argId);
@@ -43,6 +41,12 @@ export function planIntent(intent:Intent,caps:CapabilityRegistry):IntentPlanResu
         args.push({kind:"const",value:s.value,type:s.type});
       }else return {status:"unsupported",reason:`signal ${argId} has no binding or value`};
     }
+    let cap=resolveCapabilityForRelation(store,c.relation,caps,args.map(a=>a.type),ci===intent.constraints.length-1?intent.goal.type:undefined);
+    if(!cap){
+      const capId=relationToCapability[c.relation];
+      if(capId){ try{cap=caps.get(capId);}catch{} }
+    }
+    if(!cap) return {status:"unsupported",reason:`no typed capability grounding for relation ${c.relation}`};
     if(args.length!==cap.inputs.length || args.some((a,i)=>!typeEquals(a.type,cap.inputs[i]!)))
       return {status:"unsupported",reason:"grounded signal types do not satisfy capability contract"};
     results.push({kind:"call",capabilityId:cap.id,args,type:cap.output});

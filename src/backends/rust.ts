@@ -5,9 +5,11 @@ import type { CapabilityRegistry } from "../runtime/capabilities.js";
 
 function rustType(t: Type): string {
   switch (t.kind) {
+    case "null": return "()";
     case "int": return "i64";
     case "bool": return "bool";
     case "string": return "String";
+    case "json": return "serde_json::Value";
     case "list": return `Vec<${rustType(t.item)}>`;
   }
 }

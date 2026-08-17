@@ -1,0 +1,10 @@
+import {MemoryGraphStore,babyCapabilities,seedPortableSubstrateKnowledge,teachStarterEnglishLexicon,teachSynonym,LanguageController} from '../dist/index.js';
+const graph=new MemoryGraphStore(), caps=babyCapabilities(); seedPortableSubstrateKnowledge(graph,caps);
+const controller=new LanguageController(graph,caps);
+const before=controller.handle('deduct six from this number',[20]);
+const lessons=teachStarterEnglishLexicon(graph);
+const after=controller.handle('deduct six from this number',[20]);
+const beforeNovel=controller.handle('dock six from this number',[20]);
+teachSynonym(graph,{form:'dock',knownForm:'subtract',provenance:['teacher:interactive-demo']});
+const afterNovel=controller.handle('dock six from this number',[20]);
+console.log(JSON.stringify({lessons,before,after,beforeNovel,afterNovel,graph:{lexemes:graph.entitiesByKind('lexeme').length,senses:graph.entitiesByKind('sense').length,concepts:graph.entitiesByKind('concept').length,capabilities:graph.entitiesByKind('capability').length}},null,2));

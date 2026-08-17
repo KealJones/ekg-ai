@@ -1,5 +1,6 @@
 import { canonicalBlueprintSemantics, type ProgramBlueprint } from "./ir/blueprint.js";
 import type { Type } from "./ir/types.js";
+import type { ExecutionExperience, ExecutionExperienceSink } from "./runtime/execution-experience.js";
 import { typeEquals } from "./ir/types.js";
 
 export interface ProgramLibrary {
@@ -7,11 +8,16 @@ export interface ProgramLibrary {
   findEquivalent(program: ProgramBlueprint): ProgramBlueprint | undefined;
   get(id: string): ProgramBlueprint | undefined;
   all(): ProgramBlueprint[];
+  remove?(id: string): boolean;
   compatible(inputs: Type[], output: Type): ProgramBlueprint[];
+  /** Optional durable execution-history interface used by resilient runtimes. */
+  recordExperience?(experience: ExecutionExperience): void;
+  experiencesFor?(subjectId: string): ExecutionExperience[];
 }
 
 export class MemoryProgramLibrary implements ProgramLibrary {
   private readonly programs = new Map<string, ProgramBlueprint>();
+  private readonly experience = new Map<string, ExecutionExperience[]>();
 
   put(program: ProgramBlueprint): ProgramBlueprint {
     const existingById = this.programs.get(program.id);
@@ -45,8 +51,20 @@ export class MemoryProgramLibrary implements ProgramLibrary {
     return p ? structuredClone(p) : undefined;
   }
 
+  remove(id: string): boolean { return this.programs.delete(id); }
+
   all(): ProgramBlueprint[] {
     return [...this.programs.values()].map(p => structuredClone(p));
+  }
+
+  recordExperience(experience: ExecutionExperience): void {
+    const xs=this.experience.get(experience.subjectId)??[];
+    xs.push(structuredClone(experience));
+    this.experience.set(experience.subjectId,xs);
+  }
+
+  experiencesFor(subjectId: string): ExecutionExperience[] {
+    return (this.experience.get(subjectId)??[]).map(x=>structuredClone(x));
   }
 
   compatible(inputs: Type[], output: Type): ProgramBlueprint[] {

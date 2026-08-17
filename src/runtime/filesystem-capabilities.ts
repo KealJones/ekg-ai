@@ -11,7 +11,7 @@ export function filesystemCapabilities(host:FilesystemHost): CapabilityRegistry 
   const r=new CapabilityRegistry();
   r.register({
     id:"fs.list_filenames",
-    inputs:[T.string],output:T.list(T.string),pure:false,deterministic:false,
+    inputs:[T.string],output:T.list(T.string),pure:false,deterministic:false,searchSafe:true,
     reference:(dir:Value)=>host.listFilenames(String(dir)),
     tsEmit:a=>`host.listFilenames(${a[0]})`,
     rustEmit:a=>`host.list_filenames(${a[0]})`

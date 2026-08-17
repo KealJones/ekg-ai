@@ -1,0 +1,174 @@
+{
+  "benchmark": "BabyBench",
+  "version": "0.1",
+  "philosophy": "Developmental probes are allowed to fail. A newly passing locked probe is a capability event, not a reason to rewrite history.",
+  "babi20": {
+    "count": 20,
+    "currentlyConnectedToQaAgent": false,
+    "probes": [
+      {
+        "id": "BABI-01",
+        "family": "single-supporting-fact",
+        "skill": "retrieve one relevant fact",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-02",
+        "family": "two-supporting-facts",
+        "skill": "chain two facts",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-03",
+        "family": "three-supporting-facts",
+        "skill": "chain three facts",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-04",
+        "family": "two-argument-relations",
+        "skill": "invert a binary relation",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-05",
+        "family": "three-argument-relations",
+        "skill": "resolve subject/object/recipient roles",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-06",
+        "family": "yes-no-questions",
+        "skill": "answer proposition truth",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-07",
+        "family": "counting",
+        "skill": "count members of a set",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-08",
+        "family": "lists-sets",
+        "skill": "return set members",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-09",
+        "family": "simple-negation",
+        "skill": "represent explicit negation",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-10",
+        "family": "indefinite-knowledge",
+        "skill": "preserve uncertainty",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-11",
+        "family": "basic-coreference",
+        "skill": "resolve pronoun to entity",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-12",
+        "family": "conjunction",
+        "skill": "apply predicate to conjoined entities",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-13",
+        "family": "compound-coreference",
+        "skill": "resolve plural coreference",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-14",
+        "family": "time-reasoning",
+        "skill": "reason over event order",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-15",
+        "family": "basic-deduction",
+        "skill": "apply universal rule",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-16",
+        "family": "basic-induction",
+        "skill": "induce class property from examples",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-17",
+        "family": "positional-reasoning",
+        "skill": "compose spatial relations",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-18",
+        "family": "size-reasoning",
+        "skill": "compose comparative size relations",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-19",
+        "family": "path-finding",
+        "skill": "compose directional path",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      },
+      {
+        "id": "BABI-20",
+        "family": "agents-motivations",
+        "skill": "infer motivation for action",
+        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+      }
+    ]
+  },
+  "objectMilestones": [
+    {
+      "id": "OBJECT-001-single-property",
+      "passed": true,
+      "candidatesExplored": 3,
+      "maxDepthReached": 1,
+      "program": {
+        "kind": "call",
+        "capabilityId": "core.json_get",
+        "args": [
+          {
+            "kind": "input",
+            "index": 0,
+            "type": {
+              "kind": "json"
+            }
+          },
+          {
+            "kind": "input",
+            "index": 1,
+            "type": {
+              "kind": "string"
+            }
+          }
+        ],
+        "type": {
+          "kind": "json"
+        }
+      }
+    },
+    {
+      "id": "OBJECT-PATH-001-dot-nested",
+      "passed": false,
+      "candidatesExplored": 53,
+      "maxDepthReached": 2
+    },
+    {
+      "id": "OBJECT-PATH-002-variable-depth",
+      "passed": false,
+      "candidatesExplored": 53,
+      "maxDepthReached": 2
+    }
+  ]
+}

@@ -8,6 +8,8 @@ export interface Capability {
   output: Type;
   pure: boolean;
   deterministic: boolean;
+  /** Safe for speculative program search. Defaults to pure && deterministic when omitted. */
+  searchSafe?: boolean;
   reference: (...args: Value[]) => Value;
   tsEmit: (args: string[]) => string;
   rustEmit: (args: string[]) => string;

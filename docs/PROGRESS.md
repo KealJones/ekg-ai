@@ -518,3 +518,75 @@ Corrected research interpretation:
 Added durable Blueprint uniqueness invariant: exact canonical-semantic duplicates cannot accumulate. Duplicate synthesis must reuse the existing Blueprint and is treated as a retrieval/planning miss diagnostic.
 
 Repository agent convention is now `AGENTS.md` canonical with `CLAUDE.md -> AGENTS.md` symlink.
+
+## v0.3 implementation — primitive-holdout protocol foundation
+
+Implemented protocol machinery without authoring or inspecting scored held-out items:
+- one-shot `PrimitiveLessonLedger` rejects a second lesson for the same capability and records Teacher-token cost/provenance;
+- checkpoint-0 capability-absence audit mechanically rejects capabilities already present in the runtime registry;
+- multi-fixture denotation grader requires >=3 fixtures and gives item credit only when every fixture passes;
+- Teacher-OFF guard fails closed and records any attempted Teacher call;
+- durable executable-state measurement records program count, canonical serialized bytes, canonical structural node count, and unique canonical semantics for growth curves;
+- canonical duplicate Blueprints remain deduplicated by the existing program-library invariant.
+
+Evidence:
+- full suite: **117/117 passing**;
+- frozen `benchmark:v0` unchanged: double BUILD, repeat RUN, triple ADAPT, unsupported reverse-string TEACH;
+- negative/adversarial coverage includes second-lesson rejection, too-few-fixtures rejection, present-capability detection, duplicate-program non-growth, and attempted Teacher-call failure.
+
+Scientific limitation:
+- this is experiment infrastructure, not a v0.3 result;
+- no scored primitive-holdout utterances or gold denotations were authored here;
+- capability selection, external item ingestion, independent gold/reference semantics, split/novelty audit, and the actual scored conditions remain outstanding.
+
+## v0.3 external-item/reference-gold pipeline milestone (2026-08-16)
+- Added `src/benchmarks/external-items.ts` as the scored-item ingestion boundary.
+- Scored holdout items carry explicit external corpus/record provenance and cannot contain authored gold denotations.
+- Gold is derived only by an injected, provenance-tagged executable reference semantics implementation over >=3 fixtures.
+- Frozen benchmark manifests are deterministic and tamper-evident via a stable integrity fingerprint covering language + gold.
+- Added conservative provenance audit that rejects EKG/Teacher/self-authored scored items.
+- Added validation for duplicate item/fixture IDs and insufficient fixture sets.
+- This milestone contains **no held-out benchmark items and no scientific result**; it only makes the independence requirement mechanically enforceable before external data is imported.
+- Full suite: **121/121 tests passing**.
+
+
+## v0.3.3 — primitive selection + external-corpus mapping freeze
+- Froze exactly three candidate semantic primitives **before importing scored held-out utterances**: `predicate.within_closed_int_window`, `predicate.string_contains`, and `logic.negate_predicate`.
+- Added mechanical selection audits against checkpoint-0 host capability IDs/aliases and durable program IDs/aliases. A candidate that already exists is rejected rather than quietly counted as one-shot learning.
+- Every candidate requires >=40 novel compositions and at least one external-corpus mapping rule.
+- Mapping rules point at NL2Bash provenance/selection criteria only; no scored utterance or gold answer is copied into the repository at this stage.
+- Negative tests prove selection fails for an existing capability, pre-existing durable task-family knowledge, fewer than three primitives, and insufficient held-out composition budget.
+- **No experiment result is claimed.** This milestone freezes what will be tested without letting scored examples influence primitive choice.
+
+
+## v0.3.4 — experiment runner + protocol freeze
+- Added a deterministic v0.3 experiment protocol freeze keyed to the v0.3.3 primitive-selection hash.
+- Frozen primary conditions: post-lesson EKG, lesson-withheld EKG, checkpoint-0 synthesis control, and selective k-NN. All primary scored conditions are Teacher-OFF.
+- Production binding requires benchmark integrity/provenance checks, only the three preselected primitives, >=40 items per primitive, >=4 semantic families per primitive, and >=3 fixtures per item.
+- Added hard per-item search budget, confidence validation, mutually exclusive outcome accounting, risk/coverage + AURC when confidence is available, FCER, search cost per solved item, per-primitive accuracy, and durable-state before/after deltas.
+- Added a smoke-only binding mode so runner correctness can be tested without pretending developer-authored fixtures are scientific evidence. Production mode remains strict.
+- Added `benchmark:v0.3-protocol`, which emits the frozen selection/protocol hashes while importing **zero scored held-out items**.
+- Negative tests prove underpowered production sets, surprise primitives, missing conditions, and any Teacher call during scored evaluation fail closed.
+- **Still no scientific result:** v0.3.4 freezes the instrument; the next step is independent corpus extraction/review, reference fixtures, final benchmark binding, then the scored run.
+
+## v0.3.5 — external-corpus supply gate
+
+Added a deterministic NL2Bash paired-corpus intake/audit path. It discovers candidate records from the external Bash command rather than EKG-authored utterance labels, preserves original line identity, and fails closed unless each frozen primitive has at least the preregistered 40 candidate records. Candidate discovery is explicitly **not scored evidence**: candidates still require independent semantic-family review, fixture construction, derived reference gold, freeze/bind, and only then Teacher-OFF evaluation.
+
+This milestone also makes an important protocol constraint executable: if the chosen external corpus cannot supply 40 independently sourced compositions for any frozen primitive, v0.3 must stop/reselect rather than padding the benchmark with self-authored examples.
+
+## 2026-08-16 — v0.7.0 education + structured-world milestone
+- Project gospel switched development emphasis from zero-shot purity to lifelong education.
+- Recursive JSON/object values added to the IR/value universe.
+- Portable object primitives include parse/type/keys/get/has plus string split/list access building blocks.
+- Bounded process execution and Bash added as explicit effectful host capabilities.
+- BabyBench added with all 20 bAbI prerequisite families and personal object milestones.
+- OBJECT-001 passes; dot-path and variable-depth path milestones intentionally remain red.
+- 154/154 tests pass.
+
+## 2026-08-16 — v0.8.3 lived-experience recovery
+- Added durable execution-experience traces for learned programs and host capabilities, retaining successes and failures with inputs/results/errors, types, caller stack, call site, and surrounding caller Blueprint.
+- Self-healing learned programs now fall back from canonical graph snapshot restoration to reconstruction from historical successful usages.
+- Reconstruction uses historically observed capability/program neighborhoods to constrain synthesis before any broader fallback.
+- Reconstructed programs are validated against remembered successful usages and persisted back into durable graph memory with explicit provenance.
+- Added regression coverage proving recovery after deleting both the live program and all executable snapshots.

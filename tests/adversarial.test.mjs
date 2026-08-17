@@ -120,5 +120,6 @@ test("search must not blindly prioritize an irrelevant learned library", () => {
   const blind=synthesizeDetailed(task,caps,{maxDepth:3,programs:lib,callablePrograms:[irrelevant],programCallPriority:"before-capabilities"});
   assert.ok(normal.program);
   assert.ok(blind.program);
-  assert.ok(blind.candidatesExplored>normal.candidatesExplored);
+  assert.ok(blind.candidatesExplored<=normal.candidatesExplored,`v2 should prune irrelevant learned behavior: normal=${normal.candidatesExplored}, blind=${blind.candidatesExplored}`);
+  assert.ok((blind.generatedExpressions??0)>=(normal.generatedExpressions??0),"irrelevant program may add generation work even when behavioral pruning protects candidate evaluation");
 });

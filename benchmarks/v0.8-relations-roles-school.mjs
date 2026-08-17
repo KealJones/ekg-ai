@@ -1,0 +1,10 @@
+import {MemoryGraphStore,MemoryProgramLibrary,babyCapabilities,TeacherSchool,WorldLanguageEngine,starterSpatialPredicates,starterSpatialGrammar,starterGivingFrame,starterGivingGrammar,babyBenchBabi20,evaluateDevelopmentalProbes} from '../dist/index.js';
+const agent=g=>async p=>{const r=new WorldLanguageEngine(g).runStory(p.story,p.question);return {answer:r.answer,abstained:r.abstained}};
+const before=new MemoryGraphStore();
+const beforeR=await evaluateDevelopmentalProbes(agent(before),babyBenchBabi20.slice(3,5));
+const spatial=new MemoryGraphStore(), ss=new TeacherSchool(spatial,babyCapabilities(),new MemoryProgramLibrary());
+for(const p of starterSpatialPredicates())ss.teachPredicate(p);for(const g of starterSpatialGrammar())ss.teachGrammar(g);
+const spatialR=await evaluateDevelopmentalProbes(agent(spatial),babyBenchBabi20.slice(3,5));
+const roles=new MemoryGraphStore(), rs=new TeacherSchool(roles,babyCapabilities(),new MemoryProgramLibrary());rs.teachFrame(starterGivingFrame());for(const g of starterGivingGrammar())rs.teachGrammar(g);
+const roleR=await evaluateDevelopmentalProbes(agent(roles),babyBenchBabi20.slice(3,5));
+console.log(JSON.stringify({before:beforeR.map(x=>x.passed),afterSpatial:spatialR.map(x=>x.passed),afterGiving:roleR.map(x=>x.passed),spatialFacts:spatial.entitiesByKind('fact').map(x=>x.attrs),events:roles.entitiesByKind('event').map(x=>x.attrs)},null,2));

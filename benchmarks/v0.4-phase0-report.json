@@ -1,0 +1,334 @@
+{
+  "status": "BLOCKED_SPEC_ENGINE_CONSTANT_POOL_MISMATCH",
+  "freezeSha256": "883d92b796e70e207972eac51893898b485ff9bce5b0484ca70b63f74542b2cf",
+  "phase": "v0.4-phase0",
+  "normalSearchMaxDepth": 3,
+  "capabilityList": [
+    {
+      "id": "core.add_int",
+      "inputs": [
+        {
+          "kind": "int"
+        },
+        {
+          "kind": "int"
+        }
+      ],
+      "output": {
+        "kind": "int"
+      },
+      "pure": true,
+      "deterministic": true
+    },
+    {
+      "id": "core.mul_int",
+      "inputs": [
+        {
+          "kind": "int"
+        },
+        {
+          "kind": "int"
+        }
+      ],
+      "output": {
+        "kind": "int"
+      },
+      "pure": true,
+      "deterministic": true
+    },
+    {
+      "id": "core.max_int",
+      "inputs": [
+        {
+          "kind": "int"
+        },
+        {
+          "kind": "int"
+        }
+      ],
+      "output": {
+        "kind": "int"
+      },
+      "pure": true,
+      "deterministic": true
+    },
+    {
+      "id": "core.eq_int",
+      "inputs": [
+        {
+          "kind": "int"
+        },
+        {
+          "kind": "int"
+        }
+      ],
+      "output": {
+        "kind": "bool"
+      },
+      "pure": true,
+      "deterministic": true
+    },
+    {
+      "id": "core.gte_int",
+      "inputs": [
+        {
+          "kind": "int"
+        },
+        {
+          "kind": "int"
+        }
+      ],
+      "output": {
+        "kind": "bool"
+      },
+      "pure": true,
+      "deterministic": true
+    },
+    {
+      "id": "core.string_len",
+      "inputs": [
+        {
+          "kind": "string"
+        }
+      ],
+      "output": {
+        "kind": "int"
+      },
+      "pure": true,
+      "deterministic": true
+    },
+    {
+      "id": "core.argmax_string_len",
+      "inputs": [
+        {
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        }
+      ],
+      "output": {
+        "kind": "string"
+      },
+      "pure": true,
+      "deterministic": true
+    },
+    {
+      "id": "core.argmin_string_len",
+      "inputs": [
+        {
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        }
+      ],
+      "output": {
+        "kind": "string"
+      },
+      "pure": true,
+      "deterministic": true
+    },
+    {
+      "id": "core.list_len_string",
+      "inputs": [
+        {
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        }
+      ],
+      "output": {
+        "kind": "int"
+      },
+      "pure": true,
+      "deterministic": true
+    }
+  ],
+  "calibration": {
+    "normalMaxDepth": 3,
+    "measuredDMax": 3,
+    "depth4GuardSolved": false,
+    "rows": [
+      {
+        "target": "2x",
+        "expectedMinDepth": 1,
+        "searchLimit": 3,
+        "solvedRuns": 5,
+        "runs": 5,
+        "foundDepths": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "candidates": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "wallMs": [
+          0.9555880000000059,
+          0.14659699999999987,
+          0.05337900000000673,
+          0.04569800000000157,
+          0.03948799999999153
+        ]
+      },
+      {
+        "target": "4x",
+        "expectedMinDepth": 2,
+        "searchLimit": 3,
+        "solvedRuns": 5,
+        "runs": 5,
+        "foundDepths": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "candidates": [
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "wallMs": [
+          1.2384470000000078,
+          0.37945299999999804,
+          0.27195300000001055,
+          0.34163599999999406,
+          0.29989500000000646
+        ]
+      },
+      {
+        "target": "8x",
+        "expectedMinDepth": 3,
+        "searchLimit": 3,
+        "solvedRuns": 5,
+        "runs": 5,
+        "foundDepths": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "candidates": [
+          434,
+          434,
+          434,
+          434,
+          434
+        ],
+        "wallMs": [
+          72.27049799999999,
+          54.71701299999998,
+          50.30020200000001,
+          57.31015999999997,
+          52.14972599999999
+        ]
+      },
+      {
+        "target": "16x",
+        "expectedMinDepth": 4,
+        "searchLimit": 3,
+        "solvedRuns": 0,
+        "runs": 5,
+        "foundDepths": [],
+        "candidates": [
+          7204,
+          7204,
+          7204,
+          7204,
+          7204
+        ],
+        "wallMs": [
+          91.591814,
+          90.09524399999998,
+          84.84716100000003,
+          85.78671399999996,
+          91.39141700000005
+        ]
+      }
+    ],
+    "automaticIntegerConstants": false,
+    "constantProbeCandidates": 7204
+  },
+  "constantPoolAssumption": {
+    "claudeAssumedConstants": [
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3
+    ],
+    "currentBuildAutomaticallyEnumeratesConstants": false,
+    "compatible": false,
+    "consequence": "BLOCK: Claude's reachability proof and generated constant-bearing items model a stronger search language than current BUILD. Do not run treatment until protocol is revised or substrate change is explicitly preregistered."
+  },
+  "draftBenchmarkAudit": {
+    "items": 184,
+    "itemsWithLiteralConstants": 127,
+    "itemsRequiringUnmodeledStringSplit": [
+      "span_string_len:F1_arg_composed:000",
+      "span_string_len:F1_arg_composed:010",
+      "span_string_len:F1_arg_composed:021",
+      "span_string_len:F1_arg_composed:031",
+      "span_string_len:F1_arg_composed:041"
+    ],
+    "compatibleWithCurrentBuild": false
+  },
+  "instrumentationProbe": {
+    "taskId": "phase0.instrumentation.double",
+    "decision": "BUILD",
+    "success": true,
+    "searchCandidatesExplored": 2,
+    "searchDepthReached": 1,
+    "wallMs": 0.63880800000004,
+    "teacherCalls": 0,
+    "libraryBefore": {
+      "programIds": [],
+      "canonicalPrograms": [],
+      "durableReturn": {
+        "programs": 0,
+        "canonicalProgramBytes": 0,
+        "canonicalProgramNodes": 0,
+        "uniqueCanonicalPrograms": 0
+      },
+      "callGraph": [],
+      "provenance": {}
+    },
+    "libraryAfter": {
+      "programIds": [
+        "learned.phase0.instrumentation.double"
+      ],
+      "canonicalPrograms": [
+        "{\"inputs\":[{\"kind\":\"int\"}],\"output\":{\"kind\":\"int\"},\"body\":{\"kind\":\"call\",\"capabilityId\":\"core.add_int\",\"args\":[{\"kind\":\"input\",\"index\":0,\"type\":{\"kind\":\"int\"}},{\"kind\":\"input\",\"index\":0,\"type\":{\"kind\":\"int\"}}],\"type\":{\"kind\":\"int\"}},\"properties\":[]}"
+      ],
+      "durableReturn": {
+        "programs": 1,
+        "canonicalProgramBytes": 249,
+        "canonicalProgramNodes": 23,
+        "uniqueCanonicalPrograms": 1
+      },
+      "callGraph": [],
+      "provenance": {
+        "learned.phase0.instrumentation.double": [
+          "synthesis:phase0.instrumentation.double"
+        ]
+      }
+    },
+    "addedProgramIds": [
+      "learned.phase0.instrumentation.double"
+    ],
+    "selectedProgramId": "learned.phase0.instrumentation.double"
+  }
+}

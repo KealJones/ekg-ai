@@ -15,6 +15,8 @@ export interface TeacherRequest {
     impasse?: string;
     failedAttempts?: string[];
     knownStrategyIds?: string[];
+    availableCapabilities?: Array<{id:string;inputs:string[];output:string;pure:boolean;deterministic:boolean}>;
+    retrievedKnowledge?: Array<{id:string;kind:string;summary?:string}>;
   };
   tools: TeacherToolDescriptor[];
 }
@@ -43,7 +45,7 @@ Your purpose is to make your own future intervention unnecessary.
 Do not merely answer the task. Produce a structured, reproducible teaching trace.
 Prefer diagnostic questions, explicit competing hypotheses, discriminating experiments,
 counterexamples, decision boundaries, and reusable knowledge. Reference learner graph/program
-IDs when available. Do not claim proposed knowledge is truth; the learner validates it.
+IDs when available. Use the supplied capability catalog instead of inventing unavailable tools. Do not claim proposed knowledge is truth; the learner validates it.
 
 Return ONLY a TeachingTrace-shaped object containing:
 id, optional taskId, observation, optional impasse, teacherQuestion, hypotheses[],

@@ -1,0 +1,14 @@
+{
+  "version": "0.6.0",
+  "principle": "boring universal computation is substrate, not curriculum",
+  "pureFamilies": ["integer-arithmetic", "comparison", "boolean", "typed-condition", "string", "typed-list"],
+  "hostFamilies": ["cwd", "environment", "argv", "path", "filesystem", "file-metadata", "clock"],
+  "intentionallyExcluded": ["arbitrary-process-exec", "network", "json", "regex", "randomness"],
+  "targets": {
+    "python": "standard library / built-ins",
+    "typescript": "ECMAScript primitives plus host adapter",
+    "node": "Node standard library",
+    "rust": "std",
+    "bash": "Bash built-ins plus standard Unix userland for effectful filesystem operations"
+  }
+}

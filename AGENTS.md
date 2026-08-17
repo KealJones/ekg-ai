@@ -5,6 +5,22 @@ This repository experiments with **Executable Knowledge Graph Intelligence**: po
 
 Do not optimize for impressive demos. Optimize for falsifiable evidence that learning, reuse, abstraction, and transfer actually work.
 
+
+## CURRENT PROJECT GOSPEL — READ THIS BEFORE OVERTHINKING
+
+`docs/PROJECT_GOSPEL.md` is the current north-star doctrine and overrides older development instincts that treated zero-shot benchmark purity as the main product goal.
+
+- EKG is **not an LLM** and is not expected to possess knowledge with zero training.
+- Learning machinery may bootstrap; knowledge/understanding must be taught and accumulated.
+- Expected-red developmental tests are desirable. Do not contort the architecture merely to keep them scientifically pristine.
+- Teacher intervention is normal education. The desired trend is durable learning and decreasing repeated help.
+- The graph/program library is part of the intelligence's lived experience, not an external cache.
+- EKG should be able to compose/create reusable tools from its capabilities. **Acquired capabilities become durable parts of the learner's competence**, not disposable per-task tools. They remain part of what the AI can do unless later learning intentionally revises, supersedes, deprecates, or forgets them. A fixed agent harness/tool list is not the long-term architecture.
+- Host/process/shell capabilities are legitimate environment affordances. Sandbox them for safety; do not ban them just to prevent benchmark shortcuts.
+- Portable-core concepts do **not** require 100% native support across every host. Roughly 80–90% semantic convergence across representative runtimes is sufficient when outliers have practical adapters/ecosystem implementations. Compare semantics, not API spelling. Do not let the weirdest runtime veto EKG's ontology.
+- Preserve old experimental checkpoints rather than freezing current development around old protocols.
+- When forced to choose between making baby more educable/capable and protecting an obsolete benchmark assumption, **build the baby and version the benchmark**.
+
 ## Core architectural invariants
 - Canonical learned behavior lives in portable Blueprint IR, not Rust, TypeScript, or a particular host language.
 - Rust/TypeScript/reference execution are backends, not ontology.
@@ -146,3 +162,49 @@ Do not tune success thresholds after seeing v0.3 held-out results. Any protocol 
 The durable program store must not contain two Blueprints with identical canonical executable semantics.
 If synthesis creates a canonical match for a Blueprint already present, reuse the existing Blueprint and record the event as a retrieval/planning miss; do not persist the duplicate.
 Exact canonical identity is stronger than same-fixture denotation. Behaviorally equivalent but structurally distinct plans may coexist when their semantics, costs, portability, tie behavior, or other declared properties differ.
+
+## Context-sensitive language
+
+A lexical form is not its meaning. EKG keeps explicit senses and may learn contextual evidence that selects among them without erasing alternatives. Context-sensitive resolution should combine lexical senses, semantic frames/graph coherence, type/execution constraints, and eventually neural candidate signals. See `docs/CONTEXTUAL_LANGUAGE.md`.
+
+## Developmental education rule
+
+A red benchmark is not a blocker and must not trigger benchmark-lawyering. Prefer teaching the missing concept/procedure and recording the resulting learning curve. A validated learned procedure becomes durable competence and remains part of the learner until it is explicitly revised/deprecated/forgotten by learning logic. Do not replace an aspirational learned skill with a task-specific host primitive merely to make the benchmark green.
+
+## Language/world education doctrine
+
+Do not hard-code answers to BabyBench families. Teach reusable grammar, semantic relations, world facts, and inference procedures into durable graph state. It is acceptable and expected for later tasks to remain red until prerequisite concepts are taught. Prefer staged curriculum reports showing `before -> lesson -> after` over zero-shot claims.
+
+### Teach rules, not benchmark answers
+
+When a developmental task requires multi-hop reasoning, prefer a general durable inference rule over task-family code. Keep language parsing rules, predicate semantics, world facts, and inference rules inspectable and separately teachable so failures identify the missing prerequisite.
+
+### Curriculum selection invariant
+
+Select the next lesson because it teaches a reusable concept or procedure the learner is missing, not because it is the shortest path to making a benchmark green. Benchmarks are sensors for missing prerequisites. If a task reveals a need for inverse relations, argument roles, relation composition, temporal ordering, negation, counting, or another general concept, teach that concept directly and let any benchmark improvement be a consequence. Do not add benchmark-family-specific solvers or task-shaped knowledge unless the domain itself genuinely requires that abstraction.
+
+## Resilience is a product invariant
+
+Do not treat learned-program/library entries as disposable single points of failure. Validated learned capabilities must preserve enough executable state in durable graph memory to be reconstructed. Normal baby execution should use self-healing program lookup / resilient preflight when learned-program chains are involved. Repair from existing validated knowledge first; revalidate; record the repair. If recovery is impossible, escalate with a concrete broken-dependency diagnosis. Do not silently invent replacements, and do not abandon an entire chain merely because one live implementation pointer disappeared.
+
+### Lived experience is recovery state
+
+Resilience must not depend solely on one canonical Blueprint snapshot. Preserve durable execution context for learned-program and host-capability usage whenever practical, including successful and failed calls, actual inputs/outputs or errors, typed signatures, caller/call-stack context, call-site expressions, surrounding caller Blueprints, provenance, and repair history. Do not discard a failed usage merely because a later usage succeeds.
+
+When a learned implementation is missing/corrupt, recovery order is:
+1. restore and revalidate the canonical durable executable snapshot when available;
+2. otherwise reconstruct from accumulated lived usage evidence, preferring the historically observed execution neighborhood over unconstrained global search;
+3. validate the reconstruction against remembered successful usages and current dependencies;
+4. persist the validated replacement plus reconstruction provenance;
+5. only then escalate to Teacher with the complete diagnosis/evidence if autonomous repair fails.
+
+The learner's past executions are part of its durable context and may contain enough evidence to recover knowledge even when the original implementation artifact is gone.
+
+## Graph backend doctrine
+
+- Read `docs/LADYBUGDB.md` and the storage doctrine in `docs/PROJECT_GOSPEL.md` before changing graph persistence/retrieval.
+- `GraphStore` semantics are canonical; LadybugDB is the preferred embedded durable backend, not EKG's identity.
+- ArcadeDB remains an optional network/server adapter.
+- Keep `MemoryGraphStore` working as bootstrap/test/fallback.
+- Use OpenCypher for graph-native retrieval; do not reimplement graph traversal with whole-store JS scans when the durable backend can answer the query directly.
+- Search v2 may consume graph/history priors, but executable correctness remains grounded in EKG evaluation, not database ranking.

@@ -17,8 +17,8 @@ export class LanguageController {
   handle(rawUtterance:string,inputs:Value[]):LanguageResult{
     const interpreted=interpretComposedIntent(rawUtterance,this.graph);
     if(interpreted.status==="clarify") return {status:"clarify",question:interpreted.question,teacherInterventions:0};
-    if(interpreted.status==="teacher") return {status:"teacher",context:buildIntentTeacherContext(rawUtterance,interpreted)!,teacherInterventions:1};
-    const plan=planIntent(interpreted.intent,this.caps);
+    if(interpreted.status==="teacher") return {status:"teacher",context:buildIntentTeacherContext(rawUtterance,interpreted,this.caps)!,teacherInterventions:1};
+    const plan=planIntent(interpreted.intent,this.caps,this.graph);
     if(plan.status!=="planned") return {status:"unsupported",reason:plan.reason??"unplanned",teacherInterventions:0};
     return {status:"executed",output:runProgram(plan.program!,inputs,this.caps),intentId:interpreted.intent.id,teacherInterventions:0};
   }

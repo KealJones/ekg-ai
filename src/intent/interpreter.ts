@@ -2,6 +2,7 @@ import { T } from "../ir/types.js";
 import type { GraphStore } from "../graph/graph.js";
 import type { Intent, IntentInterpretation } from "./intent.js";
 import { learnedPhraseGroundings, type PhraseGrounding } from "./phrase-grounding.js";
+import { contextualLexicalSensesForText } from "./lexicon.js";
 
 const numberWords:Record<string,number>={
   zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,
@@ -32,8 +33,9 @@ export function interpretIntent(rawUtterance:string,store?:GraphStore):IntentInt
   if(!raw) return {status:"teacher",reason:"empty utterance",rawUtterance};
   const lower=raw.toLowerCase();
   const tokens=words(raw);
-  const groundings=[...(store?learnedPhraseGroundings(store):[]),...seedGroundings]
-    .filter((g,i,a)=>a.findIndex(x=>x.phrase===g.phrase)===i);
+  const lexical:PhraseGrounding[]=store?contextualLexicalSensesForText(store,raw).filter(x=>x.confidence>=.35).map(x=>({phrase:x.form,relation:x.relation,impliedValue:x.impliedValue,confidence:x.confidence,provenance:x.provenance})):[];
+  const groundings=[...lexical,...(store?learnedPhraseGroundings(store):[]),...seedGroundings]
+    .filter((g,i,a)=>a.findIndex(x=>x.phrase===g.phrase&&x.relation===g.relation)===i);
   const phraseMatches=(phrase:string)=>{
     const escaped=phrase.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
     return new RegExp(`(?:^|\\b)${escaped}(?:\\b|$)`,"i").test(lower);
@@ -61,15 +63,17 @@ export function interpretIntent(rawUtterance:string,store?:GraphStore):IntentInt
     .map(n=>n.value);
   if(lexicalFactor!==undefined) constants=[lexicalFactor,...constants];
 
-  if((relation==="Multiply"||relation==="Add") && constants.length===0){
+  const binaryWithAmount=new Set(["Multiply","Add","Subtract","Divide","Modulo","Minimum","Maximum","EqualInt","NotEqualInt","LessThan","LessOrEqual","GreaterThan","GreaterOrEqual"]);
+  if(binaryWithAmount.has(relation) && constants.length===0){
     return {status:"clarify",alternatives:[makeNumericIntent(raw,relation,[],matched[0]!.confidence,[...matched[0]!.provenance])],
-      question:`What ${relation==="Multiply"?"factor":"amount"} should be used?`};
+      question:relation==="Multiply"?"What factor should be used?":`What second number should be used for ${relation}?`};
   }
   return {status:"resolved",intent:makeNumericIntent(raw,relation,constants,matched[0]!.confidence,[...matched[0]!.provenance]),alternatives:[]};
 }
 
 function makeNumericIntent(raw:string,relation:string,constants:number[],confidence:number,provenance:string[]):Intent{
   const inputId="signal.input0";
+  const boolRelations=new Set(["EqualInt","NotEqualInt","LessThan","LessOrEqual","GreaterThan","GreaterOrEqual"]);
   const signals=[
     {id:inputId,concept:"Number",type:T.int,binding:"input" as const,inputIndex:0,provenance:["utterance:implicit-number-input"]},
     ...constants.map((n,i)=>({id:`signal.const${i}`,concept:"Number",type:T.int,value:n,provenance:["utterance:number"]}))
@@ -78,7 +82,7 @@ function makeNumericIntent(raw:string,relation:string,constants:number[],confide
     id:`intent:${raw.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,48)}`,
     rawUtterance:raw,
     signals,
-    goal:{concept:"Number",type:T.int},
+    goal:{concept:boolRelations.has(relation)?"Boolean":"Number",type:boolRelations.has(relation)?T.bool:T.int},
     constraints:[{relation,args:[inputId,...constants.map((_,i)=>`signal.const${i}`)],provenance}],
     confidence,
     provenance:["intent-interpreter:v0.1",...provenance]

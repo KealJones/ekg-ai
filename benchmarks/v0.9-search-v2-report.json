@@ -1,0 +1,25 @@
+{
+  "version": "0.9.1",
+  "task": "prove depth-4 16x is not reachable with depth<=3",
+  "legacy": {
+    "strategy": "legacy",
+    "wallMs": 5473.78,
+    "solved": false,
+    "candidatesExplored": 7204,
+    "generatedExpressions": 12006,
+    "behavioralPrunes": 0,
+    "memoHits": 0,
+    "memoMisses": 0
+  },
+  "v2": {
+    "strategy": "v2",
+    "wallMs": 108.9,
+    "solved": false,
+    "candidatesExplored": 208,
+    "generatedExpressions": 1176,
+    "behavioralPrunes": 904,
+    "memoHits": 18236,
+    "memoMisses": 9008
+  },
+  "speedup": 50.26
+}

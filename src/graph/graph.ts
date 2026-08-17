@@ -1,4 +1,4 @@
-export type EntityKind = "concept" | "program" | "capability" | "type" | "goal" | "episode" | "test" | "state_model" | "teaching_trace" | "impasse" | "question" | "hypothesis" | "experiment" | "conclusion" | "question_strategy" | "utility_evidence";
+export type EntityKind = "concept" | "lexeme" | "sense" | "frame" | "grammar_rule" | "inference_rule" | "fact" | "event" | "program" | "capability" | "type" | "goal" | "episode" | "test" | "state_model" | "teaching_trace" | "impasse" | "question" | "hypothesis" | "experiment" | "conclusion" | "question_strategy" | "utility_evidence";
 export interface Entity { id: string; kind: EntityKind; labels?: string[]; attrs?: Record<string, unknown>; }
 export interface Relation { id: string; kind: string; from: string; to: string; confidence?: number; }
 
