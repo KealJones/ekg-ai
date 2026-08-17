@@ -1,6 +1,7 @@
 import type { Type } from "./types.js";
 
-export type Value = boolean | number | string | Value[];
+export type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
+export type Value = JsonValue;
 
 export type Expr =
   | { kind: "const"; value: Value; type: Type }

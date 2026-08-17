@@ -36,6 +36,10 @@ If a fresh branch snapshot is needed, give the user this form of URL:
 
 `https://github.com/<owner>/<repo>/archive/refs/heads/<branch>.zip`
 
+For the current v0.3 branch:
+
+`https://github.com/KealJones/ekg-ai/archive/refs/heads/v0.3-preregistered-experiment.zip`
+
 The user can download that ZIP and upload it into the conversation. Extract it into a new sandbox working directory, then continue with the preferred workflow above.
 
 ## Important constraints

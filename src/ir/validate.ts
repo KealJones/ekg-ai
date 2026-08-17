@@ -4,11 +4,21 @@ import { typeEquals } from './types.js';
 import type { CapabilityRegistry } from '../runtime/capabilities.js';
 import type { ProgramLibrary } from '../program-library.js';
 
+function isJsonValue(value: Value): boolean {
+  if (value === null || typeof value === 'boolean' || typeof value === 'string') return true;
+  if (typeof value === 'number') return Number.isFinite(value);
+  if (Array.isArray(value)) return value.every(isJsonValue);
+  if (typeof value === 'object') return Object.values(value as Record<string,Value>).every(isJsonValue);
+  return false;
+}
+
 export function valueMatchesType(value: Value, type: Type): boolean {
   switch (type.kind) {
+    case 'null': return value === null;
     case 'bool': return typeof value === 'boolean';
     case 'int': return typeof value === 'number' && Number.isInteger(value);
     case 'string': return typeof value === 'string';
+    case 'json': return isJsonValue(value);
     case 'list': return Array.isArray(value) && value.every(v => valueMatchesType(v, type.item));
   }
 }

@@ -1,11 +1,11 @@
 {
   "name": "ekg-ai-v0",
-  "version": "0.2.0",
+  "version": "0.9.1",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json",
-    "test": "npm run build && node --test tests/*.test.mjs",
+    "test": "npm run build && node scripts/run-tests.mjs fast",
     "benchmark:v0": "npm run build && node benchmarks/v0-controller.mjs",
     "benchmark:learning": "npm run build && node benchmarks/v0-learning.mjs",
     "benchmark:report": "npm run build && node benchmarks/v0-report.mjs",
@@ -18,6 +18,27 @@
     "benchmark:language-curriculum": "npm run build && node benchmarks/v0-language-curriculum.mjs",
     "benchmark:filesystem-milestone": "npm run build && node benchmarks/v0-filesystem-milestone.mjs",
     "benchmark:falsification-pilot": "npm run build && node benchmarks/v1-falsification-pilot.mjs",
-    "benchmark:pilot-audit": "npm run build && node benchmarks/v1-pilot-audit.mjs"
+    "benchmark:pilot-audit": "npm run build && node benchmarks/v1-pilot-audit.mjs",
+    "benchmark:tiny-semantic": "npm run build && node benchmarks/v0-tiny-semantic-probe.mjs",
+    "benchmark:v0.3-protocol": "npm run build && node benchmarks/v0.3-protocol-freeze.mjs",
+    "benchmark:v0.3-corpus-audit": "npm run build && node benchmarks/v0.3-corpus-audit.mjs",
+    "benchmark:v0.3-preflight": "npm run build && node benchmarks/v0.3-denotation-dependency-audit.mjs",
+    "benchmark:v0.4-phase0": "npm run build && node benchmarks/v0.4-phase0.mjs",
+    "benchmark:v0.5-phase0": "npm run build && node benchmarks/v0.5-phase0.mjs",
+    "benchmark:portable-play": "npm run build && node benchmarks/v0.6-portable-play.mjs",
+    "benchmark:baby": "npm run build && node benchmarks/babybench.mjs",
+    "benchmark:language-school": "npm run build && node benchmarks/v0.7-language-school.mjs",
+    "benchmark:object-school": "npm run build && node benchmarks/v0.7-object-school.mjs",
+    "benchmark:babi-school": "npm run build && node benchmarks/v0.8-babi-school.mjs",
+    "benchmark:possession-school": "npm run build && node benchmarks/v0.8-possession-school.mjs",
+    "benchmark:resilience": "npm run build && node benchmarks/v0.8-resilience.mjs",
+    "benchmark:relations-roles-school": "npm run build && node benchmarks/v0.8-relations-roles-school.mjs",
+    "test:arcade": "npm run build && node --test tests/arcade-graph.test.mjs",
+    "test:arcade:integration": "npm run build && node --test tests/arcade-integration.test.mjs",
+    "test:experiments": "npm run build && node scripts/run-tests.mjs experiments",
+    "benchmark:search-v2": "npm run build && node benchmarks/v0.9-search-v2.mjs",
+    "test:ladybug": "npm run build && node --test tests/ladybug-graph.test.mjs",
+    "test:ladybug:integration": "npm run build && node --test tests/ladybug-integration.test.mjs",
+    "test:remote": "npm run test:ladybug:integration && npm test"
   }
 }

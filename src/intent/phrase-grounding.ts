@@ -1,4 +1,5 @@
 import type { GraphStore } from "../graph/graph.js";
+import { storeLexicalSense, lexicalSensesForText } from "./lexicon.js";
 
 export interface PhraseGrounding {
   phrase: string;
@@ -30,10 +31,11 @@ export function storePhraseGrounding(store:GraphStore,g:PhraseGrounding):void{
   const edge=`${id}:expresses:${rid}`;
   if(!store.outgoing(id,"expresses").some(x=>x.to===rid))
     store.putRelation({id:edge,kind:"expresses",from:id,to:rid,confidence:g.confidence});
+  storeLexicalSense(store,{form:g.phrase,senseId:`legacy:${g.relation}:${g.phrase.trim().toLowerCase()}`,relation:g.relation,impliedValue:g.impliedValue,confidence:g.confidence,provenance:g.provenance});
 }
 
 export function learnedPhraseGroundings(store:GraphStore):PhraseGrounding[]{
-  return store.entitiesByKind("concept")
+  const legacy=store.entitiesByKind("concept")
     .filter(e=>e.labels?.includes("phrase") && typeof e.attrs?.phrase==="string" && typeof e.attrs?.relation==="string")
     .filter(e=>Number(e.attrs!.confidence??.5)>=.35)
     .map(e=>({
@@ -43,6 +45,9 @@ export function learnedPhraseGroundings(store:GraphStore):PhraseGrounding[]{
       confidence:Number(e.attrs!.confidence??.5),
       provenance:Array.isArray(e.attrs!.provenance)?e.attrs!.provenance as string[]:["graph"]
     }));
+  // Lexical senses are resolved contextually by the interpreter. Re-injecting every raw
+  // lexeme sense here would defeat word-sense disambiguation by restoring all alternatives.
+  return legacy.filter((g,i,a)=>a.findIndex(x=>x.phrase===g.phrase&&x.relation===g.relation)===i);
 }
 
 export function recordPhraseGroundingOutcome(store:GraphStore,phrase:string,success:boolean):void{
@@ -57,4 +62,11 @@ export function recordPhraseGroundingOutcome(store:GraphStore,phrase:string,succ
   const prior=Number(attrs.confidence??.5);
   const confidence=Math.max(0,Math.min(1,(prior*2+successes)/(2+observations)));
   store.putEntity({...entity,attrs:{...attrs,successes,failures,confidence}});
+  const lexId=`lexeme:en:${phrase.trim().toLowerCase().replace(/\s+/g," ").replace(/[^a-z0-9._-]+/g,"-").replace(/^-|-$/g,"")}`;
+  const relation=typeof attrs.relation==="string"?String(attrs.relation):undefined;
+  for(const edge of store.outgoing(lexId,"has_sense")){
+    const sense=store.getEntity(edge.to);
+    if(!sense||!relation||sense.attrs?.relation!==relation) continue;
+    store.putEntity({...sense,attrs:{...(sense.attrs??{}),successes,failures,confidence}});
+  }
 }

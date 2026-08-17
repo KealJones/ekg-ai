@@ -24,6 +24,9 @@ export interface PromotionEvidence {
   baselineSolved?: number;
   /** Number of held-out tasks solved with the abstraction. */
   promotedSolved?: number;
+  /** Total search work (e.g. generated expressions + scored candidates). Preferred by Search v2. */
+  baselineWork?: number;
+  promotedWork?: number;
 }
 
 function abstractionDefinitionCost(candidate: AbstractionCandidate): number {
@@ -47,7 +50,7 @@ export function decideAbstractionPromotion(
 ): AbstractionPromotionDecision {
   const independentPrograms = new Set(candidate.programIds).size;
   const compressionGainNodes = estimateCompressionGain(candidate);
-  const heldoutSearchSavings = evidence.baselineCandidates - evidence.promotedCandidates;
+  const heldoutSearchSavings = (evidence.baselineWork ?? evidence.baselineCandidates) - (evidence.promotedWork ?? evidence.promotedCandidates);
   const baselineSolved = evidence.baselineSolved ?? 0;
   const promotedSolved = evidence.promotedSolved ?? baselineSolved;
 

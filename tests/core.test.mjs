@@ -248,7 +248,7 @@ test("automatic promotion experiment rejects an abstraction that expands held-ou
   });
   assert.equal(result.baseline.solved,1);
   assert.equal(result.promoted.solved,1);
-  assert.ok(result.promoted.candidates>result.baseline.candidates);
+  assert.ok(result.promoted.searchWork>result.baseline.searchWork);
   assert.equal(result.decision.promoted,false);
   assert.equal(result.decision.reason,"no-heldout-utility");
 });
@@ -271,8 +271,8 @@ test("automatic promotion experiment promotes an abstraction only when it measur
   });
   assert.equal(result.baseline.solved,1);
   assert.equal(result.promoted.solved,1);
-  assert.ok(result.promoted.candidates<result.baseline.candidates,
-    `expected abstraction to reduce search: baseline=${result.baseline.candidates}, promoted=${result.promoted.candidates}`);
+  assert.ok(result.promoted.searchWork<result.baseline.searchWork,
+    `expected abstraction to reduce search: baseline=${result.baseline.searchWork}, promoted=${result.promoted.searchWork}`);
   assert.equal(result.decision.promoted,true);
   assert.equal(result.decision.reason,"promoted");
   assert.ok(result.decision.heldoutSearchSavings>0);

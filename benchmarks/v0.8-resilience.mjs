@@ -1,0 +1,10 @@
+import {T,defaultCapabilities,MemoryGraphStore,MemoryProgramLibrary,SelfHealingProgramLibrary,TeacherSchool,runProgramResilient} from '../dist/index.js';
+const caps=defaultCapabilities(); caps.register({id:'core.sub_int',inputs:[T.int,T.int],output:T.int,pure:true,deterministic:true,reference:(a,b)=>Number(a)-Number(b),tsEmit:a=>`(${a[0]}-${a[1]})`,rustEmit:a=>`(${a[0]}-${a[1]})`});
+const graph=new MemoryGraphStore(), backing=new MemoryProgramLibrary(), programs=new SelfHealingProgramLibrary(backing,graph,caps), school=new TeacherSchool(graph,caps,programs);
+const I=i=>({kind:'input',index:i,type:T.int}), C=(id,args)=>({kind:'call',capabilityId:id,args,type:T.int}), P=(id,args)=>({kind:'program_call',programId:id,args,type:T.int});
+const inner={id:'learned.abs-diff',inputs:[T.int,T.int],output:T.int,body:C('core.max_int',[C('core.sub_int',[I(0),I(1)]),C('core.sub_int',[I(1),I(0)])])};
+school.teachProgram({id:'lesson.abs-diff',conceptId:'abs-diff',description:'absolute integer difference',program:inner,validationTask:{id:'v',inputs:[T.int,T.int],output:T.int,examples:[{inputs:[9,4],output:5},{inputs:[4,9],output:5}]},provenance:['teacher:resilience-demo']});
+const outer={id:'learned.add-after-difference',inputs:[T.int,T.int,T.int],output:T.int,body:C('core.add_int',[P(inner.id,[I(0),I(1)]),I(2)])}; backing.put(outer);
+backing.remove(inner.id);
+const result=runProgramResilient(outer,[17,5,3],caps,programs);
+console.log(JSON.stringify({before:'inner deleted from live library',answer:result.value,healthy:result.health.healthy,repairs:graph.entitiesByKind('episode').filter(e=>e.labels?.includes('self-repair')).map(e=>({programId:e.attrs?.programId,status:e.attrs?.status}))},null,2));

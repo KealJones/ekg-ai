@@ -1,0 +1,70 @@
+name: EKG Remote Lab
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'benchmarks/**'
+      - 'package.json'
+      - '.github/workflows/ekg-remote-lab.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ladybug-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install build tools + embedded LadybugDB
+        run: npm install --no-save typescript @ladybugdb/core@latest
+
+      - name: Record environment
+        run: |
+          mkdir -p artifacts
+          {
+            echo "node=$(node --version)"
+            echo "npm=$(npm --version)"
+            npm ls @ladybugdb/core --depth=0
+          } | tee artifacts/environment.txt
+
+      - name: Real Ladybug embedded integration
+        env:
+          EKG_REQUIRE_LADYBUG: '1'
+          EKG_LADYBUG_PATH: ${{ runner.temp }}/ekg-ci-brain.lbdb
+        run: |
+          set -o pipefail
+          npm run test:ladybug:integration 2>&1 | tee artifacts/ladybug-integration.log
+
+      - name: Living EKG suite
+        run: |
+          set -o pipefail
+          npm test 2>&1 | tee artifacts/npm-test.log
+
+      - name: Search v2 benchmark
+        run: |
+          set -o pipefail
+          npm run benchmark:search-v2 2>&1 | tee artifacts/search-v2.log
+
+      - name: Snapshot test brain
+        if: always()
+        run: |
+          mkdir -p artifacts/brain
+          cp -a "${{ runner.temp }}"/ekg-ci-brain.lbdb* artifacts/brain/ 2>/dev/null || true
+
+      - name: Upload remote-lab results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ekg-remote-lab-${{ github.sha }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 14

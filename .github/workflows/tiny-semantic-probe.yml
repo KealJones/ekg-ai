@@ -1,0 +1,30 @@
+name: Tiny Semantic Probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [v0.3-preregistered-experiment]
+    paths:
+      - "src/intent/semantic-encoder.ts"
+      - "benchmarks/v0-tiny-semantic-probe.mjs"
+      - ".github/workflows/tiny-semantic-probe.yml"
+      - "package.json"
+
+permissions:
+  contents: read
+
+jobs:
+  minilm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install TypeScript and Transformers.js
+        run: npm install --no-save typescript@5 @huggingface/transformers@3.8.1
+      - name: Build EKG
+        run: npm run build
+      - name: Run exploratory MiniLM semantic probe
+        run: npm run benchmark:tiny-semantic

@@ -13,10 +13,14 @@ import {
 export interface PromotionExperimentSide {
   solved: number;
   candidates: number;
+  generatedExpressions: number;
+  searchWork: number;
   perTask: Array<{
     taskId: string;
     solved: boolean;
     candidates: number;
+    generatedExpressions: number;
+    searchWork: number;
     depth: number;
     usedProgramCalls: string[];
   }>;
@@ -57,6 +61,8 @@ export function measureProgramUtility(
       taskId:task.id,
       solved:!!result.program,
       candidates:result.candidatesExplored,
+      generatedExpressions:result.generatedExpressions??result.candidatesExplored,
+      searchWork:(result.generatedExpressions??0)+result.candidatesExplored,
       depth:result.maxDepthReached,
       usedProgramCalls:result.usedProgramCalls,
     };
@@ -64,6 +70,8 @@ export function measureProgramUtility(
   return {
     solved:perTask.filter(x=>x.solved).length,
     candidates:perTask.reduce((n,x)=>n+x.candidates,0),
+    generatedExpressions:perTask.reduce((n,x)=>n+x.generatedExpressions,0),
+    searchWork:perTask.reduce((n,x)=>n+x.searchWork,0),
     perTask,
   };
 }
@@ -95,6 +103,8 @@ export function runAbstractionPromotionExperiment(args:{
     promotedCandidates:promoted.candidates,
     baselineSolved:baseline.solved,
     promotedSolved:promoted.solved,
+    baselineWork:baseline.searchWork,
+    promotedWork:promoted.searchWork,
   });
 
   return {candidateProgram,baseline,promoted,decision};

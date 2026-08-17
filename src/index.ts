@@ -13,8 +13,10 @@ export * from "./episode.js";
 export * from "./controller.js";
 
 export * from "./baselines/memorize.js";
+export * from "./baselines/selective-knn.js";
 export * from "./benchmarks/fingerprint.js";
 export * from "./benchmarks/v0-suite.js";
+export * from "./benchmarks/selective-evaluation.js";
 
 export * from "./learning/abstraction-miner.js";
 export * from "./telemetry/program-usage.js";
@@ -45,6 +47,42 @@ export * from "./intent/behavioral-grounding.js";
 export * from "./intent/language-impasse.js";
 export * from "./intent/language-controller.js";
 export * from "./intent/language-session.js";
+export * from "./intent/semantic-encoder.js";
 export * from "./runtime/filesystem-capabilities.js";
 export * from "./domains/file-intent.js";
 export * from "./benchmarks/semantic-frame.js";
+
+export * from "./benchmarks/primitive-holdout.js";
+export * from "./benchmarks/primitive-selection.js";
+export * from "./benchmarks/primitive-experiment.js";
+
+export * from "./benchmarks/external-items.js";
+
+export * from "./benchmarks/nl2bash-intake.js";
+export * from "./benchmarks/v0.4-phase0.js";
+
+export * from "./benchmarks/v0.5-phase0.js";
+export * from "./runtime/portable-capabilities.js";
+export * from "./runtime/portable-host-capabilities.js";
+export * from "./runtime/baby-capabilities.js";
+export * from "./runtime/portable-knowledge.js";
+
+export * from "./benchmarks/babybench.js";
+
+export * from "./intent/semantic-catalog.js";
+
+export * from "./intent/lexicon.js";
+
+export * from "./teaching/teacher-school.js";
+
+export * from "./teaching/object-curriculum.js";
+
+export * from "./language/world-language.js";
+
+export * from "./runtime/resilience.js";
+
+export * from "./runtime/execution-experience.js";
+
+export * from "./graph/arcade.js";
+
+export * from "./graph/ladybug.js";

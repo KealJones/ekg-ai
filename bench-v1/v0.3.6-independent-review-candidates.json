@@ -1,0 +1,1811 @@
+{
+  "status": "REVIEW_REQUIRED_NOT_SCORED_EVIDENCE",
+  "source": {
+    "corpus": "NL2Bash",
+    "records": 12607
+  },
+  "selection": "deterministic evenly-spaced sample from command-derived candidates; 60 per primitive",
+  "instructions": "Independent reviewer must mark semantic fit, assign familyId, and reject false positives. EKG/Teacher must not author scored gold.",
+  "items": [
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:1058",
+      "line": 1058,
+      "utterance": "Creae a tarball 'files.tar.gz' containing all regular files under current directory tree that are newer than 2013-12-04 and older than 2013-12-05",
+      "command": "find . -type f -name \"*\" -newermt 2013-12-04 ! -newermt 2013-12-05 | xargs -I {} tar -czvf files.tar.gz {}",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:1521",
+      "line": 1521,
+      "utterance": "Display a long listing of all the regular files under current directory tree that are newer than \u2018Apr 18 23:59:59 EDT 2013\u2019 and older than \u2018Apr 20 00:00:00 EDT 2013\u2019 by modification time",
+      "command": "find . -type f -newermt \u2018Apr 18 23:59:59 EDT 2013\u2019 ! -newermt \u2018Apr 20 00:00:00 EDT 2013\u2019 -exec ls -l \u2018{}\u2019 \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:2513",
+      "line": 2513,
+      "utterance": "Find all directories in the /data1/realtime directory tree that were last modified more than 5 minutes ago but less than 60 minutes ago",
+      "command": "find /data1/realtime -mmin -60 -mmin +5 -type d",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:2854",
+      "line": 2854,
+      "utterance": "Find all files modified on the 7th of June, 2007, starting from the current directory",
+      "command": "find . -type f -newermt 2007-06-07 ! -newermt 2007-06-08",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3395",
+      "line": 3395,
+      "utterance": "Find all files/directories under current directory that were accessed more than 25 but less than 35 minutes ago",
+      "command": "find -amin +25 -amin -35",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3487",
+      "line": 3487,
+      "utterance": "Find all files/drectories under '/u/bill' directory tree that have been accessed in the last 2 to 6 minutes",
+      "command": "find /u/bill -amin +2 -amin -6",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3573",
+      "line": 3573,
+      "utterance": "Find all regular files in the current directory tree last modified between 1 and 3 days ago and list them using find's -ls option",
+      "command": "find ./ -daystart -mtime -3 -type f  ! -mtime -1 -exec ls -ld {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3575",
+      "line": 3575,
+      "utterance": "Find all regular files in the current directory tree last modified between 1 and 3 days ago and list them using format '%Tc %p\\n'",
+      "command": "find ./ -daystart -mtime -3 -type f  ! -mtime -1  -printf '%Tc %p\\n'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3576",
+      "line": 3576,
+      "utterance": "Find all regular files in the current directory tree last modified between 1 and 3 days ago and list them using format '%Tm %p\\n'",
+      "command": "find ./ -daystart -mtime -3 -type f  ! -mtime -1  -printf '%Tm %p\\n'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3736",
+      "line": 3736,
+      "utterance": "Find all the files in entire file system  which are modified more than 50 days back and less than 100 days and show a few lines of output from the beginning",
+      "command": "find / -mtime +50 -mtime -100 | head",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3777",
+      "line": 3777,
+      "utterance": "Find all the files which were modified more than 50 days but less than 100 days ago",
+      "command": "find / -mtime +50 -mtime -100",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3790",
+      "line": 3790,
+      "utterance": "Find all the files/directories in the current directory tree which have been modified between 2014-08-25 and 2014-08-26",
+      "command": "find ./ -newermt 2014-08-25 ! -newermt 2014-08-26 -print",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:3973",
+      "line": 3973,
+      "utterance": "Find files in the /var/log folder which were modified modified 2 weeks ago",
+      "command": "find /var/log/ -mtime +7 -mtime -8",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:4013",
+      "line": 4013,
+      "utterance": "Find files modified between 6 and 9 minutes ago",
+      "command": "find . -mmin +5 -mmin -10",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:4037",
+      "line": 4037,
+      "utterance": "Find files on the system accessed during the last 24 hours but not within the last hour",
+      "command": "find / -atime -1 -amin +60",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:4083",
+      "line": 4083,
+      "utterance": "Find files that were modified more than 7 days ago but less than 14 days ago and archive them",
+      "command": "find . -type f -mtime +7 -mtime -14 | xargs tar -cvf `date '+%d%m%Y'_archive.tar`",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:4104",
+      "line": 4104,
+      "utterance": "Find files whose data was modified within the given days of the month",
+      "command": "find ./ -daystart -mtime -10 -and -mtime +1",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:4970",
+      "line": 4970,
+      "utterance": "List all files in entire file system that are newer than the file $newerthan and older than the file $olderthan and sort them according to file modification time",
+      "command": "find / -type f -name \"*\" -newermt \"$newerthan\" ! -newermt \"$olderthan\"  -printf '%T@ %p\\n' | sort -k 1 -n | sed 's/^[^ ]* //'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:4971",
+      "line": 4971,
+      "utterance": "List all files in entire file system that are newer than the file $newerthan and older than the file $olderthan and sort them according to file modification time",
+      "command": "find / -type f -name \"*\" -newermt \"$newerthan\" ! -newermt \"$olderthan\" -printf \"%T+\\t%p\\n\" | sort | awk '{print $2}'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:4972",
+      "line": 4972,
+      "utterance": "List all files in entire file system that are newer than the file $newerthan and older than the file $olderthan in regards of modification time",
+      "command": "find / -type f -name \"*\" -newermt \"$newerthan\" ! -newermt \"$olderthan\" -ls",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:4986",
+      "line": 4986,
+      "utterance": "List all files in the current directory tree that were last modified between \"mar 03, 2010 09:00\" and \"mar 11, 2010\"",
+      "command": "find -newermt \"mar 03, 2010 09:00\" -not -newermt \"mar 11, 2010\" -ls",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:5015",
+      "line": 5015,
+      "utterance": "List all files with their modification time in entire file system that are newer than the file $newerthan and older than the file $olderthan in regards of modification time and sort them according to file modification time",
+      "command": "find / -type f -name \"*\" -newermt \"$newerthan\" ! -newermt \"$olderthan\" -printf \"%T+\\t%p\\n\" | sort",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:5020",
+      "line": 5020,
+      "utterance": "List all files/directories under /data1/Marcel which are greater than 524288 bytes and were modified or accessed more than 1 year ago",
+      "command": "find /data1/Marcel -size +1024 \\( -mtime +365 -o -atime +365 \\) -ls",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:5021",
+      "line": 5021,
+      "utterance": "List all files/directories under /data1/Marcel with their file information which are greater than 524288 bytes and were modified or accessed more than 1 year ago",
+      "command": "find /data1/Marcel -size +1024  \\( -mtime +365 -o -atime +365 \\) -ls -exec file {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:5176",
+      "line": 5176,
+      "utterance": "List files under $CURR_DIR which were modified, accessed or whose status were changed $FTIME ago and sort them and remove duplicate entries",
+      "command": "sort <(cd $CURR_DIR && find . -type f -ctime $FTIME) <(cd $CURR_DIR && find . -type f -atime $FTIME) <(cd $CURR_DIR && find . -type f -mtime $FTIME) | uniq",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:5179",
+      "line": 5179,
+      "utterance": "List files under current directory which were modified, accessed or whose status were changed $FTIME ago and sort them and remove duplicate entries",
+      "command": "(find . -type f -ctime $FTIME && find . -type f -atime $FTIME && find . -type f -mtime $FTIME) | sort | uniq",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:5322",
+      "line": 5322,
+      "utterance": "Locate files that reside in the /u/bill directory tree and were last accessed between 2 and 6 minutes ago",
+      "command": "find /u/bill -amin +2 -amin -6",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:5358",
+      "line": 5358,
+      "utterance": "Look for any files that were modified 2-5 days ago",
+      "command": "find -mtime +2 -mtime -5",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:6581",
+      "line": 6581,
+      "utterance": "Print the list of regular files from the current directory that were last modified on November, 22",
+      "command": "find . -maxdepth 1 -type f -newermt \"Nov 22\" \\! -newermt \"Nov 23\" -exec echo {} +",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:7477",
+      "line": 7477,
+      "utterance": "Remove all regular files from the current directory tree that were modified between August 10th and August 17th",
+      "command": "find . -type f -newermt \"Aug 10\" ! -newermt \"Aug 17\" -exec rm {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:7604",
+      "line": 7604,
+      "utterance": "Remove the regular files from the current directory tree that were last modified on November, 21",
+      "command": "find -type f -newermt \"Nov 21\" ! -newermt \"Nov 22\" -delete",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:8334",
+      "line": 8334,
+      "utterance": "Search directory $CURR_DIR for regular files that were changed, accessed, or modified $FTIME days ago",
+      "command": "find ${CURR_DIR} -type f \\( -ctime ${FTIME} -o -atime ${FTIME} -o -mtime ${FTIME} \\) -printf \"./%P\\n\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:8373",
+      "line": 8373,
+      "utterance": "Search for \"1234567890\" in every gzip file modified between 8:00 and 9:00 on 2014-04-30",
+      "command": "find . -newermt '2014-04-30 08:00:00' -not -newermt '2014-04-30 09:00:00' |xargs gunzip -c | grep 1234567890",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:9916",
+      "line": 9916,
+      "utterance": "create a backup of all normal/regular files in current folder which have been modified between two dates and create a tar.gz file of this backup",
+      "command": "find /path/to/files/ -newermt 20131204 -not -newermt 20131205 -type f -print0 | cpio --create --null  --format=ustar  | gzip > /tmp/dec-4.tar.gz",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:10223",
+      "line": 10223,
+      "utterance": "display all files which have been modified between two dates in current folder",
+      "command": "find . -type f -newermt \"2014-01-01\" ! -newermt \"2014-06-01\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:10381",
+      "line": 10381,
+      "utterance": "display all the files in the current folder that are at least one week old (7 days) but less then 30 days old",
+      "command": "find . -mtime +30 -a -mtime -7 -print0",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:10397",
+      "line": 10397,
+      "utterance": "display all the files in the current folder which have been modified between two dates",
+      "command": "find . -newermt \u201cSep 1 2006\u201d -and \\! -newermt \u201cSep 10 2006\u201d",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:10645",
+      "line": 10645,
+      "utterance": "display the files modified between last 18 to 24 months in the format filename, file size, Last access date, modification date and save the output to the file /dir/dir/output.csv",
+      "command": "find /dir/dir -type f -mtime +540 -mtime -720 -printf \\\u201d%p\\\u201d,\\\u201d%s\\\u201d,\\\u201d%AD\\\u201d,|\u201d%TD\\\u201d\\\\n > /dir/dir/output.csv",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:10738",
+      "line": 10738,
+      "utterance": "find .gif files in /var/www and below that were last changed between 90 and 180 days ago",
+      "command": "find /var/www -name *.gif -ctime +90 -ctime -180",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:10893",
+      "line": 10893,
+      "utterance": "find all files in the home folder which have been modified between 72 and 96 hours before",
+      "command": "find ~ -mtime 2 -mtime -4 -daystart",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:10903",
+      "line": 10903,
+      "utterance": "find all files that have been modified yesterday",
+      "command": "find /some/dir -mmin -$((currtime + (24 * 60))) -a -mmin +$((${currtime} + 1))",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:10908",
+      "line": 10908,
+      "utterance": "find all files that were modified between 90 to 100 days ago in home directory and delete then .",
+      "command": "find /home -type f -mtime +90 -mtime -100  -exec rm  {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11116",
+      "line": 11116,
+      "utterance": "find all the files and folder that were created in 2012 on Friday of every month",
+      "command": "find / -daystart -mtime +41 -mtime -408 \\   -printf \"%M %n %u %g %10s %TY-%Tm-%Td %Ta %TH:%TM:%TS %h/%f\\n\" | awk '($7==\"Fri\"){print}'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11170",
+      "line": 11170,
+      "utterance": "find all the files in the current directory which start with t and have been modified between one hour (60 minutes) and 12 hours (720 minutes) ago.",
+      "command": "find . -mmin -720 -mmin +60 -type f -name \"t*\" -exec ls -l '{}' \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11214",
+      "line": 11214,
+      "utterance": "find all the files in the current folder which have been modified for the ffiles that are at least one week old (7 days) but less then 30 days old",
+      "command": "find . -mtime +30 -a -mtime -7 -print0",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11215",
+      "line": 11215,
+      "utterance": "find all the files in the current folder which have been modified in the 10 minutes ago",
+      "command": "find -mmin +15 -mmin -25",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11227",
+      "line": 11227,
+      "utterance": "find all the files in the current folder which which have been modified yesterday and day before yesterday and whose name is of length 1",
+      "command": "find . -name \\? -daystart -mtime +0 -mtime -3",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11237",
+      "line": 11237,
+      "utterance": "find all the files in the entire file system that have been modified between 50 to 100 days and display ten files",
+      "command": "find / -mtime +50 -mtime -100 | head",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11281",
+      "line": 11281,
+      "utterance": "find all the files in the folder /opt which have been modified between 20 to 50 days ago",
+      "command": "find /opt -mtime +30 -mtime -50",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11288",
+      "line": 11288,
+      "utterance": "find all the files in the home folder that are modified day before yesterday",
+      "command": "find $HOME -mtime -2 -mtime +1",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11290",
+      "line": 11290,
+      "utterance": "find all the files in the home folder that have been modified between 24 to 48 hours",
+      "command": "find $HOME -mtime -2 -mtime +1",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11311",
+      "line": 11311,
+      "utterance": "find all the files that are modified in the last 1 day",
+      "command": "find -mtime +0 -mtime -1",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11421",
+      "line": 11421,
+      "utterance": "find all the normal/regular files in the current folder which have been modified two days ago and display a long listing of them",
+      "command": "find . -type f -mtime 2 -mtime -3 -daystart -exec ls -l {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11496",
+      "line": 11496,
+      "utterance": "find all the text files in the current directory which have been modified in the last 4 days and not today and copy them to another folder",
+      "command": "find . -name \"*.txt\" -type f -daystart -mtime -4 -mtime +0|xargs -i cp {} /home/ozuma/tmp",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11517",
+      "line": 11517,
+      "utterance": "find all the text files that have modified in the last 2 days and not modified today",
+      "command": "find . -name \"*.txt\" -type f -daystart -mtime +0 -mtime -2",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11522",
+      "line": 11522,
+      "utterance": "find all the video files which are bigger than 10 MB which have not been modified in the last 60 days but have been changed in the last 100 days in /tmp and /var/tmp folder home folders",
+      "command": "find /tmp /var/tmp ~ -type f -size +10M -mtime +60 -ctime -100 -exec file -N -i -- {} + | sed -n 's!: video/[^:]*$!!p'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11566",
+      "line": 11566,
+      "utterance": "find files in /u/bill directory which are access an 2 to 6 minutes ago",
+      "command": "find /u/bill -amin +2 -amin -6",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:11807",
+      "line": 11807,
+      "utterance": "list files in /u/bill that were last read from 2 to 6 minutes ago",
+      "command": "find /u/bill -amin +2 -amin -6",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:12223",
+      "line": 12223,
+      "utterance": "search for all the perl files in the folder /nas/projects/mgmt/scripts/perl which have been modified 8-10 days ago.",
+      "command": "find /nas/projects/mgmt/scripts/perl -mtime 8 -mtime -10 -daystart -iname \"*.pl\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.within_closed_int_window",
+      "recordId": "NL2Bash:all:12524",
+      "line": 12524,
+      "utterance": "sort and display the unique lines display the contents of all the files that have been modified in the last 91 days and not in the last 2 days",
+      "command": "find .  -name \"*.txt\" -type f -daystart -mtime -91 -mtime +2 | xargs cat | sort | uniq",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:5",
+      "line": 5,
+      "utterance": "(GNU specific) Display information about number of processes in various states.",
+      "command": "top -bn1 | grep zombie",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:534",
+      "line": 534,
+      "utterance": "Check if \"/path/to/dir\" is a nfs mount point",
+      "command": "mount -l | grep 'type nfs' | sed 's/.* on \\([^ ]*\\) .*/\\1/' | grep /path/to/dir",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:681",
+      "line": 681,
+      "utterance": "Construction with additional '-exec true' to be used if both commands need to run regardless of their success or failure.",
+      "command": "find . -name \"*.txt\" \\( -exec echo {} \\; -o -exec true \\; \\) -exec grep banana {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:913",
+      "line": 913,
+      "utterance": "Count the *.html files residing in the /usr/src directory tree and containing string \"foo\"",
+      "command": "find /usr/src -name \"*.html\" -exec grep -l foo '{}' ';' | wc -l",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:1029",
+      "line": 1029,
+      "utterance": "Counts non-blank lines (lines with spaces are considered blank) in all *.py files in a current folder.",
+      "command": "grep -v '^\\s*$' *.py | wc",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:1311",
+      "line": 1311,
+      "utterance": "Delete all contents form the files that contain the regex 'string' in maximum 1 level down the / directory excluding other partitions",
+      "command": "find / -maxdepth 1 -xdev -type f|xargs grep -l 'string'| xargs perl -pi -e 's/.//g'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:1792",
+      "line": 1792,
+      "utterance": "Execute \"ps aux | grep php\" every second",
+      "command": "watch -n 1 'ps aux | grep php'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:1976",
+      "line": 1976,
+      "utterance": "Find *2011* files and grep for the string 'From: Ralph' in those files",
+      "command": "find . -name '*2011*' -print | xargs -n2 grep 'From: Ralph'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:2060",
+      "line": 2060,
+      "utterance": "Find all *.c files under and below the current directory that contain \"wait_event_interruptible\"",
+      "command": "find . -name \\*.c -print0 | xargs -0 grep wait_event_interruptible /dev/null",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:2276",
+      "line": 2276,
+      "utterance": "Find all *Company* files/directories under /root/of/where/files/are directory",
+      "command": "find /root/of/where/files/are -name *Company*",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:2324",
+      "line": 2324,
+      "utterance": "Find all .java files whose name contains \"Message\"",
+      "command": "find . -print | grep '.*Message.*\\.java'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:2601",
+      "line": 2601,
+      "utterance": "Find all directories under and below /root that match pattern \"*linux*\", case insensitive",
+      "command": "find  /root -type d -iname \"*linux*\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:2967",
+      "line": 2967,
+      "utterance": "Find all files under ${searchpath} that match the regex ${string1}.*${string2}.*${string3}  in their contents where ${string1} etc.. will be expanded",
+      "command": "find \"${searchpath}\" -type f -print0 | xargs -0 grep -l -E \"${string1}.*${string2}.*${string3}\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:3156",
+      "line": 3156,
+      "utterance": "Find all files/directores under /etc filter them by searching for 'test' in their name and run the file command on each of them",
+      "command": "find /etc -print0 | grep -azZ test | xargs -0 file",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:3447",
+      "line": 3447,
+      "utterance": "Find all files/directories with '.c' or '.h' extension under current directory tree and search for the regex expanded by the variable $i and show the output by paging through one screenful at a time",
+      "command": "find . -name '*.[ch]' -exec grep $i {} | less",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:3669",
+      "line": 3669,
+      "utterance": "Find all regular files whose names contain \"@\" in directory tree ~/$folder",
+      "command": "find ~/$folder -name \"*@*\" -type f -print0",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:3933",
+      "line": 3933,
+      "utterance": "Find file names *blast* in specfied directory, case insensitive",
+      "command": "find /usr/local -iname \"*blast*\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:4227",
+      "line": 4227,
+      "utterance": "Find process \"terminal\" displaying the searching process",
+      "command": "ps aux | grep '[t]erminal'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:4350",
+      "line": 4350,
+      "utterance": "Find the largest original \".gz\" file in the current directory tree",
+      "command": "find . -name '*.gz' -print | xargs gzip -l | awk '{ print $2, $4 ;}'  | grep -v '(totals)$' | sort -n | tail -1",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:4430",
+      "line": 4430,
+      "utterance": "Finds if 'subversion' package is installed in system.",
+      "command": "yum list | grep subversion",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:4461",
+      "line": 4461,
+      "utterance": "Finds strings with text \"searched-string\" recursively in all files of current folder and prints names of files with matched strings.",
+      "command": "grep -r -l \"foo\" .",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:4672",
+      "line": 4672,
+      "utterance": "Gets IP address of first network interface which name matches pattern \"venet0:0\\|eth0\".",
+      "command": "ifconfig | grep -A2 \"venet0:0\\|eth0\" | grep 'inet addr:' | sed -r 's/.*inet addr:([^ ]+).*/\\1/' | head -1",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:4712",
+      "line": 4712,
+      "utterance": "Gets string with MAC addess of network interface eth0.",
+      "command": "ifconfig eth0 | grep HWaddr",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:4843",
+      "line": 4843,
+      "utterance": "Kill process named \"python csp_build.py\".",
+      "command": "ps aux | grep 'python csp_build.py' | head -1 | tr -s ' ' | cut -d \" \" -f2 | xargs kill",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:4995",
+      "line": 4995,
+      "utterance": "List all files matching regular expression '*foo*' in a human-readable form",
+      "command": "find . -name '*foo*' -exec ls -lah {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:5185",
+      "line": 5185,
+      "utterance": "List in detail regular files from the current directory tree whose names match Perl regular expression '\\w+-\\d+x\\d+\\.\\w+$'",
+      "command": "find -type f |  grep -P '\\w+-\\d+x\\d+\\.\\w+$' | sed -re 's/(\\s)/\\\\\\1/g' | xargs ls -l",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:5573",
+      "line": 5573,
+      "utterance": "Move all *$lower1* files/directories under current directory to paths formed by replacing the match of $lower1 with $lower2 in their paths",
+      "command": "find . -name \"*$lower1*\" -exec bash -c 'mv \"$1\" \"${1/$2/$3}\"' -- {} $lower1 $lower2 \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:5935",
+      "line": 5935,
+      "utterance": "Print a minimal set of differences between files in directories \"a\" and \"b\", ignore the first 3 lines of output, and print any line starting with \"-\" with the first character removed",
+      "command": "diff -dbU0 a b | tail -n +4 | grep ^- | cut -c2-",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:6174",
+      "line": 6174,
+      "utterance": "Print git branch currently checked out in a working directory.",
+      "command": "git status | grep \"On branch\" | cut -c 11-",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:6398",
+      "line": 6398,
+      "utterance": "Print the characters in $b that match with any character in $a without printing any whitespace in-between",
+      "command": "echo \"$b\" | grep --only-matching \"[$a]\" | xargs | tr --delete ' '",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:6748",
+      "line": 6748,
+      "utterance": "Prints current directory name",
+      "command": "pwd | grep -o \"\\w*-*$\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:7166",
+      "line": 7166,
+      "utterance": "Recursively finds 'pattern' in files from current folder, and prints matched string with number only if matching whole word.",
+      "command": "grep -rnw \"pattern\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:7212",
+      "line": 7212,
+      "utterance": "Recursively from current folder searches only files that names match \".*xxx\" pattern, ignores binary files and prints file name before every string that contains \"my Text to grep\".",
+      "command": "grep --include=\"*.xxx\" -nRHI \"my Text to grep\" *",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:7533",
+      "line": 7533,
+      "utterance": "Remove files matching pattern '*-*x*.*' from the current directory tree",
+      "command": "find  -name '*-*x*.*' | xargs rm -f",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:7888",
+      "line": 7888,
+      "utterance": "Reports count of processors in system.",
+      "command": "grep \"^core id\" /proc/cpuinfo | sort -u | wc -l",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8211",
+      "line": 8211,
+      "utterance": "Saves byte size of all content of $1 folder in 'uiTotalSize' variable.",
+      "command": "uiTotalSize=$(ls -l -R $1 | grep -v ^d | awk '{total+=$5;} END {print total;}')",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8292",
+      "line": 8292,
+      "utterance": "Search all files and   directories either of the directory /home/oracle and  /home/databse which  contain the \"zip\"  anywhere in the files or directory name .",
+      "command": "find /home/oracle /home/database -name '*zip*'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8320",
+      "line": 8320,
+      "utterance": "Search all variables and their values for \"NAME\"",
+      "command": "env | grep NAME",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8387",
+      "line": 8387,
+      "utterance": "Search for \"search term\" in a sorted list of all files under current directory",
+      "command": "find . | awk '{FS = \"/\" ; print \"\", NF, $F}' | sort -n  | awk '{print $2}' | xargs grep -d skip \"search term\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8412",
+      "line": 8412,
+      "utterance": "Search for 'foo' in all regular files under 'sources' directory tree and show the matched lines with filenames",
+      "command": "find sources -type f -exec grep -H foo {} +",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8442",
+      "line": 8442,
+      "utterance": "Search for 'whatIWantToFind' in all files under current directory",
+      "command": "find . -exec grep whatIWantToFind {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8544",
+      "line": 8544,
+      "utterance": "Search for first match of the case insensitive regex 're' in all *.coffee files under current directory",
+      "command": "find . -name \\*.coffee -exec grep -m1 -i 're' {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8580",
+      "line": 8580,
+      "utterance": "Search for the regex $greppattern in all files with '.c' or '.h' extension under $searchpath with name pattern $filepat and show the matched line numbers, file names and matched lines",
+      "command": "find \"$searchpath\" -name \"$filepat.[ch]\" -exec grep --color -aHn \"$greppattern\" {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8626",
+      "line": 8626,
+      "utterance": "Search the *.cc files in the current directory tree for string \"xxx\"",
+      "command": "find . -name \"*.cc\" -print -exec grep \"xxx\" {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8706",
+      "line": 8706,
+      "utterance": "Search the XML files from directories /res/values-en-rUS and /res/xml for string \"hovering_msg\"",
+      "command": "find /res/values-en-rUS /res/xml -iname '*.xml' -print0 | xargs -0 -d '\\n' -- grep -i \"hovering_msg\" --",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8821",
+      "line": 8821,
+      "utterance": "Search the current directory tree for files containing \"bash\" in their names",
+      "command": "find . -name \"*bash*\" | xargs",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:8944",
+      "line": 8944,
+      "utterance": "Search the files of the current directory tree for string \"searched-string\"",
+      "command": "find . | xargs grep \"searched-string\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:9028",
+      "line": 9028,
+      "utterance": "Send SIGHUP (hangup) signal to all parents of zombie processes.",
+      "command": "kill -HUP $(ps -A -ostat,ppid | grep -e '[zZ]'| awk '{ print $2 }')",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:9520",
+      "line": 9520,
+      "utterance": "Unsets all environment variables with 'G4' in name.",
+      "command": "unset `printenv |grep G4 |awk 'BEGIN{FS=\"=\";}{printf(\"%s \",$1);}'`",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:9877",
+      "line": 9877,
+      "utterance": "check if named screen session exists",
+      "command": "screen -list | grep -q \"myscreen\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:10562",
+      "line": 10562,
+      "utterance": "display files ending with \".ext\" in current folder excluding those that are present in the list list.txt",
+      "command": "find -type f -name '*.ext' | grep -vFf list.txt",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:10910",
+      "line": 10910,
+      "utterance": "find all files under the /etc directory and display IP address patterns in them",
+      "command": "find /etc -type f -exec cat '{}' \\; | tr -c '.[:digit:]' '\\n' \\ | grep '^[^.][^.]*\\.[^.][^.]*\\.[^.][^.]*\\.[^.][^.]*$'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:11154",
+      "line": 11154,
+      "utterance": "find all the files in the current directory and search for the word \"pw0\" in them.",
+      "command": "find . -exec grep -i \"pw0\" {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:11458",
+      "line": 11458,
+      "utterance": "find all the regular files in the current folder which have specific word in their name and force delete all these files and save the log to the file log_del.txt",
+      "command": "find ./ -type f -name '*.r*' -print0 | xargs -0 rm -rf &> log_del.txt",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:11681",
+      "line": 11681,
+      "utterance": "find the regular js files which path does not contains '*/test/*'  and name does not contains '*-min-*' or '*console*'",
+      "command": "find . ! -path \"*/test/*\" -type f -name \"*.js\" ! -name \"*-min-*\" ! -name \"*console*\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:11959",
+      "line": 11959,
+      "utterance": "remove all the files in the present directory which have special characters in their name and do not search in the sub directories of the current folder.",
+      "command": "find . -name '*[+{;\"\\\\=?~()<>&*|$ ]*' -maxdepth 0 -exec rm -f '{}' \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:12113",
+      "line": 12113,
+      "utterance": "search for a word in all the files in the current directory and display the file paths relative to the current directory",
+      "command": "find . -exec grep -l foo {} +",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:12256",
+      "line": 12256,
+      "utterance": "search for files having python in filename",
+      "command": "find / -name '*python*'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:12375",
+      "line": 12375,
+      "utterance": "search for the word \"slrn\" in all the files in the current folder",
+      "command": "find ./ -exec grep -q 'slrn' '{}' \\; -print",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "predicate.string_contains",
+      "recordId": "NL2Bash:all:12599",
+      "line": 12599,
+      "utterance": "use regex with find command",
+      "command": "find . * | grep -P \"[a-f0-9\\-]{36}\\.jpg\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:73",
+      "line": 73,
+      "utterance": "Add group write permission to all files and directories in the current directory including hidden files and excluding \"..\"",
+      "command": "chmod g+w $(ls -1a | grep -v '^..$')",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:664",
+      "line": 664,
+      "utterance": "Concatenate all .txt files residing in the current directory tree",
+      "command": "find . -name '*.txt' -not -name \"all.txt\" | xargs cat > all.txt",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:925",
+      "line": 925,
+      "utterance": "Count the number of differing lines in \"file1\" and \"file2\" with 0 lines of unified context",
+      "command": "diff -U 0 file1 file2 | grep -v ^@ | wc -l",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:1194",
+      "line": 1194,
+      "utterance": "Create symbolic links in the current directory for all files excluding \"CONFIGFILE\" located in \"/your/project\"",
+      "command": "find /your/project -maxdepth 1 ! -name \"CONFIGFILE\" -exec ln -s \\{\\} ./ \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:1463",
+      "line": 1463,
+      "utterance": "Delete line 2 in numbered file \"file\" and renumber",
+      "command": "grep -v '^2 ' file | cut -d' ' -f2- | nl -w1 -s' '",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:1747",
+      "line": 1747,
+      "utterance": "Exclude directory from find . command",
+      "command": "find . -name '*.js' | grep -v excludeddir",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:2157",
+      "line": 2157,
+      "utterance": "Find all *.ogg (case insensitive) files/directories under your home directory that are not greater than 20MB in size",
+      "command": "find $HOME -iname '*.ogg' ! -size +20M",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:2240",
+      "line": 2240,
+      "utterance": "Find all *.txt files under the current directory whose names are not \"File.txt\"",
+      "command": "find . -maxdepth 1 -type f -regex '.*\\.txt' -not -name File.txt",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:2503",
+      "line": 2503,
+      "utterance": "Find all directories in current directory (non-recursive) excluding . and print a sorted list in the file a",
+      "command": "find . -maxdepth 1 -type d ! -name . | sort > a",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:2570",
+      "line": 2570,
+      "utterance": "Find all directories under 'project' directory without going into subdirectories that do not match the POSIX egrep regex $PATTERN in their paths and are not empty",
+      "command": "find project -maxdepth 1 -mindepth 1 -regextype posix-egrep ! -iregex  $PATTERN  ! -empty -type d",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:2741",
+      "line": 2741,
+      "utterance": "Find all files changed on the 29th of September, 2008, starting from the current directory",
+      "command": "find . -type f -newerct 2008-09-29 ! -newerct 2008-09-30",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:2832",
+      "line": 2832,
+      "utterance": "Find all files in the home directory tree that are owned by another user and change their ownership to the current user",
+      "command": "find ~ ! -user $USER -exec sudo chown ${USER}:\"{}\" \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:3092",
+      "line": 3092,
+      "utterance": "Find all files under directory tree /path/to/dir whose permissions are not 644",
+      "command": "find /path/to/dir ! -perm 0644",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:3285",
+      "line": 3285,
+      "utterance": "Find all files/directories that contain 'packet' (case insensitive) in their names excluding directories that are bigger than 1500 bytes in size",
+      "command": "find . -iregex \".*packet.*\" ! -type d -size +1500c",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:3463",
+      "line": 3463,
+      "utterance": "Find all files/directories with '.what_to_find' extension under current directory tree and show the list by excluding paths that contain 'excludeddir1' and 'excludeddir2'",
+      "command": "find . -name '*.what_to_find' | grep -v exludeddir1 | grep -v excludeddir2",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:3577",
+      "line": 3577,
+      "utterance": "Find all regular files in the current directory tree that are not readable by all",
+      "command": "find -type f ! -perm -444",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:3660",
+      "line": 3660,
+      "utterance": "Find all regular files under current directory tree excluding files from './dir1' (except './dir1/subdir1/) and './dir2' directories",
+      "command": "find . \\( -not -path './dir1/*' -and -not -path './dir2/*' -or -path './dir1/subdir1/*' \\) -type f",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:3749",
+      "line": 3749,
+      "utterance": "Find all the files in the current directory recursively whose permissions are not 777",
+      "command": "find . -type f ! -perm 777 | head",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:3871",
+      "line": 3871,
+      "utterance": "Find broken symlinks in the current directory tree",
+      "command": "find -type l | while read f; do if [ ! -e \"$f\" ]; then ls -l \"$f\"; fi; done",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:4033",
+      "line": 4033,
+      "utterance": "Find files newer than start.txt but not newer than end.txt",
+      "command": "find ./ -newer start.txt -and ! -newer end.txt",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:4094",
+      "line": 4094,
+      "utterance": "Find files under current directory that are not newer than $date_time in regards of modification time",
+      "command": "find . -type f -not -newermt \"$date_time\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:4299",
+      "line": 4299,
+      "utterance": "Find regular non-hidden files containing `some text' in their names with hidden directories optimization",
+      "command": "find . -type d -path '*/\\.*' -prune -o -not -name '.*' -type f -name '*some text*' -print",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:4417",
+      "line": 4417,
+      "utterance": "Finds all the log* files in /myDir recursively that are more than 7 days older, skipping already created .bz2 archives and compresses them.",
+      "command": "find /myDir -name 'log*' -and -not -name '*.bz2' -ctime +7 -exec bzip2 -zv {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:4669",
+      "line": 4669,
+      "utterance": "Gets IP address of first listed active network interface in system.",
+      "command": "ifconfig  | grep 'inet addr:' | grep -v '127.0.0.1' | awk -F: '{print $2}' | awk '{print $1}' | head -1",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:4711",
+      "line": 4711,
+      "utterance": "Gets string with IP4 address of en0 network interface.",
+      "command": "ifconfig en0 | grep inet | grep -v inet6",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:4919",
+      "line": 4919,
+      "utterance": "List all crons in the environment",
+      "command": "cat /etc/passwd | sed 's/^\\([^:]*\\):.*$/crontab -u \\1 -l 2>\\&1/' | grep -v \"no crontab for\" | sh",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:5061",
+      "line": 5061,
+      "utterance": "List all non-empty files under under current directory",
+      "command": "find . -type f ! -size 0",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:5394",
+      "line": 5394,
+      "utterance": "Make a list of all files in the current directory tree, except *.png and *.class, and view it in the vim editor",
+      "command": "find . | grep -v \"\\.png$\" | grep -v \"\\.class$\" | vim -",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:5859",
+      "line": 5859,
+      "utterance": "Print DISPLAY of \"orschiro\" user",
+      "command": "who | awk -F '[()]' '/orschiro/{print $(NF-1)}' | grep -v orschiro | uniq",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:6237",
+      "line": 6237,
+      "utterance": "Print ls output for all non-empty files under under current directory",
+      "command": "find . -type f ! -size 0 -exec ls -l '{}' \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:6657",
+      "line": 6657,
+      "utterance": "Print the text file paths that match 'needle text' in their contents under 'my_folder' recursively",
+      "command": "grep -rl \"needle text\" my_folder | tr '\\n' '\\0' | xargs -r -0 file | grep -e ':[^:]*text[^:]*$' | grep -v -e 'executable'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:7152",
+      "line": 7152,
+      "utterance": "Recursively counts non-blank lines in all files in a current folder, that match regex '\\.php|\\.as|\\.sql|\\.css|\\.js', but skip folders './pma', './blog', './punbb', './js/3rdparty' and files like '*.svn'.",
+      "command": "find . -path './pma' -prune -o -path './blog' -prune -o -path './punbb' -prune -o -path './js/3rdparty' -prune -o -print | egrep '\\.php|\\.as|\\.sql|\\.css|\\.js' | grep -v '\\.svn' | xargs cat | sed '/^\\s*$/d' | wc -l",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:7425",
+      "line": 7425,
+      "utterance": "Remove all files from the current directory tree whose names do not match regular expression \"excluded files criteria\"",
+      "command": "find . | grep -v \"excluded files criteria\" | xargs rm",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:7558",
+      "line": 7558,
+      "utterance": "Remove lines matching \"kpt#\" from \"data.txt\" and add left-justified line numbers",
+      "command": "grep -v 'kpt#' data.txt | nl -nln",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:7652",
+      "line": 7652,
+      "utterance": "Removes all files but $1 newest ones from current folder.",
+      "command": "ls -tp | grep -v '/' | tail -n +\"$1\" | xargs -I {} rm -- {}",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:7897",
+      "line": 7897,
+      "utterance": "Request A record from nameserver $ns for domain name $d, filter strings with domain name and exclude lines matching 'DIG'",
+      "command": "dig @$ns $d A | grep $d | grep -v \"DiG\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:8296",
+      "line": 8296,
+      "utterance": "Search all files in the current directory tree for \"SearchString\", ignoring .html files and skipping .svn directories",
+      "command": "find . \\( -name '*.svn*' -prune  -o ! -name '*.html' \\) | xargs -d '\\n' grep -Hd skip 'SearchString'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:8486",
+      "line": 8486,
+      "utterance": "Search for directories that contain the phrase \"foo\" but do not end in \".bar\"",
+      "command": "find . -name '*foo*' ! -name '*.bar' -type d -print",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:8683",
+      "line": 8683,
+      "utterance": "Search the /path directory tree for files missing g+w or o+w bits",
+      "command": "find /path ! -perm -022",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:8748",
+      "line": 8748,
+      "utterance": "Search the current directory recursively for files last modified within the past 24 hours ignoring paths ./es* and ./en*",
+      "command": "find . -mtime 0 | grep -v '^\\./en' | grep -v '^\\./es'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:8803",
+      "line": 8803,
+      "utterance": "Search the current directory tree for directories lacking execute permissions for user, group, or others",
+      "command": "find . -type d ! -perm -111",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:8849",
+      "line": 8849,
+      "utterance": "Search the current directory tree for files whose names do not end in \".exe\" and \".dll\"",
+      "command": "find . -not -name \"*.exe\" -not -name \"*.dll\" -type f",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:8918",
+      "line": 8918,
+      "utterance": "Search the entire file hierarchy for files ending with '~' and print all matches except for those with '/media' in their pathnames.",
+      "command": "find / -name \"*~\" | grep -v \"/media\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:9488",
+      "line": 9488,
+      "utterance": "Truncate all non-empty regular files under the current directory",
+      "command": "find . -type f -maxdepth 1 -not -empty -print0 | xargs -0i sh -c \"cat /dev/null > \\\"{}\\\"\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:10155",
+      "line": 10155,
+      "utterance": "display all directories in current folder excluding those which do not have read permission to all users and save the output to a file",
+      "command": "find . -type d ! -perm -g+r,u+r,o+r -prune -o -print > files_and_folders",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:10206",
+      "line": 10206,
+      "utterance": "display all files in the current folder which do not match the regular expression",
+      "command": "find . -not -regex \".*test.*\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:10328",
+      "line": 10328,
+      "utterance": "display all the files  in the current folder excluding the current folder and do not search in the sub directories",
+      "command": "find . -maxdepth 1 -type d \\( ! -name . \\)",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:10376",
+      "line": 10376,
+      "utterance": "display all the files in the current folder excluding those which are in the path of \".git\"",
+      "command": "find . ! -path  \"*.git*\" -type f -print",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:10535",
+      "line": 10535,
+      "utterance": "display all the soft links in a  folder which are not broken",
+      "command": "find -L /target ! -type l",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:10748",
+      "line": 10748,
+      "utterance": "find a file in current folder and show all errors apart from permission denied",
+      "command": "find /. -name 'toBeSearched.file' 2>&1 | grep -v 'Permission denied'",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:10902",
+      "line": 10902,
+      "utterance": "find all files that do not have read permission to all",
+      "command": "find . -type f ! -perm -444",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:10999",
+      "line": 10999,
+      "utterance": "find all regular/normal files in the current folder whose name has the word photo or picture and which have been modified in the last 30 minutes",
+      "command": "find . \\( -iname \"*photo*\" -or -name \"*picture*\" \\) -and ! -type d -and -mmin -30",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:11271",
+      "line": 11271,
+      "utterance": "find all the files in the folder \"/mp3-collection\" which are bigger than 10MB excluding those that start with the word Metallica",
+      "command": "find /mp3-collection -size +10000k ! -name \"Metallica*\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:11477",
+      "line": 11477,
+      "utterance": "find all the regular/normal files in the current folder which have been accessed in the last 1440*24 hours and not modified in 1441*24 hours excluding those which are in the custom sub directory tree",
+      "command": "ionice -c 3 find  . -type f -amin -1440 -mmin +1441 -not -path custom/ -print0",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:11627",
+      "line": 11627,
+      "utterance": "find non-hidden files (ones that do not start with the period \".\" chartacter) that were are modified in the last 15 minutes.",
+      "command": "find . -mmin -15 \\( ! -regex \".*/\\..*\" \\)",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:11765",
+      "line": 11765,
+      "utterance": "list all files under $dir directory except path $dir/prune_me directory",
+      "command": "find \"$dir\" -not -path \"$dir/prune_me*\" -exec bash -c 'echo \"$0\"' {} \\;",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:11811",
+      "line": 11811,
+      "utterance": "list files that the user does not have permissions to read, do not try to descend into directories that cannot be read.",
+      "command": "find . ! -perm -g+r,u+r,o+r -prune",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:12079",
+      "line": 12079,
+      "utterance": "search for MP3 files in the current folder and subfolders except in dir1 subfolder.",
+      "command": "find ! -path \"dir1\" -iname \"*.mp3\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:12266",
+      "line": 12266,
+      "utterance": "search for files that are readable for everybody, have at least on write bit set but are not executable for anybody",
+      "command": "find . -perm -444 -perm /222 ! -perm /111",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    },
+    {
+      "primitiveId": "logic.negate_predicate",
+      "recordId": "NL2Bash:all:12449",
+      "line": 12449,
+      "utterance": "set alias \"killaf\" for command \"kill -9 `psu|grep MF1pp|grep -v grep|awk '{print $2}'`\"",
+      "command": "alias killaf=\"kill -9 `psu|grep MF1pp|grep -v grep|awk '{print $2}'`\"",
+      "reviewVerdict": "",
+      "familyId": "",
+      "reviewNotes": ""
+    }
+  ]
+}
