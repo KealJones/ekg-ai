@@ -113,6 +113,7 @@ export class EkgCli {
       const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
       const renderType=(t:any):string=>t.kind==="list"?`List<${renderType(t.item)}>`:t.kind;
       const capSummary=this.caps.all().map(c=>`${c.id}(${c.inputs.map(renderType).join(",")}) -> ${renderType(c.output)}`).join("\n");
+      this.io.line("Asking Teacher...");
       const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
       if(lesson){
         this.io.line(lesson.answer);
