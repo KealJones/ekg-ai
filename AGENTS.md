@@ -1,12 +1,62 @@
 # CLAUDE.md
 
+## Quick orientation for new sessions
+
+EKG-AI is a lifelong-learning system where knowledge lives in a graph, not in model weights. It understands language by looking up word meanings in its lexicon graph, executes typed programs composed from host capabilities, and learns from every interaction.
+
+**Start here:**
+1. `pnpm ekg` - run the CLI (no build needed, uses tsx)
+2. `pnpm test` - 194 tests (builds first)
+3. `pnpm run benchmark:ekg` - developmental report card (13/20 bAbI, 1/3 object milestones)
+
+**Key architecture files to read first:**
+- `src/cli/ekg-cli.ts` - the CLI entry point and main execution flow. `executeUtterance()` is the heart: semantic parser -> fallback to legacy intent system -> Teacher escalation
+- `src/intent/semantic-parser.ts` - unified parser that classifies tokens by graph-backed word senses and infers sentence structure. Replaces template matching
+- `src/intent/semantic-dispatch.ts` - routes parsed utterances to fact operations (assert/query) or capability execution (plan/run)
+- `src/intent/token-classifier.ts` - classifies each token as action/entity/value/question/negation/structural/conversational using lexicon lookup + fuzzy matching
+- `src/intent/lexicon.ts` - the lexicon graph: lexeme -> sense -> relation. `lexicalSensesForText()` and `contextualLexicalSensesForText()` are the core word-lookup functions
+- `src/intent/planner.ts` - compiles Intent constraints into typed ProgramBlueprint IR for execution
+- `src/language/world-language.ts` - world facts, inference engine (Horn-clause forward chaining), grammar rules (legacy, being replaced by semantic parser)
+- `src/brain.ts` - `Brain` interface, `FileBrain` (JSON), `openBrainWithBackend()` factory
+- `src/graph/ladybug-brain.ts` - `LadybugBrain` (embedded Cypher DB)
+- `src/graph/graph.ts` - `GraphStore` interface, `MemoryGraphStore`
+- `src/graph/ladybug.ts` - `LadybugGraphStore` with OpenCypher
+- `src/cli/teacher-transport.ts` - LLM Teacher integration (Claude/ChatGPT CLI). Returns structured lessons: groundings, capability mappings, blueprints, facts, synonyms
+
+**How language flows through the system:**
+```
+utterance
+  -> tokenize + fuzzy-match to lexicon (token-classifier.ts)
+  -> classify tokens by sense: action/entity/value/question/etc
+  -> infer sentence structure (semantic-parser.ts)
+  -> dispatch:
+     fact-assert ("Ava went to the kitchen") -> assertWorldFact
+     fact-query ("Where is Ava?") -> queryLatestWorldFact
+     capability-command ("multiply seven by three") -> planIntent -> runProgram
+     conversational ("hi!") -> greeting response
+     unresolved -> legacy intent system -> Teacher (LLM) with structured learning
+```
+
+**How the Teacher teaches:**
+When EKG can't handle an utterance, it asks the Teacher (Claude/ChatGPT via CLI). The Teacher returns structured JSON with:
+- `answer` - direct response to show the user
+- `groundings` - word meanings to add to the lexicon
+- `capabilityMappings` - words that should invoke specific host capabilities
+- `blueprints` - complete executable programs (validated before storage)
+- `facts` - static world knowledge
+- `synonyms` - word equivalences
+
+Each lesson is validated and committed to the graph. The key metric: **teacher calls per novel task should decrease as knowledge accumulates**.
+
+**Seed brain:** `ekg-data/seed-brain.json` ships with the repo (~4200 entities, 1100 lexemes from WordNet, 28 grammar rules, 3 inference rules). Fresh brains load from this. Update seed with `/export-seed` in the CLI after teaching sessions.
+
 ## Project intent
 This repository experiments with **Executable Knowledge Graph Intelligence**: portable learned procedures + explicit evidence/knowledge, with the goal of reducing search and external teacher dependence over time.
 
 Do not optimize for impressive demos. Optimize for falsifiable evidence that learning, reuse, abstraction, and transfer actually work.
 
 
-## CURRENT PROJECT GOSPEL — READ THIS BEFORE OVERTHINKING
+## CURRENT PROJECT GOSPEL - READ THIS BEFORE OVERTHINKING
 
 `docs/PROJECT_GOSPEL.md` is the current north-star doctrine and overrides older development instincts that treated zero-shot benchmark purity as the main product goal.
 
@@ -17,21 +67,21 @@ Do not optimize for impressive demos. Optimize for falsifiable evidence that lea
 - The graph/program library is part of the intelligence's lived experience, not an external cache.
 - EKG should be able to compose/create reusable tools from its capabilities. **Acquired capabilities become durable parts of the learner's competence**, not disposable per-task tools. They remain part of what the AI can do unless later learning intentionally revises, supersedes, deprecates, or forgets them. A fixed agent harness/tool list is not the long-term architecture.
 - Host/process/shell capabilities are legitimate environment affordances. Sandbox them for safety; do not ban them just to prevent benchmark shortcuts.
-- Portable-core concepts do **not** require 100% native support across every host. Roughly 80–90% semantic convergence across representative runtimes is sufficient when outliers have practical adapters/ecosystem implementations. Compare semantics, not API spelling. Do not let the weirdest runtime veto EKG's ontology.
+- Portable-core concepts do **not** require 100% native support across every host. Roughly 80-90% semantic convergence across representative runtimes is sufficient when outliers have practical adapters/ecosystem implementations. Compare semantics, not API spelling. Do not let the weirdest runtime veto EKG's ontology.
 - Preserve old experimental checkpoints rather than freezing current development around old protocols.
 - When forced to choose between making EKG more educable/capable and protecting an obsolete benchmark assumption, **build EKG and version the benchmark**.
 
 ## Core architectural invariants
 - Canonical learned behavior lives in portable Blueprint IR, not Rust, TypeScript, or a particular host language.
 - Rust/TypeScript/reference execution are backends, not ontology.
-- Graph storage is an implementation detail behind an interface.
+- Graph storage is an implementation detail behind the `GraphStore` interface.
 - Known executable knowledge is attempted before synthesis: `RUN -> ADAPT -> BUILD -> TEACH`.
 - Types/contracts constrain execution and synthesis before semantic similarity or learned ranking.
-- Future teacher/LLM output is a proposal with provenance and must be validated; it is never automatically truth.
+- Teacher/LLM output is a proposal with provenance and must be validated; it is never automatically truth.
 - Learned programs remain decomposable even when higher layers treat them as atomic callable units.
-- Record enough evidence/telemetry to measure search cost, reuse, failure, and future teacher dependence.
+- Record enough evidence/telemetry to measure search cost, reuse, failure, and teacher dependence.
 - Add complexity only when benchmarks demonstrate a need.
-- Host capabilities are cheap/exact machinery; learned Blueprints encode knowledge about how and when to compose that machinery. Host-language implementations are not ontology, and the boundary may move only when evidence justifies promotion/optimization.
+- Host capabilities are cheap/exact machinery; learned Blueprints encode knowledge about how and when to compose that machinery.
 
 ## Testing Rule: Prove Wrong Things Are Wrong
 Every new capability must include:
@@ -46,166 +96,72 @@ Every learning mechanism must include:
 
 Do not accept tests that only demonstrate the happy path.
 
-For abstraction/pattern learning specifically, test that:
-- repeated useful structure can be proposed/promoted;
-- superficially similar but semantically different structures are not merged;
-- one-off structures are not promoted;
-- frequent but non-useful structures are not promoted;
-- abstractions that worsen held-out performance/search cost fail promotion or are demoted.
-
 When a negative test reveals existing incorrect behavior, **fix the implementation rather than weakening the test to match the implementation**.
-
-Prefer held-out tests, property/invariant tests, differential backend tests, adversarial fixtures, and memorize-only controls over hand-picked success demos.
-
-## Benchmark discipline
-- Keep frozen train/test splits stable unless intentionally versioning the benchmark.
-- Report solve rate **and** cost: candidates explored, search depth, runtime where meaningful, direct reuse, structural reuse, and teacher usage when introduced.
-- Compare against deliberately dumb baselines such as exact memorization.
-- A new abstraction is not valuable because it exists. It must demonstrate measurable compression, held-out transfer, search reduction, execution savings, or another explicit utility.
-- Never silently turn held-out tests into training data to make a metric improve.
-- Record benchmark changes and rationale in `docs/PROGRESS.md`.
-
-## Immediate research path
-1. Portable IR and cross-backend semantics.
-2. Typed synthesis.
-3. `RUN -> ADAPT -> BUILD -> TEACH`.
-4. Episodes and search/reuse telemetry.
-5. Abstraction discovery.
-6. **Abstraction promotion only when before/after held-out utility improves.**
-7. Synthetic curriculum / learned search guidance only after baseline measurement.
-8. Structured Teacher Mode later, explicitly teaching its own replacement.
-
-## Work-session handoff discipline
-Before substantial changes:
-- read `docs/ADR-001-core-invariants.md`;
-- read `docs/PROGRESS.md`;
-- run the full test suite;
-- run the frozen benchmark report.
-
-After substantial changes:
-- add positive and negative/adversarial tests;
-- rerun the full suite and frozen benchmarks;
-- update `docs/PROGRESS.md` with changes, evidence, limitations, and next gates;
-- do not claim a milestone without executable evidence.
-
-## Research maxim
-**Steal shit ruthlessly — with attribution/citation.**
-
-
-## Teacher Mode development rule
-
-Once infrastructure exists for the learner to discover a cognitive procedure, do **not** automatically implement that procedure directly in host code.
-
-Prefer this development cycle:
-
-1. Pose a concrete problem or discriminating question.
-2. Let the learner attempt it with current knowledge.
-3. Record the impasse/failure and relevant context.
-4. Teacher asks diagnostic questions or proposes explicit hypotheses/counterexamples.
-5. Teacher provides the minimum structured hint/explanation necessary.
-6. Learner proposes a Blueprint, concept, evaluation criterion, or other reusable knowledge.
-7. Test it against positive, negative, adversarial, and held-out cases.
-8. Store validated knowledge plus provenance and the teaching trace.
-9. Reuse it on later tasks and measure whether teacher dependence falls.
-
-Teacher interactions are research data. Preserve, when available:
-- observation / impasse;
-- question asked;
-- hypotheses considered;
-- alternatives rejected and why;
-- experiment or counterexample proposed;
-- result;
-- conclusion/invariant;
-- reusable procedure/concept produced;
-- confidence and provenance;
-- what question should be asked next.
-
-The goal is not immediate zero-teacher bootstrapping. The goal is for Teacher Mode to progressively produce the procedures and evidence needed to replace pieces of Teacher Mode itself.
-
-Do not force the learner to rediscover implementation plumbing (serialization, storage mechanics, etc.) merely for purity. The distinction is between infrastructure and cognitive strategy.
-
-A primary long-term metric is **teacher calls/interventions required per successfully solved novel task as experience accumulates**. If accumulated experience does not reduce teacher dependence, treat that as evidence against the core hypothesis.
-
-
-## Intent interpretation architecture
-
-Natural language should not permanently require a frontier LLM.
-
-Near-term front door:
-`raw utterance -> Viv-inspired Intent Interpreter -> signals + goal + constraints -> graph/program retrieval + planner -> execution`
-
-Rules:
-- Do not use hand-authored `TaskSpec.family` / `labels` as a substitute for understanding raw language.
-- Seed obvious vocabulary/groundings when rediscovering them has no research value.
-- Unknown language should fall back to clarification or Teacher, not guessing.
-- Validated Teacher interpretations must leave structured phrase/concept/relation grounding evidence that can remove later Teacher calls.
-- Graph/planner feasibility should eventually feed back into interpretation ranking.
-- The Viv-inspired interpreter is scaffolding, not the desired final architecture.
-- Long term, learned graph mappings + generic matching/composition/ranking should progressively absorb both the hand-built interpreter and most LLM interpretation.
-- Track `teacher-free intent grounding rate` and `Teacher interventions per novel language task`.
-
-Attribution / prior art:
-- Viv Labs' Natural Language Intent Interpreter and Concept Action Network patent family is explicit inspiration for the signals/goal typed-intent + planner boundary. Preserve attribution when documenting or publishing this architecture.
-
-
-## v0.1 milestone principle
-The primary research loop is now demonstrated on a small real-world filesystem family:
-`raw language -> impasse -> Teacher teaches structured reusable knowledge -> learner synthesizes Blueprint -> held-out validation -> RUN/ADAPT with reduced Teacher dependence`.
-
-Preserve this shape when expanding domains. Do not replace the learner's composition problem with convenience host calls such as `findLongestFilename()`. Native I/O and exact low-level operations may remain host capabilities; task-level procedures should be learned/composed and measured.
-
-## v0.3 preregistration lock
-Before changing learner behavior for the next scientific experiment, read `docs/PREREGISTRATION_V0.3.md`.
-Do not tune success thresholds after seeing v0.3 held-out results. Any protocol change after the preregistration freeze must be logged as a new benchmark version.
-
-### Blueprint uniqueness invariant
-The durable program store must not contain two Blueprints with identical canonical executable semantics.
-If synthesis creates a canonical match for a Blueprint already present, reuse the existing Blueprint and record the event as a retrieval/planning miss; do not persist the duplicate.
-Exact canonical identity is stronger than same-fixture denotation. Behaviorally equivalent but structurally distinct plans may coexist when their semantics, costs, portability, tie behavior, or other declared properties differ.
-
-## Context-sensitive language
-
-A lexical form is not its meaning. EKG keeps explicit senses and may learn contextual evidence that selects among them without erasing alternatives. Context-sensitive resolution should combine lexical senses, semantic frames/graph coherence, type/execution constraints, and eventually neural candidate signals. See `docs/CONTEXTUAL_LANGUAGE.md`.
-
-## Developmental education rule
-
-A red benchmark is not a blocker and must not trigger benchmark-lawyering. Prefer teaching the missing concept/procedure and recording the resulting learning curve. A validated learned procedure becomes durable competence and remains part of the learner until it is explicitly revised/deprecated/forgotten by learning logic. Do not replace an aspirational learned skill with a task-specific host primitive merely to make the benchmark green.
-
-## Language/world education doctrine
-
-Do not hard-code answers to EKGBench families. Teach reusable grammar, semantic relations, world facts, and inference procedures into durable graph state. It is acceptable and expected for later tasks to remain red until prerequisite concepts are taught. Prefer staged curriculum reports showing `before -> lesson -> after` over zero-shot claims.
-
-### Teach rules, not benchmark answers
-
-When a developmental task requires multi-hop reasoning, prefer a general durable inference rule over task-family code. Keep language parsing rules, predicate semantics, world facts, and inference rules inspectable and separately teachable so failures identify the missing prerequisite.
-
-### Curriculum selection invariant
-
-Select the next lesson because it teaches a reusable concept or procedure the learner is missing, not because it is the shortest path to making a benchmark green. Benchmarks are sensors for missing prerequisites. If a task reveals a need for inverse relations, argument roles, relation composition, temporal ordering, negation, counting, or another general concept, teach that concept directly and let any benchmark improvement be a consequence. Do not add benchmark-family-specific solvers or task-shaped knowledge unless the domain itself genuinely requires that abstraction.
 
 ## Graph backend doctrine
 
-- Read `docs/LADYBUGDB.md` and the storage doctrine in `docs/PROJECT_GOSPEL.md` before changing graph persistence/retrieval.
+- Read `docs/LADYBUGDB.md` before changing graph persistence/retrieval.
 - `GraphStore` semantics are canonical; LadybugDB is the preferred embedded durable backend, not EKG's identity.
 - Keep `MemoryGraphStore` working as bootstrap/test/fallback.
 - Use OpenCypher for graph-native retrieval when the backend supports it; do not reimplement graph traversal with whole-store JS scans when Cypher can answer the query directly.
-- Search v2 may consume graph/history priors, but executable correctness remains grounded in EKG evaluation, not database ranking.
-- A **seed brain** (`ekg-data/seed-brain.json`) ships with the repo. Update the seed when baseline knowledge grows. The seed is the reproducible starting intelligence; runtime brains accumulate on top.
+- A **seed brain** (`ekg-data/seed-brain.json`) ships with the repo. Update the seed when baseline knowledge grows (use `/export-seed` in the CLI). The seed is the reproducible starting intelligence; runtime brains accumulate on top.
 - Both `FileBrain` (JSON) and `LadybugBrain` (.lbdb) implement the `Brain` interface. The CLI auto-detects backend availability and auto-migrates from JSON to LadybugDB.
+- `pnpm` is the package manager. `tsx` runs TypeScript directly for the CLI (no build step for `pnpm ekg`).
+
+## Semantic parser doctrine
+
+The semantic parser (`src/intent/semantic-parser.ts`) derives meaning from graph-backed word senses, not template matching. When adding language capabilities:
+- Teach word meanings into the lexicon graph, not hardcoded patterns.
+- The parser classifies tokens by looking up senses, then infers structure. No POS tagging, no external NLP libraries.
+- Fuzzy matching (`src/intent/fuzzy.ts`) handles typos automatically.
+- Values in utterances ("multiply seven by three") are extracted by the token classifier. The `:: [values]` syntax is only needed when the parser can't extract values from the words.
+- World predicates (located_in, possesses) and capability relations (Multiply, Add) live in the same lexicon. The parser dispatches based on what the relation resolves to.
+- The legacy template grammar (`world-language.ts` GrammarRule system) remains as fallback but should not be extended. New language understanding goes through the semantic parser.
+- WordNet vocabulary (`ekg-data/wordnet-curated.json`) is imported at bootstrap. `wordnet.*` relations are vocabulary knowledge, not executable actions.
+
+## Teacher Mode
+
+The Teacher (Claude/ChatGPT via CLI) is the fallback for unknown utterances. It returns structured lessons that EKG validates and commits to its graph:
+
+- **Capability mappings**: "time" -> `host.unix_time_seconds` (teaches EKG to call a capability)
+- **Blueprints**: complete executable programs composed from capabilities (validated against the registry)
+- **Groundings**: word meanings for the lexicon
+- **Facts**: static world knowledge (NEVER for dynamic values like current time)
+- **Synonyms**: word equivalences
+
+The goal is for Teacher dependence to **decrease over time** as knowledge accumulates. If it doesn't, that's evidence against the core hypothesis.
+
+Teacher is configured via `EKG_TEACHER=claude|chatgpt|auto` env var. Requires `claude` or `chatgpt` CLI to be installed.
 
 ## Resilience is a product invariant
 
-Do not treat learned-program/library entries as disposable single points of failure. Validated learned capabilities must preserve enough executable state in durable graph memory to be reconstructed. Normal EKG execution should use self-healing program lookup / resilient preflight when learned-program chains are involved. Repair from existing validated knowledge first; revalidate; record the repair. If recovery is impossible, escalate with a concrete broken-dependency diagnosis. Do not silently invent replacements, and do not abandon an entire chain merely because one live implementation pointer disappeared.
+Validated learned capabilities must preserve enough executable state in durable graph memory to be reconstructed. Self-healing program lookup can recover from graph snapshots or accumulated lived execution experience. Teacher escalation is a last resort after autonomous repair fails.
 
-### Lived experience is recovery state
+## Key docs
 
-Resilience must not depend solely on one canonical Blueprint snapshot. Preserve durable execution context for learned-program and host-capability usage whenever practical, including successful and failed calls, actual inputs/outputs or errors, typed signatures, caller/call-stack context, call-site expressions, surrounding caller Blueprints, provenance, and repair history. Do not discard a failed usage merely because a later usage succeeds.
+- `docs/PROJECT_GOSPEL.md` - product/research doctrine (read first for tradeoffs)
+- `docs/PROGRESS.md` - detailed research log with evidence
+- `docs/LADYBUGDB.md` - graph backend details
+- `docs/FUTURE_WORK.md` - ideas and planned improvements
+- `docs/AUDIT_V0.9.6.md` - architecture audit findings
+- `docs/CONTEXTUAL_LANGUAGE.md` - context-sensitive language design
+- `docs/ADR-001-core-invariants.md` - architectural decisions
+- `CHANGELOG.md` - version history
 
-When a learned implementation is missing/corrupt, recovery order is:
-1. restore and revalidate the canonical durable executable snapshot when available;
-2. otherwise reconstruct from accumulated lived usage evidence, preferring the historically observed execution neighborhood over unconstrained global search;
-3. validate the reconstruction against remembered successful usages and current dependencies;
-4. persist the validated replacement plus reconstruction provenance;
-5. only then escalate to Teacher with the complete diagnosis/evidence if autonomous repair fails.
+## Work-session handoff discipline
 
-The learner's past executions are part of its durable context and may contain enough evidence to recover knowledge even when the original implementation artifact is gone.
+Before substantial changes:
+- read `docs/PROGRESS.md` tail for current state;
+- run `pnpm test`;
+- run `pnpm run benchmark:ekg`.
+
+After substantial changes:
+- add positive and negative/adversarial tests;
+- rerun the full suite and benchmarks;
+- update `docs/PROGRESS.md` with changes, evidence, limitations, and next gates;
+- update `CHANGELOG.md`;
+- regenerate seed brain if bootstrap/lexicon changed (`/export-seed` in CLI);
+- do not claim a milestone without executable evidence.
+
+## Research maxim
+**Steal shit ruthlessly - with attribution/citation.**
