@@ -1,7 +1,7 @@
 {
   "format": "ekg-brain",
   "version": 1,
-  "savedAt": "2026-08-19T18:32:43.384Z",
+  "savedAt": "2026-08-19T20:17:20.720Z",
   "graph": {
     "entities": [
       {
@@ -63032,6 +63032,2260 @@
         }
       },
       {
+        "id": "construction:cap.what-is-v-a-v",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.what-is-v-a-v",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is",
+                "are"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value1",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "action",
+                "type": "action",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value2",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "@action",
+            "args": [
+              {
+                "from": "slot",
+                "slot": "value1"
+              },
+              {
+                "from": "slot",
+                "slot": "value2"
+              }
+            ]
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.what-is-v-a-v"
+          ],
+          "examples": [
+            "what is 5 plus 3",
+            "what is 7 times 2"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.what-is-v-a-v-q",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.what-is-v-a-v-q",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is",
+                "are"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value1",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "action",
+                "type": "action",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "by"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value2",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "@action",
+            "args": [
+              {
+                "from": "slot",
+                "slot": "value1"
+              },
+              {
+                "from": "slot",
+                "slot": "value2"
+              }
+            ]
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.what-is-v-a-v-q"
+          ],
+          "examples": [
+            "what is 10 divided by 2"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.a-v-and-v",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.a-v-and-v",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "action",
+                "type": "action",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value1",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "and"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value2",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "@action",
+            "args": [
+              {
+                "from": "slot",
+                "slot": "value1"
+              },
+              {
+                "from": "slot",
+                "slot": "value2"
+              }
+            ]
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.a-v-and-v"
+          ],
+          "examples": [
+            "add 5 and 3",
+            "multiply 7 and 2"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.a-v-by-v",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.a-v-by-v",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "action",
+                "type": "action",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value1",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "by"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value2",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "@action",
+            "args": [
+              {
+                "from": "slot",
+                "slot": "value1"
+              },
+              {
+                "from": "slot",
+                "slot": "value2"
+              }
+            ]
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.a-v-by-v"
+          ],
+          "examples": [
+            "multiply 5 by 3",
+            "divide 10 by 2"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.v-a-v",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.v-a-v",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value1",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "action",
+                "type": "action",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value2",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "@action",
+            "args": [
+              {
+                "from": "slot",
+                "slot": "value1"
+              },
+              {
+                "from": "slot",
+                "slot": "value2"
+              }
+            ]
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.v-a-v"
+          ],
+          "examples": [
+            "5 plus 3",
+            "10 minus 7"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.a-this-by-v",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.a-this-by-v",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "action",
+                "type": "action",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "this"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "number"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "by"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value",
+                "type": "value",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "@action",
+            "args": [
+              {
+                "from": "slot",
+                "slot": "value"
+              }
+            ]
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.a-this-by-v"
+          ],
+          "examples": [
+            "multiply this number by 3"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.a-this",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.a-this",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "action",
+                "type": "action",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "this"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "number"
+              ]
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "@action",
+            "args": []
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.a-this"
+          ],
+          "examples": [
+            "double this number",
+            "negate this number"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.what-time",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.what-time",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "time"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "it"
+              ]
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "CurrentTime",
+            "args": []
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.what-time"
+          ],
+          "examples": [
+            "what time is it"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.what-time-mod",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.what-time-mod",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "time"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "it"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "modifier",
+                "type": "modifier",
+                "span": "many",
+                "optional": true
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "CurrentTime",
+            "args": []
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.what-time-mod"
+          ],
+          "examples": [
+            "what time is it in 12 hour format"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:cap.what-date",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "capability-command"
+        ],
+        "attrs": {
+          "id": "construction:cap.what-date",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "date"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "it"
+              ]
+            }
+          ],
+          "meaning": {
+            "kind": "capability-command",
+            "relation": "CurrentDate",
+            "args": []
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:cap.what-date"
+          ],
+          "examples": [
+            "what date is it"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-went-to-o",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-went-to-o",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "went"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "to"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "place",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "located_in",
+            "subject": "subject",
+            "object": "place"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-went-to-o"
+          ],
+          "examples": [
+            "Ava went to the kitchen"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-is-in-o",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-is-in-o",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "in"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "place",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "located_in",
+            "subject": "subject",
+            "object": "place"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-is-in-o"
+          ],
+          "examples": [
+            "Ava is in the kitchen"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-picked-up-o",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-picked-up-o",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "picked"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "up"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "object",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "possesses",
+            "subject": "subject",
+            "object": "object"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-picked-up-o"
+          ],
+          "examples": [
+            "Ava picked up the apple"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-carrying-o",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-carrying-o",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "carrying"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "a"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "object",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "possesses",
+            "subject": "subject",
+            "object": "object"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-carrying-o"
+          ],
+          "examples": [
+            "Ava is carrying a coin"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-not-in-o",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-not-in-o",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "not"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "in"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "place",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "located_in",
+            "subject": "subject",
+            "object": "place",
+            "negated": true
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-not-in-o"
+          ],
+          "examples": [
+            "Ava is not in the kitchen"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-and-s-went-to",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-and-s-went-to",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject1",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "and"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject2",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "went"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "to"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "place",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "located_in",
+            "subject": "subject1",
+            "object": "place"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-and-s-went-to"
+          ],
+          "examples": [
+            "Ava and Liam went to the kitchen"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-is-a-o",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-is-a-o",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "instance",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "a"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "class",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "is_a",
+            "subject": "instance",
+            "object": "class"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-is-a-o"
+          ],
+          "examples": [
+            "Pip is a swan"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-dir-of-o",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-dir-of-o",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "action",
+                "type": "action",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "of"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "object",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "@action",
+            "subject": "subject",
+            "object": "object"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-dir-of-o"
+          ],
+          "examples": [
+            "the triangle is left of the square"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.s-bigger-o",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.s-bigger-o",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "bigger"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "than"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "object",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "bigger_than",
+            "subject": "subject",
+            "object": "object"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.s-bigger-o"
+          ],
+          "examples": [
+            "the chest is bigger than the box"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.giving",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.giving",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "giver",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "gave"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "theme",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "to"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "recipient",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "gave_to",
+            "subject": "giver",
+            "object": "recipient"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.giving"
+          ],
+          "examples": [
+            "Liam gave the book to Maya"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:fact.all-are",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-assert"
+        ],
+        "attrs": {
+          "id": "construction:fact.all-are",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "all"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "class",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "are"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "value",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-assert",
+            "predicate": "has_property_universal",
+            "subject": "class",
+            "object": "value"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:fact.all-are"
+          ],
+          "examples": [
+            "all swans are white"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.where-is",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.where-is",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "where"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "located_in",
+            "subject": "subject"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.where-is"
+          ],
+          "examples": [
+            "where is Ava"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.where-is-the",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.where-is-the",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "where"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "located_in",
+            "subject": "subject"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.where-is-the"
+          ],
+          "examples": [
+            "where is the apple"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.is-in",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.is-in",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "in"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "place",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "truth",
+            "predicate": "located_in",
+            "subject": "subject",
+            "object": "place"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.is-in"
+          ],
+          "examples": [
+            "is Ava in the kitchen"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.carrying-truth",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.carrying-truth",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "carrying"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "a"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "item",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "truth",
+            "predicate": "possesses",
+            "subject": "subject",
+            "object": "item"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.carrying-truth"
+          ],
+          "examples": [
+            "is Ava carrying a coin"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.how-many",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.how-many",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "how"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "many"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "things"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "carrying"
+              ]
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "count",
+            "predicate": "possesses",
+            "subject": "subject"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.how-many"
+          ],
+          "examples": [
+            "how many things is Ava carrying"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.what-carrying",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.what-carrying",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "carrying"
+              ]
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "set",
+            "predicate": "possesses",
+            "subject": "subject"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.what-carrying"
+          ],
+          "examples": [
+            "what is Ava carrying"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.what-color",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.what-color",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "color"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "instance",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "has_property",
+            "subject": "instance"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.what-color"
+          ],
+          "examples": [
+            "what color is Pip"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.direction",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.direction",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "direction"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "from"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "object",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "direction_from",
+            "subject": "subject",
+            "object": "object"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.direction"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.relative-position",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.relative-position",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "where"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "relative"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "to"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "object",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "position_of",
+            "subject": "subject",
+            "object": "object"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.relative-position"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.size-relative",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.size-relative",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "how"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "subject",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "sized"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "relative"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "to"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "object",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "size_of",
+            "subject": "subject",
+            "object": "object"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.size-relative"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:query.who-gave",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:query.who-gave",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "who"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "did"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "giver",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "give"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "theme",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "to"
+              ]
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "gave_to_recipient",
+            "subject": "giver",
+            "object": "theme"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:query.who-gave"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:conv.greeting",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "conversational"
+        ],
+        "attrs": {
+          "id": "construction:conv.greeting",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "greeting",
+                "type": "conversational",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "conversational",
+            "intent": "greeting"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:conv.greeting"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:conv.farewell",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "conversational"
+        ],
+        "attrs": {
+          "id": "construction:conv.farewell",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "farewell",
+                "type": "conversational",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "conversational",
+            "intent": "farewell"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:conv.farewell"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:conv.thanks",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "conversational"
+        ],
+        "attrs": {
+          "id": "construction:conv.thanks",
+          "pattern": [
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "thanks",
+                "type": "conversational",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "conversational",
+            "intent": "gratitude"
+          },
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-construction-v1",
+            "seed:conv.thanks"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
         "id": "state:bootstrap:ekg-core-v1",
         "kind": "state_model",
         "labels": [
@@ -63045,7 +65299,7 @@
           "starterEnglishLessons": 248,
           "starterWorldLessons": 54,
           "wordnetLessons": 1075,
-          "initializedAt": "2026-08-19T18:32:43.384Z"
+          "initializedAt": "2026-08-19T20:17:20.720Z"
         }
       }
     ],
