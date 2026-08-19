@@ -2,4 +2,5 @@ dist/
 node_modules/
 .DS_Store
 
-ekg-data/
+ekg-data/*
+!ekg-data/seed-brain.json
