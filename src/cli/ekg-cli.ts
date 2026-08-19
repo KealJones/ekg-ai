@@ -11,9 +11,11 @@ import { applyClarification } from "../intent/clarification.js";
 import { planIntent } from "../intent/planner.js";
 import { buildIntentTeacherContext } from "../intent/language-impasse.js";
 import { runProgram } from "../runtime/interpreter.js";
-import { teachSynonym } from "../intent/lexicon.js";
+import { teachSynonym, storeLexicalSense, lexicalSensesForText } from "../intent/lexicon.js";
 import { dispatchUtterance } from "../intent/semantic-dispatch.js";
-import { askTeacher, isTeacherAvailable } from "./teacher-transport.js";
+import { askTeacherStructured, isTeacherAvailable } from "./teacher-transport.js";
+import { assertWorldFact } from "../language/world-language.js";
+import { PORTABLE_SEMANTIC_CATALOG } from "../intent/semantic-catalog.js";
 import type { IntentInterpretation } from "../intent/intent.js";
 import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
 import type { Type } from "../ir/types.js";
@@ -116,9 +118,13 @@ export class EkgCli {
         return;
       }
       if(isTeacherAvailable()){
-        const response=askTeacher(rawUtterance);
-        if(response){
-          this.io.line(response.answer);
+        const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
+        const capSummary=this.caps.all().slice(0,30).map(c=>c.id).join(", ");
+        const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
+        if(lesson){
+          this.io.line(lesson.answer);
+          const learned=this.learnFromTeacher(lesson,rawUtterance);
+          if(learned.length>0) this.io.line(`Learned: ${learned.join(", ")}`);
           return;
         }
       }
@@ -155,6 +161,38 @@ export class EkgCli {
     this.io.line(formatCliValue(output));
     const relations=interpreted.intent.constraints.map(c=>c.relation);
     this.persistLearnedProgram(plan.program,intentId,rawUtterance,relations);
+  }
+
+  private learnFromTeacher(lesson:{groundings:Array<{form:string;relation:string;definition?:string;impliedValue?:number;questionFor?:string}>;facts:Array<{subject:string;predicate:string;object:string}>;synonyms:Array<{newForm:string;knownForm:string}>},utterance:string):string[]{
+    const learned:string[]=[];
+    const safe=(s:string)=>s.toLowerCase().replace(/[^a-z0-9._-]+/g,"-").replace(/^-|-$/g,"").slice(0,100);
+    for(const g of lesson.groundings){
+      try{
+        const existing=lexicalSensesForText(this.brain.graph,g.form);
+        if(existing.some(s=>s.relation===g.relation)) continue;
+        storeLexicalSense(this.brain.graph,{
+          form:g.form, senseId:`teacher:${safe(g.form)}:${safe(g.relation)}`, relation:g.relation,
+          definition:g.definition, impliedValue:g.impliedValue, questionFor:g.questionFor,
+          confidence:.85, provenance:["teacher:llm-structured",`utterance:${utterance}`]
+        });
+        learned.push(`${g.form} -> ${g.relation}`);
+      }catch{}
+    }
+    for(const f of lesson.facts){
+      try{
+        assertWorldFact(this.brain.graph,{subject:f.subject,predicate:f.predicate,object:f.object,provenance:["teacher:llm-structured",`utterance:${utterance}`]});
+        learned.push(`fact: ${f.subject} ${f.predicate} ${f.object}`);
+      }catch{}
+    }
+    for(const s of lesson.synonyms){
+      try{
+        const existing=lexicalSensesForText(this.brain.graph,s.newForm);
+        if(existing.length>0) continue;
+        teachSynonym(this.brain.graph,{form:s.newForm,knownForm:s.knownForm,provenance:["teacher:llm-structured",`utterance:${utterance}`]});
+        learned.push(`synonym: ${s.newForm} = ${s.knownForm}`);
+      }catch{}
+    }
+    return learned;
   }
 
   private persistLearnedProgram(program:ProgramBlueprint,intentId:string,utterance:string,relations:string[]=[]):void{
