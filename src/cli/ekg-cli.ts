@@ -105,8 +105,23 @@ export class EkgCli {
       return;
     }
 
-    // Fall back to legacy intent system (handles clarification, teacher, prompting, THEN composition)
+    // Fall back to legacy intent system (handles prompting, THEN composition)
     let interpreted:IntentInterpretation = dispatch.status==="intent" ? dispatch.interpretation : interpretComposedIntent(rawUtterance,this.brain.graph);
+
+    // If clarify or teacher, try Teacher first instead of bugging the user
+    if((interpreted.status==="clarify" || interpreted.status==="teacher") && this.teacherEnabled && isTeacherAvailable()){
+      const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
+      const capSummary=this.caps.all().slice(0,30).map(c=>c.id).join(", ");
+      const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
+      if(lesson){
+        this.io.line(lesson.answer);
+        const learned=this.learnFromTeacher(lesson,rawUtterance);
+        if(learned.length>0) this.io.line(`Learned: ${learned.join(", ")}`);
+        return;
+      }
+    }
+
+    // Only ask user for clarification if Teacher couldn't help
     while(interpreted.status==="clarify"){
       const answer=await this.io.question(`${interpreted.question}\nclarify> `);
       if(isExitCommand(answer)) throw new ExitRequested();
@@ -117,21 +132,8 @@ export class EkgCli {
         this.io.line(`Unresolved (Teacher OFF): ${interpreted.reason}`);
         return;
       }
-      if(isTeacherAvailable()){
-        const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
-        const capSummary=this.caps.all().slice(0,30).map(c=>c.id).join(", ");
-        const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
-        if(lesson){
-          this.io.line(lesson.answer);
-          const learned=this.learnFromTeacher(lesson,rawUtterance);
-          if(learned.length>0) this.io.line(`Learned: ${learned.join(", ")}`);
-          return;
-        }
-      }
-      const context=buildIntentTeacherContext(rawUtterance,interpreted,this.caps);
-      this.io.line(`Teacher needed: ${interpreted.reason}`);
-      if(context?.impasse) this.io.line(`Impasse: ${context.impasse}`);
-      this.io.line(`No external Teacher transport is configured in the local CLI yet. Use /teach synonym <new> = <known> for a simple validated lexical lesson.`);
+      this.io.line(`Teacher needed but couldn't resolve: ${interpreted.reason}`);
+      this.io.line(`Use /teach synonym <new> = <known> for a manual lexical lesson.`);
       return;
     }
 
