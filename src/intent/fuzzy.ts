@@ -70,7 +70,7 @@ export function bestFuzzyMatch(
   for (const candidate of candidates) {
     const distance = levenshtein(token, candidate);
     if (distance > maxDistance) continue;
-    if (distance / proportionalLimit > 0.4) continue;
+    if (distance / proportionalLimit > 0.3) continue;
     if (!best || distance < best.distance || (distance === best.distance && candidate.length > best.candidate.length)) {
       best = { candidate, distance };
     }

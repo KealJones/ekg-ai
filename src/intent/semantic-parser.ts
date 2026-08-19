@@ -1,6 +1,8 @@
 import type { GraphStore } from "../graph/graph.js";
 import { classifyTokens, type ClassifiedToken } from "./token-classifier.js";
 import { descriptorForRelation } from "./semantic-catalog.js";
+import { matchConstructions, type ConstructionMatch } from "./construction-chart.js";
+import type { ConstructionMeaning } from "./construction.js";
 
 export type ConversationalIntent = "greeting" | "farewell" | "gratitude" | "affirmative" | "help-request";
 
@@ -35,8 +37,57 @@ function isCapabilityRelation(relation: string, store?: GraphStore): boolean {
   return false;
 }
 
+function constructionToParsed(match: ConstructionMatch): ParsedUtterance | undefined {
+  const m = match.construction.meaning;
+  const get = (name: string) => match.captures.get(name)?.text ?? "";
+  const getRelation = (name: string) => {
+    const cap = match.captures.get(name);
+    if (!cap || !cap.tokens.length) return "";
+    const sense = cap.tokens[0]!.senses[0];
+    return sense?.relation ?? "";
+  };
+  const provenance = ["construction-grammar:v1", `construction:${match.construction.id}`, ...match.construction.provenance];
+  const confidence = match.confidence;
+
+  if (m.kind === "fact-assert") {
+    const predicate = m.predicate.startsWith("@") ? getRelation(m.predicate.slice(1)) : m.predicate;
+    return {kind: "fact-assert", subject: get(m.subject), predicate, object: get(m.object), negated: !!m.negated, confidence, provenance};
+  }
+  if (m.kind === "fact-query") {
+    const predicate = m.predicate.startsWith("@") ? getRelation(m.predicate.slice(1)) : m.predicate;
+    return {kind: "fact-query", queryType: m.queryType, subject: get(m.subject), predicate, object: m.object ? get(m.object) : undefined, confidence, provenance};
+  }
+  if (m.kind === "capability-command") {
+    const relation = m.relation.startsWith("@") ? getRelation(m.relation.slice(1)) : m.relation;
+    if (!relation) return undefined;
+    const args: ParsedArg[] = m.args.map(a => {
+      if (a.from === "implied") return {kind: "value" as const, value: a.value};
+      const cap = match.captures.get(a.slot);
+      if (!cap || !cap.tokens.length) return {kind: "input" as const, index: 0};
+      const numVal = cap.tokens[0]!.numericValue;
+      if (numVal !== undefined) return {kind: "value" as const, value: numVal};
+      return {kind: "input" as const, index: 0};
+    });
+    return {kind: "capability-command", relation, args, confidence, provenance};
+  }
+  if (m.kind === "conversational") {
+    return {kind: "conversational", intent: m.intent as ConversationalIntent, confidence, provenance};
+  }
+  return undefined;
+}
+
 export function parseUtterance(store: GraphStore | undefined, utterance: string): ParsedUtterance {
   const normalized = utterance.trim().toLowerCase();
+
+  // Try construction grammar first
+  if (store) {
+    const tokens = classifyTokens(store, utterance);
+    const matches = matchConstructions(store, tokens);
+    if (matches.length > 0) {
+      const parsed = constructionToParsed(matches[0]!);
+      if (parsed) return parsed;
+    }
+  }
 
   const sequenceParts = normalized.split(/\bthen\b/i).map(s => s.trim()).filter(Boolean);
   if (sequenceParts.length > 1) {

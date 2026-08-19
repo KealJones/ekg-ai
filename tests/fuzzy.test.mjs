@@ -28,6 +28,7 @@ test('bestFuzzyMatch finds closest candidate within threshold', () => {
 
 test('bestFuzzyMatch rejects short-word fuzzy matches that are too proportionally distant', () => {
   const words = ['to', 'go', 'do', 'no', 'at'];
-  assert.equal(bestFuzzyMatch('xx', words), undefined); // distance 2 / length 2 = 1.0 > 0.4
-  assert.deepEqual(bestFuzzyMatch('too', ['to', 'go']), {candidate: 'to', distance: 1}); // 1/3 = 0.33 < 0.4
+  assert.equal(bestFuzzyMatch('xx', words), undefined); // distance 2 / length 2 = 1.0 > 0.3
+  assert.equal(bestFuzzyMatch('too', ['to', 'go']), undefined); // 1/3 = 0.33 > 0.3 threshold
+  assert.deepEqual(bestFuzzyMatch('multipli', ['multiply', 'add']), {candidate: 'multiply', distance: 1}); // 1/8 = 0.125 < 0.3
 });
