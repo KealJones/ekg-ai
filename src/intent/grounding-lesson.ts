@@ -1,4 +1,5 @@
 import type { GraphStore } from "../graph/graph.js";
+import { MemoryGraphStore } from "../graph/graph.js";
 import { interpretIntent } from "./interpreter.js";
 import { storePhraseGrounding } from "./phrase-grounding.js";
 
@@ -26,9 +27,7 @@ export interface IntentGroundingLessonResult {
 export function validateAndLearnIntentGrounding(store:GraphStore,lesson:IntentGroundingLesson):IntentGroundingLessonResult{
   if(lesson.validationExamples.length===0) throw new Error("intent grounding lesson requires validation examples");
   // Validate in a temporary graph so a bad proposal never mutates durable knowledge.
-  const temp=new (store.constructor as {new():GraphStore})();
-  // This v0 assumes the store implementation is constructible. A future GraphStore
-  // transaction/snapshot interface should replace this implementation detail.
+  const temp = store.sandbox ? store.sandbox() : new MemoryGraphStore(store.snapshot());
   storePhraseGrounding(temp,{phrase:lesson.phrase,relation:lesson.relation,impliedValue:lesson.impliedValue,confidence:lesson.confidence,provenance:lesson.provenance});
   const failures:string[]=[];
   for(const ex of lesson.validationExamples){

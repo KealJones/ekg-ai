@@ -1,6 +1,6 @@
-# BabyBench: developmental report card
+# EKGBench: developmental report card
 
-BabyBench is intentionally allowed to contain expected failures. It is not a CI pass/fail gate for the whole project.
+EKGBench is intentionally allowed to contain expected failures. It is not a CI pass/fail gate for the whole project.
 
 ## bAbI-inspired families
 
@@ -35,10 +35,10 @@ Source taxonomy: Weston et al., *Towards AI-Complete Question Answering: A Set o
 - `OBJECT-PATH-001-dot-nested`: `{foo:{bar:"baz"}} + "foo.bar" -> "baz"`.
 - `OBJECT-PATH-002-variable-depth`: generalize the same idea across path depths, including one, two, and three components.
 
-The dot-path solution is intentionally **not** provided as a task-specific primitive. Baby has object access, string splitting, and list operations; it should eventually learn/write the reusable procedure.
+The dot-path solution is intentionally **not** provided as a task-specific primitive. EKG has object access, string splitting, and list operations; it should eventually learn/write the reusable procedure.
 
 ## Use
 
-`npm run benchmark:baby`
+`npm run benchmark:ekg`
 
 The report is observational. Expected-red probes do not make `npm test` red.

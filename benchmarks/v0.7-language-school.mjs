@@ -1,5 +1,5 @@
-import {MemoryGraphStore,babyCapabilities,seedPortableSubstrateKnowledge,teachStarterEnglishLexicon,teachSynonym,LanguageController} from '../dist/index.js';
-const graph=new MemoryGraphStore(), caps=babyCapabilities(); seedPortableSubstrateKnowledge(graph,caps);
+import {MemoryGraphStore,ekgCapabilities,seedPortableSubstrateKnowledge,teachStarterEnglishLexicon,teachSynonym,LanguageController} from '../dist/index.js';
+const graph=new MemoryGraphStore(), caps=ekgCapabilities(); seedPortableSubstrateKnowledge(graph,caps);
 const controller=new LanguageController(graph,caps);
 const before=controller.handle('deduct six from this number',[20]);
 const lessons=teachStarterEnglishLexicon(graph);

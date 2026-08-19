@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  MemoryGraphStore,MemoryProgramLibrary,babyCapabilities,TeacherSchool,WorldLanguageEngine,
-  starterLocationGrammar,starterPossessionGrammar,possessionLocationInference,babyBenchBabi20,evaluateDevelopmentalProbes
+  MemoryGraphStore,MemoryProgramLibrary,ekgCapabilities,TeacherSchool,WorldLanguageEngine,
+  starterLocationGrammar,starterPossessionGrammar,possessionLocationInference,ekgBenchBabi20,evaluateDevelopmentalProbes
 } from '../dist/index.js';
 
 function teachLocation(school){
@@ -17,7 +17,7 @@ function teachPossession(school){
 const agent=graph=>async p=>{const r=new WorldLanguageEngine(graph).runStory(p.story,p.question);return {answer:r.answer,abstained:r.abstained}};
 
 test('possession and location are taught as separate durable concepts/rules',()=>{
-  const graph=new MemoryGraphStore(),school=new TeacherSchool(graph,babyCapabilities(),new MemoryProgramLibrary());
+  const graph=new MemoryGraphStore(),school=new TeacherSchool(graph,ekgCapabilities(),new MemoryProgramLibrary());
   teachLocation(school);teachPossession(school);
   assert.equal(graph.getEntity('predicate:located_in').attrs.functionalObject,true);
   assert.equal(graph.getEntity('predicate:possesses').attrs.functionalObject,false);
@@ -25,9 +25,9 @@ test('possession and location are taught as separate durable concepts/rules',()=
 });
 
 test('general learned possession-location inference unlocks bAbI #2 and #3',async()=>{
-  const graph=new MemoryGraphStore(),school=new TeacherSchool(graph,babyCapabilities(),new MemoryProgramLibrary());
+  const graph=new MemoryGraphStore(),school=new TeacherSchool(graph,ekgCapabilities(),new MemoryProgramLibrary());
   teachLocation(school);
-  let r=await evaluateDevelopmentalProbes(agent(graph),babyBenchBabi20.slice(0,3));
+  let r=await evaluateDevelopmentalProbes(agent(graph),ekgBenchBabi20.slice(0,3));
   assert.deepEqual(r.map(x=>x.passed),[true,false,false]);
   teachPossession(school);
   // fresh graph with same taught long-term rules avoids story-to-story working-memory leakage
@@ -35,7 +35,7 @@ test('general learned possession-location inference unlocks bAbI #2 and #3',asyn
   const inference=graph.entitiesByKind('inference_rule');
   const predicates=graph.entitiesByKind('concept').filter(x=>x.labels?.includes('predicate'));
   const results=[];
-  for(const probe of babyBenchBabi20.slice(0,3)){
+  for(const probe of ekgBenchBabi20.slice(0,3)){
     const g=new MemoryGraphStore();
     for(const p of predicates) g.putEntity(p);
     for(const gr of learned) g.putEntity(gr);

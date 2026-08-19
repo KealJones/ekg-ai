@@ -1,6 +1,7 @@
 import type { GraphStore } from "../graph/graph.js";
 import type { CapabilityRegistry } from "../runtime/capabilities.js";
 import type { Value } from "../ir/blueprint.js";
+import type { ProgramLibrary } from "../program-library.js";
 import { interpretComposedIntent } from "./composition.js";
 import { planIntent } from "./planner.js";
 import { runProgram } from "../runtime/interpreter.js";
@@ -13,13 +14,13 @@ export type LanguageResult =
   | {status:"unsupported";reason:string;teacherInterventions:0};
 
 export class LanguageController {
-  constructor(private readonly graph:GraphStore,private readonly caps:CapabilityRegistry){}
+  constructor(private readonly graph:GraphStore,private readonly caps:CapabilityRegistry,private readonly programs?:ProgramLibrary){}
   handle(rawUtterance:string,inputs:Value[]):LanguageResult{
     const interpreted=interpretComposedIntent(rawUtterance,this.graph);
     if(interpreted.status==="clarify") return {status:"clarify",question:interpreted.question,teacherInterventions:0};
     if(interpreted.status==="teacher") return {status:"teacher",context:buildIntentTeacherContext(rawUtterance,interpreted,this.caps)!,teacherInterventions:1};
-    const plan=planIntent(interpreted.intent,this.caps,this.graph);
+    const plan=planIntent(interpreted.intent,this.caps,this.graph,this.programs);
     if(plan.status!=="planned") return {status:"unsupported",reason:plan.reason??"unplanned",teacherInterventions:0};
-    return {status:"executed",output:runProgram(plan.program!,inputs,this.caps),intentId:interpreted.intent.id,teacherInterventions:0};
+    return {status:"executed",output:runProgram(plan.program!,inputs,this.caps,this.programs),intentId:interpreted.intent.id,teacherInterventions:0};
   }
 }

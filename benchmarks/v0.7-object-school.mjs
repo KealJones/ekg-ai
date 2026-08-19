@@ -1,5 +1,5 @@
-import {MemoryGraphStore,MemoryProgramLibrary,babyCapabilities,TeacherSchool,twoLevelDotPathLesson,runObjectProgramMilestones} from '../dist/index.js';
-const caps=babyCapabilities(), graph=new MemoryGraphStore(), programs=new MemoryProgramLibrary();
+import {MemoryGraphStore,MemoryProgramLibrary,ekgCapabilities,TeacherSchool,twoLevelDotPathLesson,runObjectProgramMilestones} from '../dist/index.js';
+const caps=ekgCapabilities(), graph=new MemoryGraphStore(), programs=new MemoryProgramLibrary();
 const before=runObjectProgramMilestones(caps,programs);
 const education=new TeacherSchool(graph,caps,programs).teachProgram(twoLevelDotPathLesson());
 const after=runObjectProgramMilestones(caps,programs);

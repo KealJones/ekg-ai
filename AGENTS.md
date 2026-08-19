@@ -19,7 +19,7 @@ Do not optimize for impressive demos. Optimize for falsifiable evidence that lea
 - Host/process/shell capabilities are legitimate environment affordances. Sandbox them for safety; do not ban them just to prevent benchmark shortcuts.
 - Portable-core concepts do **not** require 100% native support across every host. Roughly 80–90% semantic convergence across representative runtimes is sufficient when outliers have practical adapters/ecosystem implementations. Compare semantics, not API spelling. Do not let the weirdest runtime veto EKG's ontology.
 - Preserve old experimental checkpoints rather than freezing current development around old protocols.
-- When forced to choose between making baby more educable/capable and protecting an obsolete benchmark assumption, **build the baby and version the benchmark**.
+- When forced to choose between making EKG more educable/capable and protecting an obsolete benchmark assumption, **build EKG and version the benchmark**.
 
 ## Core architectural invariants
 - Canonical learned behavior lives in portable Blueprint IR, not Rust, TypeScript, or a particular host language.
@@ -173,7 +173,7 @@ A red benchmark is not a blocker and must not trigger benchmark-lawyering. Prefe
 
 ## Language/world education doctrine
 
-Do not hard-code answers to BabyBench families. Teach reusable grammar, semantic relations, world facts, and inference procedures into durable graph state. It is acceptable and expected for later tasks to remain red until prerequisite concepts are taught. Prefer staged curriculum reports showing `before -> lesson -> after` over zero-shot claims.
+Do not hard-code answers to EKGBench families. Teach reusable grammar, semantic relations, world facts, and inference procedures into durable graph state. It is acceptable and expected for later tasks to remain red until prerequisite concepts are taught. Prefer staged curriculum reports showing `before -> lesson -> after` over zero-shot claims.
 
 ### Teach rules, not benchmark answers
 
@@ -185,7 +185,7 @@ Select the next lesson because it teaches a reusable concept or procedure the le
 
 ## Resilience is a product invariant
 
-Do not treat learned-program/library entries as disposable single points of failure. Validated learned capabilities must preserve enough executable state in durable graph memory to be reconstructed. Normal baby execution should use self-healing program lookup / resilient preflight when learned-program chains are involved. Repair from existing validated knowledge first; revalidate; record the repair. If recovery is impossible, escalate with a concrete broken-dependency diagnosis. Do not silently invent replacements, and do not abandon an entire chain merely because one live implementation pointer disappeared.
+Do not treat learned-program/library entries as disposable single points of failure. Validated learned capabilities must preserve enough executable state in durable graph memory to be reconstructed. Normal EKG execution should use self-healing program lookup / resilient preflight when learned-program chains are involved. Repair from existing validated knowledge first; revalidate; record the repair. If recovery is impossible, escalate with a concrete broken-dependency diagnosis. Do not silently invent replacements, and do not abandon an entire chain merely because one live implementation pointer disappeared.
 
 ### Lived experience is recovery state
 
@@ -199,12 +199,3 @@ When a learned implementation is missing/corrupt, recovery order is:
 5. only then escalate to Teacher with the complete diagnosis/evidence if autonomous repair fails.
 
 The learner's past executions are part of its durable context and may contain enough evidence to recover knowledge even when the original implementation artifact is gone.
-
-## Graph backend doctrine
-
-- Read `docs/LADYBUGDB.md` and the storage doctrine in `docs/PROJECT_GOSPEL.md` before changing graph persistence/retrieval.
-- `GraphStore` semantics are canonical; LadybugDB is the preferred embedded durable backend, not EKG's identity.
-- ArcadeDB remains an optional network/server adapter.
-- Keep `MemoryGraphStore` working as bootstrap/test/fallback.
-- Use OpenCypher for graph-native retrieval; do not reimplement graph traversal with whole-store JS scans when the durable backend can answer the query directly.
-- Search v2 may consume graph/history priors, but executable correctness remains grounded in EKG evaluation, not database ranking.

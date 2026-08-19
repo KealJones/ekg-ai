@@ -25,7 +25,7 @@ export const BABI_SOURCE="Weston et al. (2015), Towards AI-Complete Question Ans
  * the task taxonomy, not the original dataset sentences. These are developmental
  * probes: red is information, not a CI failure.
  */
-export const babyBenchBabi20:DevelopmentalProbe[]=[
+export const ekgBenchBabi20:DevelopmentalProbe[]=[
   {id:"BABI-01",family:"single-supporting-fact",skill:"retrieve one relevant fact",source:BABI_SOURCE,story:["Ava went to the kitchen."],question:"Where is Ava?",expected:"kitchen",prerequisites:["entity","location","fact-retrieval"],aspirational:true},
   {id:"BABI-02",family:"two-supporting-facts",skill:"chain two facts",source:BABI_SOURCE,story:["Ava picked up the apple.","Ava went to the garden."],question:"Where is the apple?",expected:"garden",prerequisites:["fact-retrieval","possession","movement"],aspirational:true},
   {id:"BABI-03",family:"three-supporting-facts",skill:"chain three facts",source:BABI_SOURCE,story:["Ava picked up the key.","Ava went to the hall.","Ava went to the office."],question:"Where is the key?",expected:"office",prerequisites:["multi-hop","state-update"],aspirational:true},
@@ -53,7 +53,7 @@ export type DevelopmentalAgent=(probe:DevelopmentalProbe)=>DevelopmentalAnswer|P
 export interface DevelopmentalResult {id:string;family:string;passed:boolean;abstained:boolean;answer?:JsonValue;expected:JsonValue}
 const canonical=(x:JsonValue)=>JSON.stringify(x);
 
-export async function evaluateDevelopmentalProbes(agent:DevelopmentalAgent,probes:DevelopmentalProbe[]=babyBenchBabi20):Promise<DevelopmentalResult[]>{
+export async function evaluateDevelopmentalProbes(agent:DevelopmentalAgent,probes:DevelopmentalProbe[]=ekgBenchBabi20):Promise<DevelopmentalResult[]>{
   const out:DevelopmentalResult[]=[];
   for(const probe of probes){
     const got=await agent(probe);
@@ -68,7 +68,7 @@ export const objectProgramMilestones:ProgramMilestone[]=[
     id:"OBJECT-001-single-property",
     description:"Given an object and one property/key, synthesize a program that returns that property value.",
     expectedEventually:true,searchDepth:1,
-    task:{id:"baby.object.single-property",inputs:[T.json,T.string],output:T.json,examples:[
+    task:{id:"ekg.object.single-property",inputs:[T.json,T.string],output:T.json,examples:[
       {inputs:[{foo:"bar"},"foo"],output:"bar"},
       {inputs:[{name:"Dash",age:5},"name"],output:"Dash"},
       {inputs:[{count:7},"count"],output:7},
@@ -78,7 +78,7 @@ export const objectProgramMilestones:ProgramMilestone[]=[
     id:"OBJECT-PATH-001-dot-nested",
     description:'Given a recursive object and dot path such as "foo.bar", synthesize a program returning the nested value.',
     expectedEventually:true,searchDepth:2,
-    task:{id:"baby.object.dot-path",inputs:[T.json,T.string],output:T.json,examples:[
+    task:{id:"ekg.object.dot-path",inputs:[T.json,T.string],output:T.json,examples:[
       {inputs:[{foo:{bar:"baz"}},"foo.bar"],output:"baz"},
       {inputs:[{user:{name:"Ava"}},"user.name"],output:"Ava"},
       {inputs:[{a:{b:42}},"a.b"],output:42},
@@ -88,7 +88,7 @@ export const objectProgramMilestones:ProgramMilestone[]=[
     id:"OBJECT-PATH-002-variable-depth",
     description:"Generalize nested property access across previously unseen path depths without a task-specific host primitive.",
     expectedEventually:true,searchDepth:2,
-    task:{id:"baby.object.variable-dot-path",inputs:[T.json,T.string],output:T.json,examples:[
+    task:{id:"ekg.object.variable-dot-path",inputs:[T.json,T.string],output:T.json,examples:[
       {inputs:[{a:{b:{c:"deep"}}},"a.b.c"],output:"deep"},
       {inputs:[{x:{y:"two"}},"x.y"],output:"two"},
       {inputs:[{top:"one"},"top"],output:"one"},

@@ -20,9 +20,15 @@ export interface EpisodeStore {
   byTask(taskId: string): Episode[];
 }
 
+export interface MemoryEpisodeState { episodes: Episode[]; }
+
 export class MemoryEpisodeStore implements EpisodeStore {
   private readonly episodes: Episode[] = [];
-  append(episode: Episode): void { this.episodes.push(structuredClone(episode)); }
+  constructor(initial?: MemoryEpisodeState, private readonly onChange?: () => void) {
+    for(const e of initial?.episodes ?? []) this.episodes.push(structuredClone(e));
+  }
+  append(episode: Episode): void { this.episodes.push(structuredClone(episode)); this.onChange?.(); }
   all(): Episode[] { return this.episodes.map(e => structuredClone(e)); }
   byTask(taskId: string): Episode[] { return this.episodes.filter(e => e.taskId === taskId).map(e => structuredClone(e)); }
+  snapshot(): MemoryEpisodeState { return {episodes:this.all()}; }
 }

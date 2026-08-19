@@ -5,11 +5,14 @@ export * from "./runtime/interpreter.js";
 export * from "./backends/typescript.js";
 export * from "./backends/rust.js";
 export * from "./graph/graph.js";
+export * from "./graph/ladybug.js";
+export * from "./graph/ladybug-brain.js";
 export * from "./search/synthesizer.js";
 export * from "./task.js";
 export * from "./task-evaluator.js";
 export * from "./program-library.js";
 export * from "./episode.js";
+export * from "./brain.js";
 export * from "./controller.js";
 
 export * from "./baselines/memorize.js";
@@ -64,10 +67,10 @@ export * from "./benchmarks/v0.4-phase0.js";
 export * from "./benchmarks/v0.5-phase0.js";
 export * from "./runtime/portable-capabilities.js";
 export * from "./runtime/portable-host-capabilities.js";
-export * from "./runtime/baby-capabilities.js";
+export * from "./runtime/ekg-capabilities.js";
 export * from "./runtime/portable-knowledge.js";
 
-export * from "./benchmarks/babybench.js";
+export * from "./benchmarks/ekgbench.js";
 
 export * from "./intent/semantic-catalog.js";
 
@@ -83,6 +86,8 @@ export * from "./runtime/resilience.js";
 
 export * from "./runtime/execution-experience.js";
 
-export * from "./graph/arcade.js";
 
-export * from "./graph/ladybug.js";
+
+export * from "./runtime/bootstrap.js";
+export * from "./cli/input.js";
+export * from "./cli/ekg-cli.js";

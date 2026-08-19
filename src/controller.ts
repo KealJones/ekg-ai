@@ -16,8 +16,13 @@ export interface SolveResult {
 }
 
 export class LearnerController {
-  private episodeCounter = 0;
-  constructor(private readonly caps: CapabilityRegistry, private readonly programs: ProgramLibrary, private readonly episodes: EpisodeStore) {}
+  private episodeCounter: number;
+  constructor(private readonly caps: CapabilityRegistry, private readonly programs: ProgramLibrary, private readonly episodes: EpisodeStore) {
+    this.episodeCounter=this.episodes.all().reduce((max,e)=>{
+      const m=/^episode\.(\d+)$/.exec(e.id);
+      return m ? Math.max(max,Number(m[1])) : max;
+    },0);
+  }
 
   solve(task: TaskSpec, maxDepth = 3): SolveResult {
     const compatible=this.programs.compatible(task.inputs,task.output);

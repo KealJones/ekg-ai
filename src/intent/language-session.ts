@@ -1,6 +1,7 @@
 import type { GraphStore } from "../graph/graph.js";
 import type { CapabilityRegistry } from "../runtime/capabilities.js";
 import type { Value } from "../ir/blueprint.js";
+import type { ProgramLibrary } from "../program-library.js";
 import type { IntentInterpretation } from "./intent.js";
 import { interpretComposedIntent } from "./composition.js";
 import { applyClarification } from "./clarification.js";
@@ -17,7 +18,7 @@ export type SessionResult =
 export class LanguageSession {
   private pending?:Extract<IntentInterpretation,{status:"clarify"}>;
   private originalUtterance?:string;
-  constructor(private readonly graph:GraphStore,private readonly caps:CapabilityRegistry){}
+  constructor(private readonly graph:GraphStore,private readonly caps:CapabilityRegistry,private readonly programs?:ProgramLibrary){}
 
   start(rawUtterance:string,inputs:Value[]):SessionResult{
     this.pending=undefined; this.originalUtterance=rawUtterance;
@@ -38,8 +39,8 @@ export class LanguageSession {
     this.pending=undefined;
     if(interpreted.status==="teacher")
       return {status:"teacher",context:buildIntentTeacherContext(this.originalUtterance??interpreted.rawUtterance,interpreted)!};
-    const plan=planIntent(interpreted.intent,this.caps);
+    const plan=planIntent(interpreted.intent,this.caps,this.graph,this.programs);
     if(plan.status!=="planned") return {status:"unsupported",reason:plan.reason??"unplanned"};
-    return {status:"executed",output:runProgram(plan.program!,inputs,this.caps)};
+    return {status:"executed",output:runProgram(plan.program!,inputs,this.caps,this.programs)};
   }
 }
