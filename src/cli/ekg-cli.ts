@@ -13,9 +13,10 @@ import { buildIntentTeacherContext } from "../intent/language-impasse.js";
 import { runProgram } from "../runtime/interpreter.js";
 import { teachSynonym, storeLexicalSense, lexicalSensesForText } from "../intent/lexicon.js";
 import { dispatchUtterance } from "../intent/semantic-dispatch.js";
-import { askTeacherStructured, isTeacherAvailable } from "./teacher-transport.js";
+import { askTeacherStructured, isTeacherAvailable, type TeacherBlueprint } from "./teacher-transport.js";
 import { assertWorldFact } from "../language/world-language.js";
 import { PORTABLE_SEMANTIC_CATALOG } from "../intent/semantic-catalog.js";
+import { validateProgram } from "../ir/validate.js";
 import type { IntentInterpretation } from "../intent/intent.js";
 import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
 import type { Type } from "../ir/types.js";
@@ -167,9 +168,22 @@ export class EkgCli {
     this.persistLearnedProgram(plan.program,intentId,rawUtterance,relations);
   }
 
-  private learnFromTeacher(lesson:{groundings:Array<{form:string;relation:string;definition?:string;impliedValue?:number;questionFor?:string}>;capabilityMappings?:Array<{form:string;capabilityId:string;relation:string;definition?:string}>;facts:Array<{subject:string;predicate:string;object:string}>;synonyms:Array<{newForm:string;knownForm:string}>},utterance:string):string[]{
+  private learnFromTeacher(lesson:{groundings:Array<{form:string;relation:string;definition?:string;impliedValue?:number;questionFor?:string}>;capabilityMappings?:Array<{form:string;capabilityId:string;relation:string;definition?:string}>;blueprints?:Array<TeacherBlueprint>;facts:Array<{subject:string;predicate:string;object:string}>;synonyms:Array<{newForm:string;knownForm:string}>},utterance:string):string[]{
     const learned:string[]=[];
     const safe=(s:string)=>s.toLowerCase().replace(/[^a-z0-9._-]+/g,"-").replace(/^-|-$/g,"").slice(0,100);
+    for(const bp of lesson.blueprints??[]){
+      try{
+        const program={id:bp.id,name:bp.description,inputs:bp.inputs as any[],output:bp.output as any,body:bp.body,provenance:["teacher:llm-blueprint",`utterance:${utterance}`]};
+        validateProgram(program,this.caps,this.programs);
+        this.persistLearnedProgram(program,bp.id,utterance);
+        for(const phrase of bp.phrases??[]){
+          storeLexicalSense(this.brain.graph,{form:phrase,senseId:`teacher:${safe(phrase)}:${safe(bp.id)}`,relation:`Learned:${bp.id}`,definition:bp.description,confidence:.9,provenance:["teacher:llm-blueprint",`utterance:${utterance}`]});
+        }
+        learned.push(`program: ${bp.id} (${bp.description})`);
+      }catch(e){
+        learned.push(`blueprint rejected: ${bp.id} (${e instanceof Error?e.message:String(e)})`);
+      }
+    }
     for(const m of lesson.capabilityMappings??[]){
       try{
         this.caps.get(m.capabilityId);
