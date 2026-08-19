@@ -1,0 +1,3 @@
+allowBuilds:
+  '@ladybugdb/core': true
+  esbuild: true

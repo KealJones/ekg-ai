@@ -23,7 +23,7 @@ test('CLI input parser accepts explicit JSON runtime inputs and rejects malforme
 test('npm-style EKG CLI executes natural language against a persisted brain file',()=>{
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'ekg-cli-'));
   const brain=path.join(dir,'brain.json');
-  const r=run(['--brain',brain,'--backend','memory','--no-banner','--once','deduct six from this number','--inputs','[20]']);
+  const r=run(['--brain',brain,'--backend','memory','--teacher','off','--no-banner','--once','deduct six from this number','--inputs','[20]']);
   assert.equal(r.status,0,`STDOUT:\n${r.stdout}\nSTDERR:\n${r.stderr}`);
   assert.equal(r.stdout.trim(),'14');
   assert.ok(fs.existsSync(brain));
@@ -36,10 +36,10 @@ test('npm-style EKG CLI executes natural language against a persisted brain file
 test('CLI manual synonym lesson survives a complete process restart',()=>{
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'ekg-cli-learn-'));
   const brain=path.join(dir,'brain.json');
-  const teach=run(['--brain',brain,'--backend','memory','--no-banner'],{input:'/teach synonym dock = subtract\n/exit\n'});
+  const teach=run(['--brain',brain,'--backend','memory','--teacher','off','--no-banner'],{input:'/teach synonym dock = subtract\n/exit\n'});
   assert.equal(teach.status,0,`STDOUT:\n${teach.stdout}\nSTDERR:\n${teach.stderr}`);
   assert.match(teach.stdout,/Learned: dock -> Subtract/);
-  const use=run(['--brain',brain,'--backend','memory','--no-banner','--once','dock six from this number','--inputs','[20]']);
+  const use=run(['--brain',brain,'--backend','memory','--teacher','off','--no-banner','--once','dock six from this number','--inputs','[20]']);
   assert.equal(use.status,0,`STDOUT:\n${use.stdout}\nSTDERR:\n${use.stderr}`);
   assert.equal(use.stdout.trim(),'14');
   fs.rmSync(dir,{recursive:true,force:true});
@@ -55,7 +55,7 @@ test('interactive EKG CLI prompts for missing typed runtime input',async()=>{
     error:text=>errors.push(text),
     question:async prompt=>{lines.push(prompt);return answers.shift()??'';}
   };
-  const shell=new EkgCli(io,{brainPath:brain,banner:false});
+  const shell=new EkgCli(io,{brainPath:brain,banner:false,teacherEnabled:false});
   await shell.handleLine('deduct six from this number');
   assert.deepEqual(errors,[]);
   assert.ok(lines.some(x=>x.includes('input[0] (int)>')));

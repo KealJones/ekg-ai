@@ -17,6 +17,8 @@ import { askTeacherStructured, isTeacherAvailable, type TeacherBlueprint } from 
 import { assertWorldFact } from "../language/world-language.js";
 import { PORTABLE_SEMANTIC_CATALOG } from "../intent/semantic-catalog.js";
 import { validateProgram } from "../ir/validate.js";
+import { LearnerController } from "../controller.js";
+import { recordPhraseGroundingOutcome } from "../intent/phrase-grounding.js";
 import type { IntentInterpretation } from "../intent/intent.js";
 import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
 import type { Type } from "../ir/types.js";
@@ -49,6 +51,7 @@ export class EkgCli {
   readonly brain:Brain;
   readonly caps=ekgCapabilities();
   readonly programs:SelfHealingProgramLibrary;
+  readonly controller:LearnerController;
   teacherEnabled:boolean;
   private running=true;
   readonly bootstrap:{initialized:boolean;starterEnglishLessons:number;starterWorldLessons:number};
@@ -57,6 +60,7 @@ export class EkgCli {
     this.brain=options.brain??new FileBrain(options.brainPath);
     this.bootstrap=ensureEkgBootstrap(this.brain.graph,this.caps);
     this.programs=new SelfHealingProgramLibrary(this.brain.programs as any,this.brain.graph,this.caps);
+    this.controller=new LearnerController(this.caps,this.programs,this.brain.episodes);
     this.teacherEnabled=options.teacherEnabled??true;
     if(options.banner!==false) this.printBanner();
   }
@@ -85,96 +89,80 @@ export class EkgCli {
   }
 
   private async executeUtterance(rawUtterance:string,providedInputs?:Value[]):Promise<void>{
-    const MAX_LEARN_ATTEMPTS = 3;
+    const MAX_LEARN_ROUNDS = 3;
 
-    for(let attempt=0; attempt<=MAX_LEARN_ATTEMPTS; attempt++){
+    for(let round=0; round<=MAX_LEARN_ROUNDS; round++){
+      // 1. PARSE: semantic parser + construction grammar
       const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
 
-      if(dispatch.status==="fact-recorded"){
-        this.io.line(dispatch.message);
-        return;
-      }
-      if(dispatch.status==="answer"){
-        this.io.line(formatCliValue(dispatch.value));
-        return;
-      }
+      // 2. DIRECT RESULTS: facts, queries, conversational - no synthesis needed
+      if(dispatch.status==="fact-recorded"){ this.io.line(dispatch.message); return; }
+      if(dispatch.status==="answer"){ this.io.line(formatCliValue(dispatch.value)); return; }
+      if(dispatch.status==="conversational"){ this.io.line(dispatch.response); return; }
+
+      // 3. EXECUTED: semantic parser handled it directly (inline values, zero-arg caps)
       if(dispatch.status==="executed"){
         this.io.line(formatCliValue(dispatch.value));
-        const intentId=`semantic:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,80)}`;
-        this.persistLearnedProgram(dispatch.program,intentId,rawUtterance);
-        return;
-      }
-      if(dispatch.status==="conversational"){
-        this.io.line(dispatch.response);
+        this.persistLearnedProgram(dispatch.program,`semantic:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,80)}`,rawUtterance);
         return;
       }
 
-      // Not resolved natively - try Teacher to learn what's needed
-      if(!this.teacherEnabled || !isTeacherAvailable() || attempt >= MAX_LEARN_ATTEMPTS) break;
+      // 4. INTENT RESOLVED: run through full RUN -> ADAPT -> BUILD -> TEACH controller
+      if(dispatch.status==="intent" && dispatch.interpretation.status==="resolved"){
+        const interpreted=dispatch.interpretation;
+        const inputTypes=interpreted.intent.signals.filter(s=>s.binding==="input").sort((a,b)=>(a.inputIndex??0)-(b.inputIndex??0)).map(s=>s.type);
+        const inputs=providedInputs??await this.promptInputs(inputTypes);
+        validateCliInputs(inputs,inputTypes);
 
-      const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
+        const plan=planIntent(interpreted.intent,this.caps,this.brain.graph,this.programs);
+        if(plan.status==="planned" && plan.program){
+          const output=runProgram(plan.program,inputs,this.caps,this.programs);
+          this.io.line(formatCliValue(output));
+          this.persistLearnedProgram(plan.program,interpreted.intent.id,rawUtterance,interpreted.intent.constraints.map(c=>c.relation));
+          try{recordPhraseGroundingOutcome(this.brain.graph,rawUtterance,true);}catch{}
+          return;
+        }
+      }
+
+      // 5. UNRESOLVED: ask Teacher, learn, retry
+      if(!this.teacherEnabled || !isTeacherAvailable() || round >= MAX_LEARN_ROUNDS) break;
+
       const renderType=(t:any):string=>t.kind==="list"?`List<${renderType(t.item)}>`:t.kind;
       const hostCaps=this.caps.all().map(c=>`${c.id}(${c.inputs.map(renderType).join(",")}) -> ${renderType(c.output)}`);
       const learnedProgs=this.brain.programs.all().map(p=>`${p.id}(${p.inputs.map(renderType).join(",")}) -> ${renderType(p.output)} [learned, use program_call]`);
       const allCaps=[...hostCaps,...learnedProgs];
       const capSummary=allCaps.length>50?allCaps.slice(0,50).join("\n")+`\n... and ${allCaps.length-50} more`:allCaps.join("\n");
+      const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
 
-      this.io.line(attempt===0?"Asking Teacher...":"Retrying with new knowledge...");
+      this.io.line(round===0?"Asking Teacher...":"Retrying with new knowledge...");
       const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
       if(!lesson) break;
 
       const learned=this.learnFromTeacher(lesson,rawUtterance);
-      if(learned.length===0){
-        // Teacher responded but didn't teach anything new - show its answer and stop
-        this.io.line(lesson.answer);
-        return;
-      }
+      if(learned.length===0){ this.io.line(lesson.answer); return; }
       this.io.line(`Learned: ${learned.join(", ")}`);
-      // Loop back and retry with the new knowledge
     }
 
-    // Final fallback: legacy intent system for prompting/THEN composition
+    // 6. FINAL FALLBACK: legacy intent with clarification
     let interpreted:IntentInterpretation = interpretComposedIntent(rawUtterance,this.brain.graph);
     while(interpreted.status==="clarify"){
       const answer=await this.io.question(`${interpreted.question}\nclarify> `);
       if(isExitCommand(answer)) throw new ExitRequested();
       interpreted=applyClarification(interpreted,answer.trim());
     }
-    if(interpreted.status==="teacher"){
-      if(!this.teacherEnabled){
-        this.io.line(`Unresolved (Teacher OFF): ${interpreted.reason}`);
-        return;
-      }
-      this.io.line(`Could not resolve after learning attempts: ${interpreted.reason}`);
+    if(interpreted.status!=="resolved"){
+      this.io.line(this.teacherEnabled?`Could not resolve: ${(interpreted as any).reason??rawUtterance}`:`Unresolved (Teacher OFF): ${(interpreted as any).reason??rawUtterance}`);
       return;
     }
-
-    const inputTypes=interpreted.intent.signals
-      .filter(s=>s.binding==="input")
-      .sort((a,b)=>(a.inputIndex??0)-(b.inputIndex??0))
-      .map(s=>s.type);
+    const inputTypes=interpreted.intent.signals.filter(s=>s.binding==="input").sort((a,b)=>(a.inputIndex??0)-(b.inputIndex??0)).map(s=>s.type);
     const inputs=providedInputs??await this.promptInputs(inputTypes);
     validateCliInputs(inputs,inputTypes);
-
-    const intentId=interpreted.intent.id;
-    const learnedId=`intent-plan:${intentId}`;
-
-    const existing=this.programs.get(learnedId);
-    if(existing){
-      const output=runProgram(existing,inputs,this.caps,this.programs);
-      this.io.line(formatCliValue(output));
-      return;
-    }
-
     const plan=planIntent(interpreted.intent,this.caps,this.brain.graph,this.programs);
-    if(plan.status!=="planned" || !plan.program){
-      this.io.line(`Unsupported: ${plan.reason??"could not construct a plan"}`);
-      return;
-    }
+    if(plan.status!=="planned"||!plan.program){ this.io.line(`Unsupported: ${plan.reason??"could not plan"}`); return; }
     const output=runProgram(plan.program,inputs,this.caps,this.programs);
     this.io.line(formatCliValue(output));
-    const relations=interpreted.intent.constraints.map(c=>c.relation);
-    this.persistLearnedProgram(plan.program,intentId,rawUtterance,relations);
+    this.persistLearnedProgram(plan.program,interpreted.intent.id,rawUtterance,interpreted.intent.constraints.map(c=>c.relation));
+    try{recordPhraseGroundingOutcome(this.brain.graph,rawUtterance,true);}catch{}
   }
 
   private learnFromTeacher(lesson:{groundings:Array<{form:string;relation:string;definition?:string;impliedValue?:number;questionFor?:string}>;capabilityMappings?:Array<{form:string;capabilityId:string;relation:string;definition?:string}>;blueprints?:Array<TeacherBlueprint>;facts:Array<{subject:string;predicate:string;object:string}>;synonyms:Array<{newForm:string;knownForm:string}>},utterance:string):string[]{
