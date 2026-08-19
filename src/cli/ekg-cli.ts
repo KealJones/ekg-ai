@@ -95,19 +95,6 @@ export class EkgCli {
     const learnedThisSession:string[]=[];
 
     for(let round=0; round<=MAX_LEARN_ROUNDS; round++){
-      // 0. TRY LEARNED BLUEPRINTS: if Teacher just taught a program, try running it directly
-      if(learnedThisSession.length>0){
-        for(const progId of learnedThisSession){
-          const prog=this.programs.get(progId);
-          if(!prog || prog.inputs.length>0) continue;
-          try{
-            const output=runProgram(prog,[],this.caps,this.programs);
-            this.io.line(formatCliValue(output));
-            return;
-          }catch{}
-        }
-      }
-
       // 1. PARSE: semantic parser + construction grammar
       const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
 
@@ -224,9 +211,10 @@ export class EkgCli {
       try{
         const program={id:bp.id,name:bp.description,inputs:bp.inputs as any[],output:bp.output as any,body:bp.body,provenance:["teacher:llm-blueprint",`utterance:${utterance}`]};
         validateProgram(program,this.caps,this.programs);
-        this.persistLearnedProgram(program,bp.id,utterance);
+        const relation=`Learned_${safe(bp.id)}`;
+        this.persistLearnedProgram(program,bp.id,utterance,[relation]);
         for(const phrase of bp.phrases??[]){
-          storeLexicalSense(this.brain.graph,{form:phrase,senseId:`teacher:${safe(phrase)}:${safe(bp.id)}`,relation:`Learned:${bp.id}`,definition:bp.description,confidence:.9,provenance:["teacher:llm-blueprint",`utterance:${utterance}`]});
+          storeLexicalSense(this.brain.graph,{form:phrase,senseId:`teacher:${safe(phrase)}:${safe(bp.id)}`,relation,definition:bp.description,confidence:.9,provenance:["teacher:llm-blueprint",`utterance:${utterance}`]});
         }
         learned.push(`program: ${bp.id} (${bp.description})`);
       }catch(e){
