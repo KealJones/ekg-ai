@@ -113,7 +113,9 @@ export class EkgCli {
     if((interpreted.status==="clarify" || interpreted.status==="teacher") && this.teacherEnabled && isTeacherAvailable()){
       const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
       const renderType=(t:any):string=>t.kind==="list"?`List<${renderType(t.item)}>`:t.kind;
-      const capSummary=this.caps.all().map(c=>`${c.id}(${c.inputs.map(renderType).join(",")}) -> ${renderType(c.output)}`).join("\n");
+      const hostCaps=this.caps.all().map(c=>`${c.id}(${c.inputs.map(renderType).join(",")}) -> ${renderType(c.output)}`);
+      const learnedProgs=this.brain.programs.all().map(p=>`${p.id}(${p.inputs.map(renderType).join(",")}) -> ${renderType(p.output)} [learned, use program_call]`);
+      const capSummary=[...hostCaps,...learnedProgs].join("\n");
       this.io.line("Asking Teacher...");
       const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
       if(lesson){
