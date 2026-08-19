@@ -37,16 +37,16 @@ const PROVIDERS: Record<string, ProviderConfig> = {
     name: "Claude (claude -p)",
     check: "claude",
     run: (prompt) => {
-      const r = spawnSync("claude", ["-p", "--model", "haiku"], { input: prompt, encoding: "utf8", timeout: 30000, stdio: ["pipe", "pipe", "pipe"] });
-      return r.status === 0 ? r.stdout?.trim() : undefined;
+      const r = spawnSync("claude", ["-p", "--model", "haiku"], { input: prompt, encoding: "utf8", timeout: 60000, stdio: ["pipe", "pipe", "pipe"] });
+      return r.status === 0 && r.stdout ? r.stdout.trim() : undefined;
     },
   },
   chatgpt: {
     name: "ChatGPT (chatgpt)",
     check: "chatgpt",
     run: (prompt) => {
-      const r = spawnSync("chatgpt", ["-n", prompt], { encoding: "utf8", timeout: 30000, stdio: ["pipe", "pipe", "pipe"] });
-      return r.status === 0 ? r.stdout?.trim() : undefined;
+      const r = spawnSync("chatgpt", ["-n", prompt], { encoding: "utf8", timeout: 60000, stdio: ["pipe", "pipe", "pipe"] });
+      return r.status === 0 && r.stdout ? r.stdout.trim() : undefined;
     },
   },
 };
