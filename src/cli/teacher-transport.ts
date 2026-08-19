@@ -9,6 +9,7 @@ export interface TeacherResponse {
 export interface TeacherLesson {
   answer: string;
   groundings: Array<{form: string; relation: string; definition?: string; impliedValue?: number; questionFor?: string}>;
+  capabilityMappings: Array<{form: string; capabilityId: string; relation: string; definition?: string}>;
   facts: Array<{subject: string; predicate: string; object: string}>;
   synonyms: Array<{newForm: string; knownForm: string}>;
 }
@@ -89,27 +90,28 @@ export function askTeacherStructured(utterance: string, capabilitySummary: strin
 
 USER UTTERANCE: "${utterance}"
 
-EKG's known capability relations (maps words to executable operations):
+EKG's known semantic relations (maps words to operations):
 ${knownRelations.slice(0, 40).join(", ")}
 
-EKG's host capabilities (a subset):
+EKG's executable host capabilities (these EXIST and CAN be called):
 ${capabilitySummary}
 
-Respond with ONLY valid JSON (no markdown, no backticks, no explanation) in this exact format:
+Respond with ONLY valid JSON (no markdown, no backticks, no explanation):
 {
-  "answer": "direct answer to the user's question (1-2 sentences)",
-  "groundings": [{"form": "word", "relation": "ExistingRelation", "definition": "what this word means in this context"}],
+  "answer": "direct answer to the user (1-2 sentences)",
+  "groundings": [{"form": "word", "relation": "ExistingRelation", "definition": "meaning"}],
+  "capabilityMappings": [{"form": "word", "capabilityId": "host.capability_id", "relation": "NewRelation", "definition": "meaning"}],
   "facts": [{"subject": "entity", "predicate": "relation", "object": "value"}],
   "synonyms": [{"newForm": "unknown_word", "knownForm": "known_word"}]
 }
 
 Rules:
-- "groundings" teaches EKG new word meanings. Use EXISTING relations from the list above when possible. Only propose new relations if nothing fits.
-- "facts" teaches world knowledge (like "Paris is_a city" or "water has_property liquid").
-- "synonyms" links unknown words to words EKG already knows.
-- All arrays can be empty if no teaching opportunity exists.
-- Keep groundings minimal - only teach what's needed for THIS utterance.
-- The "answer" field is required, everything else is optional teaching.`;
+- "groundings": teach word meanings using EXISTING relations from the list above.
+- "capabilityMappings": map words to executable capabilities. Use EXACT capability IDs from the list above. This teaches EKG to CALL a capability, not store a static fact. Example: {"form":"time","capabilityId":"host.unix_time_seconds","relation":"CurrentTime","definition":"get current unix timestamp"}.
+- "facts": ONLY for timeless world knowledge (like "Paris is_a city"). NEVER use facts for dynamic/changing values like current time, date, or weather.
+- "synonyms": link unknown words to known words.
+- All arrays can be empty. Keep lessons minimal.
+- If EKG has a host capability that can answer the question, use capabilityMappings to teach EKG to call it, then provide the answer too.`;
 
   const result = config.run(prompt);
   if (!result) return undefined;
@@ -119,10 +121,11 @@ Rules:
     const parsed = JSON.parse(cleaned) as TeacherLesson;
     if (typeof parsed.answer !== "string") return undefined;
     parsed.groundings = Array.isArray(parsed.groundings) ? parsed.groundings.filter(g => typeof g.form === "string" && typeof g.relation === "string") : [];
+    parsed.capabilityMappings = Array.isArray(parsed.capabilityMappings) ? parsed.capabilityMappings.filter(m => typeof m.form === "string" && typeof m.capabilityId === "string" && typeof m.relation === "string") : [];
     parsed.facts = Array.isArray(parsed.facts) ? parsed.facts.filter(f => typeof f.subject === "string" && typeof f.predicate === "string" && typeof f.object === "string") : [];
     parsed.synonyms = Array.isArray(parsed.synonyms) ? parsed.synonyms.filter(s => typeof s.newForm === "string" && typeof s.knownForm === "string") : [];
     return parsed;
   } catch {
-    return { answer: result, groundings: [], facts: [], synonyms: [] };
+    return { answer: result, groundings: [], capabilityMappings: [], facts: [], synonyms: [] };
   }
 }
