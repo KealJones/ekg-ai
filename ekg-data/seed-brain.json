@@ -1,7 +1,7 @@
 {
   "format": "ekg-brain",
   "version": 1,
-  "savedAt": "2026-08-19T20:17:20.720Z",
+  "savedAt": "2026-08-19T21:13:30.515Z",
   "graph": {
     "entities": [
       {
@@ -65286,6 +65286,5359 @@
         }
       },
       {
+        "id": "world:entity:earth",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "earth"
+        ],
+        "attrs": {
+          "name": "earth",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:planet",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "planet"
+        ],
+        "attrs": {
+          "name": "planet",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:0:earth:is_a:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "earth",
+          "predicate": "is_a",
+          "object": "planet",
+          "sequence": 0,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:mars",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "mars"
+        ],
+        "attrs": {
+          "name": "mars",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:1:mars:is_a:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "mars",
+          "predicate": "is_a",
+          "object": "planet",
+          "sequence": 1,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:venus",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "venus"
+        ],
+        "attrs": {
+          "name": "venus",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:2:venus:is_a:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "venus",
+          "predicate": "is_a",
+          "object": "planet",
+          "sequence": 2,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:jupiter",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "jupiter"
+        ],
+        "attrs": {
+          "name": "jupiter",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:3:jupiter:is_a:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "jupiter",
+          "predicate": "is_a",
+          "object": "planet",
+          "sequence": 3,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:saturn",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "saturn"
+        ],
+        "attrs": {
+          "name": "saturn",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:4:saturn:is_a:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "saturn",
+          "predicate": "is_a",
+          "object": "planet",
+          "sequence": 4,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:mercury",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "mercury"
+        ],
+        "attrs": {
+          "name": "mercury",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:5:mercury:is_a:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "mercury",
+          "predicate": "is_a",
+          "object": "planet",
+          "sequence": 5,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:uranus",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "uranus"
+        ],
+        "attrs": {
+          "name": "uranus",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:6:uranus:is_a:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "uranus",
+          "predicate": "is_a",
+          "object": "planet",
+          "sequence": 6,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:neptune",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "neptune"
+        ],
+        "attrs": {
+          "name": "neptune",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:7:neptune:is_a:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "neptune",
+          "predicate": "is_a",
+          "object": "planet",
+          "sequence": 7,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:sun",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "sun"
+        ],
+        "attrs": {
+          "name": "sun",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:star",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "star"
+        ],
+        "attrs": {
+          "name": "star",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:8:sun:is_a:star",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "sun",
+          "predicate": "is_a",
+          "object": "star",
+          "sequence": 8,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:moon",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "moon"
+        ],
+        "attrs": {
+          "name": "moon",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:satellite",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "satellite"
+        ],
+        "attrs": {
+          "name": "satellite",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:9:moon:is_a:satellite",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "moon",
+          "predicate": "is_a",
+          "object": "satellite",
+          "sequence": 9,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:moon",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "moon"
+        ],
+        "attrs": {
+          "name": "moon",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:10:earth:has_satellite:moon",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "has_satellite"
+        ],
+        "attrs": {
+          "subject": "earth",
+          "predicate": "has_satellite",
+          "object": "moon",
+          "sequence": 10,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:3",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "3"
+        ],
+        "attrs": {
+          "name": "3",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:11:earth:position_from_sun:3",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "position_from_sun"
+        ],
+        "attrs": {
+          "subject": "earth",
+          "predicate": "position_from_sun",
+          "object": "3",
+          "sequence": 11,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:4",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "4"
+        ],
+        "attrs": {
+          "name": "4",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:12:mars:position_from_sun:4",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "position_from_sun"
+        ],
+        "attrs": {
+          "subject": "mars",
+          "predicate": "position_from_sun",
+          "object": "4",
+          "sequence": 12,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:13:jupiter:is_largest:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_largest"
+        ],
+        "attrs": {
+          "subject": "jupiter",
+          "predicate": "is_largest",
+          "object": "planet",
+          "sequence": 13,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:14:mercury:is_smallest:planet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_smallest"
+        ],
+        "attrs": {
+          "subject": "mercury",
+          "predicate": "is_smallest",
+          "object": "planet",
+          "sequence": 14,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:sun",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "sun"
+        ],
+        "attrs": {
+          "name": "sun",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:15:mercury:is_closest_to:sun",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_closest_to"
+        ],
+        "attrs": {
+          "subject": "mercury",
+          "predicate": "is_closest_to",
+          "object": "sun",
+          "sequence": 15,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:water",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "water"
+        ],
+        "attrs": {
+          "name": "water",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:h2o",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "h2o"
+        ],
+        "attrs": {
+          "name": "h2o",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:16:water:chemical_formula:h2o",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "chemical_formula"
+        ],
+        "attrs": {
+          "subject": "water",
+          "predicate": "chemical_formula",
+          "object": "h2o",
+          "sequence": 16,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:0-degrees-celsius",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "0 degrees celsius"
+        ],
+        "attrs": {
+          "name": "0 degrees celsius",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:17:water:freezes_at:0-degrees-celsius",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "freezes_at"
+        ],
+        "attrs": {
+          "subject": "water",
+          "predicate": "freezes_at",
+          "object": "0 degrees celsius",
+          "sequence": 17,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:100-degrees-celsius",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "100 degrees celsius"
+        ],
+        "attrs": {
+          "name": "100 degrees celsius",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:18:water:boils_at:100-degrees-celsius",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "boils_at"
+        ],
+        "attrs": {
+          "subject": "water",
+          "predicate": "boils_at",
+          "object": "100 degrees celsius",
+          "sequence": 18,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:oxygen",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "oxygen"
+        ],
+        "attrs": {
+          "name": "oxygen",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:element",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "element"
+        ],
+        "attrs": {
+          "name": "element",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:19:oxygen:is_a:element",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "oxygen",
+          "predicate": "is_a",
+          "object": "element",
+          "sequence": 19,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:hydrogen",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "hydrogen"
+        ],
+        "attrs": {
+          "name": "hydrogen",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:20:hydrogen:is_a:element",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "hydrogen",
+          "predicate": "is_a",
+          "object": "element",
+          "sequence": 20,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:carbon",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "carbon"
+        ],
+        "attrs": {
+          "name": "carbon",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:21:carbon:is_a:element",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "carbon",
+          "predicate": "is_a",
+          "object": "element",
+          "sequence": 21,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:gold",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "gold"
+        ],
+        "attrs": {
+          "name": "gold",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:22:gold:is_a:element",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "gold",
+          "predicate": "is_a",
+          "object": "element",
+          "sequence": 22,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:au",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "au"
+        ],
+        "attrs": {
+          "name": "au",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:23:gold:chemical_symbol:au",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "chemical_symbol"
+        ],
+        "attrs": {
+          "subject": "gold",
+          "predicate": "chemical_symbol",
+          "object": "au",
+          "sequence": 23,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:iron",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "iron"
+        ],
+        "attrs": {
+          "name": "iron",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:24:iron:is_a:element",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "iron",
+          "predicate": "is_a",
+          "object": "element",
+          "sequence": 24,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:fe",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "fe"
+        ],
+        "attrs": {
+          "name": "fe",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:25:iron:chemical_symbol:fe",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "chemical_symbol"
+        ],
+        "attrs": {
+          "subject": "iron",
+          "predicate": "chemical_symbol",
+          "object": "fe",
+          "sequence": 25,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:united-states",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "united states"
+        ],
+        "attrs": {
+          "name": "united states",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:washington-dc",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "washington dc"
+        ],
+        "attrs": {
+          "name": "washington dc",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:26:united-states:capital:washington-dc",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "united states",
+          "predicate": "capital",
+          "object": "washington dc",
+          "sequence": 26,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:united-kingdom",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "united kingdom"
+        ],
+        "attrs": {
+          "name": "united kingdom",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:london",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "london"
+        ],
+        "attrs": {
+          "name": "london",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:27:united-kingdom:capital:london",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "united kingdom",
+          "predicate": "capital",
+          "object": "london",
+          "sequence": 27,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:france",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "france"
+        ],
+        "attrs": {
+          "name": "france",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:paris",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "paris"
+        ],
+        "attrs": {
+          "name": "paris",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:28:france:capital:paris",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "france",
+          "predicate": "capital",
+          "object": "paris",
+          "sequence": 28,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:germany",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "germany"
+        ],
+        "attrs": {
+          "name": "germany",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:berlin",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "berlin"
+        ],
+        "attrs": {
+          "name": "berlin",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:29:germany:capital:berlin",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "germany",
+          "predicate": "capital",
+          "object": "berlin",
+          "sequence": 29,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:japan",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "japan"
+        ],
+        "attrs": {
+          "name": "japan",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:tokyo",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "tokyo"
+        ],
+        "attrs": {
+          "name": "tokyo",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:30:japan:capital:tokyo",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "japan",
+          "predicate": "capital",
+          "object": "tokyo",
+          "sequence": 30,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:china",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "china"
+        ],
+        "attrs": {
+          "name": "china",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:beijing",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "beijing"
+        ],
+        "attrs": {
+          "name": "beijing",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:31:china:capital:beijing",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "china",
+          "predicate": "capital",
+          "object": "beijing",
+          "sequence": 31,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:india",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "india"
+        ],
+        "attrs": {
+          "name": "india",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:new-delhi",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "new delhi"
+        ],
+        "attrs": {
+          "name": "new delhi",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:32:india:capital:new-delhi",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "india",
+          "predicate": "capital",
+          "object": "new delhi",
+          "sequence": 32,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:brazil",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "brazil"
+        ],
+        "attrs": {
+          "name": "brazil",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:brasilia",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "brasilia"
+        ],
+        "attrs": {
+          "name": "brasilia",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:33:brazil:capital:brasilia",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "brazil",
+          "predicate": "capital",
+          "object": "brasilia",
+          "sequence": 33,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:australia",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "australia"
+        ],
+        "attrs": {
+          "name": "australia",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:canberra",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "canberra"
+        ],
+        "attrs": {
+          "name": "canberra",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:34:australia:capital:canberra",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "australia",
+          "predicate": "capital",
+          "object": "canberra",
+          "sequence": 34,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:canada",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "canada"
+        ],
+        "attrs": {
+          "name": "canada",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:ottawa",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "ottawa"
+        ],
+        "attrs": {
+          "name": "ottawa",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:35:canada:capital:ottawa",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "canada",
+          "predicate": "capital",
+          "object": "ottawa",
+          "sequence": 35,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:mexico",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "mexico"
+        ],
+        "attrs": {
+          "name": "mexico",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:mexico-city",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "mexico city"
+        ],
+        "attrs": {
+          "name": "mexico city",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:36:mexico:capital:mexico-city",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "mexico",
+          "predicate": "capital",
+          "object": "mexico city",
+          "sequence": 36,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:russia",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "russia"
+        ],
+        "attrs": {
+          "name": "russia",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:moscow",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "moscow"
+        ],
+        "attrs": {
+          "name": "moscow",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:37:russia:capital:moscow",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "russia",
+          "predicate": "capital",
+          "object": "moscow",
+          "sequence": 37,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:italy",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "italy"
+        ],
+        "attrs": {
+          "name": "italy",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:rome",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "rome"
+        ],
+        "attrs": {
+          "name": "rome",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:38:italy:capital:rome",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "italy",
+          "predicate": "capital",
+          "object": "rome",
+          "sequence": 38,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:spain",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "spain"
+        ],
+        "attrs": {
+          "name": "spain",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:madrid",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "madrid"
+        ],
+        "attrs": {
+          "name": "madrid",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:39:spain:capital:madrid",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "spain",
+          "predicate": "capital",
+          "object": "madrid",
+          "sequence": 39,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:egypt",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "egypt"
+        ],
+        "attrs": {
+          "name": "egypt",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:cairo",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "cairo"
+        ],
+        "attrs": {
+          "name": "cairo",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:40:egypt:capital:cairo",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "egypt",
+          "predicate": "capital",
+          "object": "cairo",
+          "sequence": 40,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:south-korea",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "south korea"
+        ],
+        "attrs": {
+          "name": "south korea",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:seoul",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "seoul"
+        ],
+        "attrs": {
+          "name": "seoul",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:41:south-korea:capital:seoul",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "capital"
+        ],
+        "attrs": {
+          "subject": "south korea",
+          "predicate": "capital",
+          "object": "seoul",
+          "sequence": 41,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:north-america",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "north america"
+        ],
+        "attrs": {
+          "name": "north america",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:42:united-states:continent:north-america",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "united states",
+          "predicate": "continent",
+          "object": "north america",
+          "sequence": 42,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:43:canada:continent:north-america",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "canada",
+          "predicate": "continent",
+          "object": "north america",
+          "sequence": 43,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:44:mexico:continent:north-america",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "mexico",
+          "predicate": "continent",
+          "object": "north america",
+          "sequence": 44,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:south-america",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "south america"
+        ],
+        "attrs": {
+          "name": "south america",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:45:brazil:continent:south-america",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "brazil",
+          "predicate": "continent",
+          "object": "south america",
+          "sequence": 45,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:europe",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "europe"
+        ],
+        "attrs": {
+          "name": "europe",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:46:france:continent:europe",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "france",
+          "predicate": "continent",
+          "object": "europe",
+          "sequence": 46,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:47:germany:continent:europe",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "germany",
+          "predicate": "continent",
+          "object": "europe",
+          "sequence": 47,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:asia",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "asia"
+        ],
+        "attrs": {
+          "name": "asia",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:48:japan:continent:asia",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "japan",
+          "predicate": "continent",
+          "object": "asia",
+          "sequence": 48,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:49:china:continent:asia",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "china",
+          "predicate": "continent",
+          "object": "asia",
+          "sequence": 49,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:50:india:continent:asia",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "india",
+          "predicate": "continent",
+          "object": "asia",
+          "sequence": 50,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:africa",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "africa"
+        ],
+        "attrs": {
+          "name": "africa",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:51:egypt:continent:africa",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "egypt",
+          "predicate": "continent",
+          "object": "africa",
+          "sequence": 51,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:oceania",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "oceania"
+        ],
+        "attrs": {
+          "name": "oceania",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:52:australia:continent:oceania",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "continent"
+        ],
+        "attrs": {
+          "subject": "australia",
+          "predicate": "continent",
+          "object": "oceania",
+          "sequence": 52,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:pacific",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "pacific"
+        ],
+        "attrs": {
+          "name": "pacific",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:ocean",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "ocean"
+        ],
+        "attrs": {
+          "name": "ocean",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:53:pacific:is_a:ocean",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "pacific",
+          "predicate": "is_a",
+          "object": "ocean",
+          "sequence": 53,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:atlantic",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "atlantic"
+        ],
+        "attrs": {
+          "name": "atlantic",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:54:atlantic:is_a:ocean",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "atlantic",
+          "predicate": "is_a",
+          "object": "ocean",
+          "sequence": 54,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:indian",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "indian"
+        ],
+        "attrs": {
+          "name": "indian",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:55:indian:is_a:ocean",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "indian",
+          "predicate": "is_a",
+          "object": "ocean",
+          "sequence": 55,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:arctic",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "arctic"
+        ],
+        "attrs": {
+          "name": "arctic",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:56:arctic:is_a:ocean",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "arctic",
+          "predicate": "is_a",
+          "object": "ocean",
+          "sequence": 56,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:57:pacific:is_largest:ocean",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_largest"
+        ],
+        "attrs": {
+          "subject": "pacific",
+          "predicate": "is_largest",
+          "object": "ocean",
+          "sequence": 57,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:dog",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "dog"
+        ],
+        "attrs": {
+          "name": "dog",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:mammal",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "mammal"
+        ],
+        "attrs": {
+          "name": "mammal",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:58:dog:is_a:mammal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "dog",
+          "predicate": "is_a",
+          "object": "mammal",
+          "sequence": 58,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:cat",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "cat"
+        ],
+        "attrs": {
+          "name": "cat",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:59:cat:is_a:mammal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "cat",
+          "predicate": "is_a",
+          "object": "mammal",
+          "sequence": 59,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:whale",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "whale"
+        ],
+        "attrs": {
+          "name": "whale",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:60:whale:is_a:mammal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "whale",
+          "predicate": "is_a",
+          "object": "mammal",
+          "sequence": 60,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:dolphin",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "dolphin"
+        ],
+        "attrs": {
+          "name": "dolphin",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:61:dolphin:is_a:mammal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "dolphin",
+          "predicate": "is_a",
+          "object": "mammal",
+          "sequence": 61,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:eagle",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "eagle"
+        ],
+        "attrs": {
+          "name": "eagle",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:bird",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "bird"
+        ],
+        "attrs": {
+          "name": "bird",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:62:eagle:is_a:bird",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "eagle",
+          "predicate": "is_a",
+          "object": "bird",
+          "sequence": 62,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:penguin",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "penguin"
+        ],
+        "attrs": {
+          "name": "penguin",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:63:penguin:is_a:bird",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "penguin",
+          "predicate": "is_a",
+          "object": "bird",
+          "sequence": 63,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:shark",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "shark"
+        ],
+        "attrs": {
+          "name": "shark",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:fish",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "fish"
+        ],
+        "attrs": {
+          "name": "fish",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:64:shark:is_a:fish",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "shark",
+          "predicate": "is_a",
+          "object": "fish",
+          "sequence": 64,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:salmon",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "salmon"
+        ],
+        "attrs": {
+          "name": "salmon",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:65:salmon:is_a:fish",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "salmon",
+          "predicate": "is_a",
+          "object": "fish",
+          "sequence": 65,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:frog",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "frog"
+        ],
+        "attrs": {
+          "name": "frog",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:amphibian",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "amphibian"
+        ],
+        "attrs": {
+          "name": "amphibian",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:66:frog:is_a:amphibian",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "frog",
+          "predicate": "is_a",
+          "object": "amphibian",
+          "sequence": 66,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:snake",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "snake"
+        ],
+        "attrs": {
+          "name": "snake",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:reptile",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "reptile"
+        ],
+        "attrs": {
+          "name": "reptile",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:67:snake:is_a:reptile",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "snake",
+          "predicate": "is_a",
+          "object": "reptile",
+          "sequence": 67,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:crocodile",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "crocodile"
+        ],
+        "attrs": {
+          "name": "crocodile",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:68:crocodile:is_a:reptile",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "crocodile",
+          "predicate": "is_a",
+          "object": "reptile",
+          "sequence": 68,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:mammal",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "mammal"
+        ],
+        "attrs": {
+          "name": "mammal",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:animal",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "animal"
+        ],
+        "attrs": {
+          "name": "animal",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:69:mammal:is_a:animal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "mammal",
+          "predicate": "is_a",
+          "object": "animal",
+          "sequence": 69,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:bird",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "bird"
+        ],
+        "attrs": {
+          "name": "bird",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:70:bird:is_a:animal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "bird",
+          "predicate": "is_a",
+          "object": "animal",
+          "sequence": 70,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:fish",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "fish"
+        ],
+        "attrs": {
+          "name": "fish",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:71:fish:is_a:animal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "fish",
+          "predicate": "is_a",
+          "object": "animal",
+          "sequence": 71,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:reptile",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "reptile"
+        ],
+        "attrs": {
+          "name": "reptile",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:72:reptile:is_a:animal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "reptile",
+          "predicate": "is_a",
+          "object": "animal",
+          "sequence": 72,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:amphibian",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "amphibian"
+        ],
+        "attrs": {
+          "name": "amphibian",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:73:amphibian:is_a:animal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "amphibian",
+          "predicate": "is_a",
+          "object": "animal",
+          "sequence": 73,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:insect",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "insect"
+        ],
+        "attrs": {
+          "name": "insect",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:74:insect:is_a:animal",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "insect",
+          "predicate": "is_a",
+          "object": "animal",
+          "sequence": 74,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:ant",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "ant"
+        ],
+        "attrs": {
+          "name": "ant",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:insect",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "insect"
+        ],
+        "attrs": {
+          "name": "insect",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:75:ant:is_a:insect",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "ant",
+          "predicate": "is_a",
+          "object": "insect",
+          "sequence": 75,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:bee",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "bee"
+        ],
+        "attrs": {
+          "name": "bee",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:76:bee:is_a:insect",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "bee",
+          "predicate": "is_a",
+          "object": "insect",
+          "sequence": 76,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:butterfly",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "butterfly"
+        ],
+        "attrs": {
+          "name": "butterfly",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:77:butterfly:is_a:insect",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "butterfly",
+          "predicate": "is_a",
+          "object": "insect",
+          "sequence": 77,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:heart",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "heart"
+        ],
+        "attrs": {
+          "name": "heart",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:organ",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "organ"
+        ],
+        "attrs": {
+          "name": "organ",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:78:heart:is_a:organ",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "heart",
+          "predicate": "is_a",
+          "object": "organ",
+          "sequence": 78,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:brain",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "brain"
+        ],
+        "attrs": {
+          "name": "brain",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:79:brain:is_a:organ",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "brain",
+          "predicate": "is_a",
+          "object": "organ",
+          "sequence": 79,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:lungs",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "lungs"
+        ],
+        "attrs": {
+          "name": "lungs",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:80:lungs:is_a:organ",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "lungs",
+          "predicate": "is_a",
+          "object": "organ",
+          "sequence": 80,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:pumps-blood",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "pumps blood"
+        ],
+        "attrs": {
+          "name": "pumps blood",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:81:heart:function:pumps-blood",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "function"
+        ],
+        "attrs": {
+          "subject": "heart",
+          "predicate": "function",
+          "object": "pumps blood",
+          "sequence": 81,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:breathing",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "breathing"
+        ],
+        "attrs": {
+          "name": "breathing",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:82:lungs:function:breathing",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "function"
+        ],
+        "attrs": {
+          "subject": "lungs",
+          "predicate": "function",
+          "object": "breathing",
+          "sequence": 82,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:thinking",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "thinking"
+        ],
+        "attrs": {
+          "name": "thinking",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:83:brain:function:thinking",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "function"
+        ],
+        "attrs": {
+          "subject": "brain",
+          "predicate": "function",
+          "object": "thinking",
+          "sequence": 83,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:triangle",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "triangle"
+        ],
+        "attrs": {
+          "name": "triangle",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:84:triangle:has_sides:3",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "has_sides"
+        ],
+        "attrs": {
+          "subject": "triangle",
+          "predicate": "has_sides",
+          "object": "3",
+          "sequence": 84,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:square",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "square"
+        ],
+        "attrs": {
+          "name": "square",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:85:square:has_sides:4",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "has_sides"
+        ],
+        "attrs": {
+          "subject": "square",
+          "predicate": "has_sides",
+          "object": "4",
+          "sequence": 85,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:pentagon",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "pentagon"
+        ],
+        "attrs": {
+          "name": "pentagon",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:5",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "5"
+        ],
+        "attrs": {
+          "name": "5",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:86:pentagon:has_sides:5",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "has_sides"
+        ],
+        "attrs": {
+          "subject": "pentagon",
+          "predicate": "has_sides",
+          "object": "5",
+          "sequence": 86,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:hexagon",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "hexagon"
+        ],
+        "attrs": {
+          "name": "hexagon",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:6",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "6"
+        ],
+        "attrs": {
+          "name": "6",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:87:hexagon:has_sides:6",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "has_sides"
+        ],
+        "attrs": {
+          "subject": "hexagon",
+          "predicate": "has_sides",
+          "object": "6",
+          "sequence": 87,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:octagon",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "octagon"
+        ],
+        "attrs": {
+          "name": "octagon",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:8",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "8"
+        ],
+        "attrs": {
+          "name": "8",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:88:octagon:has_sides:8",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "has_sides"
+        ],
+        "attrs": {
+          "subject": "octagon",
+          "predicate": "has_sides",
+          "object": "8",
+          "sequence": 88,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:circle",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "circle"
+        ],
+        "attrs": {
+          "name": "circle",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:0",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "0"
+        ],
+        "attrs": {
+          "name": "0",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:89:circle:has_sides:0",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "has_sides"
+        ],
+        "attrs": {
+          "subject": "circle",
+          "predicate": "has_sides",
+          "object": "0",
+          "sequence": 89,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:speed-of-light",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "speed of light"
+        ],
+        "attrs": {
+          "name": "speed of light",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:299792458-meters-per-second",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "299792458 meters per second"
+        ],
+        "attrs": {
+          "name": "299792458 meters per second",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:90:speed-of-light:value:299792458-meters-per-second",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "value"
+        ],
+        "attrs": {
+          "subject": "speed of light",
+          "predicate": "value",
+          "object": "299792458 meters per second",
+          "sequence": 90,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:gravity-on-earth",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "gravity on earth"
+        ],
+        "attrs": {
+          "name": "gravity on earth",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:9.8-meters-per-second-squared",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "9.8 meters per second squared"
+        ],
+        "attrs": {
+          "name": "9.8 meters per second squared",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:91:gravity-on-earth:value:9.8-meters-per-second-squared",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "value"
+        ],
+        "attrs": {
+          "subject": "gravity on earth",
+          "predicate": "value",
+          "object": "9.8 meters per second squared",
+          "sequence": 91,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:absolute-zero",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "absolute zero"
+        ],
+        "attrs": {
+          "name": "absolute zero",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:273.15-degrees-celsius",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "-273.15 degrees celsius"
+        ],
+        "attrs": {
+          "name": "-273.15 degrees celsius",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:92:absolute-zero:value:273.15-degrees-celsius",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "value"
+        ],
+        "attrs": {
+          "subject": "absolute zero",
+          "predicate": "value",
+          "object": "-273.15 degrees celsius",
+          "sequence": 92,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:shakespeare",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "shakespeare"
+        ],
+        "attrs": {
+          "name": "shakespeare",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:hamlet",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "hamlet"
+        ],
+        "attrs": {
+          "name": "hamlet",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:93:shakespeare:wrote:hamlet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "wrote"
+        ],
+        "attrs": {
+          "subject": "shakespeare",
+          "predicate": "wrote",
+          "object": "hamlet",
+          "sequence": 93,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:hamlet",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "hamlet"
+        ],
+        "attrs": {
+          "name": "hamlet",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:shakespeare",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "shakespeare"
+        ],
+        "attrs": {
+          "name": "shakespeare",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:94:hamlet:wrote_by:shakespeare",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "wrote_by"
+        ],
+        "attrs": {
+          "subject": "hamlet",
+          "predicate": "wrote_by",
+          "object": "shakespeare",
+          "sequence": 94,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:wrote"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:romeo-and-juliet",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "romeo and juliet"
+        ],
+        "attrs": {
+          "name": "romeo and juliet",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:95:shakespeare:wrote:romeo-and-juliet",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "wrote"
+        ],
+        "attrs": {
+          "subject": "shakespeare",
+          "predicate": "wrote",
+          "object": "romeo and juliet",
+          "sequence": 95,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:romeo-and-juliet",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "romeo and juliet"
+        ],
+        "attrs": {
+          "name": "romeo and juliet",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:96:romeo-and-juliet:wrote_by:shakespeare",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "wrote_by"
+        ],
+        "attrs": {
+          "subject": "romeo and juliet",
+          "predicate": "wrote_by",
+          "object": "shakespeare",
+          "sequence": 96,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:wrote"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:playwright",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "playwright"
+        ],
+        "attrs": {
+          "name": "playwright",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:97:shakespeare:is_a:playwright",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "shakespeare",
+          "predicate": "is_a",
+          "object": "playwright",
+          "sequence": 97,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:einstein",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "einstein"
+        ],
+        "attrs": {
+          "name": "einstein",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:theory-of-relativity",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "theory of relativity"
+        ],
+        "attrs": {
+          "name": "theory of relativity",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:98:einstein:discovered:theory-of-relativity",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "discovered"
+        ],
+        "attrs": {
+          "subject": "einstein",
+          "predicate": "discovered",
+          "object": "theory of relativity",
+          "sequence": 98,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:theory-of-relativity",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "theory of relativity"
+        ],
+        "attrs": {
+          "name": "theory of relativity",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:einstein",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "einstein"
+        ],
+        "attrs": {
+          "name": "einstein",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:99:theory-of-relativity:discovered_by:einstein",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "discovered_by"
+        ],
+        "attrs": {
+          "subject": "theory of relativity",
+          "predicate": "discovered_by",
+          "object": "einstein",
+          "sequence": 99,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:discovered"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:physicist",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "physicist"
+        ],
+        "attrs": {
+          "name": "physicist",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:100:einstein:is_a:physicist",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "einstein",
+          "predicate": "is_a",
+          "object": "physicist",
+          "sequence": 100,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:newton",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "newton"
+        ],
+        "attrs": {
+          "name": "newton",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:laws-of-motion",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "laws of motion"
+        ],
+        "attrs": {
+          "name": "laws of motion",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:101:newton:discovered:laws-of-motion",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "discovered"
+        ],
+        "attrs": {
+          "subject": "newton",
+          "predicate": "discovered",
+          "object": "laws of motion",
+          "sequence": 101,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:laws-of-motion",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "laws of motion"
+        ],
+        "attrs": {
+          "name": "laws of motion",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:newton",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "newton"
+        ],
+        "attrs": {
+          "name": "newton",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:102:laws-of-motion:discovered_by:newton",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "discovered_by"
+        ],
+        "attrs": {
+          "subject": "laws of motion",
+          "predicate": "discovered_by",
+          "object": "newton",
+          "sequence": 102,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:discovered"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:value:gravity",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "gravity"
+        ],
+        "attrs": {
+          "name": "gravity",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:103:newton:discovered:gravity",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "discovered"
+        ],
+        "attrs": {
+          "subject": "newton",
+          "predicate": "discovered",
+          "object": "gravity",
+          "sequence": 103,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:gravity",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "gravity"
+        ],
+        "attrs": {
+          "name": "gravity",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:104:gravity:discovered_by:newton",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "discovered_by"
+        ],
+        "attrs": {
+          "subject": "gravity",
+          "predicate": "discovered_by",
+          "object": "newton",
+          "sequence": 104,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:discovered"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:darwin",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "darwin"
+        ],
+        "attrs": {
+          "name": "darwin",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:evolution",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "evolution"
+        ],
+        "attrs": {
+          "name": "evolution",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:105:darwin:discovered:evolution",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "discovered"
+        ],
+        "attrs": {
+          "subject": "darwin",
+          "predicate": "discovered",
+          "object": "evolution",
+          "sequence": 105,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:evolution",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "evolution"
+        ],
+        "attrs": {
+          "name": "evolution",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:darwin",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "darwin"
+        ],
+        "attrs": {
+          "name": "darwin",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:106:evolution:discovered_by:darwin",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "discovered_by"
+        ],
+        "attrs": {
+          "subject": "evolution",
+          "predicate": "discovered_by",
+          "object": "darwin",
+          "sequence": 106,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:discovered"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:edison",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "edison"
+        ],
+        "attrs": {
+          "name": "edison",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:light-bulb",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "light bulb"
+        ],
+        "attrs": {
+          "name": "light bulb",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:107:edison:invented:light-bulb",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "invented"
+        ],
+        "attrs": {
+          "subject": "edison",
+          "predicate": "invented",
+          "object": "light bulb",
+          "sequence": 107,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:light-bulb",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "light bulb"
+        ],
+        "attrs": {
+          "name": "light bulb",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:edison",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "edison"
+        ],
+        "attrs": {
+          "name": "edison",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:108:light-bulb:invented_by:edison",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "invented_by"
+        ],
+        "attrs": {
+          "subject": "light bulb",
+          "predicate": "invented_by",
+          "object": "edison",
+          "sequence": 108,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:invented"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:bell",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "bell"
+        ],
+        "attrs": {
+          "name": "bell",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:telephone",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "telephone"
+        ],
+        "attrs": {
+          "name": "telephone",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:109:bell:invented:telephone",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "invented"
+        ],
+        "attrs": {
+          "subject": "bell",
+          "predicate": "invented",
+          "object": "telephone",
+          "sequence": 109,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:telephone",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "telephone"
+        ],
+        "attrs": {
+          "name": "telephone",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:bell",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "bell"
+        ],
+        "attrs": {
+          "name": "bell",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:110:telephone:invented_by:bell",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "invented_by"
+        ],
+        "attrs": {
+          "subject": "telephone",
+          "predicate": "invented_by",
+          "object": "bell",
+          "sequence": 110,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:invented"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:wright-brothers",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "wright brothers"
+        ],
+        "attrs": {
+          "name": "wright brothers",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:airplane",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "airplane"
+        ],
+        "attrs": {
+          "name": "airplane",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:111:wright-brothers:invented:airplane",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "invented"
+        ],
+        "attrs": {
+          "subject": "wright brothers",
+          "predicate": "invented",
+          "object": "airplane",
+          "sequence": 111,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:airplane",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "airplane"
+        ],
+        "attrs": {
+          "name": "airplane",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:wright-brothers",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "wright brothers"
+        ],
+        "attrs": {
+          "name": "wright brothers",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:112:airplane:invented_by:wright-brothers",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "invented_by"
+        ],
+        "attrs": {
+          "subject": "airplane",
+          "predicate": "invented_by",
+          "object": "wright brothers",
+          "sequence": 112,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "inverse-of:invented"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:english",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "english"
+        ],
+        "attrs": {
+          "name": "english",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:language",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "language"
+        ],
+        "attrs": {
+          "name": "language",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:113:english:is_a:language",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "english",
+          "predicate": "is_a",
+          "object": "language",
+          "sequence": 113,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:spanish",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "spanish"
+        ],
+        "attrs": {
+          "name": "spanish",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:114:spanish:is_a:language",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "spanish",
+          "predicate": "is_a",
+          "object": "language",
+          "sequence": 114,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:mandarin",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "mandarin"
+        ],
+        "attrs": {
+          "name": "mandarin",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:115:mandarin:is_a:language",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "mandarin",
+          "predicate": "is_a",
+          "object": "language",
+          "sequence": 115,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:french",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "french"
+        ],
+        "attrs": {
+          "name": "french",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:116:french:is_a:language",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "french",
+          "predicate": "is_a",
+          "object": "language",
+          "sequence": 116,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:arabic",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "arabic"
+        ],
+        "attrs": {
+          "name": "arabic",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "fact:117:arabic:is_a:language",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "arabic",
+          "predicate": "is_a",
+          "object": "language",
+          "sequence": 117,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "fact:118:mandarin:most_speakers:language",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "most_speakers"
+        ],
+        "attrs": {
+          "subject": "mandarin",
+          "predicate": "most_speakers",
+          "object": "language",
+          "sequence": 118,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:meter",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "meter"
+        ],
+        "attrs": {
+          "name": "meter",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:unit-of-length",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "unit of length"
+        ],
+        "attrs": {
+          "name": "unit of length",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:119:meter:is_a:unit-of-length",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "meter",
+          "predicate": "is_a",
+          "object": "unit of length",
+          "sequence": 119,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:kilogram",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "kilogram"
+        ],
+        "attrs": {
+          "name": "kilogram",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:unit-of-mass",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "unit of mass"
+        ],
+        "attrs": {
+          "name": "unit of mass",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:120:kilogram:is_a:unit-of-mass",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "kilogram",
+          "predicate": "is_a",
+          "object": "unit of mass",
+          "sequence": 120,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:second",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "second"
+        ],
+        "attrs": {
+          "name": "second",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:unit-of-time",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "unit of time"
+        ],
+        "attrs": {
+          "name": "unit of time",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:121:second:is_a:unit-of-time",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "is_a"
+        ],
+        "attrs": {
+          "subject": "second",
+          "predicate": "is_a",
+          "object": "unit of time",
+          "sequence": 121,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-kilometer",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 kilometer"
+        ],
+        "attrs": {
+          "name": "1 kilometer",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:1000-meters",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "1000 meters"
+        ],
+        "attrs": {
+          "name": "1000 meters",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:122:1-kilometer:equals:1000-meters",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "equals"
+        ],
+        "attrs": {
+          "subject": "1 kilometer",
+          "predicate": "equals",
+          "object": "1000 meters",
+          "sequence": 122,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-meter",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 meter"
+        ],
+        "attrs": {
+          "name": "1 meter",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:100-centimeters",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "100 centimeters"
+        ],
+        "attrs": {
+          "name": "100 centimeters",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:123:1-meter:equals:100-centimeters",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "equals"
+        ],
+        "attrs": {
+          "subject": "1 meter",
+          "predicate": "equals",
+          "object": "100 centimeters",
+          "sequence": 123,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-kilogram",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 kilogram"
+        ],
+        "attrs": {
+          "name": "1 kilogram",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:1000-grams",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "1000 grams"
+        ],
+        "attrs": {
+          "name": "1000 grams",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:124:1-kilogram:equals:1000-grams",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "equals"
+        ],
+        "attrs": {
+          "subject": "1 kilogram",
+          "predicate": "equals",
+          "object": "1000 grams",
+          "sequence": 124,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-hour",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 hour"
+        ],
+        "attrs": {
+          "name": "1 hour",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:60-minutes",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "60 minutes"
+        ],
+        "attrs": {
+          "name": "60 minutes",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:125:1-hour:equals:60-minutes",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "equals"
+        ],
+        "attrs": {
+          "subject": "1 hour",
+          "predicate": "equals",
+          "object": "60 minutes",
+          "sequence": 125,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-minute",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 minute"
+        ],
+        "attrs": {
+          "name": "1 minute",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:60-seconds",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "60 seconds"
+        ],
+        "attrs": {
+          "name": "60 seconds",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:126:1-minute:equals:60-seconds",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "equals"
+        ],
+        "attrs": {
+          "subject": "1 minute",
+          "predicate": "equals",
+          "object": "60 seconds",
+          "sequence": 126,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-day",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 day"
+        ],
+        "attrs": {
+          "name": "1 day",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:24-hours",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "24 hours"
+        ],
+        "attrs": {
+          "name": "24 hours",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:127:1-day:equals:24-hours",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "equals"
+        ],
+        "attrs": {
+          "subject": "1 day",
+          "predicate": "equals",
+          "object": "24 hours",
+          "sequence": 127,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-year",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 year"
+        ],
+        "attrs": {
+          "name": "1 year",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:365-days",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "365 days"
+        ],
+        "attrs": {
+          "name": "365 days",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:128:1-year:equals:365-days",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "equals"
+        ],
+        "attrs": {
+          "subject": "1 year",
+          "predicate": "equals",
+          "object": "365 days",
+          "sequence": 128,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-mile",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 mile"
+        ],
+        "attrs": {
+          "name": "1 mile",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:1.6-kilometers",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "1.6 kilometers"
+        ],
+        "attrs": {
+          "name": "1.6 kilometers",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:129:1-mile:approximately_equals:1.6-kilometers",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "approximately_equals"
+        ],
+        "attrs": {
+          "subject": "1 mile",
+          "predicate": "approximately_equals",
+          "object": "1.6 kilometers",
+          "sequence": 129,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "world:entity:1-inch",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "entity",
+          "1 inch"
+        ],
+        "attrs": {
+          "name": "1 inch",
+          "role": "entity"
+        }
+      },
+      {
+        "id": "world:value:2.54-centimeters",
+        "kind": "concept",
+        "labels": [
+          "world-entity",
+          "value",
+          "2.54 centimeters"
+        ],
+        "attrs": {
+          "name": "2.54 centimeters",
+          "role": "value"
+        }
+      },
+      {
+        "id": "fact:130:1-inch:equals:2.54-centimeters",
+        "kind": "fact",
+        "labels": [
+          "world-fact",
+          "equals"
+        ],
+        "attrs": {
+          "subject": "1 inch",
+          "predicate": "equals",
+          "object": "2.54 centimeters",
+          "sequence": 130,
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "active": true
+        }
+      },
+      {
+        "id": "universal:mammals:has_property:warm-blooded",
+        "kind": "inference_rule",
+        "labels": [
+          "universal-rule",
+          "learned-inference"
+        ],
+        "attrs": {
+          "id": "universal:mammals:has_property:warm-blooded",
+          "kind": "universal",
+          "className": "mammals",
+          "propertyPredicate": "has_property",
+          "propertyValue": "warm-blooded",
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "universal:birds:has_property:feathers",
+        "kind": "inference_rule",
+        "labels": [
+          "universal-rule",
+          "learned-inference"
+        ],
+        "attrs": {
+          "id": "universal:birds:has_property:feathers",
+          "kind": "universal",
+          "className": "birds",
+          "propertyPredicate": "has_property",
+          "propertyValue": "feathers",
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "universal:fish:has_property:gills",
+        "kind": "inference_rule",
+        "labels": [
+          "universal-rule",
+          "learned-inference"
+        ],
+        "attrs": {
+          "id": "universal:fish:has_property:gills",
+          "kind": "universal",
+          "className": "fish",
+          "propertyPredicate": "has_property",
+          "propertyValue": "gills",
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "universal:reptiles:has_property:cold-blooded",
+        "kind": "inference_rule",
+        "labels": [
+          "universal-rule",
+          "learned-inference"
+        ],
+        "attrs": {
+          "id": "universal:reptiles:has_property:cold-blooded",
+          "kind": "universal",
+          "className": "reptiles",
+          "propertyPredicate": "has_property",
+          "propertyValue": "cold-blooded",
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "universal:planets:orbits:sun",
+        "kind": "inference_rule",
+        "labels": [
+          "universal-rule",
+          "learned-inference"
+        ],
+        "attrs": {
+          "id": "universal:planets:orbits:sun",
+          "kind": "universal",
+          "className": "planets",
+          "propertyPredicate": "orbits",
+          "propertyValue": "sun",
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "universal:stars:produces:light",
+        "kind": "inference_rule",
+        "labels": [
+          "universal-rule",
+          "learned-inference"
+        ],
+        "attrs": {
+          "id": "universal:stars:produces:light",
+          "kind": "universal",
+          "className": "stars",
+          "propertyPredicate": "produces",
+          "propertyValue": "light",
+          "provenance": [
+            "teacher:curriculum-k8"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "construction:curriculum.query.capital-of",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:curriculum.query.capital-of",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "capital"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "of"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "country",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "capital",
+            "subject": "country"
+          },
+          "confidence": 0.85,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "curriculum:query.capital-of"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:curriculum.query.what-is",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:curriculum.query.what-is",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "a"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "thing",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "is_a",
+            "subject": "thing"
+          },
+          "confidence": 0.85,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "curriculum:query.what-is"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:curriculum.query.what-is-2",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:curriculum.query.what-is-2",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "thing",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "is_a",
+            "subject": "thing"
+          },
+          "confidence": 0.85,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "curriculum:query.what-is-2"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:curriculum.query.who-invented",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:curriculum.query.who-invented",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "who"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "invented"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "the"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "thing",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "invented_by",
+            "subject": "thing"
+          },
+          "confidence": 0.85,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "curriculum:query.who-invented"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:curriculum.query.who-discovered",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:curriculum.query.who-discovered",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "who"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "discovered"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "thing",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "discovered_by",
+            "subject": "thing"
+          },
+          "confidence": 0.85,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "curriculum:query.who-discovered"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:curriculum.query.who-wrote",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:curriculum.query.who-wrote",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "who"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "wrote"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "thing",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "written_by",
+            "subject": "thing"
+          },
+          "confidence": 0.85,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "curriculum:query.who-wrote"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:curriculum.query.how-many-sides",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:curriculum.query.how-many-sides",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "how"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "many"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "sides"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "does"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "a"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "shape",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "have"
+              ]
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "has_sides",
+            "subject": "shape"
+          },
+          "confidence": 0.85,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "curriculum:query.how-many-sides"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
+        "id": "construction:curriculum.query.continent",
+        "kind": "construction",
+        "labels": [
+          "construction",
+          "fact-query"
+        ],
+        "attrs": {
+          "id": "construction:curriculum.query.continent",
+          "pattern": [
+            {
+              "kind": "literal",
+              "forms": [
+                "what"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "continent"
+              ]
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "is"
+              ]
+            },
+            {
+              "kind": "slot",
+              "slot": {
+                "name": "country",
+                "type": "entity",
+                "span": "one",
+                "optional": false
+              }
+            },
+            {
+              "kind": "literal",
+              "forms": [
+                "in"
+              ]
+            }
+          ],
+          "meaning": {
+            "kind": "fact-query",
+            "queryType": "object",
+            "predicate": "continent",
+            "subject": "country"
+          },
+          "confidence": 0.85,
+          "provenance": [
+            "teacher:curriculum-k8",
+            "curriculum:query.continent"
+          ],
+          "status": "active",
+          "durable": true
+        }
+      },
+      {
         "id": "state:bootstrap:ekg-core-v1",
         "kind": "state_model",
         "labels": [
@@ -65299,7 +70652,7 @@
           "starterEnglishLessons": 248,
           "starterWorldLessons": 54,
           "wordnetLessons": 1075,
-          "initializedAt": "2026-08-19T20:17:20.720Z"
+          "initializedAt": "2026-08-19T21:13:30.514Z"
         }
       }
     ],
@@ -95067,6 +100420,1840 @@
         "from": "concept:wordnet:2237206",
         "to": "concept:wordnet:welcome",
         "confidence": 0.9
+      },
+      {
+        "id": "fact:0:earth:is_a:planet:subject:world:entity:earth",
+        "kind": "fact_subject",
+        "from": "fact:0:earth:is_a:planet",
+        "to": "world:entity:earth",
+        "confidence": 1
+      },
+      {
+        "id": "fact:0:earth:is_a:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:0:earth:is_a:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:1:mars:is_a:planet:subject:world:entity:mars",
+        "kind": "fact_subject",
+        "from": "fact:1:mars:is_a:planet",
+        "to": "world:entity:mars",
+        "confidence": 1
+      },
+      {
+        "id": "fact:1:mars:is_a:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:1:mars:is_a:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:2:venus:is_a:planet:subject:world:entity:venus",
+        "kind": "fact_subject",
+        "from": "fact:2:venus:is_a:planet",
+        "to": "world:entity:venus",
+        "confidence": 1
+      },
+      {
+        "id": "fact:2:venus:is_a:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:2:venus:is_a:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:3:jupiter:is_a:planet:subject:world:entity:jupiter",
+        "kind": "fact_subject",
+        "from": "fact:3:jupiter:is_a:planet",
+        "to": "world:entity:jupiter",
+        "confidence": 1
+      },
+      {
+        "id": "fact:3:jupiter:is_a:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:3:jupiter:is_a:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:4:saturn:is_a:planet:subject:world:entity:saturn",
+        "kind": "fact_subject",
+        "from": "fact:4:saturn:is_a:planet",
+        "to": "world:entity:saturn",
+        "confidence": 1
+      },
+      {
+        "id": "fact:4:saturn:is_a:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:4:saturn:is_a:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:5:mercury:is_a:planet:subject:world:entity:mercury",
+        "kind": "fact_subject",
+        "from": "fact:5:mercury:is_a:planet",
+        "to": "world:entity:mercury",
+        "confidence": 1
+      },
+      {
+        "id": "fact:5:mercury:is_a:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:5:mercury:is_a:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:6:uranus:is_a:planet:subject:world:entity:uranus",
+        "kind": "fact_subject",
+        "from": "fact:6:uranus:is_a:planet",
+        "to": "world:entity:uranus",
+        "confidence": 1
+      },
+      {
+        "id": "fact:6:uranus:is_a:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:6:uranus:is_a:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:7:neptune:is_a:planet:subject:world:entity:neptune",
+        "kind": "fact_subject",
+        "from": "fact:7:neptune:is_a:planet",
+        "to": "world:entity:neptune",
+        "confidence": 1
+      },
+      {
+        "id": "fact:7:neptune:is_a:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:7:neptune:is_a:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:8:sun:is_a:star:subject:world:entity:sun",
+        "kind": "fact_subject",
+        "from": "fact:8:sun:is_a:star",
+        "to": "world:entity:sun",
+        "confidence": 1
+      },
+      {
+        "id": "fact:8:sun:is_a:star:object:world:value:star",
+        "kind": "fact_object",
+        "from": "fact:8:sun:is_a:star",
+        "to": "world:value:star",
+        "confidence": 1
+      },
+      {
+        "id": "fact:9:moon:is_a:satellite:subject:world:entity:moon",
+        "kind": "fact_subject",
+        "from": "fact:9:moon:is_a:satellite",
+        "to": "world:entity:moon",
+        "confidence": 1
+      },
+      {
+        "id": "fact:9:moon:is_a:satellite:object:world:value:satellite",
+        "kind": "fact_object",
+        "from": "fact:9:moon:is_a:satellite",
+        "to": "world:value:satellite",
+        "confidence": 1
+      },
+      {
+        "id": "fact:10:earth:has_satellite:moon:subject:world:entity:earth",
+        "kind": "fact_subject",
+        "from": "fact:10:earth:has_satellite:moon",
+        "to": "world:entity:earth",
+        "confidence": 1
+      },
+      {
+        "id": "fact:10:earth:has_satellite:moon:object:world:value:moon",
+        "kind": "fact_object",
+        "from": "fact:10:earth:has_satellite:moon",
+        "to": "world:value:moon",
+        "confidence": 1
+      },
+      {
+        "id": "fact:11:earth:position_from_sun:3:subject:world:entity:earth",
+        "kind": "fact_subject",
+        "from": "fact:11:earth:position_from_sun:3",
+        "to": "world:entity:earth",
+        "confidence": 1
+      },
+      {
+        "id": "fact:11:earth:position_from_sun:3:object:world:value:3",
+        "kind": "fact_object",
+        "from": "fact:11:earth:position_from_sun:3",
+        "to": "world:value:3",
+        "confidence": 1
+      },
+      {
+        "id": "fact:12:mars:position_from_sun:4:subject:world:entity:mars",
+        "kind": "fact_subject",
+        "from": "fact:12:mars:position_from_sun:4",
+        "to": "world:entity:mars",
+        "confidence": 1
+      },
+      {
+        "id": "fact:12:mars:position_from_sun:4:object:world:value:4",
+        "kind": "fact_object",
+        "from": "fact:12:mars:position_from_sun:4",
+        "to": "world:value:4",
+        "confidence": 1
+      },
+      {
+        "id": "fact:13:jupiter:is_largest:planet:subject:world:entity:jupiter",
+        "kind": "fact_subject",
+        "from": "fact:13:jupiter:is_largest:planet",
+        "to": "world:entity:jupiter",
+        "confidence": 1
+      },
+      {
+        "id": "fact:13:jupiter:is_largest:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:13:jupiter:is_largest:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:14:mercury:is_smallest:planet:subject:world:entity:mercury",
+        "kind": "fact_subject",
+        "from": "fact:14:mercury:is_smallest:planet",
+        "to": "world:entity:mercury",
+        "confidence": 1
+      },
+      {
+        "id": "fact:14:mercury:is_smallest:planet:object:world:value:planet",
+        "kind": "fact_object",
+        "from": "fact:14:mercury:is_smallest:planet",
+        "to": "world:value:planet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:15:mercury:is_closest_to:sun:subject:world:entity:mercury",
+        "kind": "fact_subject",
+        "from": "fact:15:mercury:is_closest_to:sun",
+        "to": "world:entity:mercury",
+        "confidence": 1
+      },
+      {
+        "id": "fact:15:mercury:is_closest_to:sun:object:world:value:sun",
+        "kind": "fact_object",
+        "from": "fact:15:mercury:is_closest_to:sun",
+        "to": "world:value:sun",
+        "confidence": 1
+      },
+      {
+        "id": "fact:16:water:chemical_formula:h2o:subject:world:entity:water",
+        "kind": "fact_subject",
+        "from": "fact:16:water:chemical_formula:h2o",
+        "to": "world:entity:water",
+        "confidence": 1
+      },
+      {
+        "id": "fact:16:water:chemical_formula:h2o:object:world:value:h2o",
+        "kind": "fact_object",
+        "from": "fact:16:water:chemical_formula:h2o",
+        "to": "world:value:h2o",
+        "confidence": 1
+      },
+      {
+        "id": "fact:17:water:freezes_at:0-degrees-celsius:subject:world:entity:water",
+        "kind": "fact_subject",
+        "from": "fact:17:water:freezes_at:0-degrees-celsius",
+        "to": "world:entity:water",
+        "confidence": 1
+      },
+      {
+        "id": "fact:17:water:freezes_at:0-degrees-celsius:object:world:value:0-degrees-celsius",
+        "kind": "fact_object",
+        "from": "fact:17:water:freezes_at:0-degrees-celsius",
+        "to": "world:value:0-degrees-celsius",
+        "confidence": 1
+      },
+      {
+        "id": "fact:18:water:boils_at:100-degrees-celsius:subject:world:entity:water",
+        "kind": "fact_subject",
+        "from": "fact:18:water:boils_at:100-degrees-celsius",
+        "to": "world:entity:water",
+        "confidence": 1
+      },
+      {
+        "id": "fact:18:water:boils_at:100-degrees-celsius:object:world:value:100-degrees-celsius",
+        "kind": "fact_object",
+        "from": "fact:18:water:boils_at:100-degrees-celsius",
+        "to": "world:value:100-degrees-celsius",
+        "confidence": 1
+      },
+      {
+        "id": "fact:19:oxygen:is_a:element:subject:world:entity:oxygen",
+        "kind": "fact_subject",
+        "from": "fact:19:oxygen:is_a:element",
+        "to": "world:entity:oxygen",
+        "confidence": 1
+      },
+      {
+        "id": "fact:19:oxygen:is_a:element:object:world:value:element",
+        "kind": "fact_object",
+        "from": "fact:19:oxygen:is_a:element",
+        "to": "world:value:element",
+        "confidence": 1
+      },
+      {
+        "id": "fact:20:hydrogen:is_a:element:subject:world:entity:hydrogen",
+        "kind": "fact_subject",
+        "from": "fact:20:hydrogen:is_a:element",
+        "to": "world:entity:hydrogen",
+        "confidence": 1
+      },
+      {
+        "id": "fact:20:hydrogen:is_a:element:object:world:value:element",
+        "kind": "fact_object",
+        "from": "fact:20:hydrogen:is_a:element",
+        "to": "world:value:element",
+        "confidence": 1
+      },
+      {
+        "id": "fact:21:carbon:is_a:element:subject:world:entity:carbon",
+        "kind": "fact_subject",
+        "from": "fact:21:carbon:is_a:element",
+        "to": "world:entity:carbon",
+        "confidence": 1
+      },
+      {
+        "id": "fact:21:carbon:is_a:element:object:world:value:element",
+        "kind": "fact_object",
+        "from": "fact:21:carbon:is_a:element",
+        "to": "world:value:element",
+        "confidence": 1
+      },
+      {
+        "id": "fact:22:gold:is_a:element:subject:world:entity:gold",
+        "kind": "fact_subject",
+        "from": "fact:22:gold:is_a:element",
+        "to": "world:entity:gold",
+        "confidence": 1
+      },
+      {
+        "id": "fact:22:gold:is_a:element:object:world:value:element",
+        "kind": "fact_object",
+        "from": "fact:22:gold:is_a:element",
+        "to": "world:value:element",
+        "confidence": 1
+      },
+      {
+        "id": "fact:23:gold:chemical_symbol:au:subject:world:entity:gold",
+        "kind": "fact_subject",
+        "from": "fact:23:gold:chemical_symbol:au",
+        "to": "world:entity:gold",
+        "confidence": 1
+      },
+      {
+        "id": "fact:23:gold:chemical_symbol:au:object:world:value:au",
+        "kind": "fact_object",
+        "from": "fact:23:gold:chemical_symbol:au",
+        "to": "world:value:au",
+        "confidence": 1
+      },
+      {
+        "id": "fact:24:iron:is_a:element:subject:world:entity:iron",
+        "kind": "fact_subject",
+        "from": "fact:24:iron:is_a:element",
+        "to": "world:entity:iron",
+        "confidence": 1
+      },
+      {
+        "id": "fact:24:iron:is_a:element:object:world:value:element",
+        "kind": "fact_object",
+        "from": "fact:24:iron:is_a:element",
+        "to": "world:value:element",
+        "confidence": 1
+      },
+      {
+        "id": "fact:25:iron:chemical_symbol:fe:subject:world:entity:iron",
+        "kind": "fact_subject",
+        "from": "fact:25:iron:chemical_symbol:fe",
+        "to": "world:entity:iron",
+        "confidence": 1
+      },
+      {
+        "id": "fact:25:iron:chemical_symbol:fe:object:world:value:fe",
+        "kind": "fact_object",
+        "from": "fact:25:iron:chemical_symbol:fe",
+        "to": "world:value:fe",
+        "confidence": 1
+      },
+      {
+        "id": "fact:26:united-states:capital:washington-dc:subject:world:entity:united-states",
+        "kind": "fact_subject",
+        "from": "fact:26:united-states:capital:washington-dc",
+        "to": "world:entity:united-states",
+        "confidence": 1
+      },
+      {
+        "id": "fact:26:united-states:capital:washington-dc:object:world:value:washington-dc",
+        "kind": "fact_object",
+        "from": "fact:26:united-states:capital:washington-dc",
+        "to": "world:value:washington-dc",
+        "confidence": 1
+      },
+      {
+        "id": "fact:27:united-kingdom:capital:london:subject:world:entity:united-kingdom",
+        "kind": "fact_subject",
+        "from": "fact:27:united-kingdom:capital:london",
+        "to": "world:entity:united-kingdom",
+        "confidence": 1
+      },
+      {
+        "id": "fact:27:united-kingdom:capital:london:object:world:value:london",
+        "kind": "fact_object",
+        "from": "fact:27:united-kingdom:capital:london",
+        "to": "world:value:london",
+        "confidence": 1
+      },
+      {
+        "id": "fact:28:france:capital:paris:subject:world:entity:france",
+        "kind": "fact_subject",
+        "from": "fact:28:france:capital:paris",
+        "to": "world:entity:france",
+        "confidence": 1
+      },
+      {
+        "id": "fact:28:france:capital:paris:object:world:value:paris",
+        "kind": "fact_object",
+        "from": "fact:28:france:capital:paris",
+        "to": "world:value:paris",
+        "confidence": 1
+      },
+      {
+        "id": "fact:29:germany:capital:berlin:subject:world:entity:germany",
+        "kind": "fact_subject",
+        "from": "fact:29:germany:capital:berlin",
+        "to": "world:entity:germany",
+        "confidence": 1
+      },
+      {
+        "id": "fact:29:germany:capital:berlin:object:world:value:berlin",
+        "kind": "fact_object",
+        "from": "fact:29:germany:capital:berlin",
+        "to": "world:value:berlin",
+        "confidence": 1
+      },
+      {
+        "id": "fact:30:japan:capital:tokyo:subject:world:entity:japan",
+        "kind": "fact_subject",
+        "from": "fact:30:japan:capital:tokyo",
+        "to": "world:entity:japan",
+        "confidence": 1
+      },
+      {
+        "id": "fact:30:japan:capital:tokyo:object:world:value:tokyo",
+        "kind": "fact_object",
+        "from": "fact:30:japan:capital:tokyo",
+        "to": "world:value:tokyo",
+        "confidence": 1
+      },
+      {
+        "id": "fact:31:china:capital:beijing:subject:world:entity:china",
+        "kind": "fact_subject",
+        "from": "fact:31:china:capital:beijing",
+        "to": "world:entity:china",
+        "confidence": 1
+      },
+      {
+        "id": "fact:31:china:capital:beijing:object:world:value:beijing",
+        "kind": "fact_object",
+        "from": "fact:31:china:capital:beijing",
+        "to": "world:value:beijing",
+        "confidence": 1
+      },
+      {
+        "id": "fact:32:india:capital:new-delhi:subject:world:entity:india",
+        "kind": "fact_subject",
+        "from": "fact:32:india:capital:new-delhi",
+        "to": "world:entity:india",
+        "confidence": 1
+      },
+      {
+        "id": "fact:32:india:capital:new-delhi:object:world:value:new-delhi",
+        "kind": "fact_object",
+        "from": "fact:32:india:capital:new-delhi",
+        "to": "world:value:new-delhi",
+        "confidence": 1
+      },
+      {
+        "id": "fact:33:brazil:capital:brasilia:subject:world:entity:brazil",
+        "kind": "fact_subject",
+        "from": "fact:33:brazil:capital:brasilia",
+        "to": "world:entity:brazil",
+        "confidence": 1
+      },
+      {
+        "id": "fact:33:brazil:capital:brasilia:object:world:value:brasilia",
+        "kind": "fact_object",
+        "from": "fact:33:brazil:capital:brasilia",
+        "to": "world:value:brasilia",
+        "confidence": 1
+      },
+      {
+        "id": "fact:34:australia:capital:canberra:subject:world:entity:australia",
+        "kind": "fact_subject",
+        "from": "fact:34:australia:capital:canberra",
+        "to": "world:entity:australia",
+        "confidence": 1
+      },
+      {
+        "id": "fact:34:australia:capital:canberra:object:world:value:canberra",
+        "kind": "fact_object",
+        "from": "fact:34:australia:capital:canberra",
+        "to": "world:value:canberra",
+        "confidence": 1
+      },
+      {
+        "id": "fact:35:canada:capital:ottawa:subject:world:entity:canada",
+        "kind": "fact_subject",
+        "from": "fact:35:canada:capital:ottawa",
+        "to": "world:entity:canada",
+        "confidence": 1
+      },
+      {
+        "id": "fact:35:canada:capital:ottawa:object:world:value:ottawa",
+        "kind": "fact_object",
+        "from": "fact:35:canada:capital:ottawa",
+        "to": "world:value:ottawa",
+        "confidence": 1
+      },
+      {
+        "id": "fact:36:mexico:capital:mexico-city:subject:world:entity:mexico",
+        "kind": "fact_subject",
+        "from": "fact:36:mexico:capital:mexico-city",
+        "to": "world:entity:mexico",
+        "confidence": 1
+      },
+      {
+        "id": "fact:36:mexico:capital:mexico-city:object:world:value:mexico-city",
+        "kind": "fact_object",
+        "from": "fact:36:mexico:capital:mexico-city",
+        "to": "world:value:mexico-city",
+        "confidence": 1
+      },
+      {
+        "id": "fact:37:russia:capital:moscow:subject:world:entity:russia",
+        "kind": "fact_subject",
+        "from": "fact:37:russia:capital:moscow",
+        "to": "world:entity:russia",
+        "confidence": 1
+      },
+      {
+        "id": "fact:37:russia:capital:moscow:object:world:value:moscow",
+        "kind": "fact_object",
+        "from": "fact:37:russia:capital:moscow",
+        "to": "world:value:moscow",
+        "confidence": 1
+      },
+      {
+        "id": "fact:38:italy:capital:rome:subject:world:entity:italy",
+        "kind": "fact_subject",
+        "from": "fact:38:italy:capital:rome",
+        "to": "world:entity:italy",
+        "confidence": 1
+      },
+      {
+        "id": "fact:38:italy:capital:rome:object:world:value:rome",
+        "kind": "fact_object",
+        "from": "fact:38:italy:capital:rome",
+        "to": "world:value:rome",
+        "confidence": 1
+      },
+      {
+        "id": "fact:39:spain:capital:madrid:subject:world:entity:spain",
+        "kind": "fact_subject",
+        "from": "fact:39:spain:capital:madrid",
+        "to": "world:entity:spain",
+        "confidence": 1
+      },
+      {
+        "id": "fact:39:spain:capital:madrid:object:world:value:madrid",
+        "kind": "fact_object",
+        "from": "fact:39:spain:capital:madrid",
+        "to": "world:value:madrid",
+        "confidence": 1
+      },
+      {
+        "id": "fact:40:egypt:capital:cairo:subject:world:entity:egypt",
+        "kind": "fact_subject",
+        "from": "fact:40:egypt:capital:cairo",
+        "to": "world:entity:egypt",
+        "confidence": 1
+      },
+      {
+        "id": "fact:40:egypt:capital:cairo:object:world:value:cairo",
+        "kind": "fact_object",
+        "from": "fact:40:egypt:capital:cairo",
+        "to": "world:value:cairo",
+        "confidence": 1
+      },
+      {
+        "id": "fact:41:south-korea:capital:seoul:subject:world:entity:south-korea",
+        "kind": "fact_subject",
+        "from": "fact:41:south-korea:capital:seoul",
+        "to": "world:entity:south-korea",
+        "confidence": 1
+      },
+      {
+        "id": "fact:41:south-korea:capital:seoul:object:world:value:seoul",
+        "kind": "fact_object",
+        "from": "fact:41:south-korea:capital:seoul",
+        "to": "world:value:seoul",
+        "confidence": 1
+      },
+      {
+        "id": "fact:42:united-states:continent:north-america:subject:world:entity:united-states",
+        "kind": "fact_subject",
+        "from": "fact:42:united-states:continent:north-america",
+        "to": "world:entity:united-states",
+        "confidence": 1
+      },
+      {
+        "id": "fact:42:united-states:continent:north-america:object:world:value:north-america",
+        "kind": "fact_object",
+        "from": "fact:42:united-states:continent:north-america",
+        "to": "world:value:north-america",
+        "confidence": 1
+      },
+      {
+        "id": "fact:43:canada:continent:north-america:subject:world:entity:canada",
+        "kind": "fact_subject",
+        "from": "fact:43:canada:continent:north-america",
+        "to": "world:entity:canada",
+        "confidence": 1
+      },
+      {
+        "id": "fact:43:canada:continent:north-america:object:world:value:north-america",
+        "kind": "fact_object",
+        "from": "fact:43:canada:continent:north-america",
+        "to": "world:value:north-america",
+        "confidence": 1
+      },
+      {
+        "id": "fact:44:mexico:continent:north-america:subject:world:entity:mexico",
+        "kind": "fact_subject",
+        "from": "fact:44:mexico:continent:north-america",
+        "to": "world:entity:mexico",
+        "confidence": 1
+      },
+      {
+        "id": "fact:44:mexico:continent:north-america:object:world:value:north-america",
+        "kind": "fact_object",
+        "from": "fact:44:mexico:continent:north-america",
+        "to": "world:value:north-america",
+        "confidence": 1
+      },
+      {
+        "id": "fact:45:brazil:continent:south-america:subject:world:entity:brazil",
+        "kind": "fact_subject",
+        "from": "fact:45:brazil:continent:south-america",
+        "to": "world:entity:brazil",
+        "confidence": 1
+      },
+      {
+        "id": "fact:45:brazil:continent:south-america:object:world:value:south-america",
+        "kind": "fact_object",
+        "from": "fact:45:brazil:continent:south-america",
+        "to": "world:value:south-america",
+        "confidence": 1
+      },
+      {
+        "id": "fact:46:france:continent:europe:subject:world:entity:france",
+        "kind": "fact_subject",
+        "from": "fact:46:france:continent:europe",
+        "to": "world:entity:france",
+        "confidence": 1
+      },
+      {
+        "id": "fact:46:france:continent:europe:object:world:value:europe",
+        "kind": "fact_object",
+        "from": "fact:46:france:continent:europe",
+        "to": "world:value:europe",
+        "confidence": 1
+      },
+      {
+        "id": "fact:47:germany:continent:europe:subject:world:entity:germany",
+        "kind": "fact_subject",
+        "from": "fact:47:germany:continent:europe",
+        "to": "world:entity:germany",
+        "confidence": 1
+      },
+      {
+        "id": "fact:47:germany:continent:europe:object:world:value:europe",
+        "kind": "fact_object",
+        "from": "fact:47:germany:continent:europe",
+        "to": "world:value:europe",
+        "confidence": 1
+      },
+      {
+        "id": "fact:48:japan:continent:asia:subject:world:entity:japan",
+        "kind": "fact_subject",
+        "from": "fact:48:japan:continent:asia",
+        "to": "world:entity:japan",
+        "confidence": 1
+      },
+      {
+        "id": "fact:48:japan:continent:asia:object:world:value:asia",
+        "kind": "fact_object",
+        "from": "fact:48:japan:continent:asia",
+        "to": "world:value:asia",
+        "confidence": 1
+      },
+      {
+        "id": "fact:49:china:continent:asia:subject:world:entity:china",
+        "kind": "fact_subject",
+        "from": "fact:49:china:continent:asia",
+        "to": "world:entity:china",
+        "confidence": 1
+      },
+      {
+        "id": "fact:49:china:continent:asia:object:world:value:asia",
+        "kind": "fact_object",
+        "from": "fact:49:china:continent:asia",
+        "to": "world:value:asia",
+        "confidence": 1
+      },
+      {
+        "id": "fact:50:india:continent:asia:subject:world:entity:india",
+        "kind": "fact_subject",
+        "from": "fact:50:india:continent:asia",
+        "to": "world:entity:india",
+        "confidence": 1
+      },
+      {
+        "id": "fact:50:india:continent:asia:object:world:value:asia",
+        "kind": "fact_object",
+        "from": "fact:50:india:continent:asia",
+        "to": "world:value:asia",
+        "confidence": 1
+      },
+      {
+        "id": "fact:51:egypt:continent:africa:subject:world:entity:egypt",
+        "kind": "fact_subject",
+        "from": "fact:51:egypt:continent:africa",
+        "to": "world:entity:egypt",
+        "confidence": 1
+      },
+      {
+        "id": "fact:51:egypt:continent:africa:object:world:value:africa",
+        "kind": "fact_object",
+        "from": "fact:51:egypt:continent:africa",
+        "to": "world:value:africa",
+        "confidence": 1
+      },
+      {
+        "id": "fact:52:australia:continent:oceania:subject:world:entity:australia",
+        "kind": "fact_subject",
+        "from": "fact:52:australia:continent:oceania",
+        "to": "world:entity:australia",
+        "confidence": 1
+      },
+      {
+        "id": "fact:52:australia:continent:oceania:object:world:value:oceania",
+        "kind": "fact_object",
+        "from": "fact:52:australia:continent:oceania",
+        "to": "world:value:oceania",
+        "confidence": 1
+      },
+      {
+        "id": "fact:53:pacific:is_a:ocean:subject:world:entity:pacific",
+        "kind": "fact_subject",
+        "from": "fact:53:pacific:is_a:ocean",
+        "to": "world:entity:pacific",
+        "confidence": 1
+      },
+      {
+        "id": "fact:53:pacific:is_a:ocean:object:world:value:ocean",
+        "kind": "fact_object",
+        "from": "fact:53:pacific:is_a:ocean",
+        "to": "world:value:ocean",
+        "confidence": 1
+      },
+      {
+        "id": "fact:54:atlantic:is_a:ocean:subject:world:entity:atlantic",
+        "kind": "fact_subject",
+        "from": "fact:54:atlantic:is_a:ocean",
+        "to": "world:entity:atlantic",
+        "confidence": 1
+      },
+      {
+        "id": "fact:54:atlantic:is_a:ocean:object:world:value:ocean",
+        "kind": "fact_object",
+        "from": "fact:54:atlantic:is_a:ocean",
+        "to": "world:value:ocean",
+        "confidence": 1
+      },
+      {
+        "id": "fact:55:indian:is_a:ocean:subject:world:entity:indian",
+        "kind": "fact_subject",
+        "from": "fact:55:indian:is_a:ocean",
+        "to": "world:entity:indian",
+        "confidence": 1
+      },
+      {
+        "id": "fact:55:indian:is_a:ocean:object:world:value:ocean",
+        "kind": "fact_object",
+        "from": "fact:55:indian:is_a:ocean",
+        "to": "world:value:ocean",
+        "confidence": 1
+      },
+      {
+        "id": "fact:56:arctic:is_a:ocean:subject:world:entity:arctic",
+        "kind": "fact_subject",
+        "from": "fact:56:arctic:is_a:ocean",
+        "to": "world:entity:arctic",
+        "confidence": 1
+      },
+      {
+        "id": "fact:56:arctic:is_a:ocean:object:world:value:ocean",
+        "kind": "fact_object",
+        "from": "fact:56:arctic:is_a:ocean",
+        "to": "world:value:ocean",
+        "confidence": 1
+      },
+      {
+        "id": "fact:57:pacific:is_largest:ocean:subject:world:entity:pacific",
+        "kind": "fact_subject",
+        "from": "fact:57:pacific:is_largest:ocean",
+        "to": "world:entity:pacific",
+        "confidence": 1
+      },
+      {
+        "id": "fact:57:pacific:is_largest:ocean:object:world:value:ocean",
+        "kind": "fact_object",
+        "from": "fact:57:pacific:is_largest:ocean",
+        "to": "world:value:ocean",
+        "confidence": 1
+      },
+      {
+        "id": "fact:58:dog:is_a:mammal:subject:world:entity:dog",
+        "kind": "fact_subject",
+        "from": "fact:58:dog:is_a:mammal",
+        "to": "world:entity:dog",
+        "confidence": 1
+      },
+      {
+        "id": "fact:58:dog:is_a:mammal:object:world:value:mammal",
+        "kind": "fact_object",
+        "from": "fact:58:dog:is_a:mammal",
+        "to": "world:value:mammal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:59:cat:is_a:mammal:subject:world:entity:cat",
+        "kind": "fact_subject",
+        "from": "fact:59:cat:is_a:mammal",
+        "to": "world:entity:cat",
+        "confidence": 1
+      },
+      {
+        "id": "fact:59:cat:is_a:mammal:object:world:value:mammal",
+        "kind": "fact_object",
+        "from": "fact:59:cat:is_a:mammal",
+        "to": "world:value:mammal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:60:whale:is_a:mammal:subject:world:entity:whale",
+        "kind": "fact_subject",
+        "from": "fact:60:whale:is_a:mammal",
+        "to": "world:entity:whale",
+        "confidence": 1
+      },
+      {
+        "id": "fact:60:whale:is_a:mammal:object:world:value:mammal",
+        "kind": "fact_object",
+        "from": "fact:60:whale:is_a:mammal",
+        "to": "world:value:mammal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:61:dolphin:is_a:mammal:subject:world:entity:dolphin",
+        "kind": "fact_subject",
+        "from": "fact:61:dolphin:is_a:mammal",
+        "to": "world:entity:dolphin",
+        "confidence": 1
+      },
+      {
+        "id": "fact:61:dolphin:is_a:mammal:object:world:value:mammal",
+        "kind": "fact_object",
+        "from": "fact:61:dolphin:is_a:mammal",
+        "to": "world:value:mammal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:62:eagle:is_a:bird:subject:world:entity:eagle",
+        "kind": "fact_subject",
+        "from": "fact:62:eagle:is_a:bird",
+        "to": "world:entity:eagle",
+        "confidence": 1
+      },
+      {
+        "id": "fact:62:eagle:is_a:bird:object:world:value:bird",
+        "kind": "fact_object",
+        "from": "fact:62:eagle:is_a:bird",
+        "to": "world:value:bird",
+        "confidence": 1
+      },
+      {
+        "id": "fact:63:penguin:is_a:bird:subject:world:entity:penguin",
+        "kind": "fact_subject",
+        "from": "fact:63:penguin:is_a:bird",
+        "to": "world:entity:penguin",
+        "confidence": 1
+      },
+      {
+        "id": "fact:63:penguin:is_a:bird:object:world:value:bird",
+        "kind": "fact_object",
+        "from": "fact:63:penguin:is_a:bird",
+        "to": "world:value:bird",
+        "confidence": 1
+      },
+      {
+        "id": "fact:64:shark:is_a:fish:subject:world:entity:shark",
+        "kind": "fact_subject",
+        "from": "fact:64:shark:is_a:fish",
+        "to": "world:entity:shark",
+        "confidence": 1
+      },
+      {
+        "id": "fact:64:shark:is_a:fish:object:world:value:fish",
+        "kind": "fact_object",
+        "from": "fact:64:shark:is_a:fish",
+        "to": "world:value:fish",
+        "confidence": 1
+      },
+      {
+        "id": "fact:65:salmon:is_a:fish:subject:world:entity:salmon",
+        "kind": "fact_subject",
+        "from": "fact:65:salmon:is_a:fish",
+        "to": "world:entity:salmon",
+        "confidence": 1
+      },
+      {
+        "id": "fact:65:salmon:is_a:fish:object:world:value:fish",
+        "kind": "fact_object",
+        "from": "fact:65:salmon:is_a:fish",
+        "to": "world:value:fish",
+        "confidence": 1
+      },
+      {
+        "id": "fact:66:frog:is_a:amphibian:subject:world:entity:frog",
+        "kind": "fact_subject",
+        "from": "fact:66:frog:is_a:amphibian",
+        "to": "world:entity:frog",
+        "confidence": 1
+      },
+      {
+        "id": "fact:66:frog:is_a:amphibian:object:world:value:amphibian",
+        "kind": "fact_object",
+        "from": "fact:66:frog:is_a:amphibian",
+        "to": "world:value:amphibian",
+        "confidence": 1
+      },
+      {
+        "id": "fact:67:snake:is_a:reptile:subject:world:entity:snake",
+        "kind": "fact_subject",
+        "from": "fact:67:snake:is_a:reptile",
+        "to": "world:entity:snake",
+        "confidence": 1
+      },
+      {
+        "id": "fact:67:snake:is_a:reptile:object:world:value:reptile",
+        "kind": "fact_object",
+        "from": "fact:67:snake:is_a:reptile",
+        "to": "world:value:reptile",
+        "confidence": 1
+      },
+      {
+        "id": "fact:68:crocodile:is_a:reptile:subject:world:entity:crocodile",
+        "kind": "fact_subject",
+        "from": "fact:68:crocodile:is_a:reptile",
+        "to": "world:entity:crocodile",
+        "confidence": 1
+      },
+      {
+        "id": "fact:68:crocodile:is_a:reptile:object:world:value:reptile",
+        "kind": "fact_object",
+        "from": "fact:68:crocodile:is_a:reptile",
+        "to": "world:value:reptile",
+        "confidence": 1
+      },
+      {
+        "id": "fact:69:mammal:is_a:animal:subject:world:entity:mammal",
+        "kind": "fact_subject",
+        "from": "fact:69:mammal:is_a:animal",
+        "to": "world:entity:mammal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:69:mammal:is_a:animal:object:world:value:animal",
+        "kind": "fact_object",
+        "from": "fact:69:mammal:is_a:animal",
+        "to": "world:value:animal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:70:bird:is_a:animal:subject:world:entity:bird",
+        "kind": "fact_subject",
+        "from": "fact:70:bird:is_a:animal",
+        "to": "world:entity:bird",
+        "confidence": 1
+      },
+      {
+        "id": "fact:70:bird:is_a:animal:object:world:value:animal",
+        "kind": "fact_object",
+        "from": "fact:70:bird:is_a:animal",
+        "to": "world:value:animal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:71:fish:is_a:animal:subject:world:entity:fish",
+        "kind": "fact_subject",
+        "from": "fact:71:fish:is_a:animal",
+        "to": "world:entity:fish",
+        "confidence": 1
+      },
+      {
+        "id": "fact:71:fish:is_a:animal:object:world:value:animal",
+        "kind": "fact_object",
+        "from": "fact:71:fish:is_a:animal",
+        "to": "world:value:animal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:72:reptile:is_a:animal:subject:world:entity:reptile",
+        "kind": "fact_subject",
+        "from": "fact:72:reptile:is_a:animal",
+        "to": "world:entity:reptile",
+        "confidence": 1
+      },
+      {
+        "id": "fact:72:reptile:is_a:animal:object:world:value:animal",
+        "kind": "fact_object",
+        "from": "fact:72:reptile:is_a:animal",
+        "to": "world:value:animal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:73:amphibian:is_a:animal:subject:world:entity:amphibian",
+        "kind": "fact_subject",
+        "from": "fact:73:amphibian:is_a:animal",
+        "to": "world:entity:amphibian",
+        "confidence": 1
+      },
+      {
+        "id": "fact:73:amphibian:is_a:animal:object:world:value:animal",
+        "kind": "fact_object",
+        "from": "fact:73:amphibian:is_a:animal",
+        "to": "world:value:animal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:74:insect:is_a:animal:subject:world:entity:insect",
+        "kind": "fact_subject",
+        "from": "fact:74:insect:is_a:animal",
+        "to": "world:entity:insect",
+        "confidence": 1
+      },
+      {
+        "id": "fact:74:insect:is_a:animal:object:world:value:animal",
+        "kind": "fact_object",
+        "from": "fact:74:insect:is_a:animal",
+        "to": "world:value:animal",
+        "confidence": 1
+      },
+      {
+        "id": "fact:75:ant:is_a:insect:subject:world:entity:ant",
+        "kind": "fact_subject",
+        "from": "fact:75:ant:is_a:insect",
+        "to": "world:entity:ant",
+        "confidence": 1
+      },
+      {
+        "id": "fact:75:ant:is_a:insect:object:world:value:insect",
+        "kind": "fact_object",
+        "from": "fact:75:ant:is_a:insect",
+        "to": "world:value:insect",
+        "confidence": 1
+      },
+      {
+        "id": "fact:76:bee:is_a:insect:subject:world:entity:bee",
+        "kind": "fact_subject",
+        "from": "fact:76:bee:is_a:insect",
+        "to": "world:entity:bee",
+        "confidence": 1
+      },
+      {
+        "id": "fact:76:bee:is_a:insect:object:world:value:insect",
+        "kind": "fact_object",
+        "from": "fact:76:bee:is_a:insect",
+        "to": "world:value:insect",
+        "confidence": 1
+      },
+      {
+        "id": "fact:77:butterfly:is_a:insect:subject:world:entity:butterfly",
+        "kind": "fact_subject",
+        "from": "fact:77:butterfly:is_a:insect",
+        "to": "world:entity:butterfly",
+        "confidence": 1
+      },
+      {
+        "id": "fact:77:butterfly:is_a:insect:object:world:value:insect",
+        "kind": "fact_object",
+        "from": "fact:77:butterfly:is_a:insect",
+        "to": "world:value:insect",
+        "confidence": 1
+      },
+      {
+        "id": "fact:78:heart:is_a:organ:subject:world:entity:heart",
+        "kind": "fact_subject",
+        "from": "fact:78:heart:is_a:organ",
+        "to": "world:entity:heart",
+        "confidence": 1
+      },
+      {
+        "id": "fact:78:heart:is_a:organ:object:world:value:organ",
+        "kind": "fact_object",
+        "from": "fact:78:heart:is_a:organ",
+        "to": "world:value:organ",
+        "confidence": 1
+      },
+      {
+        "id": "fact:79:brain:is_a:organ:subject:world:entity:brain",
+        "kind": "fact_subject",
+        "from": "fact:79:brain:is_a:organ",
+        "to": "world:entity:brain",
+        "confidence": 1
+      },
+      {
+        "id": "fact:79:brain:is_a:organ:object:world:value:organ",
+        "kind": "fact_object",
+        "from": "fact:79:brain:is_a:organ",
+        "to": "world:value:organ",
+        "confidence": 1
+      },
+      {
+        "id": "fact:80:lungs:is_a:organ:subject:world:entity:lungs",
+        "kind": "fact_subject",
+        "from": "fact:80:lungs:is_a:organ",
+        "to": "world:entity:lungs",
+        "confidence": 1
+      },
+      {
+        "id": "fact:80:lungs:is_a:organ:object:world:value:organ",
+        "kind": "fact_object",
+        "from": "fact:80:lungs:is_a:organ",
+        "to": "world:value:organ",
+        "confidence": 1
+      },
+      {
+        "id": "fact:81:heart:function:pumps-blood:subject:world:entity:heart",
+        "kind": "fact_subject",
+        "from": "fact:81:heart:function:pumps-blood",
+        "to": "world:entity:heart",
+        "confidence": 1
+      },
+      {
+        "id": "fact:81:heart:function:pumps-blood:object:world:value:pumps-blood",
+        "kind": "fact_object",
+        "from": "fact:81:heart:function:pumps-blood",
+        "to": "world:value:pumps-blood",
+        "confidence": 1
+      },
+      {
+        "id": "fact:82:lungs:function:breathing:subject:world:entity:lungs",
+        "kind": "fact_subject",
+        "from": "fact:82:lungs:function:breathing",
+        "to": "world:entity:lungs",
+        "confidence": 1
+      },
+      {
+        "id": "fact:82:lungs:function:breathing:object:world:value:breathing",
+        "kind": "fact_object",
+        "from": "fact:82:lungs:function:breathing",
+        "to": "world:value:breathing",
+        "confidence": 1
+      },
+      {
+        "id": "fact:83:brain:function:thinking:subject:world:entity:brain",
+        "kind": "fact_subject",
+        "from": "fact:83:brain:function:thinking",
+        "to": "world:entity:brain",
+        "confidence": 1
+      },
+      {
+        "id": "fact:83:brain:function:thinking:object:world:value:thinking",
+        "kind": "fact_object",
+        "from": "fact:83:brain:function:thinking",
+        "to": "world:value:thinking",
+        "confidence": 1
+      },
+      {
+        "id": "fact:84:triangle:has_sides:3:subject:world:entity:triangle",
+        "kind": "fact_subject",
+        "from": "fact:84:triangle:has_sides:3",
+        "to": "world:entity:triangle",
+        "confidence": 1
+      },
+      {
+        "id": "fact:84:triangle:has_sides:3:object:world:value:3",
+        "kind": "fact_object",
+        "from": "fact:84:triangle:has_sides:3",
+        "to": "world:value:3",
+        "confidence": 1
+      },
+      {
+        "id": "fact:85:square:has_sides:4:subject:world:entity:square",
+        "kind": "fact_subject",
+        "from": "fact:85:square:has_sides:4",
+        "to": "world:entity:square",
+        "confidence": 1
+      },
+      {
+        "id": "fact:85:square:has_sides:4:object:world:value:4",
+        "kind": "fact_object",
+        "from": "fact:85:square:has_sides:4",
+        "to": "world:value:4",
+        "confidence": 1
+      },
+      {
+        "id": "fact:86:pentagon:has_sides:5:subject:world:entity:pentagon",
+        "kind": "fact_subject",
+        "from": "fact:86:pentagon:has_sides:5",
+        "to": "world:entity:pentagon",
+        "confidence": 1
+      },
+      {
+        "id": "fact:86:pentagon:has_sides:5:object:world:value:5",
+        "kind": "fact_object",
+        "from": "fact:86:pentagon:has_sides:5",
+        "to": "world:value:5",
+        "confidence": 1
+      },
+      {
+        "id": "fact:87:hexagon:has_sides:6:subject:world:entity:hexagon",
+        "kind": "fact_subject",
+        "from": "fact:87:hexagon:has_sides:6",
+        "to": "world:entity:hexagon",
+        "confidence": 1
+      },
+      {
+        "id": "fact:87:hexagon:has_sides:6:object:world:value:6",
+        "kind": "fact_object",
+        "from": "fact:87:hexagon:has_sides:6",
+        "to": "world:value:6",
+        "confidence": 1
+      },
+      {
+        "id": "fact:88:octagon:has_sides:8:subject:world:entity:octagon",
+        "kind": "fact_subject",
+        "from": "fact:88:octagon:has_sides:8",
+        "to": "world:entity:octagon",
+        "confidence": 1
+      },
+      {
+        "id": "fact:88:octagon:has_sides:8:object:world:value:8",
+        "kind": "fact_object",
+        "from": "fact:88:octagon:has_sides:8",
+        "to": "world:value:8",
+        "confidence": 1
+      },
+      {
+        "id": "fact:89:circle:has_sides:0:subject:world:entity:circle",
+        "kind": "fact_subject",
+        "from": "fact:89:circle:has_sides:0",
+        "to": "world:entity:circle",
+        "confidence": 1
+      },
+      {
+        "id": "fact:89:circle:has_sides:0:object:world:value:0",
+        "kind": "fact_object",
+        "from": "fact:89:circle:has_sides:0",
+        "to": "world:value:0",
+        "confidence": 1
+      },
+      {
+        "id": "fact:90:speed-of-light:value:299792458-meters-per-second:subject:world:entity:speed-of-light",
+        "kind": "fact_subject",
+        "from": "fact:90:speed-of-light:value:299792458-meters-per-second",
+        "to": "world:entity:speed-of-light",
+        "confidence": 1
+      },
+      {
+        "id": "fact:90:speed-of-light:value:299792458-meters-per-second:object:world:value:299792458-meters-per-second",
+        "kind": "fact_object",
+        "from": "fact:90:speed-of-light:value:299792458-meters-per-second",
+        "to": "world:value:299792458-meters-per-second",
+        "confidence": 1
+      },
+      {
+        "id": "fact:91:gravity-on-earth:value:9.8-meters-per-second-squared:subject:world:entity:gravity-on-earth",
+        "kind": "fact_subject",
+        "from": "fact:91:gravity-on-earth:value:9.8-meters-per-second-squared",
+        "to": "world:entity:gravity-on-earth",
+        "confidence": 1
+      },
+      {
+        "id": "fact:91:gravity-on-earth:value:9.8-meters-per-second-squared:object:world:value:9.8-meters-per-second-squared",
+        "kind": "fact_object",
+        "from": "fact:91:gravity-on-earth:value:9.8-meters-per-second-squared",
+        "to": "world:value:9.8-meters-per-second-squared",
+        "confidence": 1
+      },
+      {
+        "id": "fact:92:absolute-zero:value:273.15-degrees-celsius:subject:world:entity:absolute-zero",
+        "kind": "fact_subject",
+        "from": "fact:92:absolute-zero:value:273.15-degrees-celsius",
+        "to": "world:entity:absolute-zero",
+        "confidence": 1
+      },
+      {
+        "id": "fact:92:absolute-zero:value:273.15-degrees-celsius:object:world:value:273.15-degrees-celsius",
+        "kind": "fact_object",
+        "from": "fact:92:absolute-zero:value:273.15-degrees-celsius",
+        "to": "world:value:273.15-degrees-celsius",
+        "confidence": 1
+      },
+      {
+        "id": "fact:93:shakespeare:wrote:hamlet:subject:world:entity:shakespeare",
+        "kind": "fact_subject",
+        "from": "fact:93:shakespeare:wrote:hamlet",
+        "to": "world:entity:shakespeare",
+        "confidence": 1
+      },
+      {
+        "id": "fact:93:shakespeare:wrote:hamlet:object:world:value:hamlet",
+        "kind": "fact_object",
+        "from": "fact:93:shakespeare:wrote:hamlet",
+        "to": "world:value:hamlet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:94:hamlet:wrote_by:shakespeare:subject:world:entity:hamlet",
+        "kind": "fact_subject",
+        "from": "fact:94:hamlet:wrote_by:shakespeare",
+        "to": "world:entity:hamlet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:94:hamlet:wrote_by:shakespeare:object:world:value:shakespeare",
+        "kind": "fact_object",
+        "from": "fact:94:hamlet:wrote_by:shakespeare",
+        "to": "world:value:shakespeare",
+        "confidence": 1
+      },
+      {
+        "id": "fact:95:shakespeare:wrote:romeo-and-juliet:subject:world:entity:shakespeare",
+        "kind": "fact_subject",
+        "from": "fact:95:shakespeare:wrote:romeo-and-juliet",
+        "to": "world:entity:shakespeare",
+        "confidence": 1
+      },
+      {
+        "id": "fact:95:shakespeare:wrote:romeo-and-juliet:object:world:value:romeo-and-juliet",
+        "kind": "fact_object",
+        "from": "fact:95:shakespeare:wrote:romeo-and-juliet",
+        "to": "world:value:romeo-and-juliet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:96:romeo-and-juliet:wrote_by:shakespeare:subject:world:entity:romeo-and-juliet",
+        "kind": "fact_subject",
+        "from": "fact:96:romeo-and-juliet:wrote_by:shakespeare",
+        "to": "world:entity:romeo-and-juliet",
+        "confidence": 1
+      },
+      {
+        "id": "fact:96:romeo-and-juliet:wrote_by:shakespeare:object:world:value:shakespeare",
+        "kind": "fact_object",
+        "from": "fact:96:romeo-and-juliet:wrote_by:shakespeare",
+        "to": "world:value:shakespeare",
+        "confidence": 1
+      },
+      {
+        "id": "fact:97:shakespeare:is_a:playwright:subject:world:entity:shakespeare",
+        "kind": "fact_subject",
+        "from": "fact:97:shakespeare:is_a:playwright",
+        "to": "world:entity:shakespeare",
+        "confidence": 1
+      },
+      {
+        "id": "fact:97:shakespeare:is_a:playwright:object:world:value:playwright",
+        "kind": "fact_object",
+        "from": "fact:97:shakespeare:is_a:playwright",
+        "to": "world:value:playwright",
+        "confidence": 1
+      },
+      {
+        "id": "fact:98:einstein:discovered:theory-of-relativity:subject:world:entity:einstein",
+        "kind": "fact_subject",
+        "from": "fact:98:einstein:discovered:theory-of-relativity",
+        "to": "world:entity:einstein",
+        "confidence": 1
+      },
+      {
+        "id": "fact:98:einstein:discovered:theory-of-relativity:object:world:value:theory-of-relativity",
+        "kind": "fact_object",
+        "from": "fact:98:einstein:discovered:theory-of-relativity",
+        "to": "world:value:theory-of-relativity",
+        "confidence": 1
+      },
+      {
+        "id": "fact:99:theory-of-relativity:discovered_by:einstein:subject:world:entity:theory-of-relativity",
+        "kind": "fact_subject",
+        "from": "fact:99:theory-of-relativity:discovered_by:einstein",
+        "to": "world:entity:theory-of-relativity",
+        "confidence": 1
+      },
+      {
+        "id": "fact:99:theory-of-relativity:discovered_by:einstein:object:world:value:einstein",
+        "kind": "fact_object",
+        "from": "fact:99:theory-of-relativity:discovered_by:einstein",
+        "to": "world:value:einstein",
+        "confidence": 1
+      },
+      {
+        "id": "fact:100:einstein:is_a:physicist:subject:world:entity:einstein",
+        "kind": "fact_subject",
+        "from": "fact:100:einstein:is_a:physicist",
+        "to": "world:entity:einstein",
+        "confidence": 1
+      },
+      {
+        "id": "fact:100:einstein:is_a:physicist:object:world:value:physicist",
+        "kind": "fact_object",
+        "from": "fact:100:einstein:is_a:physicist",
+        "to": "world:value:physicist",
+        "confidence": 1
+      },
+      {
+        "id": "fact:101:newton:discovered:laws-of-motion:subject:world:entity:newton",
+        "kind": "fact_subject",
+        "from": "fact:101:newton:discovered:laws-of-motion",
+        "to": "world:entity:newton",
+        "confidence": 1
+      },
+      {
+        "id": "fact:101:newton:discovered:laws-of-motion:object:world:value:laws-of-motion",
+        "kind": "fact_object",
+        "from": "fact:101:newton:discovered:laws-of-motion",
+        "to": "world:value:laws-of-motion",
+        "confidence": 1
+      },
+      {
+        "id": "fact:102:laws-of-motion:discovered_by:newton:subject:world:entity:laws-of-motion",
+        "kind": "fact_subject",
+        "from": "fact:102:laws-of-motion:discovered_by:newton",
+        "to": "world:entity:laws-of-motion",
+        "confidence": 1
+      },
+      {
+        "id": "fact:102:laws-of-motion:discovered_by:newton:object:world:value:newton",
+        "kind": "fact_object",
+        "from": "fact:102:laws-of-motion:discovered_by:newton",
+        "to": "world:value:newton",
+        "confidence": 1
+      },
+      {
+        "id": "fact:103:newton:discovered:gravity:subject:world:entity:newton",
+        "kind": "fact_subject",
+        "from": "fact:103:newton:discovered:gravity",
+        "to": "world:entity:newton",
+        "confidence": 1
+      },
+      {
+        "id": "fact:103:newton:discovered:gravity:object:world:value:gravity",
+        "kind": "fact_object",
+        "from": "fact:103:newton:discovered:gravity",
+        "to": "world:value:gravity",
+        "confidence": 1
+      },
+      {
+        "id": "fact:104:gravity:discovered_by:newton:subject:world:entity:gravity",
+        "kind": "fact_subject",
+        "from": "fact:104:gravity:discovered_by:newton",
+        "to": "world:entity:gravity",
+        "confidence": 1
+      },
+      {
+        "id": "fact:104:gravity:discovered_by:newton:object:world:value:newton",
+        "kind": "fact_object",
+        "from": "fact:104:gravity:discovered_by:newton",
+        "to": "world:value:newton",
+        "confidence": 1
+      },
+      {
+        "id": "fact:105:darwin:discovered:evolution:subject:world:entity:darwin",
+        "kind": "fact_subject",
+        "from": "fact:105:darwin:discovered:evolution",
+        "to": "world:entity:darwin",
+        "confidence": 1
+      },
+      {
+        "id": "fact:105:darwin:discovered:evolution:object:world:value:evolution",
+        "kind": "fact_object",
+        "from": "fact:105:darwin:discovered:evolution",
+        "to": "world:value:evolution",
+        "confidence": 1
+      },
+      {
+        "id": "fact:106:evolution:discovered_by:darwin:subject:world:entity:evolution",
+        "kind": "fact_subject",
+        "from": "fact:106:evolution:discovered_by:darwin",
+        "to": "world:entity:evolution",
+        "confidence": 1
+      },
+      {
+        "id": "fact:106:evolution:discovered_by:darwin:object:world:value:darwin",
+        "kind": "fact_object",
+        "from": "fact:106:evolution:discovered_by:darwin",
+        "to": "world:value:darwin",
+        "confidence": 1
+      },
+      {
+        "id": "fact:107:edison:invented:light-bulb:subject:world:entity:edison",
+        "kind": "fact_subject",
+        "from": "fact:107:edison:invented:light-bulb",
+        "to": "world:entity:edison",
+        "confidence": 1
+      },
+      {
+        "id": "fact:107:edison:invented:light-bulb:object:world:value:light-bulb",
+        "kind": "fact_object",
+        "from": "fact:107:edison:invented:light-bulb",
+        "to": "world:value:light-bulb",
+        "confidence": 1
+      },
+      {
+        "id": "fact:108:light-bulb:invented_by:edison:subject:world:entity:light-bulb",
+        "kind": "fact_subject",
+        "from": "fact:108:light-bulb:invented_by:edison",
+        "to": "world:entity:light-bulb",
+        "confidence": 1
+      },
+      {
+        "id": "fact:108:light-bulb:invented_by:edison:object:world:value:edison",
+        "kind": "fact_object",
+        "from": "fact:108:light-bulb:invented_by:edison",
+        "to": "world:value:edison",
+        "confidence": 1
+      },
+      {
+        "id": "fact:109:bell:invented:telephone:subject:world:entity:bell",
+        "kind": "fact_subject",
+        "from": "fact:109:bell:invented:telephone",
+        "to": "world:entity:bell",
+        "confidence": 1
+      },
+      {
+        "id": "fact:109:bell:invented:telephone:object:world:value:telephone",
+        "kind": "fact_object",
+        "from": "fact:109:bell:invented:telephone",
+        "to": "world:value:telephone",
+        "confidence": 1
+      },
+      {
+        "id": "fact:110:telephone:invented_by:bell:subject:world:entity:telephone",
+        "kind": "fact_subject",
+        "from": "fact:110:telephone:invented_by:bell",
+        "to": "world:entity:telephone",
+        "confidence": 1
+      },
+      {
+        "id": "fact:110:telephone:invented_by:bell:object:world:value:bell",
+        "kind": "fact_object",
+        "from": "fact:110:telephone:invented_by:bell",
+        "to": "world:value:bell",
+        "confidence": 1
+      },
+      {
+        "id": "fact:111:wright-brothers:invented:airplane:subject:world:entity:wright-brothers",
+        "kind": "fact_subject",
+        "from": "fact:111:wright-brothers:invented:airplane",
+        "to": "world:entity:wright-brothers",
+        "confidence": 1
+      },
+      {
+        "id": "fact:111:wright-brothers:invented:airplane:object:world:value:airplane",
+        "kind": "fact_object",
+        "from": "fact:111:wright-brothers:invented:airplane",
+        "to": "world:value:airplane",
+        "confidence": 1
+      },
+      {
+        "id": "fact:112:airplane:invented_by:wright-brothers:subject:world:entity:airplane",
+        "kind": "fact_subject",
+        "from": "fact:112:airplane:invented_by:wright-brothers",
+        "to": "world:entity:airplane",
+        "confidence": 1
+      },
+      {
+        "id": "fact:112:airplane:invented_by:wright-brothers:object:world:value:wright-brothers",
+        "kind": "fact_object",
+        "from": "fact:112:airplane:invented_by:wright-brothers",
+        "to": "world:value:wright-brothers",
+        "confidence": 1
+      },
+      {
+        "id": "fact:113:english:is_a:language:subject:world:entity:english",
+        "kind": "fact_subject",
+        "from": "fact:113:english:is_a:language",
+        "to": "world:entity:english",
+        "confidence": 1
+      },
+      {
+        "id": "fact:113:english:is_a:language:object:world:value:language",
+        "kind": "fact_object",
+        "from": "fact:113:english:is_a:language",
+        "to": "world:value:language",
+        "confidence": 1
+      },
+      {
+        "id": "fact:114:spanish:is_a:language:subject:world:entity:spanish",
+        "kind": "fact_subject",
+        "from": "fact:114:spanish:is_a:language",
+        "to": "world:entity:spanish",
+        "confidence": 1
+      },
+      {
+        "id": "fact:114:spanish:is_a:language:object:world:value:language",
+        "kind": "fact_object",
+        "from": "fact:114:spanish:is_a:language",
+        "to": "world:value:language",
+        "confidence": 1
+      },
+      {
+        "id": "fact:115:mandarin:is_a:language:subject:world:entity:mandarin",
+        "kind": "fact_subject",
+        "from": "fact:115:mandarin:is_a:language",
+        "to": "world:entity:mandarin",
+        "confidence": 1
+      },
+      {
+        "id": "fact:115:mandarin:is_a:language:object:world:value:language",
+        "kind": "fact_object",
+        "from": "fact:115:mandarin:is_a:language",
+        "to": "world:value:language",
+        "confidence": 1
+      },
+      {
+        "id": "fact:116:french:is_a:language:subject:world:entity:french",
+        "kind": "fact_subject",
+        "from": "fact:116:french:is_a:language",
+        "to": "world:entity:french",
+        "confidence": 1
+      },
+      {
+        "id": "fact:116:french:is_a:language:object:world:value:language",
+        "kind": "fact_object",
+        "from": "fact:116:french:is_a:language",
+        "to": "world:value:language",
+        "confidence": 1
+      },
+      {
+        "id": "fact:117:arabic:is_a:language:subject:world:entity:arabic",
+        "kind": "fact_subject",
+        "from": "fact:117:arabic:is_a:language",
+        "to": "world:entity:arabic",
+        "confidence": 1
+      },
+      {
+        "id": "fact:117:arabic:is_a:language:object:world:value:language",
+        "kind": "fact_object",
+        "from": "fact:117:arabic:is_a:language",
+        "to": "world:value:language",
+        "confidence": 1
+      },
+      {
+        "id": "fact:118:mandarin:most_speakers:language:subject:world:entity:mandarin",
+        "kind": "fact_subject",
+        "from": "fact:118:mandarin:most_speakers:language",
+        "to": "world:entity:mandarin",
+        "confidence": 1
+      },
+      {
+        "id": "fact:118:mandarin:most_speakers:language:object:world:value:language",
+        "kind": "fact_object",
+        "from": "fact:118:mandarin:most_speakers:language",
+        "to": "world:value:language",
+        "confidence": 1
+      },
+      {
+        "id": "fact:119:meter:is_a:unit-of-length:subject:world:entity:meter",
+        "kind": "fact_subject",
+        "from": "fact:119:meter:is_a:unit-of-length",
+        "to": "world:entity:meter",
+        "confidence": 1
+      },
+      {
+        "id": "fact:119:meter:is_a:unit-of-length:object:world:value:unit-of-length",
+        "kind": "fact_object",
+        "from": "fact:119:meter:is_a:unit-of-length",
+        "to": "world:value:unit-of-length",
+        "confidence": 1
+      },
+      {
+        "id": "fact:120:kilogram:is_a:unit-of-mass:subject:world:entity:kilogram",
+        "kind": "fact_subject",
+        "from": "fact:120:kilogram:is_a:unit-of-mass",
+        "to": "world:entity:kilogram",
+        "confidence": 1
+      },
+      {
+        "id": "fact:120:kilogram:is_a:unit-of-mass:object:world:value:unit-of-mass",
+        "kind": "fact_object",
+        "from": "fact:120:kilogram:is_a:unit-of-mass",
+        "to": "world:value:unit-of-mass",
+        "confidence": 1
+      },
+      {
+        "id": "fact:121:second:is_a:unit-of-time:subject:world:entity:second",
+        "kind": "fact_subject",
+        "from": "fact:121:second:is_a:unit-of-time",
+        "to": "world:entity:second",
+        "confidence": 1
+      },
+      {
+        "id": "fact:121:second:is_a:unit-of-time:object:world:value:unit-of-time",
+        "kind": "fact_object",
+        "from": "fact:121:second:is_a:unit-of-time",
+        "to": "world:value:unit-of-time",
+        "confidence": 1
+      },
+      {
+        "id": "fact:122:1-kilometer:equals:1000-meters:subject:world:entity:1-kilometer",
+        "kind": "fact_subject",
+        "from": "fact:122:1-kilometer:equals:1000-meters",
+        "to": "world:entity:1-kilometer",
+        "confidence": 1
+      },
+      {
+        "id": "fact:122:1-kilometer:equals:1000-meters:object:world:value:1000-meters",
+        "kind": "fact_object",
+        "from": "fact:122:1-kilometer:equals:1000-meters",
+        "to": "world:value:1000-meters",
+        "confidence": 1
+      },
+      {
+        "id": "fact:123:1-meter:equals:100-centimeters:subject:world:entity:1-meter",
+        "kind": "fact_subject",
+        "from": "fact:123:1-meter:equals:100-centimeters",
+        "to": "world:entity:1-meter",
+        "confidence": 1
+      },
+      {
+        "id": "fact:123:1-meter:equals:100-centimeters:object:world:value:100-centimeters",
+        "kind": "fact_object",
+        "from": "fact:123:1-meter:equals:100-centimeters",
+        "to": "world:value:100-centimeters",
+        "confidence": 1
+      },
+      {
+        "id": "fact:124:1-kilogram:equals:1000-grams:subject:world:entity:1-kilogram",
+        "kind": "fact_subject",
+        "from": "fact:124:1-kilogram:equals:1000-grams",
+        "to": "world:entity:1-kilogram",
+        "confidence": 1
+      },
+      {
+        "id": "fact:124:1-kilogram:equals:1000-grams:object:world:value:1000-grams",
+        "kind": "fact_object",
+        "from": "fact:124:1-kilogram:equals:1000-grams",
+        "to": "world:value:1000-grams",
+        "confidence": 1
+      },
+      {
+        "id": "fact:125:1-hour:equals:60-minutes:subject:world:entity:1-hour",
+        "kind": "fact_subject",
+        "from": "fact:125:1-hour:equals:60-minutes",
+        "to": "world:entity:1-hour",
+        "confidence": 1
+      },
+      {
+        "id": "fact:125:1-hour:equals:60-minutes:object:world:value:60-minutes",
+        "kind": "fact_object",
+        "from": "fact:125:1-hour:equals:60-minutes",
+        "to": "world:value:60-minutes",
+        "confidence": 1
+      },
+      {
+        "id": "fact:126:1-minute:equals:60-seconds:subject:world:entity:1-minute",
+        "kind": "fact_subject",
+        "from": "fact:126:1-minute:equals:60-seconds",
+        "to": "world:entity:1-minute",
+        "confidence": 1
+      },
+      {
+        "id": "fact:126:1-minute:equals:60-seconds:object:world:value:60-seconds",
+        "kind": "fact_object",
+        "from": "fact:126:1-minute:equals:60-seconds",
+        "to": "world:value:60-seconds",
+        "confidence": 1
+      },
+      {
+        "id": "fact:127:1-day:equals:24-hours:subject:world:entity:1-day",
+        "kind": "fact_subject",
+        "from": "fact:127:1-day:equals:24-hours",
+        "to": "world:entity:1-day",
+        "confidence": 1
+      },
+      {
+        "id": "fact:127:1-day:equals:24-hours:object:world:value:24-hours",
+        "kind": "fact_object",
+        "from": "fact:127:1-day:equals:24-hours",
+        "to": "world:value:24-hours",
+        "confidence": 1
+      },
+      {
+        "id": "fact:128:1-year:equals:365-days:subject:world:entity:1-year",
+        "kind": "fact_subject",
+        "from": "fact:128:1-year:equals:365-days",
+        "to": "world:entity:1-year",
+        "confidence": 1
+      },
+      {
+        "id": "fact:128:1-year:equals:365-days:object:world:value:365-days",
+        "kind": "fact_object",
+        "from": "fact:128:1-year:equals:365-days",
+        "to": "world:value:365-days",
+        "confidence": 1
+      },
+      {
+        "id": "fact:129:1-mile:approximately_equals:1.6-kilometers:subject:world:entity:1-mile",
+        "kind": "fact_subject",
+        "from": "fact:129:1-mile:approximately_equals:1.6-kilometers",
+        "to": "world:entity:1-mile",
+        "confidence": 1
+      },
+      {
+        "id": "fact:129:1-mile:approximately_equals:1.6-kilometers:object:world:value:1.6-kilometers",
+        "kind": "fact_object",
+        "from": "fact:129:1-mile:approximately_equals:1.6-kilometers",
+        "to": "world:value:1.6-kilometers",
+        "confidence": 1
+      },
+      {
+        "id": "fact:130:1-inch:equals:2.54-centimeters:subject:world:entity:1-inch",
+        "kind": "fact_subject",
+        "from": "fact:130:1-inch:equals:2.54-centimeters",
+        "to": "world:entity:1-inch",
+        "confidence": 1
+      },
+      {
+        "id": "fact:130:1-inch:equals:2.54-centimeters:object:world:value:2.54-centimeters",
+        "kind": "fact_object",
+        "from": "fact:130:1-inch:equals:2.54-centimeters",
+        "to": "world:value:2.54-centimeters",
+        "confidence": 1
       }
     ]
   },
