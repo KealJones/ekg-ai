@@ -111,7 +111,8 @@ export class EkgCli {
     // If clarify or teacher, try Teacher first instead of bugging the user
     if((interpreted.status==="clarify" || interpreted.status==="teacher") && this.teacherEnabled && isTeacherAvailable()){
       const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
-      const capSummary=this.caps.all().slice(0,30).map(c=>c.id).join(", ");
+      const renderType=(t:any):string=>t.kind==="list"?`List<${renderType(t.item)}>`:t.kind;
+      const capSummary=this.caps.all().map(c=>`${c.id}(${c.inputs.map(renderType).join(",")}) -> ${renderType(c.output)}`).join("\n");
       const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
       if(lesson){
         this.io.line(lesson.answer);
@@ -165,9 +166,24 @@ export class EkgCli {
     this.persistLearnedProgram(plan.program,intentId,rawUtterance,relations);
   }
 
-  private learnFromTeacher(lesson:{groundings:Array<{form:string;relation:string;definition?:string;impliedValue?:number;questionFor?:string}>;facts:Array<{subject:string;predicate:string;object:string}>;synonyms:Array<{newForm:string;knownForm:string}>},utterance:string):string[]{
+  private learnFromTeacher(lesson:{groundings:Array<{form:string;relation:string;definition?:string;impliedValue?:number;questionFor?:string}>;capabilityMappings?:Array<{form:string;capabilityId:string;relation:string;definition?:string}>;facts:Array<{subject:string;predicate:string;object:string}>;synonyms:Array<{newForm:string;knownForm:string}>},utterance:string):string[]{
     const learned:string[]=[];
     const safe=(s:string)=>s.toLowerCase().replace(/[^a-z0-9._-]+/g,"-").replace(/^-|-$/g,"").slice(0,100);
+    for(const m of lesson.capabilityMappings??[]){
+      try{
+        this.caps.get(m.capabilityId);
+        const relationId=`relation:${m.relation.toLowerCase()}`;
+        const conceptId=`concept:semantic:teacher.${safe(m.relation)}`;
+        const capabilityId=`capability:${m.capabilityId}`;
+        if(!this.brain.graph.getEntity(relationId)) this.brain.graph.putEntity({id:relationId,kind:"concept",labels:["semantic-relation",m.relation],attrs:{relation:m.relation,concept:`teacher.${m.relation}`,gloss:m.definition}});
+        if(!this.brain.graph.getEntity(conceptId)) this.brain.graph.putEntity({id:conceptId,kind:"concept",labels:["semantic-concept",`teacher.${m.relation}`],attrs:{concept:`teacher.${m.relation}`,gloss:m.definition}});
+        if(!this.brain.graph.getEntity(capabilityId)) this.brain.graph.putEntity({id:capabilityId,kind:"capability",labels:[m.capabilityId],attrs:{capabilityId:m.capabilityId}});
+        if(!this.brain.graph.outgoing(relationId,"denotes_concept").some(r=>r.to===conceptId)) this.brain.graph.putRelation({id:`${relationId}:denotes:${conceptId}`,kind:"denotes_concept",from:relationId,to:conceptId,confidence:1});
+        if(!this.brain.graph.outgoing(conceptId,"implemented_by").some(r=>r.to===capabilityId)) this.brain.graph.putRelation({id:`${conceptId}:implemented:${capabilityId}`,kind:"implemented_by",from:conceptId,to:capabilityId,confidence:1});
+        storeLexicalSense(this.brain.graph,{form:m.form,senseId:`teacher:${safe(m.form)}:${safe(m.relation)}`,relation:m.relation,definition:m.definition,confidence:.9,provenance:["teacher:llm-capability-mapping",`utterance:${utterance}`]});
+        learned.push(`${m.form} -> ${m.capabilityId}`);
+      }catch{}
+    }
     for(const g of lesson.groundings){
       try{
         const existing=lexicalSensesForText(this.brain.graph,g.form);
