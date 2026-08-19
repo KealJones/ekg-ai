@@ -313,17 +313,18 @@ function smartParseInner(
     }
   }
 
-  // 5. Try running any learned zero-arg program whose name/description/phrases overlap with utterance
+  // 5. Try running any learned zero-arg program whose key terms overlap with utterance
   if (programs) {
-    const utteranceWords = new Set(correctedLower.split(/\s+/).filter(w => w.length > 2));
+    const stopWords = new Set(["the","get","current","from","system","run","running","learned","what","how","does","this","that","for","with","into","its","text","representation","converts","format"]);
+    const utteranceWords = new Set(correctedLower.split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w)));
     let bestProg: ProgramBlueprint | undefined;
     let bestScore = 0;
     for (const prog of programs.all()) {
       if (prog.inputs.length > 0) continue;
       const progEntity = store.getEntity(`program:${prog.id}`);
       const searchable = [prog.id, prog.name ?? "", typeof progEntity?.attrs?.description === "string" ? String(progEntity.attrs.description) : ""].join(" ").toLowerCase();
-      const searchWords = searchable.split(/[\s_.\-:]+/).filter(w => w.length > 2);
-      const overlap = searchWords.filter(w => utteranceWords.has(w)).length;
+      const progWords = new Set(searchable.split(/[\s_.\-:]+/).filter(w => w.length > 2 && !stopWords.has(w)));
+      const overlap = [...utteranceWords].filter(w => progWords.has(w)).length;
       if (overlap > bestScore) { bestScore = overlap; bestProg = prog; }
     }
     if (bestProg && bestScore >= 1) {
