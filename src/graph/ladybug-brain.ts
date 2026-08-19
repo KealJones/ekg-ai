@@ -26,10 +26,27 @@ export class LadybugBrain implements Brain {
   constructor(lbdbPath?: string, openOptions?: LadybugOpenOptions) {
     this.filePath = lbdbPath ?? process.env.EKG_LADYBUG_PATH ?? "ekg-data/brain.lbdb";
     this.metaPath = `${this.filePath}.meta.json`;
+    this.seedIfNeeded();
     this.graph = LadybugGraphStore.open({ ...openOptions, path: this.filePath });
     const meta = this.readMeta();
     this.programs = new MemoryProgramLibrary(meta?.programs);
     this.episodes = new MemoryEpisodeStore(meta?.episodes);
+  }
+
+  private seedIfNeeded(): void {
+    if (fs.existsSync(this.filePath)) return;
+    const seedPath = path.join(path.dirname(this.filePath), "seed-brain.json");
+    if (!fs.existsSync(seedPath)) return;
+    const seedBrain = new FileBrain(seedPath);
+    const graph = LadybugGraphStore.open({ path: this.filePath });
+    const snap = seedBrain.snapshot();
+    for (const entity of snap.graph.entities) graph.putEntity(entity);
+    for (const relation of snap.graph.relations) graph.putRelation(relation);
+    graph.close();
+    if (snap.programs.programs.length || snap.episodes.episodes.length) {
+      const meta = { format: "ekg-brain-meta" as const, version: 1 as const, savedAt: new Date().toISOString(), programs: snap.programs, episodes: snap.episodes };
+      fs.writeFileSync(this.metaPath, JSON.stringify(meta, null, 2), "utf8");
+    }
   }
 
   snapshot() {

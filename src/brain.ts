@@ -40,12 +40,22 @@ export class FileBrain implements Brain {
   private flushTimer: ReturnType<typeof setTimeout> | undefined;
 
   constructor(readonly filePath = process.env.EKG_BRAIN_PATH ?? "ekg-data/brain.json") {
+    this.seedIfNeeded();
     const prior=this.read();
     const changed=()=>this.markDirty();
     this.graph=new MemoryGraphStore(prior?.graph,changed);
     this.programs=new MemoryProgramLibrary(prior?.programs,changed);
     this.episodes=new MemoryEpisodeStore(prior?.episodes,changed);
     if(!prior) this.save();
+  }
+
+  private seedIfNeeded(): void {
+    if(fs.existsSync(this.filePath)) return;
+    const seedPath=path.join(path.dirname(this.filePath),"seed-brain.json");
+    if(!fs.existsSync(seedPath)) return;
+    const dir=path.dirname(this.filePath);
+    fs.mkdirSync(dir,{recursive:true});
+    fs.copyFileSync(seedPath,this.filePath);
   }
 
   private markDirty(): void {
