@@ -18,7 +18,9 @@ import { assertWorldFact } from "../language/world-language.js";
 import { PORTABLE_SEMANTIC_CATALOG } from "../intent/semantic-catalog.js";
 import { validateProgram } from "../ir/validate.js";
 import { LearnerController } from "../controller.js";
+import { synthesizeDetailed, collectSubexpressions } from "../search/synthesizer.js";
 import { recordPhraseGroundingOutcome } from "../intent/phrase-grounding.js";
+import type { TaskSpec } from "../task.js";
 import type { IntentInterpretation } from "../intent/intent.js";
 import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
 import type { Type } from "../ir/types.js";
@@ -107,20 +109,49 @@ export class EkgCli {
         return;
       }
 
-      // 4. INTENT RESOLVED: run through full RUN -> ADAPT -> BUILD -> TEACH controller
+      // 4. INTENT RESOLVED: RUN existing learned program, or PLAN from intent
       if(dispatch.status==="intent" && dispatch.interpretation.status==="resolved"){
         const interpreted=dispatch.interpretation;
         const inputTypes=interpreted.intent.signals.filter(s=>s.binding==="input").sort((a,b)=>(a.inputIndex??0)-(b.inputIndex??0)).map(s=>s.type);
         const inputs=providedInputs??await this.promptInputs(inputTypes);
         validateCliInputs(inputs,inputTypes);
+        const intentId=interpreted.intent.id;
+        const learnedId=`intent-plan:${intentId}`;
 
+        // RUN: check for existing learned program (zero search, zero planning)
+        const existing=this.programs.get(learnedId);
+        if(existing){
+          const output=runProgram(existing,inputs,this.caps,this.programs);
+          this.io.line(formatCliValue(output));
+          return;
+        }
+
+        // PLAN: compile intent constraints to a program
         const plan=planIntent(interpreted.intent,this.caps,this.brain.graph,this.programs);
         if(plan.status==="planned" && plan.program){
           const output=runProgram(plan.program,inputs,this.caps,this.programs);
           this.io.line(formatCliValue(output));
-          this.persistLearnedProgram(plan.program,interpreted.intent.id,rawUtterance,interpreted.intent.constraints.map(c=>c.relation));
+          this.persistLearnedProgram(plan.program,intentId,rawUtterance,interpreted.intent.constraints.map(c=>c.relation));
           try{recordPhraseGroundingOutcome(this.brain.graph,rawUtterance,true);}catch{}
           return;
+        }
+
+        // ADAPT/BUILD: planner couldn't find a direct capability - try synthesis
+        // Synthesize from all known capabilities + learned programs
+        const goalType=interpreted.intent.goal?.type??inputTypes[0];
+        if(goalType && inputs.length>0){
+          const taskId=`cli:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,60)}`;
+          const callable=this.programs.all();
+          const seedExprs=callable.flatMap(p=>collectSubexpressions(p.body));
+          const synth=synthesizeDetailed({id:taskId,inputs:inputTypes,output:goalType,examples:[]},this.caps,{maxDepth:2,callablePrograms:callable,seedExprs,programs:this.programs,budget:{maxWallMs:3000}});
+          if(synth.program){
+            const output=runProgram(synth.program,inputs,this.caps,this.programs);
+            this.io.line(formatCliValue(output));
+            this.io.line(`(synthesized: ${synth.candidatesExplored} candidates, depth ${synth.maxDepthReached})`);
+            this.programs.put(synth.program);
+            this.persistLearnedProgram(synth.program,taskId,rawUtterance);
+            return;
+          }
         }
       }
 
