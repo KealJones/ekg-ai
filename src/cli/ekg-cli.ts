@@ -92,8 +92,22 @@ export class EkgCli {
 
   private async executeUtterance(rawUtterance:string,providedInputs?:Value[]):Promise<void>{
     const MAX_LEARN_ROUNDS = 3;
+    const learnedThisSession:string[]=[];
 
     for(let round=0; round<=MAX_LEARN_ROUNDS; round++){
+      // 0. TRY LEARNED BLUEPRINTS: if Teacher just taught a program, try running it directly
+      if(learnedThisSession.length>0){
+        for(const progId of learnedThisSession){
+          const prog=this.programs.get(progId);
+          if(!prog || prog.inputs.length>0) continue;
+          try{
+            const output=runProgram(prog,[],this.caps,this.programs);
+            this.io.line(formatCliValue(output));
+            return;
+          }catch{}
+        }
+      }
+
       // 1. PARSE: semantic parser + construction grammar
       const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
 
@@ -166,12 +180,19 @@ export class EkgCli {
       const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
 
       this.io.line(round===0?"Asking Teacher...":"Retrying with new knowledge...");
-      const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
+      const alreadyLearned=learnedThisSession.length>0?`\nALREADY LEARNED THIS SESSION (do NOT re-teach these): ${learnedThisSession.join(", ")}`:"";
+      const lesson=askTeacherStructured(rawUtterance+alreadyLearned,capSummary,knownRelations);
       if(!lesson) break;
 
       const learned=this.learnFromTeacher(lesson,rawUtterance);
       if(learned.length===0){ this.io.line(lesson.answer); return; }
       this.io.line(`Learned: ${learned.join(", ")}`);
+
+      // Track learned Blueprint IDs so we can try running them directly
+      for(const item of learned){
+        const progMatch=/^program: (.+?) \(/.exec(item);
+        if(progMatch) learnedThisSession.push(progMatch[1]!);
+      }
     }
 
     // 6. FINAL FALLBACK: legacy intent with clarification
