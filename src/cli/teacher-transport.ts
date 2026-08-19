@@ -96,38 +96,36 @@ export function askTeacherStructured(utterance: string, capabilitySummary: strin
   const config = findAvailableProvider(provider ?? (process.env.EKG_TEACHER as TeacherProvider | undefined) ?? "auto");
   if (!config) return undefined;
 
-  const prompt = `You are a Teacher for EKG, a learning AI. A user said something EKG can't handle yet.
+  const prompt = `You are a Teacher for EKG, a learning AI that builds up knowledge over time. Your job is to teach it, not just answer. After you respond, EKG will retry the utterance with whatever you taught it. If it still can't handle it, you'll be called again. So teach incrementally - each response should add one useful piece of knowledge.
 
-USER UTTERANCE: "${utterance}"
+USER SAID: "${utterance}"
 
-EKG's known semantic relations (maps words to operations):
-${knownRelations.slice(0, 40).join(", ")}
+PRIORITY: Teach EKG to handle this ITSELF using its capabilities. A direct answer is a fallback, not the goal.
 
-EKG's executable host capabilities (these EXIST and CAN be called):
+EKG's capabilities (use EXACT IDs):
 ${capabilitySummary}
 
-Respond with ONLY valid JSON (no markdown, no backticks, no explanation):
+EKG's known relations: ${knownRelations.slice(0, 40).join(", ")}
+
+Respond with ONLY valid JSON (no markdown, no backticks):
 {
-  "answer": "direct answer to the user (1-2 sentences)",
-  "groundings": [{"form": "word", "relation": "ExistingRelation", "definition": "meaning"}],
-  "capabilityMappings": [{"form": "word", "capabilityId": "host.capability_id", "relation": "NewRelation", "definition": "meaning"}],
-  "blueprints": [{"id": "learned.name", "description": "what it does", "inputs": [{"kind": "int"}], "output": {"kind": "string"}, "body": {"kind": "call", "capabilityId": "core.int_to_string", "args": [{"kind": "input", "index": 0, "type": {"kind": "int"}}], "type": {"kind": "string"}}, "phrases": ["convert number to text"]}],
-  "facts": [{"subject": "entity", "predicate": "relation", "object": "value"}],
-  "synonyms": [{"newForm": "unknown_word", "knownForm": "known_word"}]
+  "answer": "direct answer if EKG can't possibly handle this itself",
+  "groundings": [{"form": "word", "relation": "Relation", "definition": "meaning"}],
+  "capabilityMappings": [{"form": "word", "capabilityId": "exact.id.from.list", "relation": "NewRelation", "definition": "what it does"}],
+  "blueprints": [{"id": "learned.name", "description": "what it does", "inputs": [{"kind": "int"}], "output": {"kind": "string"}, "body": {"kind": "call", "capabilityId": "core.int_to_string", "args": [{"kind": "input", "index": 0, "type": {"kind": "int"}}], "type": {"kind": "string"}}, "phrases": ["trigger phrase"]}],
+  "facts": [{"subject": "entity", "predicate": "predicate", "object": "value"}],
+  "synonyms": [{"newForm": "new", "knownForm": "known"}]
 }
 
-Rules:
-- "groundings": teach word meanings using EXISTING relations from the list.
-- "capabilityMappings": map words to SINGLE capabilities using EXACT IDs from the list.
-- "blueprints": teach executable PROGRAMS that compose multiple capabilities. The body is a tree of expressions:
-  - {"kind":"call","capabilityId":"exact.cap.id","args":[...],"type":{"kind":"int"}} calls a capability
-  - {"kind":"input","index":0,"type":{"kind":"int"}} references a runtime input
-  - {"kind":"const","value":42,"type":{"kind":"int"}} is a constant
-  Types: {"kind":"int"}, {"kind":"string"}, {"kind":"bool"}, {"kind":"json"}, {"kind":"list","item":{"kind":"string"}}
-  Only use capability IDs that exist in the list above. Include "phrases" so EKG learns what language triggers this program.
-- "facts": ONLY for timeless world knowledge. NEVER for dynamic values.
-- "synonyms": link unknown words to known words.
-- All arrays can be empty. Prefer blueprints over capabilityMappings when the task needs composing multiple steps.`;
+Teaching priority (most to least valuable):
+1. capabilityMappings - if a word maps to ONE existing capability, teach that
+2. blueprints - if the task needs COMPOSING capabilities, build a program
+3. groundings - teach unknown word meanings
+4. facts - ONLY timeless knowledge (never current time/date/weather)
+5. synonyms - link unknown words to known words
+6. answer - only when nothing above applies (pure knowledge questions)
+
+CRITICAL: Use ONLY capability IDs from the list above. Never invent IDs.`;
 
   const result = config.run(prompt);
   if (!result) return undefined;
