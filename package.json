@@ -45,5 +45,8 @@
   },
   "optionalDependencies": {
     "@ladybugdb/core": "^0.19.1"
+  },
+  "dependencies": {
+    "wordnet": "^2.0.0"
   }
 }

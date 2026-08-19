@@ -16,7 +16,16 @@ export type DispatchResult =
   | {status:"answer"; value:JsonValue}
   | {status:"executed"; value:Value; program:ProgramBlueprint; inputs:Value[]}
   | {status:"intent"; interpretation:IntentInterpretation}
+  | {status:"conversational"; response:string}
   | {status:"unresolved"; reason:string};
+
+const CONVERSATIONAL_RESPONSES: Record<string,string> = {
+  "greeting": "Hey! I'm EKG. I can do math, track facts about the world, and answer questions. Type /help for commands.",
+  "farewell": "See you! Your brain state has been saved.",
+  "gratitude": "No problem.",
+  "affirmative": "Got it.",
+  "help-request": "I can do math, track facts about the world, and answer questions. Type /help for the full command list.",
+};
 
 function buildIntentFromCapabilityCommand(
   parsed: Extract<ParsedUtterance, {kind:"capability-command"}>,
@@ -102,6 +111,10 @@ export function dispatchUtterance(
     }
     if (value === undefined) return {status: "unresolved", reason: "no matching fact found"};
     return {status: "answer", value};
+  }
+
+  if (parsed.kind === "conversational") {
+    return {status: "conversational", response: CONVERSATIONAL_RESPONSES[parsed.intent]};
   }
 
   if (parsed.kind === "capability-command") {

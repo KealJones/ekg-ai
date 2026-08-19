@@ -55,6 +55,7 @@ export * from "./intent/fuzzy.js";
 export * from "./intent/token-classifier.js";
 export * from "./intent/semantic-parser.js";
 export * from "./intent/semantic-dispatch.js";
+export * from "./intent/wordnet-import.js";
 export * from "./runtime/filesystem-capabilities.js";
 export * from "./domains/file-intent.js";
 export * from "./benchmarks/semantic-frame.js";
