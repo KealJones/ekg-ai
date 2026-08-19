@@ -13,6 +13,7 @@ import { buildIntentTeacherContext } from "../intent/language-impasse.js";
 import { runProgram } from "../runtime/interpreter.js";
 import { teachSynonym, storeLexicalSense, lexicalSensesForText } from "../intent/lexicon.js";
 import { dispatchUtterance } from "../intent/semantic-dispatch.js";
+import { smartParse } from "../intent/smart-parser.js";
 import { askTeacherStructured, isTeacherAvailable, type TeacherBlueprint } from "./teacher-transport.js";
 import { assertWorldFact } from "../language/world-language.js";
 import { PORTABLE_SEMANTIC_CATALOG } from "../intent/semantic-catalog.js";
@@ -95,15 +96,23 @@ export class EkgCli {
     const learnedThisSession:string[]=[];
 
     for(let round=0; round<=MAX_LEARN_ROUNDS; round++){
-      // 1. PARSE: semantic parser + construction grammar
-      const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
+      // 1. SMART PARSE: compromise NLP + construction grammar + graph lookup
+      const result=smartParse(rawUtterance,this.brain.graph,this.caps,this.programs,providedInputs);
 
-      // 2. DIRECT RESULTS: facts, queries, conversational - no synthesis needed
+      if(result.status==="fact-recorded"){ this.io.line(result.message); return; }
+      if(result.status==="answer"){ this.io.line(formatCliValue(result.value)); return; }
+      if(result.status==="conversational"){ this.io.line(result.response); return; }
+      if(result.status==="executed"){
+        this.io.line(formatCliValue(result.value));
+        if(result.program) this.persistLearnedProgram(result.program,`smart:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,80)}`,rawUtterance);
+        return;
+      }
+
+      // Also try old dispatch as secondary
+      const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
       if(dispatch.status==="fact-recorded"){ this.io.line(dispatch.message); return; }
       if(dispatch.status==="answer"){ this.io.line(formatCliValue(dispatch.value)); return; }
       if(dispatch.status==="conversational"){ this.io.line(dispatch.response); return; }
-
-      // 3. EXECUTED: semantic parser handled it directly (inline values, zero-arg caps)
       if(dispatch.status==="executed"){
         this.io.line(formatCliValue(dispatch.value));
         this.persistLearnedProgram(dispatch.program,`semantic:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,80)}`,rawUtterance);

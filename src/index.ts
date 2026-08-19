@@ -60,6 +60,7 @@ export * from "./intent/construction.js";
 export * from "./intent/construction-chart.js";
 export * from "./intent/construction-catalog.js";
 export * from "./teaching/curriculum-import.js";
+export * from "./intent/smart-parser.js";
 export * from "./runtime/filesystem-capabilities.js";
 export * from "./domains/file-intent.js";
 export * from "./benchmarks/semantic-frame.js";
