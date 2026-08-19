@@ -6,10 +6,20 @@ export interface TeacherResponse {
   provider: string;
 }
 
+export interface TeacherBlueprint {
+  id: string;
+  description: string;
+  inputs: Array<{kind: string; item?: {kind: string}}>;
+  output: {kind: string; item?: {kind: string}};
+  body: any;
+  phrases?: string[];
+}
+
 export interface TeacherLesson {
   answer: string;
   groundings: Array<{form: string; relation: string; definition?: string; impliedValue?: number; questionFor?: string}>;
   capabilityMappings: Array<{form: string; capabilityId: string; relation: string; definition?: string}>;
+  blueprints: Array<TeacherBlueprint>;
   facts: Array<{subject: string; predicate: string; object: string}>;
   synonyms: Array<{newForm: string; knownForm: string}>;
 }
@@ -101,17 +111,23 @@ Respond with ONLY valid JSON (no markdown, no backticks, no explanation):
   "answer": "direct answer to the user (1-2 sentences)",
   "groundings": [{"form": "word", "relation": "ExistingRelation", "definition": "meaning"}],
   "capabilityMappings": [{"form": "word", "capabilityId": "host.capability_id", "relation": "NewRelation", "definition": "meaning"}],
+  "blueprints": [{"id": "learned.name", "description": "what it does", "inputs": [{"kind": "int"}], "output": {"kind": "string"}, "body": {"kind": "call", "capabilityId": "core.int_to_string", "args": [{"kind": "input", "index": 0, "type": {"kind": "int"}}], "type": {"kind": "string"}}, "phrases": ["convert number to text"]}],
   "facts": [{"subject": "entity", "predicate": "relation", "object": "value"}],
   "synonyms": [{"newForm": "unknown_word", "knownForm": "known_word"}]
 }
 
 Rules:
-- "groundings": teach word meanings using EXISTING relations from the list above.
-- "capabilityMappings": map words to executable capabilities. Use EXACT capability IDs from the list above. This teaches EKG to CALL a capability, not store a static fact. Example: {"form":"time","capabilityId":"host.unix_time_seconds","relation":"CurrentTime","definition":"get current unix timestamp"}.
-- "facts": ONLY for timeless world knowledge (like "Paris is_a city"). NEVER use facts for dynamic/changing values like current time, date, or weather.
+- "groundings": teach word meanings using EXISTING relations from the list.
+- "capabilityMappings": map words to SINGLE capabilities using EXACT IDs from the list.
+- "blueprints": teach executable PROGRAMS that compose multiple capabilities. The body is a tree of expressions:
+  - {"kind":"call","capabilityId":"exact.cap.id","args":[...],"type":{"kind":"int"}} calls a capability
+  - {"kind":"input","index":0,"type":{"kind":"int"}} references a runtime input
+  - {"kind":"const","value":42,"type":{"kind":"int"}} is a constant
+  Types: {"kind":"int"}, {"kind":"string"}, {"kind":"bool"}, {"kind":"json"}, {"kind":"list","item":{"kind":"string"}}
+  Only use capability IDs that exist in the list above. Include "phrases" so EKG learns what language triggers this program.
+- "facts": ONLY for timeless world knowledge. NEVER for dynamic values.
 - "synonyms": link unknown words to known words.
-- All arrays can be empty. Keep lessons minimal.
-- If EKG has a host capability that can answer the question, use capabilityMappings to teach EKG to call it, then provide the answer too.`;
+- All arrays can be empty. Prefer blueprints over capabilityMappings when the task needs composing multiple steps.`;
 
   const result = config.run(prompt);
   if (!result) return undefined;
@@ -122,10 +138,11 @@ Rules:
     if (typeof parsed.answer !== "string") return undefined;
     parsed.groundings = Array.isArray(parsed.groundings) ? parsed.groundings.filter(g => typeof g.form === "string" && typeof g.relation === "string") : [];
     parsed.capabilityMappings = Array.isArray(parsed.capabilityMappings) ? parsed.capabilityMappings.filter(m => typeof m.form === "string" && typeof m.capabilityId === "string" && typeof m.relation === "string") : [];
+    parsed.blueprints = Array.isArray(parsed.blueprints) ? parsed.blueprints.filter(b => typeof b.id === "string" && b.body && Array.isArray(b.inputs) && b.output) : [];
     parsed.facts = Array.isArray(parsed.facts) ? parsed.facts.filter(f => typeof f.subject === "string" && typeof f.predicate === "string" && typeof f.object === "string") : [];
     parsed.synonyms = Array.isArray(parsed.synonyms) ? parsed.synonyms.filter(s => typeof s.newForm === "string" && typeof s.knownForm === "string") : [];
     return parsed;
   } catch {
-    return { answer: result, groundings: [], capabilityMappings: [], facts: [], synonyms: [] };
+    return { answer: result, groundings: [], capabilityMappings: [], blueprints: [], facts: [], synonyms: [] };
   }
 }
