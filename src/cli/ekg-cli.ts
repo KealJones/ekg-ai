@@ -115,7 +115,8 @@ export class EkgCli {
       const renderType=(t:any):string=>t.kind==="list"?`List<${renderType(t.item)}>`:t.kind;
       const hostCaps=this.caps.all().map(c=>`${c.id}(${c.inputs.map(renderType).join(",")}) -> ${renderType(c.output)}`);
       const learnedProgs=this.brain.programs.all().map(p=>`${p.id}(${p.inputs.map(renderType).join(",")}) -> ${renderType(p.output)} [learned, use program_call]`);
-      const capSummary=[...hostCaps,...learnedProgs].join("\n");
+      const allCaps=[...hostCaps,...learnedProgs];
+      const capSummary=allCaps.length>50?allCaps.slice(0,50).join("\n")+`\n... and ${allCaps.length-50} more`:allCaps.join("\n");
       this.io.line("Asking Teacher...");
       const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
       if(lesson){
