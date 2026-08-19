@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { storeGrammarRule, storePredicateDefinition, storeInferenceRule, storeEventFrameDefinition, starterLocationGrammar, starterPossessionGrammar, possessionLocationInference, starterSpatialPredicates, starterSpatialGrammar, starterGivingFrame, starterGivingGrammar, starterTruthGrammar, starterCountSetGrammar, starterNegationGrammar, starterConjunctionGrammar, starterDeductionGrammar, spatialTransitivityInference, starterPositionalPredicates, starterPositionalGrammar, starterSizePredicates, starterSizeGrammar, sizeTransitivityInference } from "../language/world-language.js";
 import { installSeedConstructions } from "../intent/construction-catalog.js";
+import { loadAndImportCurriculum } from "../teaching/curriculum-import.js";
 
 export const EKG_BOOTSTRAP_MARKER = "state:bootstrap:ekg-core-v1";
 
@@ -29,6 +30,7 @@ export function ensureEkgBootstrap(graph:GraphStore,caps:CapabilityRegistry):Ekg
   const wordnetLessons=installWordNetVocabulary(graph);
   installWorldLanguageGrammar(graph);
   const constructionCount=installSeedConstructions(graph);
+  const curriculum=loadAndImportCurriculum(graph);
   graph.putEntity({
     id:EKG_BOOTSTRAP_MARKER,
     kind:"state_model",
