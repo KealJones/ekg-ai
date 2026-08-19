@@ -108,8 +108,8 @@ export function parseUtterance(store: GraphStore | undefined, utterance: string)
       }
     }
 
-    // "what is 5 divided by 2?" - question with a capability action + values
-    if (actions.length > 0 && values.length > 0) {
+    // "what is 5 divided by 2?" or "what time is it?" - question with a capability action
+    if (actions.length > 0) {
       const action = actions[0]!;
       const relation = action.senses[0]?.relation ?? "";
       if (isCapabilityRelation(relation, store)) {
@@ -147,14 +147,11 @@ export function parseUtterance(store: GraphStore | undefined, utterance: string)
         for (const v of values) args.push({kind: "value", value: v.numericValue!});
       } else if (entities.some(e => e.normalized === "this" || e.normalized === "number")) {
         args.push({kind: "input", index: inputIndex++});
-      } else {
-        args.push({kind: "input", index: inputIndex++});
       }
+      // zero-arg capabilities (like host.unix_time_seconds) need no args at all
 
       if (impliedValue !== undefined) {
         args.push({kind: "value", value: impliedValue});
-      } else if (args.length < 2 && values.length === 0) {
-        // Binary op with no second arg - need input
       }
 
       return {kind: "capability-command", relation, args, confidence, provenance};
