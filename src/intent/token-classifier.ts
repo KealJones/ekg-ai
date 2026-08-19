@@ -17,6 +17,10 @@ export interface ClassifiedToken {
 
 const norm = (x: string) => x.trim().toLowerCase().replace(/[?.!,;:]+$/g, "").replace(/\s+/g, " ");
 
+const MATH_SYMBOLS: Record<string, string> = {
+  "+": "Add", "-": "Subtract", "*": "Multiply", "/": "Divide", "x": "Multiply",
+};
+
 export const numberWords: Record<string, number> = {
   zero:0, one:1, two:2, three:3, four:4, five:5, six:6, seven:7, eight:8, nine:9, ten:10,
   eleven:11, twelve:12, thirteen:13, fourteen:14, fifteen:15, sixteen:16, seventeen:17, eighteen:18, nineteen:19, twenty:20,
@@ -28,7 +32,9 @@ const NON_ACTION_RELATIONS = new Set(["structural", "negation", "conjunction", "
 const CONVERSATIONAL_RELATIONS = new Set(["greeting", "farewell", "gratitude", "affirmative", "help-request"]);
 
 export function tokenize(utterance: string): string[] {
-  return norm(utterance).split(/\s+/).filter(Boolean);
+  let text = norm(utterance);
+  text = text.replace(/(\d)\s*([+\-*/])\s*(\d)/g, "$1 $2 $3");
+  return text.split(/\s+/).filter(Boolean);
 }
 
 function isNumericToken(token: string): number | undefined {
@@ -42,6 +48,7 @@ function roleFromRelation(relation: string, store?: GraphStore): TokenRole {
   if (relation === "conjunction" || relation === "sequence") return "conjunction";
   if (relation === "structural") return "structural";
   if (CONVERSATIONAL_RELATIONS.has(relation)) return "conversational";
+  if (relation.startsWith("wordnet.")) return "entity";
   if (descriptorForRelation(relation)) return "action";
   if (store) {
     const rid = `relation:${relation.toLowerCase()}`;
@@ -49,7 +56,7 @@ function roleFromRelation(relation: string, store?: GraphStore): TokenRole {
     const pid = `predicate:${relation.toLowerCase().replace(/[^a-z0-9._-]+/g, "-")}`;
     if (store.getEntity(pid)) return "action";
   }
-  return "action";
+  return "entity";
 }
 
 export function classifyTokens(store: GraphStore | undefined, utterance: string): ClassifiedToken[] {
@@ -57,6 +64,10 @@ export function classifyTokens(store: GraphStore | undefined, utterance: string)
   const out: ClassifiedToken[] = [];
 
   for (const token of tokens) {
+    if (MATH_SYMBOLS[token]) {
+      out.push({text: token, normalized: token, role: "action", senses: [{form: token, senseId: `math-symbol:${token}`, relation: MATH_SYMBOLS[token]!, confidence: .99, provenance: ["math-symbol"]}]});
+      continue;
+    }
     const numericValue = isNumericToken(token);
     if (numericValue !== undefined) {
       const senses = store ? lexicalSensesForText(store, token) : [];
