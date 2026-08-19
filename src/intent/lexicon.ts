@@ -11,6 +11,7 @@ export interface LexicalSense {
   impliedValue?:number;
   contextCues?:string[];
   frameId?:string;
+  questionFor?:string;
   confidence:number;
   provenance:string[];
 }
@@ -23,7 +24,7 @@ export function storeLexicalSense(store:GraphStore,s:LexicalSense):void{
   if(!store.getEntity(lex)) store.putEntity({id:lex,kind:"lexeme",labels:["lexeme","en",form],attrs:{form,language:"en"}});
   const existing=store.getEntity(sense);
   if(existing && typeof existing.attrs?.relation==="string" && existing.attrs.relation!==s.relation) throw new Error(`conflicting lexical sense ${s.senseId}`);
-  store.putEntity({id:sense,kind:"sense",labels:["word-sense",s.relation],attrs:{...(existing?.attrs??{}),senseId:s.senseId,relation:s.relation,definition:s.definition,impliedValue:s.impliedValue,contextCues:[...new Set([...(Array.isArray(existing?.attrs?.contextCues)?existing!.attrs!.contextCues as string[]:[]),...(s.contextCues??[]).map(norm)])],frameId:s.frameId??existing?.attrs?.frameId,confidence:s.confidence,provenance:s.provenance}});
+  store.putEntity({id:sense,kind:"sense",labels:["word-sense",s.relation],attrs:{...(existing?.attrs??{}),senseId:s.senseId,relation:s.relation,definition:s.definition,impliedValue:s.impliedValue,contextCues:[...new Set([...(Array.isArray(existing?.attrs?.contextCues)?existing!.attrs!.contextCues as string[]:[]),...(s.contextCues??[]).map(norm)])],frameId:s.frameId??existing?.attrs?.frameId,questionFor:s.questionFor??existing?.attrs?.questionFor,confidence:s.confidence,provenance:s.provenance}});
   if(!store.getEntity(rel)) store.putEntity({id:rel,kind:"concept",labels:["semantic-relation",s.relation],attrs:{relation:s.relation}});
   if(!store.outgoing(lex,"has_sense").some(r=>r.to===sense)) store.putRelation({id:`${lex}:sense:${sense}`,kind:"has_sense",from:lex,to:sense,confidence:s.confidence});
   if(!store.outgoing(sense,"expresses").some(r=>r.to===rel)) store.putRelation({id:`${sense}:expresses:${rel}`,kind:"expresses",from:sense,to:rel,confidence:s.confidence});
@@ -46,7 +47,7 @@ export function lexicalSensesForText(store:GraphStore,text:string):LexicalSense[
       const sense=store.getEntity(edge.to); if(!sense) continue;
       const relation=typeof sense.attrs?.relation==="string"?String(sense.attrs.relation):store.outgoing(sense.id,"expresses").map(r=>store.getEntity(r.to)?.attrs?.relation).find(x=>typeof x==="string") as string|undefined;
       if(!relation) continue;
-      out.push({form,senseId:String(sense.attrs?.senseId??sense.id),relation,definition:typeof sense.attrs?.definition==="string"?String(sense.attrs.definition):undefined,impliedValue:typeof sense.attrs?.impliedValue==="number"?Number(sense.attrs.impliedValue):undefined,contextCues:Array.isArray(sense.attrs?.contextCues)?sense.attrs!.contextCues as string[]:[],frameId:typeof sense.attrs?.frameId==="string"?String(sense.attrs.frameId):undefined,confidence:Number(sense.attrs?.confidence??edge.confidence??.5),provenance:Array.isArray(sense.attrs?.provenance)?sense.attrs!.provenance as string[]:["graph:lexicon"]});
+      out.push({form,senseId:String(sense.attrs?.senseId??sense.id),relation,definition:typeof sense.attrs?.definition==="string"?String(sense.attrs.definition):undefined,impliedValue:typeof sense.attrs?.impliedValue==="number"?Number(sense.attrs.impliedValue):undefined,contextCues:Array.isArray(sense.attrs?.contextCues)?sense.attrs!.contextCues as string[]:[],frameId:typeof sense.attrs?.frameId==="string"?String(sense.attrs.frameId):undefined,questionFor:typeof sense.attrs?.questionFor==="string"?String(sense.attrs.questionFor):undefined,confidence:Number(sense.attrs?.confidence??edge.confidence??.5),provenance:Array.isArray(sense.attrs?.provenance)?sense.attrs!.provenance as string[]:["graph:lexicon"]});
     }
   }
   return out.sort((a,b)=>b.confidence-a.confidence||b.form.length-a.form.length);
@@ -59,6 +60,64 @@ export function teachStarterEnglishLexicon(store:GraphStore):number{
     d.phrases.forEach((form,i)=>{
       storeLexicalSense(store,{form,senseId:`${d.concept}:${safe(form)}`,relation:d.relation,definition:d.gloss,confidence:i===0?.98:.9,provenance:["teacher:starter-english-v1",`semantic:${d.concept}`]}); n++;
     });
+  }
+  return n;
+}
+
+interface WorldLexiconEntry {
+  forms:string[];
+  relation:string;
+  questionFor?:string;
+  confidence?:number;
+  definition?:string;
+}
+
+const STARTER_WORLD_LEXICON:WorldLexiconEntry[] = [
+  // Action verbs (world predicates)
+  {forms:["went"],relation:"located_in",confidence:.95},
+  {forms:["moved"],relation:"located_in"},
+  {forms:["travelled"],relation:"located_in"},
+  {forms:["is in"],relation:"located_in"},
+  {forms:["carrying"],relation:"possesses"},
+  {forms:["picked up"],relation:"possesses"},
+  {forms:["holding"],relation:"possesses"},
+  {forms:["has"],relation:"possesses"},
+  {forms:["gave"],relation:"gave_to"},
+  {forms:["is a"],relation:"is_a"},
+  // Question words
+  {forms:["where"],relation:"query.location",questionFor:"located_in"},
+  {forms:["who"],relation:"query.agent",questionFor:"agent"},
+  {forms:["what"],relation:"query.generic"},
+  {forms:["how many"],relation:"query.count"},
+  // Structural/functional words
+  {forms:["the","a","an"],relation:"structural"},
+  {forms:["to","in","by","from","of","at","on"],relation:"structural"},
+  {forms:["is","are","was","were"],relation:"structural"},
+  {forms:["this","that","these","those"],relation:"structural"},
+  // Modifiers
+  {forms:["not"],relation:"negation"},
+  {forms:["no"],relation:"negation"},
+  // Connectors
+  {forms:["and"],relation:"conjunction"},
+  {forms:["then"],relation:"sequence"},
+];
+
+/** Initial world-language lessons supplied by Teacher: action verbs, question words, and structural words used by the semantic parser. */
+export function teachStarterWorldLexicon(store:GraphStore):number{
+  let n=0;
+  for(const entry of STARTER_WORLD_LEXICON){
+    for(const form of entry.forms){
+      storeLexicalSense(store,{
+        form,
+        senseId:`world:${safe(form)}:${entry.relation}`,
+        relation:entry.relation,
+        definition:entry.definition,
+        questionFor:entry.questionFor,
+        confidence:entry.confidence??.9,
+        provenance:["teacher:starter-world-v1","semantic:world-language"]
+      });
+      n++;
+    }
   }
   return n;
 }

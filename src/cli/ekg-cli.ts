@@ -12,6 +12,7 @@ import { planIntent } from "../intent/planner.js";
 import { buildIntentTeacherContext } from "../intent/language-impasse.js";
 import { runProgram } from "../runtime/interpreter.js";
 import { teachSynonym } from "../intent/lexicon.js";
+import { dispatchUtterance } from "../intent/semantic-dispatch.js";
 import type { IntentInterpretation } from "../intent/intent.js";
 import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
 import type { Type } from "../ir/types.js";
@@ -46,7 +47,7 @@ export class EkgCli {
   readonly programs:SelfHealingProgramLibrary;
   teacherEnabled:boolean;
   private running=true;
-  readonly bootstrap:{initialized:boolean;starterEnglishLessons:number};
+  readonly bootstrap:{initialized:boolean;starterEnglishLessons:number;starterWorldLessons:number};
 
   constructor(private readonly io:EkgCliIo,options:EkgCliOptions={}){
     this.brain=options.brain??new FileBrain(options.brainPath);
@@ -80,7 +81,25 @@ export class EkgCli {
   }
 
   private async executeUtterance(rawUtterance:string,providedInputs?:Value[]):Promise<void>{
-    let interpreted:IntentInterpretation=interpretComposedIntent(rawUtterance,this.brain.graph);
+    // Try semantic parser first (handles both world facts and inline-value capability commands)
+    const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
+    if(dispatch.status==="fact-recorded"){
+      this.io.line(dispatch.message);
+      return;
+    }
+    if(dispatch.status==="answer"){
+      this.io.line(formatCliValue(dispatch.value));
+      return;
+    }
+    if(dispatch.status==="executed"){
+      this.io.line(formatCliValue(dispatch.value));
+      const intentId=`semantic:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,80)}`;
+      this.persistLearnedProgram(dispatch.program,intentId,rawUtterance);
+      return;
+    }
+
+    // Fall back to legacy intent system (handles clarification, teacher, prompting, THEN composition)
+    let interpreted:IntentInterpretation = dispatch.status==="intent" ? dispatch.interpretation : interpretComposedIntent(rawUtterance,this.brain.graph);
     while(interpreted.status==="clarify"){
       const answer=await this.io.question(`${interpreted.question}\nclarify> `);
       if(isExitCommand(answer)) throw new ExitRequested();
@@ -108,7 +127,6 @@ export class EkgCli {
     const intentId=interpreted.intent.id;
     const learnedId=`intent-plan:${intentId}`;
 
-    // RUN: check if we already have a learned program for this exact intent
     const existing=this.programs.get(learnedId);
     if(existing){
       const output=runProgram(existing,inputs,this.caps,this.programs);
@@ -116,7 +134,6 @@ export class EkgCli {
       return;
     }
 
-    // PLAN + BUILD: create a new program and persist it
     const plan=planIntent(interpreted.intent,this.caps,this.brain.graph,this.programs);
     if(plan.status!=="planned" || !plan.program){
       this.io.line(`Unsupported: ${plan.reason??"could not construct a plan"}`);
