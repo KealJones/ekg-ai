@@ -108,6 +108,18 @@ export function parseUtterance(store: GraphStore | undefined, utterance: string)
       }
     }
 
+    // "what is 5 divided by 2?" - question with a capability action + values
+    if (actions.length > 0 && values.length > 0) {
+      const action = actions[0]!;
+      const relation = action.senses[0]?.relation ?? "";
+      if (isCapabilityRelation(relation, store)) {
+        const args: ParsedArg[] = values.map(v => ({kind: "value" as const, value: v.numericValue!}));
+        const impliedValue = action.impliedValue ?? action.senses[0]?.impliedValue;
+        if (impliedValue !== undefined) args.push({kind: "value", value: impliedValue});
+        return {kind: "capability-command", relation, args, confidence, provenance};
+      }
+    }
+
     return {kind: "unresolved", reason: "question recognized but cannot resolve query", tokens};
   }
 
