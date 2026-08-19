@@ -6,6 +6,13 @@ export interface TeacherResponse {
   provider: string;
 }
 
+export interface TeacherLesson {
+  answer: string;
+  groundings: Array<{form: string; relation: string; definition?: string; impliedValue?: number; questionFor?: string}>;
+  facts: Array<{subject: string; predicate: string; object: string}>;
+  synonyms: Array<{newForm: string; knownForm: string}>;
+}
+
 export type TeacherProvider = "claude" | "chatgpt" | "auto";
 
 interface ProviderConfig {
@@ -72,4 +79,50 @@ export function isTeacherAvailable(provider?: TeacherProvider): boolean {
 
 export function teacherProviderName(provider?: TeacherProvider): string {
   return findAvailableProvider(provider ?? "auto")?.name ?? "none";
+}
+
+export function askTeacherStructured(utterance: string, capabilitySummary: string, knownRelations: string[], provider?: TeacherProvider): TeacherLesson | undefined {
+  const config = findAvailableProvider(provider ?? (process.env.EKG_TEACHER as TeacherProvider | undefined) ?? "auto");
+  if (!config) return undefined;
+
+  const prompt = `You are a Teacher for EKG, a learning AI. A user said something EKG can't handle yet.
+
+USER UTTERANCE: "${utterance}"
+
+EKG's known capability relations (maps words to executable operations):
+${knownRelations.slice(0, 40).join(", ")}
+
+EKG's host capabilities (a subset):
+${capabilitySummary}
+
+Respond with ONLY valid JSON (no markdown, no backticks, no explanation) in this exact format:
+{
+  "answer": "direct answer to the user's question (1-2 sentences)",
+  "groundings": [{"form": "word", "relation": "ExistingRelation", "definition": "what this word means in this context"}],
+  "facts": [{"subject": "entity", "predicate": "relation", "object": "value"}],
+  "synonyms": [{"newForm": "unknown_word", "knownForm": "known_word"}]
+}
+
+Rules:
+- "groundings" teaches EKG new word meanings. Use EXISTING relations from the list above when possible. Only propose new relations if nothing fits.
+- "facts" teaches world knowledge (like "Paris is_a city" or "water has_property liquid").
+- "synonyms" links unknown words to words EKG already knows.
+- All arrays can be empty if no teaching opportunity exists.
+- Keep groundings minimal - only teach what's needed for THIS utterance.
+- The "answer" field is required, everything else is optional teaching.`;
+
+  const result = config.run(prompt);
+  if (!result) return undefined;
+
+  try {
+    const cleaned = result.replace(/^```json?\s*/i, "").replace(/```\s*$/i, "").trim();
+    const parsed = JSON.parse(cleaned) as TeacherLesson;
+    if (typeof parsed.answer !== "string") return undefined;
+    parsed.groundings = Array.isArray(parsed.groundings) ? parsed.groundings.filter(g => typeof g.form === "string" && typeof g.relation === "string") : [];
+    parsed.facts = Array.isArray(parsed.facts) ? parsed.facts.filter(f => typeof f.subject === "string" && typeof f.predicate === "string" && typeof f.object === "string") : [];
+    parsed.synonyms = Array.isArray(parsed.synonyms) ? parsed.synonyms.filter(s => typeof s.newForm === "string" && typeof s.knownForm === "string") : [];
+    return parsed;
+  } catch {
+    return { answer: result, groundings: [], facts: [], synonyms: [] };
+  }
 }
