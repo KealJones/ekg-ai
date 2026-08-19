@@ -51,5 +51,10 @@ export function renderType(type:Type):string{
 }
 
 export function formatCliValue(value:Value):string{
-  return typeof value==="string"?value:JSON.stringify(value,null,2);
+  if(typeof value==="string") return value;
+  if(value && typeof value==="object" && !Array.isArray(value) && "stdout" in value && typeof (value as any).stdout==="string"){
+    const stdout=String((value as any).stdout).trim();
+    if(stdout) return stdout;
+  }
+  return JSON.stringify(value,null,2);
 }
