@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 import type { Interface } from "node:readline/promises";
 import type { Brain } from "../brain.js";
 import { FileBrain } from "../brain.js";
@@ -133,6 +134,7 @@ export class EkgCli {
       case "/programs": return this.listPrograms(args);
       case "/experience": return this.experience(args);
       case "/save": this.brain.save(); this.io.line(`Saved ${this.brain.filePath}`); return;
+      case "/export-seed": return this.exportSeed(args);
       case "/teacher": return this.teacher(args);
       case "/teach": return this.teach(args);
       case "/run": return this.runLearned(args);
@@ -153,7 +155,8 @@ export class EkgCli {
       "  /run <program-id> :: [args]   Execute a learned procedure directly",
       "  /teach synonym NEW = KNOWN    Persist a synonym lesson using known language",
       "  /teacher on|off|status        Control Teacher escalation display",
-      "  /save                         Force-save brain.json",
+      "  /save                         Force-save brain",
+      "  /export-seed [path]           Export current brain as a seed-brain.json",
       "  /exit                         Save and quit",
       "",
       "Natural-language input:",
@@ -219,6 +222,19 @@ export class EkgCli {
     const form=m[1]!.trim(),knownForm=m[2]!.trim();
     const learned=teachSynonym(this.brain.graph,{form,knownForm,provenance:["teacher:local-cli","manual-synonym-lesson"]});
     this.io.line(`Learned: ${learned.form} -> ${learned.relation} (via ${knownForm})`);
+  }
+
+  private exportSeed(args:string):void{
+    const dest=args.trim()||path.join(path.dirname(this.brain.filePath),"seed-brain.json");
+    this.brain.save();
+    const snap=this.brain.snapshot();
+    const seed={format:"ekg-brain" as const,version:1 as const,savedAt:new Date().toISOString(),graph:snap.graph,programs:snap.programs,episodes:{episodes:[]}};
+    const dir=path.dirname(dest);
+    fs.mkdirSync(dir,{recursive:true});
+    const temp=`${dest}.${process.pid}.tmp`;
+    fs.writeFileSync(temp,JSON.stringify(seed,null,2),"utf8");
+    fs.renameSync(temp,dest);
+    this.io.line(`Seed exported: ${dest} (${snap.graph.entities.length} entities, ${snap.graph.relations.length} relations, ${snap.programs.programs.length} programs)`);
   }
 
   private runLearned(args:string):void{
