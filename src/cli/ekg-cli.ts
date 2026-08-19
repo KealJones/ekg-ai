@@ -85,49 +85,56 @@ export class EkgCli {
   }
 
   private async executeUtterance(rawUtterance:string,providedInputs?:Value[]):Promise<void>{
-    // Try semantic parser first (handles both world facts and inline-value capability commands)
-    const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
-    if(dispatch.status==="fact-recorded"){
-      this.io.line(dispatch.message);
-      return;
-    }
-    if(dispatch.status==="answer"){
-      this.io.line(formatCliValue(dispatch.value));
-      return;
-    }
-    if(dispatch.status==="executed"){
-      this.io.line(formatCliValue(dispatch.value));
-      const intentId=`semantic:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,80)}`;
-      this.persistLearnedProgram(dispatch.program,intentId,rawUtterance);
-      return;
-    }
-    if(dispatch.status==="conversational"){
-      this.io.line(dispatch.response);
-      return;
-    }
+    const MAX_LEARN_ATTEMPTS = 3;
 
-    // Fall back to legacy intent system (handles prompting, THEN composition)
-    let interpreted:IntentInterpretation = dispatch.status==="intent" ? dispatch.interpretation : interpretComposedIntent(rawUtterance,this.brain.graph);
+    for(let attempt=0; attempt<=MAX_LEARN_ATTEMPTS; attempt++){
+      const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
 
-    // If clarify or teacher, try Teacher first instead of bugging the user
-    if((interpreted.status==="clarify" || interpreted.status==="teacher") && this.teacherEnabled && isTeacherAvailable()){
+      if(dispatch.status==="fact-recorded"){
+        this.io.line(dispatch.message);
+        return;
+      }
+      if(dispatch.status==="answer"){
+        this.io.line(formatCliValue(dispatch.value));
+        return;
+      }
+      if(dispatch.status==="executed"){
+        this.io.line(formatCliValue(dispatch.value));
+        const intentId=`semantic:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,80)}`;
+        this.persistLearnedProgram(dispatch.program,intentId,rawUtterance);
+        return;
+      }
+      if(dispatch.status==="conversational"){
+        this.io.line(dispatch.response);
+        return;
+      }
+
+      // Not resolved natively - try Teacher to learn what's needed
+      if(!this.teacherEnabled || !isTeacherAvailable() || attempt >= MAX_LEARN_ATTEMPTS) break;
+
       const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
       const renderType=(t:any):string=>t.kind==="list"?`List<${renderType(t.item)}>`:t.kind;
       const hostCaps=this.caps.all().map(c=>`${c.id}(${c.inputs.map(renderType).join(",")}) -> ${renderType(c.output)}`);
       const learnedProgs=this.brain.programs.all().map(p=>`${p.id}(${p.inputs.map(renderType).join(",")}) -> ${renderType(p.output)} [learned, use program_call]`);
       const allCaps=[...hostCaps,...learnedProgs];
       const capSummary=allCaps.length>50?allCaps.slice(0,50).join("\n")+`\n... and ${allCaps.length-50} more`:allCaps.join("\n");
-      this.io.line("Asking Teacher...");
+
+      this.io.line(attempt===0?"Asking Teacher...":"Retrying with new knowledge...");
       const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
-      if(lesson){
+      if(!lesson) break;
+
+      const learned=this.learnFromTeacher(lesson,rawUtterance);
+      if(learned.length===0){
+        // Teacher responded but didn't teach anything new - show its answer and stop
         this.io.line(lesson.answer);
-        const learned=this.learnFromTeacher(lesson,rawUtterance);
-        if(learned.length>0) this.io.line(`Learned: ${learned.join(", ")}`);
         return;
       }
+      this.io.line(`Learned: ${learned.join(", ")}`);
+      // Loop back and retry with the new knowledge
     }
 
-    // Only ask user for clarification if Teacher couldn't help
+    // Final fallback: legacy intent system for prompting/THEN composition
+    let interpreted:IntentInterpretation = interpretComposedIntent(rawUtterance,this.brain.graph);
     while(interpreted.status==="clarify"){
       const answer=await this.io.question(`${interpreted.question}\nclarify> `);
       if(isExitCommand(answer)) throw new ExitRequested();
@@ -138,8 +145,7 @@ export class EkgCli {
         this.io.line(`Unresolved (Teacher OFF): ${interpreted.reason}`);
         return;
       }
-      this.io.line(`Teacher needed but couldn't resolve: ${interpreted.reason}`);
-      this.io.line(`Use /teach synonym <new> = <known> for a manual lexical lesson.`);
+      this.io.line(`Could not resolve after learning attempts: ${interpreted.reason}`);
       return;
     }
 
