@@ -118,16 +118,34 @@ export function smartParse(
   programs?: ProgramLibrary,
   providedInputs?: Value[]
 ): SmartResult {
+  // Try with original utterance first, only fuzzy-correct if that fails
+  const firstTry = smartParseInner(utterance, store, caps, programs, providedInputs);
+  if (firstTry.status !== "unresolved") return firstTry;
+
+  // Fuzzy-correct typos and retry
   const lower = norm(utterance);
   const words = lower.split(/\s+/).filter(Boolean);
-
-  // Fix typos first
   let corrected = utterance;
+  let didCorrect = false;
   for (const word of words) {
     const fix = fuzzyLookup(word, store);
-    if (fix) corrected = corrected.replace(new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i"), fix);
+    if (fix) { corrected = corrected.replace(new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i"), fix); didCorrect = true; }
   }
-  const correctedLower = norm(corrected);
+  if (!didCorrect) return firstTry;
+  return smartParseInner(corrected, store, caps, programs, providedInputs);
+}
+
+function smartParseInner(
+  utterance: string,
+  store: GraphStore,
+  caps: CapabilityRegistry,
+  programs?: ProgramLibrary,
+  providedInputs?: Value[]
+): SmartResult {
+  const lower = norm(utterance);
+  const words = lower.split(/\s+/).filter(Boolean);
+  const corrected = utterance;
+  const correctedLower = lower;
 
   // 1. Conversational
   if (words.length <= 3) {
