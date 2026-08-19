@@ -43,7 +43,7 @@ export function interpretIntent(rawUtterance:string,store?:GraphStore):IntentInt
   // World-language function words (articles, prepositions, copulas, negation, connectors, question words)
   // are grounded for the semantic parser but are never themselves a requested numeric/computation action.
   const nonActionRelations=new Set(["structural","negation","conjunction","sequence"]);
-  const isActionable=(relation:string)=>!nonActionRelations.has(relation) && !relation.startsWith("query.");
+  const isActionable=(relation:string)=>!nonActionRelations.has(relation) && !relation.startsWith("query.") && !relation.startsWith("wordnet.");
   const matched=groundings.filter(g=>isActionable(g.relation)&&phraseMatches(g.phrase)).sort((a,b)=>b.confidence-a.confidence);
   const distinctRelations=[...new Set(matched.map(g=>g.relation))];
 
