@@ -2,7 +2,7 @@ import type { GraphStore } from "../graph/graph.js";
 import type { CapabilityRegistry } from "./capabilities.js";
 import { seedPortableSubstrateKnowledge } from "./portable-knowledge.js";
 import { teachStarterEnglishLexicon } from "../intent/lexicon.js";
-import { storeGrammarRule, storePredicateDefinition, storeInferenceRule, storeEventFrameDefinition, starterLocationGrammar, starterPossessionGrammar, possessionLocationInference, starterSpatialPredicates, starterSpatialGrammar, starterGivingFrame, starterGivingGrammar } from "../language/world-language.js";
+import { storeGrammarRule, storePredicateDefinition, storeInferenceRule, storeEventFrameDefinition, starterLocationGrammar, starterPossessionGrammar, possessionLocationInference, starterSpatialPredicates, starterSpatialGrammar, starterGivingFrame, starterGivingGrammar, starterTruthGrammar, starterCountSetGrammar, starterNegationGrammar, starterConjunctionGrammar, starterDeductionGrammar, spatialTransitivityInference, starterPositionalPredicates, starterPositionalGrammar, starterSizePredicates, starterSizeGrammar, sizeTransitivityInference } from "../language/world-language.js";
 
 export const EKG_BOOTSTRAP_MARKER = "state:bootstrap:ekg-core-v1";
 
@@ -38,4 +38,15 @@ function installWorldLanguageGrammar(graph:GraphStore):void{
   for(const rule of starterSpatialGrammar()) storeGrammarRule(graph,rule);
   storeEventFrameDefinition(graph,starterGivingFrame());
   for(const rule of starterGivingGrammar()) storeGrammarRule(graph,rule);
+  for(const rule of starterTruthGrammar()) storeGrammarRule(graph,rule);
+  for(const rule of starterCountSetGrammar()) storeGrammarRule(graph,rule);
+  for(const rule of starterNegationGrammar()) storeGrammarRule(graph,rule);
+  for(const rule of starterConjunctionGrammar()) storeGrammarRule(graph,rule);
+  for(const rule of starterDeductionGrammar()) storeGrammarRule(graph,rule);
+  for(const def of starterPositionalPredicates()) storePredicateDefinition(graph,def);
+  for(const rule of starterPositionalGrammar()) storeGrammarRule(graph,rule);
+  storeInferenceRule(graph,spatialTransitivityInference());
+  for(const def of starterSizePredicates()) storePredicateDefinition(graph,def);
+  for(const rule of starterSizeGrammar()) storeGrammarRule(graph,rule);
+  storeInferenceRule(graph,sizeTransitivityInference());
 }

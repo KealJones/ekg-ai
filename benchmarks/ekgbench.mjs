@@ -15,11 +15,14 @@ const cyan = s => `\x1b[36m${s}\x1b[0m`;
 
 const caps = ekgCapabilities();
 
-// bAbI agent: uses WorldLanguageEngine with full bootstrap grammar
+// bAbI agent: fresh graph per probe to prevent story bleed
+const baseGraph = new MemoryGraphStore();
+ensureEkgBootstrap(baseGraph, caps);
+const baseSnapshot = baseGraph.snapshot();
+
 function createBabiAgent() {
-  const graph = new MemoryGraphStore();
-  ensureEkgBootstrap(graph, caps);
   return async (probe) => {
+    const graph = new MemoryGraphStore(baseSnapshot);
     const engine = new WorldLanguageEngine(graph);
     const r = engine.runStory(probe.story, probe.question);
     return { answer: r.answer, abstained: r.abstained, evidence: r.understood?.filter(x => x.understood).map(x => x.ruleId) };

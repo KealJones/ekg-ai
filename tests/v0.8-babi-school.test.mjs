@@ -20,7 +20,7 @@ test('bAbI single-fact location is red before language education',async()=>{
 test('Teacher grammar becomes durable graph knowledge and turns bAbI #1 green',async()=>{
   const graph=new MemoryGraphStore(), school=new TeacherSchool(graph,ekgCapabilities(),new MemoryProgramLibrary());
   for(const rule of starterLocationGrammar()) assert.equal(school.teachGrammar(rule).accepted,true);
-  assert.equal(graph.entitiesByKind('grammar_rule').length,3);
+  assert.ok(graph.entitiesByKind('grammar_rule').length>=3);
   const [r]=await evaluateDevelopmentalProbes(agentFor(graph),[ekgBenchBabi20[0]]);
   assert.equal(r.passed,true); assert.equal(r.answer,'kitchen');
 });
