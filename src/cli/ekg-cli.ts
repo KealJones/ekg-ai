@@ -124,10 +124,11 @@ export class EkgCli {
     }
     const output=runProgram(plan.program,inputs,this.caps,this.programs);
     this.io.line(formatCliValue(output));
-    this.persistLearnedProgram(plan.program,intentId,rawUtterance);
+    const relations=interpreted.intent.constraints.map(c=>c.relation);
+    this.persistLearnedProgram(plan.program,intentId,rawUtterance,relations);
   }
 
-  private persistLearnedProgram(program:ProgramBlueprint,intentId:string,utterance:string):void{
+  private persistLearnedProgram(program:ProgramBlueprint,intentId:string,utterance:string,relations:string[]=[]):void{
     const safe=(s:string)=>s.replace(/[^a-zA-Z0-9._-]+/g,"-").replace(/^-|-$/g,"").slice(0,120);
     const stored=this.programs.put({...program,provenance:[...(program.provenance??[]),"cli:interactive-execution"]});
     const programEntityId=`program:${stored.id}`;
@@ -145,6 +146,11 @@ export class EkgCli {
       this.brain.graph.putRelation({id:`${conceptId}:implemented:${abilityId}`,kind:"implemented_by",from:conceptId,to:abilityId,confidence:1});
       this.brain.graph.putRelation({id:`${abilityId}:program:${programEntityId}`,kind:"implemented_by_program",from:abilityId,to:programEntityId,confidence:1});
       this.brain.graph.putRelation({id:`${programEntityId}:acquired:${abilityId}`,kind:"acquired_as_capability",from:programEntityId,to:abilityId,confidence:1});
+    }
+    for(const relation of relations){
+      const rid=`relation:${relation.toLowerCase()}`;
+      if(!this.brain.graph.getEntity(rid)) this.brain.graph.putEntity({id:rid,kind:"concept",labels:["semantic-relation",relation],attrs:{relation}});
+      if(!this.brain.graph.outgoing(rid,"denotes_concept").some(r=>r.to===conceptId)) this.brain.graph.putRelation({id:`${rid}:denotes:${conceptId}`,kind:"denotes_concept",from:rid,to:conceptId,confidence:1});
     }
   }
 

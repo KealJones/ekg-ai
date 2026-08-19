@@ -10,8 +10,15 @@ const safe=(x:string)=>norm(x).replace(/[^a-z0-9._-]+/g,"-").replace(/^-|-$/g,""
 
 export type GrammarSemantics =
   | {kind:"assert-binary";predicate:string;subjectCapture:string;objectCapture:string}
+  | {kind:"assert-binary-negation";predicate:string;subjectCapture:string;objectCapture:string}
+  | {kind:"assert-binary-conjunction";predicate:string;subjectsCapture:string;objectCapture:string}
+  | {kind:"assert-universal";classCapture:string;propertyPredicate:string;propertyValueCapture:string}
   | {kind:"query-binary-object";predicate:string;subjectCapture:string}
+  | {kind:"query-binary-truth";predicate:string;subjectCapture:string;objectCapture:string}
   | {kind:"query-binary-predicate";predicateFamily:string;subjectCapture:string;objectCapture:string}
+  | {kind:"query-count";predicate:string;subjectCapture:string}
+  | {kind:"query-set";predicate:string;subjectCapture:string}
+  | {kind:"query-class-property";classCapture:string;propertyPredicate:string}
   | {kind:"assert-event";frameId:string;roles:Record<string,string>}
   | {kind:"query-event-role";frameId:string;targetRole:string;constraints:Record<string,string>};
 export interface GrammarRule {id:string;pattern:string;semantics:GrammarSemantics;provenance:string[];confidence?:number}
@@ -36,11 +43,20 @@ export function storeGrammarRule(graph:GraphStore,rule:GrammarRule):void{
   if(!rule.provenance.length) throw new Error("grammar rule provenance is required");
   const tokens=tokenizePattern(rule.pattern);
   const captures=new Set(tokens.map(captureName).filter(Boolean));
-  const required = rule.semantics.kind==="assert-binary" ? [rule.semantics.subjectCapture,rule.semantics.objectCapture]
-    : rule.semantics.kind==="query-binary-object" ? [rule.semantics.subjectCapture]
-    : rule.semantics.kind==="query-binary-predicate" ? [rule.semantics.subjectCapture,rule.semantics.objectCapture]
-    : rule.semantics.kind==="assert-event" ? Object.values(rule.semantics.roles)
-    : Object.values(rule.semantics.constraints);
+  const s=rule.semantics;
+  const required = s.kind==="assert-binary" ? [s.subjectCapture,s.objectCapture]
+    : s.kind==="assert-binary-negation" ? [s.subjectCapture,s.objectCapture]
+    : s.kind==="assert-binary-conjunction" ? [s.subjectsCapture,s.objectCapture]
+    : s.kind==="assert-universal" ? [s.classCapture,s.propertyValueCapture]
+    : s.kind==="query-binary-object" ? [s.subjectCapture]
+    : s.kind==="query-binary-truth" ? [s.subjectCapture,s.objectCapture]
+    : s.kind==="query-binary-predicate" ? [s.subjectCapture,s.objectCapture]
+    : s.kind==="query-count" ? [s.subjectCapture]
+    : s.kind==="query-set" ? [s.subjectCapture]
+    : s.kind==="query-class-property" ? [s.classCapture]
+    : s.kind==="assert-event" ? Object.values(s.roles)
+    : s.kind==="query-event-role" ? Object.values(s.constraints)
+    : [];
   if(required.some(x=>!captures.has(x))) throw new Error("grammar semantics references an absent capture");
   graph.putEntity({id:`grammar:${safe(rule.id)}`,kind:"grammar_rule",labels:["learned-grammar",rule.semantics.kind],attrs:{...rule,tokens,confidence:rule.confidence??.9,durable:true,status:"active"}});
 }
@@ -125,18 +141,83 @@ export function queryWorldRelation(graph:GraphStore,subject:string,object:string
   return undefined;
 }
 
+export function queryWorldFactTruth(graph:GraphStore,subject:string,predicate:string,object:string):JsonValue{
+  const s=norm(subject),o=norm(object);
+  const exists=graph.entitiesByKind("fact").some(f=>f.attrs?.active!==false&&f.attrs?.subject===s&&f.attrs?.predicate===predicate&&f.attrs?.object===o);
+  return exists?"yes":"no";
+}
+
+export function queryWorldFactCount(graph:GraphStore,subject:string,predicate:string):JsonValue{
+  const s=norm(subject);
+  return graph.entitiesByKind("fact").filter(f=>f.attrs?.active!==false&&f.attrs?.subject===s&&f.attrs?.predicate===predicate).length;
+}
+
+export function queryWorldFactSet(graph:GraphStore,subject:string,predicate:string):JsonValue{
+  const s=norm(subject);
+  return graph.entitiesByKind("fact").filter(f=>f.attrs?.active!==false&&f.attrs?.subject===s&&f.attrs?.predicate===predicate).sort((a,b)=>Number(a.attrs?.sequence??0)-Number(b.attrs?.sequence??0)).map(f=>String(f.attrs!.object));
+}
+
+export function retractWorldFact(graph:GraphStore,subject:string,predicate:string,object:string):void{
+  const s=norm(subject),o=norm(object);
+  for(const f of graph.entitiesByKind("fact").filter(f=>f.attrs?.active!==false&&f.attrs?.subject===s&&f.attrs?.predicate===predicate&&f.attrs?.object===o))
+    graph.putEntity({...f,attrs:{...(f.attrs??{}),active:false,retracted:true}});
+}
+
+export function assertUniversalRule(graph:GraphStore,className:string,propertyPredicate:string,propertyValue:string,provenance:string[]):string{
+  const id=`universal:${safe(className)}:${safe(propertyPredicate)}:${safe(propertyValue)}`;
+  graph.putEntity({id,kind:"inference_rule",labels:["universal-rule","learned-inference"],attrs:{
+    id,kind:"universal",className:norm(className),propertyPredicate,propertyValue:norm(propertyValue),provenance,confidence:.9,durable:true,status:"active"
+  }});
+  return id;
+}
+
+export function queryClassProperty(graph:GraphStore,instanceName:string,propertyPredicate:string):JsonValue|undefined{
+  const inst=norm(instanceName);
+  const directFact=graph.entitiesByKind("fact").find(f=>f.attrs?.active!==false&&f.attrs?.subject===inst&&f.attrs?.predicate===propertyPredicate);
+  if(directFact) return String(directFact.attrs!.object);
+  const classFacts=graph.entitiesByKind("fact").filter(f=>f.attrs?.active!==false&&f.attrs?.subject===inst&&f.attrs?.predicate==="is_a");
+  for(const cf of classFacts){
+    const className=norm(String(cf.attrs!.object));
+    const plurals=[className, className+"s", className+"es"];
+    const rules=graph.entitiesByKind("inference_rule").filter(r=>r.attrs?.kind==="universal"&&plurals.includes(norm(String(r.attrs?.className??"")))&&r.attrs?.propertyPredicate===propertyPredicate&&r.attrs?.status!=="deprecated");
+    if(rules.length) return String(rules[0]!.attrs!.propertyValue);
+  }
+  return undefined;
+}
+
 export class WorldLanguageEngine {
   constructor(private readonly graph:GraphStore){}
   ingest(line:string):{understood:boolean;ruleId?:string;factId?:string;eventId?:string}{
     for(const rule of rules(this.graph)){
       const c=match(rule,line); if(!c) continue;
+      const prov=[...rule.provenance,`grammar:${rule.id}`,`utterance:${line}`];
       if(rule.semantics.kind==="assert-binary"){
-        const factId=assertWorldFact(this.graph,{subject:c[rule.semantics.subjectCapture]!,predicate:rule.semantics.predicate,object:c[rule.semantics.objectCapture]!,provenance:[...rule.provenance,`grammar:${rule.id}`,`utterance:${line}`]});
+        const factId=assertWorldFact(this.graph,{subject:c[rule.semantics.subjectCapture]!,predicate:rule.semantics.predicate,object:c[rule.semantics.objectCapture]!,provenance:prov});
         return {understood:true,ruleId:rule.id,factId};
+      }
+      if(rule.semantics.kind==="assert-binary-negation"){
+        retractWorldFact(this.graph,c[rule.semantics.subjectCapture]!,rule.semantics.predicate,c[rule.semantics.objectCapture]!);
+        return {understood:true,ruleId:rule.id};
+      }
+      if(rule.semantics.kind==="assert-binary-conjunction"){
+        const sem=rule.semantics;
+        const allCaptures=Object.entries(c).filter(([k])=>k!==sem.objectCapture).map(([,v])=>v);
+        const object=c[sem.objectCapture]!;
+        let lastFactId:string|undefined;
+        for(const subject of allCaptures){
+          lastFactId=assertWorldFact(this.graph,{subject,predicate:rule.semantics.predicate,object,provenance:prov});
+        }
+        return {understood:true,ruleId:rule.id,factId:lastFactId};
+      }
+      if(rule.semantics.kind==="assert-universal"){
+        const className=c[rule.semantics.classCapture]!;
+        const propertyValue=c[rule.semantics.propertyValueCapture]!;
+        assertUniversalRule(this.graph,className,rule.semantics.propertyPredicate,propertyValue,prov);
+        return {understood:true,ruleId:rule.id};
       }
       if(rule.semantics.kind==="assert-event"){
         const roles=Object.fromEntries(Object.entries(rule.semantics.roles).map(([role,capture])=>[role,c[capture]!]));
-        const eventId=assertWorldEvent(this.graph,{frameId:rule.semantics.frameId,roles,provenance:[...rule.provenance,`grammar:${rule.id}`,`utterance:${line}`]});
+        const eventId=assertWorldEvent(this.graph,{frameId:rule.semantics.frameId,roles,provenance:prov});
         return {understood:true,ruleId:rule.id,eventId};
       }
     }
@@ -150,8 +231,24 @@ export class WorldLanguageEngine {
         const answer=queryLatestWorldFact(this.graph,c[rule.semantics.subjectCapture]!,rule.semantics.predicate);
         return answer===undefined?{abstained:true,ruleId:rule.id}:{answer,abstained:false,ruleId:rule.id};
       }
+      if(rule.semantics.kind==="query-binary-truth"){
+        const answer=queryWorldFactTruth(this.graph,c[rule.semantics.subjectCapture]!,rule.semantics.predicate,c[rule.semantics.objectCapture]!);
+        return {answer,abstained:false,ruleId:rule.id};
+      }
       if(rule.semantics.kind==="query-binary-predicate"){
         const answer=queryWorldRelation(this.graph,c[rule.semantics.subjectCapture]!,c[rule.semantics.objectCapture]!,rule.semantics.predicateFamily);
+        return answer===undefined?{abstained:true,ruleId:rule.id}:{answer,abstained:false,ruleId:rule.id};
+      }
+      if(rule.semantics.kind==="query-count"){
+        const answer=queryWorldFactCount(this.graph,c[rule.semantics.subjectCapture]!,rule.semantics.predicate);
+        return {answer,abstained:false,ruleId:rule.id};
+      }
+      if(rule.semantics.kind==="query-set"){
+        const answer=queryWorldFactSet(this.graph,c[rule.semantics.subjectCapture]!,rule.semantics.predicate);
+        return {answer,abstained:false,ruleId:rule.id};
+      }
+      if(rule.semantics.kind==="query-class-property"){
+        const answer=queryClassProperty(this.graph,c[rule.semantics.classCapture]!,rule.semantics.propertyPredicate);
         return answer===undefined?{abstained:true,ruleId:rule.id}:{answer,abstained:false,ruleId:rule.id};
       }
       if(rule.semantics.kind==="query-event-role"){
@@ -170,6 +267,7 @@ export class WorldLanguageEngine {
 
 export function starterLocationGrammar():GrammarRule[]{return [
   {id:"english.location.went-to",pattern:"{subject} went to the {place}",semantics:{kind:"assert-binary",predicate:"located_in",subjectCapture:"subject",objectCapture:"place"},provenance:["teacher:gpt-5.6-sol","curriculum:babi-location"]},
+  {id:"english.location.is-in",pattern:"{subject} is in the {place}",semantics:{kind:"assert-binary",predicate:"located_in",subjectCapture:"subject",objectCapture:"place"},provenance:["teacher:curriculum","curriculum:babi-location"]},
   {id:"english.location.where-is",pattern:"where is {subject}",semantics:{kind:"query-binary-object",predicate:"located_in",subjectCapture:"subject"},provenance:["teacher:gpt-5.6-sol","curriculum:babi-location"]},
   {id:"english.location.where-is-the",pattern:"where is the {subject}",semantics:{kind:"query-binary-object",predicate:"located_in",subjectCapture:"subject"},provenance:["teacher:gpt-5.6-sol","curriculum:babi-location"]},
 ]}
@@ -235,7 +333,7 @@ export function deriveWorldFacts(graph:GraphStore,maxRounds=6):string[]{
     created.push(factId);
     triples=[...triples,{subject:fact.object,predicate:inverse,object:fact.subject,factId,sequence:triples.length}];
   }
-  const ruleEntities=graph.entitiesByKind("inference_rule").filter(r=>r.attrs?.status!=="deprecated");
+  const ruleEntities=graph.entitiesByKind("inference_rule").filter(r=>r.attrs?.status!=="deprecated"&&r.attrs?.kind!=="universal"&&Array.isArray(r.attrs?.premises));
   for(let round=0;round<maxRounds;round++){
     let changed=false;
     triples=activeTriples(graph);
@@ -263,6 +361,7 @@ export function deriveWorldFacts(graph:GraphStore,maxRounds=6):string[]{
 
 export function starterPossessionGrammar():GrammarRule[]{return [
   {id:"english.possession.picked-up",pattern:"{subject} picked up the {object}",semantics:{kind:"assert-binary",predicate:"possesses",subjectCapture:"subject",objectCapture:"object"},provenance:["teacher:gpt-5.6-sol","curriculum:babi-possession"]},
+  {id:"english.possession.is-carrying",pattern:"{subject} is carrying a {object}",semantics:{kind:"assert-binary",predicate:"possesses",subjectCapture:"subject",objectCapture:"object"},provenance:["teacher:curriculum","curriculum:babi-possession"]},
 ]}
 export function possessionLocationInference():InferenceRule{return {
   id:"possessed-object-follows-holder-location",
@@ -292,3 +391,76 @@ export function starterGivingGrammar():GrammarRule[]{return [
   {id:"english.giving.gave-to",pattern:"{giver} gave the {theme} to {recipient}",semantics:{kind:"assert-event",frameId:"Giving",roles:{agent:"giver",theme:"theme",recipient:"recipient"}},provenance:["teacher:gpt-5.6-sol","curriculum:babi-semantic-roles"]},
   {id:"english.giving.who-recipient",pattern:"who did {giver} give the {theme} to",semantics:{kind:"query-event-role",frameId:"Giving",targetRole:"recipient",constraints:{agent:"giver",theme:"theme"}},provenance:["teacher:gpt-5.6-sol","curriculum:babi-semantic-roles"]},
 ]}
+
+// bAbI-06: yes/no questions
+export function starterTruthGrammar():GrammarRule[]{return [
+  {id:"english.truth.is-in-the",pattern:"is {subject} in the {place}",semantics:{kind:"query-binary-truth",predicate:"located_in",subjectCapture:"subject",objectCapture:"place"},provenance:["teacher:curriculum","curriculum:babi-yes-no"]},
+  {id:"english.truth.is-carrying",pattern:"is {subject} carrying a {item}",semantics:{kind:"query-binary-truth",predicate:"possesses",subjectCapture:"subject",objectCapture:"item"},provenance:["teacher:curriculum","curriculum:babi-yes-no"]},
+]}
+
+// bAbI-07/08: counting and set queries
+export function starterCountSetGrammar():GrammarRule[]{return [
+  {id:"english.count.carrying",pattern:"how many things is {subject} carrying",semantics:{kind:"query-count",predicate:"possesses",subjectCapture:"subject"},provenance:["teacher:curriculum","curriculum:babi-counting"]},
+  {id:"english.set.carrying",pattern:"what is {subject} carrying",semantics:{kind:"query-set",predicate:"possesses",subjectCapture:"subject"},provenance:["teacher:curriculum","curriculum:babi-sets"]},
+]}
+
+// bAbI-09: negation
+export function starterNegationGrammar():GrammarRule[]{return [
+  {id:"english.negation.not-in",pattern:"{subject} is not in the {place}",semantics:{kind:"assert-binary-negation",predicate:"located_in",subjectCapture:"subject",objectCapture:"place"},provenance:["teacher:curriculum","curriculum:babi-negation"]},
+]}
+
+// bAbI-12: conjunction
+export function starterConjunctionGrammar():GrammarRule[]{return [
+  {id:"english.conjunction.and-went-to",pattern:"{subject1} and {subject2} went to the {place}",semantics:{kind:"assert-binary-conjunction",predicate:"located_in",subjectsCapture:"subject1",objectCapture:"place"},provenance:["teacher:curriculum","curriculum:babi-conjunction"]},
+]}
+
+// bAbI-15: basic deduction
+export function starterDeductionGrammar():GrammarRule[]{return [
+  {id:"english.class.is-a",pattern:"{instance} is a {class}",semantics:{kind:"assert-binary",predicate:"is_a",subjectCapture:"instance",objectCapture:"class"},provenance:["teacher:curriculum","curriculum:babi-deduction"]},
+  {id:"english.class.is-a-and-property",pattern:"{instance} is a {class} and {instance2} is {value}",semantics:{kind:"assert-binary",predicate:"is_a",subjectCapture:"instance",objectCapture:"class"},provenance:["teacher:curriculum","curriculum:babi-deduction"]},
+  {id:"english.universal.all-are",pattern:"all {class} are {value}",semantics:{kind:"assert-universal",classCapture:"class",propertyPredicate:"has_property",propertyValueCapture:"value"},provenance:["teacher:curriculum","curriculum:babi-deduction"]},
+  {id:"english.query.what-property",pattern:"what color is {instance}",semantics:{kind:"query-class-property",classCapture:"instance",propertyPredicate:"has_property"},provenance:["teacher:curriculum","curriculum:babi-deduction"]},
+]}
+
+// bAbI-17: positional transitivity (spatial relations compose through shared intermediate)
+export function spatialTransitivityInference():InferenceRule{return {
+  id:"spatial-transitivity-left",
+  premises:[
+    {subject:"?a",predicate:"left_of",object:"?b"},
+    {subject:"?b",predicate:"left_of",object:"?c"},
+  ],
+  conclusion:{subject:"?a",predicate:"left_of",object:"?c"},
+  provenance:["teacher:curriculum","curriculum:babi-positional","rule:transitivity"]
+}}
+
+export function starterPositionalPredicates():PredicateDefinition[]{return [
+  {id:"left_of",family:"position",answerLabel:"left",inverseOf:"right_of",description:"subject is left of object",provenance:["teacher:curriculum","curriculum:babi-positional"]},
+  {id:"right_of",family:"position",answerLabel:"right",inverseOf:"left_of",description:"subject is right of object",provenance:["teacher:curriculum","curriculum:babi-positional"]},
+]}
+
+export function starterPositionalGrammar():GrammarRule[]{return [
+  {id:"english.position.left-of",pattern:"the {subject} is left of the {object}",semantics:{kind:"assert-binary",predicate:"left_of",subjectCapture:"subject",objectCapture:"object"},provenance:["teacher:curriculum","curriculum:babi-positional"]},
+  {id:"english.position.right-of",pattern:"the {subject} is right of the {object}",semantics:{kind:"assert-binary",predicate:"right_of",subjectCapture:"subject",objectCapture:"object"},provenance:["teacher:curriculum","curriculum:babi-positional"]},
+  {id:"english.position.where-relative",pattern:"where is the {subject} relative to the {object}",semantics:{kind:"query-binary-predicate",predicateFamily:"position",subjectCapture:"subject",objectCapture:"object"},provenance:["teacher:curriculum","curriculum:babi-positional"]},
+]}
+
+// bAbI-18: size transitivity
+export function starterSizePredicates():PredicateDefinition[]{return [
+  {id:"bigger_than",family:"size",answerLabel:"bigger",inverseOf:"smaller_than",description:"subject is bigger than object",provenance:["teacher:curriculum","curriculum:babi-size"]},
+  {id:"smaller_than",family:"size",answerLabel:"smaller",inverseOf:"bigger_than",description:"subject is smaller than object",provenance:["teacher:curriculum","curriculum:babi-size"]},
+]}
+
+export function starterSizeGrammar():GrammarRule[]{return [
+  {id:"english.size.bigger-than",pattern:"the {subject} is bigger than the {object}",semantics:{kind:"assert-binary",predicate:"bigger_than",subjectCapture:"subject",objectCapture:"object"},provenance:["teacher:curriculum","curriculum:babi-size"]},
+  {id:"english.size.how-sized",pattern:"how is the {subject} sized relative to the {object}",semantics:{kind:"query-binary-predicate",predicateFamily:"size",subjectCapture:"subject",objectCapture:"object"},provenance:["teacher:curriculum","curriculum:babi-size"]},
+]}
+
+export function sizeTransitivityInference():InferenceRule{return {
+  id:"size-transitivity-bigger",
+  premises:[
+    {subject:"?a",predicate:"bigger_than",object:"?b"},
+    {subject:"?b",predicate:"bigger_than",object:"?c"},
+  ],
+  conclusion:{subject:"?a",predicate:"bigger_than",object:"?c"},
+  provenance:["teacher:curriculum","curriculum:babi-size","rule:transitivity"]
+}}

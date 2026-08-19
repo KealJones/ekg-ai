@@ -1,7 +1,7 @@
 {
   "format": "ekg-brain",
   "version": 1,
-  "savedAt": "2026-08-19T17:36:30.545Z",
+  "savedAt": "2026-08-19T17:50:26.225Z",
   "graph": {
     "entities": [
       {
@@ -11066,6 +11066,38 @@
         }
       },
       {
+        "id": "grammar:english.location.is-in",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary"
+        ],
+        "attrs": {
+          "id": "english.location.is-in",
+          "pattern": "{subject} is in the {place}",
+          "semantics": {
+            "kind": "assert-binary",
+            "predicate": "located_in",
+            "subjectCapture": "subject",
+            "objectCapture": "place"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-location"
+          ],
+          "tokens": [
+            "{subject}",
+            "is",
+            "in",
+            "the",
+            "{place}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
         "id": "grammar:english.location.where-is",
         "kind": "grammar_rule",
         "labels": [
@@ -11149,6 +11181,38 @@
             "picked",
             "up",
             "the",
+            "{object}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.possession.is-carrying",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary"
+        ],
+        "attrs": {
+          "id": "english.possession.is-carrying",
+          "pattern": "{subject} is carrying a {object}",
+          "semantics": {
+            "kind": "assert-binary",
+            "predicate": "possesses",
+            "subjectCapture": "subject",
+            "objectCapture": "object"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-possession"
+          ],
+          "tokens": [
+            "{subject}",
+            "is",
+            "carrying",
+            "a",
             "{object}"
           ],
           "confidence": 0.9,
@@ -11541,6 +11605,649 @@
         }
       },
       {
+        "id": "grammar:english.truth.is-in-the",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "query-binary-truth"
+        ],
+        "attrs": {
+          "id": "english.truth.is-in-the",
+          "pattern": "is {subject} in the {place}",
+          "semantics": {
+            "kind": "query-binary-truth",
+            "predicate": "located_in",
+            "subjectCapture": "subject",
+            "objectCapture": "place"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-yes-no"
+          ],
+          "tokens": [
+            "is",
+            "{subject}",
+            "in",
+            "the",
+            "{place}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.truth.is-carrying",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "query-binary-truth"
+        ],
+        "attrs": {
+          "id": "english.truth.is-carrying",
+          "pattern": "is {subject} carrying a {item}",
+          "semantics": {
+            "kind": "query-binary-truth",
+            "predicate": "possesses",
+            "subjectCapture": "subject",
+            "objectCapture": "item"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-yes-no"
+          ],
+          "tokens": [
+            "is",
+            "{subject}",
+            "carrying",
+            "a",
+            "{item}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.count.carrying",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "query-count"
+        ],
+        "attrs": {
+          "id": "english.count.carrying",
+          "pattern": "how many things is {subject} carrying",
+          "semantics": {
+            "kind": "query-count",
+            "predicate": "possesses",
+            "subjectCapture": "subject"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-counting"
+          ],
+          "tokens": [
+            "how",
+            "many",
+            "things",
+            "is",
+            "{subject}",
+            "carrying"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.set.carrying",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "query-set"
+        ],
+        "attrs": {
+          "id": "english.set.carrying",
+          "pattern": "what is {subject} carrying",
+          "semantics": {
+            "kind": "query-set",
+            "predicate": "possesses",
+            "subjectCapture": "subject"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-sets"
+          ],
+          "tokens": [
+            "what",
+            "is",
+            "{subject}",
+            "carrying"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.negation.not-in",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary-negation"
+        ],
+        "attrs": {
+          "id": "english.negation.not-in",
+          "pattern": "{subject} is not in the {place}",
+          "semantics": {
+            "kind": "assert-binary-negation",
+            "predicate": "located_in",
+            "subjectCapture": "subject",
+            "objectCapture": "place"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-negation"
+          ],
+          "tokens": [
+            "{subject}",
+            "is",
+            "not",
+            "in",
+            "the",
+            "{place}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.conjunction.and-went-to",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary-conjunction"
+        ],
+        "attrs": {
+          "id": "english.conjunction.and-went-to",
+          "pattern": "{subject1} and {subject2} went to the {place}",
+          "semantics": {
+            "kind": "assert-binary-conjunction",
+            "predicate": "located_in",
+            "subjectsCapture": "subject1",
+            "objectCapture": "place"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-conjunction"
+          ],
+          "tokens": [
+            "{subject1}",
+            "and",
+            "{subject2}",
+            "went",
+            "to",
+            "the",
+            "{place}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.class.is-a",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary"
+        ],
+        "attrs": {
+          "id": "english.class.is-a",
+          "pattern": "{instance} is a {class}",
+          "semantics": {
+            "kind": "assert-binary",
+            "predicate": "is_a",
+            "subjectCapture": "instance",
+            "objectCapture": "class"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-deduction"
+          ],
+          "tokens": [
+            "{instance}",
+            "is",
+            "a",
+            "{class}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.class.is-a-and-property",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary"
+        ],
+        "attrs": {
+          "id": "english.class.is-a-and-property",
+          "pattern": "{instance} is a {class} and {instance2} is {value}",
+          "semantics": {
+            "kind": "assert-binary",
+            "predicate": "is_a",
+            "subjectCapture": "instance",
+            "objectCapture": "class"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-deduction"
+          ],
+          "tokens": [
+            "{instance}",
+            "is",
+            "a",
+            "{class}",
+            "and",
+            "{instance2}",
+            "is",
+            "{value}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.universal.all-are",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-universal"
+        ],
+        "attrs": {
+          "id": "english.universal.all-are",
+          "pattern": "all {class} are {value}",
+          "semantics": {
+            "kind": "assert-universal",
+            "classCapture": "class",
+            "propertyPredicate": "has_property",
+            "propertyValueCapture": "value"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-deduction"
+          ],
+          "tokens": [
+            "all",
+            "{class}",
+            "are",
+            "{value}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.query.what-property",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "query-class-property"
+        ],
+        "attrs": {
+          "id": "english.query.what-property",
+          "pattern": "what color is {instance}",
+          "semantics": {
+            "kind": "query-class-property",
+            "classCapture": "instance",
+            "propertyPredicate": "has_property"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-deduction"
+          ],
+          "tokens": [
+            "what",
+            "color",
+            "is",
+            "{instance}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "predicate:left_of",
+        "kind": "concept",
+        "labels": [
+          "predicate",
+          "left_of"
+        ],
+        "attrs": {
+          "predicate": "left_of",
+          "functionalObject": false,
+          "family": "position",
+          "answerLabel": "left",
+          "inverseOf": "right_of",
+          "description": "subject is left of object",
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-positional"
+          ]
+        }
+      },
+      {
+        "id": "predicate:right_of",
+        "kind": "concept",
+        "labels": [
+          "predicate",
+          "right_of"
+        ],
+        "attrs": {
+          "predicate": "right_of",
+          "functionalObject": false,
+          "family": "position",
+          "answerLabel": "right",
+          "inverseOf": "left_of",
+          "description": "subject is right of object",
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-positional"
+          ]
+        }
+      },
+      {
+        "id": "grammar:english.position.left-of",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary"
+        ],
+        "attrs": {
+          "id": "english.position.left-of",
+          "pattern": "the {subject} is left of the {object}",
+          "semantics": {
+            "kind": "assert-binary",
+            "predicate": "left_of",
+            "subjectCapture": "subject",
+            "objectCapture": "object"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-positional"
+          ],
+          "tokens": [
+            "the",
+            "{subject}",
+            "is",
+            "left",
+            "of",
+            "the",
+            "{object}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.position.right-of",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary"
+        ],
+        "attrs": {
+          "id": "english.position.right-of",
+          "pattern": "the {subject} is right of the {object}",
+          "semantics": {
+            "kind": "assert-binary",
+            "predicate": "right_of",
+            "subjectCapture": "subject",
+            "objectCapture": "object"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-positional"
+          ],
+          "tokens": [
+            "the",
+            "{subject}",
+            "is",
+            "right",
+            "of",
+            "the",
+            "{object}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.position.where-relative",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "query-binary-predicate"
+        ],
+        "attrs": {
+          "id": "english.position.where-relative",
+          "pattern": "where is the {subject} relative to the {object}",
+          "semantics": {
+            "kind": "query-binary-predicate",
+            "predicateFamily": "position",
+            "subjectCapture": "subject",
+            "objectCapture": "object"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-positional"
+          ],
+          "tokens": [
+            "where",
+            "is",
+            "the",
+            "{subject}",
+            "relative",
+            "to",
+            "the",
+            "{object}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "inference:spatial-transitivity-left",
+        "kind": "inference_rule",
+        "labels": [
+          "learned-inference"
+        ],
+        "attrs": {
+          "id": "spatial-transitivity-left",
+          "premises": [
+            {
+              "subject": "?a",
+              "predicate": "left_of",
+              "object": "?b"
+            },
+            {
+              "subject": "?b",
+              "predicate": "left_of",
+              "object": "?c"
+            }
+          ],
+          "conclusion": {
+            "subject": "?a",
+            "predicate": "left_of",
+            "object": "?c"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-positional",
+            "rule:transitivity"
+          ],
+          "confidence": 0.95,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "predicate:bigger_than",
+        "kind": "concept",
+        "labels": [
+          "predicate",
+          "bigger_than"
+        ],
+        "attrs": {
+          "predicate": "bigger_than",
+          "functionalObject": false,
+          "family": "size",
+          "answerLabel": "bigger",
+          "inverseOf": "smaller_than",
+          "description": "subject is bigger than object",
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-size"
+          ]
+        }
+      },
+      {
+        "id": "predicate:smaller_than",
+        "kind": "concept",
+        "labels": [
+          "predicate",
+          "smaller_than"
+        ],
+        "attrs": {
+          "predicate": "smaller_than",
+          "functionalObject": false,
+          "family": "size",
+          "answerLabel": "smaller",
+          "inverseOf": "bigger_than",
+          "description": "subject is smaller than object",
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-size"
+          ]
+        }
+      },
+      {
+        "id": "grammar:english.size.bigger-than",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "assert-binary"
+        ],
+        "attrs": {
+          "id": "english.size.bigger-than",
+          "pattern": "the {subject} is bigger than the {object}",
+          "semantics": {
+            "kind": "assert-binary",
+            "predicate": "bigger_than",
+            "subjectCapture": "subject",
+            "objectCapture": "object"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-size"
+          ],
+          "tokens": [
+            "the",
+            "{subject}",
+            "is",
+            "bigger",
+            "than",
+            "the",
+            "{object}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "grammar:english.size.how-sized",
+        "kind": "grammar_rule",
+        "labels": [
+          "learned-grammar",
+          "query-binary-predicate"
+        ],
+        "attrs": {
+          "id": "english.size.how-sized",
+          "pattern": "how is the {subject} sized relative to the {object}",
+          "semantics": {
+            "kind": "query-binary-predicate",
+            "predicateFamily": "size",
+            "subjectCapture": "subject",
+            "objectCapture": "object"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-size"
+          ],
+          "tokens": [
+            "how",
+            "is",
+            "the",
+            "{subject}",
+            "sized",
+            "relative",
+            "to",
+            "the",
+            "{object}"
+          ],
+          "confidence": 0.9,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
+        "id": "inference:size-transitivity-bigger",
+        "kind": "inference_rule",
+        "labels": [
+          "learned-inference"
+        ],
+        "attrs": {
+          "id": "size-transitivity-bigger",
+          "premises": [
+            {
+              "subject": "?a",
+              "predicate": "bigger_than",
+              "object": "?b"
+            },
+            {
+              "subject": "?b",
+              "predicate": "bigger_than",
+              "object": "?c"
+            }
+          ],
+          "conclusion": {
+            "subject": "?a",
+            "predicate": "bigger_than",
+            "object": "?c"
+          },
+          "provenance": [
+            "teacher:curriculum",
+            "curriculum:babi-size",
+            "rule:transitivity"
+          ],
+          "confidence": 0.95,
+          "durable": true,
+          "status": "active"
+        }
+      },
+      {
         "id": "state:bootstrap:ekg-core-v1",
         "kind": "state_model",
         "labels": [
@@ -11552,7 +12259,7 @@
         "attrs": {
           "version": 2,
           "starterEnglishLessons": 248,
-          "initializedAt": "2026-08-19T17:36:30.545Z"
+          "initializedAt": "2026-08-19T17:50:26.225Z"
         }
       }
     ],

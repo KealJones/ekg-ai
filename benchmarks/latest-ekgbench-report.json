@@ -1,130 +1,176 @@
 {
   "benchmark": "EKGBench",
-  "version": "0.1",
-  "philosophy": "Developmental probes are allowed to fail. A newly passing locked probe is a capability event, not a reason to rewrite history.",
+  "version": "0.2",
   "babi20": {
     "count": 20,
-    "currentlyConnectedToQaAgent": false,
+    "passed": 13,
+    "abstained": 6,
     "probes": [
       {
         "id": "BABI-01",
         "family": "single-supporting-fact",
-        "skill": "retrieve one relevant fact",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "kitchen",
+        "expected": "kitchen"
       },
       {
         "id": "BABI-02",
         "family": "two-supporting-facts",
-        "skill": "chain two facts",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "garden",
+        "expected": "garden"
       },
       {
         "id": "BABI-03",
         "family": "three-supporting-facts",
-        "skill": "chain three facts",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "office",
+        "expected": "office"
       },
       {
         "id": "BABI-04",
         "family": "two-argument-relations",
-        "skill": "invert a binary relation",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "south",
+        "expected": "south"
       },
       {
         "id": "BABI-05",
         "family": "three-argument-relations",
-        "skill": "resolve subject/object/recipient roles",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "maya",
+        "expected": "maya"
       },
       {
         "id": "BABI-06",
         "family": "yes-no-questions",
-        "skill": "answer proposition truth",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "yes",
+        "expected": "yes"
       },
       {
         "id": "BABI-07",
         "family": "counting",
-        "skill": "count members of a set",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": 2,
+        "expected": 2
       },
       {
         "id": "BABI-08",
         "family": "lists-sets",
-        "skill": "return set members",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": [
+          "coin",
+          "key"
+        ],
+        "expected": [
+          "coin",
+          "key"
+        ]
       },
       {
         "id": "BABI-09",
         "family": "simple-negation",
-        "skill": "represent explicit negation",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "no",
+        "expected": "no"
       },
       {
         "id": "BABI-10",
         "family": "indefinite-knowledge",
-        "skill": "preserve uncertainty",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": false,
+        "abstained": false,
+        "answer": "no",
+        "expected": "maybe"
       },
       {
         "id": "BABI-11",
         "family": "basic-coreference",
-        "skill": "resolve pronoun to entity",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": false,
+        "abstained": true,
+        "expected": "pantry"
       },
       {
         "id": "BABI-12",
         "family": "conjunction",
-        "skill": "apply predicate to conjoined entities",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "kitchen",
+        "expected": "kitchen"
       },
       {
         "id": "BABI-13",
         "family": "compound-coreference",
-        "skill": "resolve plural coreference",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": false,
+        "abstained": true,
+        "expected": [
+          "Ava",
+          "Liam"
+        ]
       },
       {
         "id": "BABI-14",
         "family": "time-reasoning",
-        "skill": "reason over event order",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": false,
+        "abstained": true,
+        "expected": "Ava"
       },
       {
         "id": "BABI-15",
         "family": "basic-deduction",
-        "skill": "apply universal rule",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "white",
+        "expected": "white"
       },
       {
         "id": "BABI-16",
         "family": "basic-induction",
-        "skill": "induce class property from examples",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": false,
+        "abstained": true,
+        "expected": "white"
       },
       {
         "id": "BABI-17",
         "family": "positional-reasoning",
-        "skill": "compose spatial relations",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "left",
+        "expected": "left"
       },
       {
         "id": "BABI-18",
         "family": "size-reasoning",
-        "skill": "compose comparative size relations",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": true,
+        "abstained": false,
+        "answer": "bigger",
+        "expected": "bigger"
       },
       {
         "id": "BABI-19",
         "family": "path-finding",
-        "skill": "compose directional path",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": false,
+        "abstained": true,
+        "expected": [
+          "east",
+          "north"
+        ]
       },
       {
         "id": "BABI-20",
         "family": "agents-motivations",
-        "skill": "infer motivation for action",
-        "status": "ASPIRATIONAL_NOT_YET_CONNECTED"
+        "passed": false,
+        "abstained": true,
+        "expected": "hungry"
       }
     ]
   },
