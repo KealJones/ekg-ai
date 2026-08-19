@@ -1,7 +1,7 @@
 {
   "format": "ekg-brain",
   "version": 1,
-  "savedAt": "2026-08-19T17:50:26.225Z",
+  "savedAt": "2026-08-19T18:17:14.151Z",
   "graph": {
     "entities": [
       {
@@ -11034,6 +11034,1230 @@
         }
       },
       {
+        "id": "lexeme:en:went",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "went"
+        ],
+        "attrs": {
+          "form": "went",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-went-located_in",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "located_in"
+        ],
+        "attrs": {
+          "senseId": "world:went:located_in",
+          "relation": "located_in",
+          "contextCues": [],
+          "confidence": 0.95,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:located_in",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "located_in"
+        ],
+        "attrs": {
+          "relation": "located_in"
+        }
+      },
+      {
+        "id": "lexeme:en:moved",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "moved"
+        ],
+        "attrs": {
+          "form": "moved",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-moved-located_in",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "located_in"
+        ],
+        "attrs": {
+          "senseId": "world:moved:located_in",
+          "relation": "located_in",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:travelled",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "travelled"
+        ],
+        "attrs": {
+          "form": "travelled",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-travelled-located_in",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "located_in"
+        ],
+        "attrs": {
+          "senseId": "world:travelled:located_in",
+          "relation": "located_in",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:is-in",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "is in"
+        ],
+        "attrs": {
+          "form": "is in",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-is-in-located_in",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "located_in"
+        ],
+        "attrs": {
+          "senseId": "world:is-in:located_in",
+          "relation": "located_in",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:carrying",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "carrying"
+        ],
+        "attrs": {
+          "form": "carrying",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-carrying-possesses",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "possesses"
+        ],
+        "attrs": {
+          "senseId": "world:carrying:possesses",
+          "relation": "possesses",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:possesses",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "possesses"
+        ],
+        "attrs": {
+          "relation": "possesses"
+        }
+      },
+      {
+        "id": "lexeme:en:picked-up",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "picked up"
+        ],
+        "attrs": {
+          "form": "picked up",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-picked-up-possesses",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "possesses"
+        ],
+        "attrs": {
+          "senseId": "world:picked-up:possesses",
+          "relation": "possesses",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:holding",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "holding"
+        ],
+        "attrs": {
+          "form": "holding",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-holding-possesses",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "possesses"
+        ],
+        "attrs": {
+          "senseId": "world:holding:possesses",
+          "relation": "possesses",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:has",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "has"
+        ],
+        "attrs": {
+          "form": "has",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-has-possesses",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "possesses"
+        ],
+        "attrs": {
+          "senseId": "world:has:possesses",
+          "relation": "possesses",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:gave",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "gave"
+        ],
+        "attrs": {
+          "form": "gave",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-gave-gave_to",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "gave_to"
+        ],
+        "attrs": {
+          "senseId": "world:gave:gave_to",
+          "relation": "gave_to",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:gave_to",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "gave_to"
+        ],
+        "attrs": {
+          "relation": "gave_to"
+        }
+      },
+      {
+        "id": "lexeme:en:is-a",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "is a"
+        ],
+        "attrs": {
+          "form": "is a",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-is-a-is_a",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "is_a"
+        ],
+        "attrs": {
+          "senseId": "world:is-a:is_a",
+          "relation": "is_a",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:is_a",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "is_a"
+        ],
+        "attrs": {
+          "relation": "is_a"
+        }
+      },
+      {
+        "id": "lexeme:en:where",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "where"
+        ],
+        "attrs": {
+          "form": "where",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-where-query.location",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "query.location"
+        ],
+        "attrs": {
+          "senseId": "world:where:query.location",
+          "relation": "query.location",
+          "contextCues": [],
+          "questionFor": "located_in",
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:query.location",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "query.location"
+        ],
+        "attrs": {
+          "relation": "query.location"
+        }
+      },
+      {
+        "id": "lexeme:en:who",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "who"
+        ],
+        "attrs": {
+          "form": "who",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-who-query.agent",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "query.agent"
+        ],
+        "attrs": {
+          "senseId": "world:who:query.agent",
+          "relation": "query.agent",
+          "contextCues": [],
+          "questionFor": "agent",
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:query.agent",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "query.agent"
+        ],
+        "attrs": {
+          "relation": "query.agent"
+        }
+      },
+      {
+        "id": "lexeme:en:what",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "what"
+        ],
+        "attrs": {
+          "form": "what",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-what-query.generic",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "query.generic"
+        ],
+        "attrs": {
+          "senseId": "world:what:query.generic",
+          "relation": "query.generic",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:query.generic",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "query.generic"
+        ],
+        "attrs": {
+          "relation": "query.generic"
+        }
+      },
+      {
+        "id": "lexeme:en:how-many",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "how many"
+        ],
+        "attrs": {
+          "form": "how many",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-how-many-query.count",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "query.count"
+        ],
+        "attrs": {
+          "senseId": "world:how-many:query.count",
+          "relation": "query.count",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:query.count",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "query.count"
+        ],
+        "attrs": {
+          "relation": "query.count"
+        }
+      },
+      {
+        "id": "lexeme:en:the",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "the"
+        ],
+        "attrs": {
+          "form": "the",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-the-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:the:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:structural",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "structural"
+        ],
+        "attrs": {
+          "relation": "structural"
+        }
+      },
+      {
+        "id": "lexeme:en:a",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "a"
+        ],
+        "attrs": {
+          "form": "a",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-a-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:a:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:an",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "an"
+        ],
+        "attrs": {
+          "form": "an",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-an-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:an:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:to",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "to"
+        ],
+        "attrs": {
+          "form": "to",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-to-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:to:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:in",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "in"
+        ],
+        "attrs": {
+          "form": "in",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-in-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:in:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:by",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "by"
+        ],
+        "attrs": {
+          "form": "by",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-by-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:by:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:from",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "from"
+        ],
+        "attrs": {
+          "form": "from",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-from-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:from:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:of",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "of"
+        ],
+        "attrs": {
+          "form": "of",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-of-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:of:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:at",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "at"
+        ],
+        "attrs": {
+          "form": "at",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-at-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:at:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:on",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "on"
+        ],
+        "attrs": {
+          "form": "on",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-on-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:on:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:is",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "is"
+        ],
+        "attrs": {
+          "form": "is",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-is-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:is:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:are",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "are"
+        ],
+        "attrs": {
+          "form": "are",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-are-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:are:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:was",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "was"
+        ],
+        "attrs": {
+          "form": "was",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-was-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:was:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:were",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "were"
+        ],
+        "attrs": {
+          "form": "were",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-were-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:were:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:this",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "this"
+        ],
+        "attrs": {
+          "form": "this",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-this-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:this:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:that",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "that"
+        ],
+        "attrs": {
+          "form": "that",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-that-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:that:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:these",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "these"
+        ],
+        "attrs": {
+          "form": "these",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-these-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:these:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "lexeme:en:those",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "those"
+        ],
+        "attrs": {
+          "form": "those",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-those-structural",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "structural"
+        ],
+        "attrs": {
+          "senseId": "world:those:structural",
+          "relation": "structural",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "sense:world-not-negation",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "negation"
+        ],
+        "attrs": {
+          "senseId": "world:not:negation",
+          "relation": "negation",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:negation",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "negation"
+        ],
+        "attrs": {
+          "relation": "negation"
+        }
+      },
+      {
+        "id": "lexeme:en:no",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "no"
+        ],
+        "attrs": {
+          "form": "no",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-no-negation",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "negation"
+        ],
+        "attrs": {
+          "senseId": "world:no:negation",
+          "relation": "negation",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "sense:world-and-conjunction",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "conjunction"
+        ],
+        "attrs": {
+          "senseId": "world:and:conjunction",
+          "relation": "conjunction",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:conjunction",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "conjunction"
+        ],
+        "attrs": {
+          "relation": "conjunction"
+        }
+      },
+      {
+        "id": "lexeme:en:then",
+        "kind": "lexeme",
+        "labels": [
+          "lexeme",
+          "en",
+          "then"
+        ],
+        "attrs": {
+          "form": "then",
+          "language": "en"
+        }
+      },
+      {
+        "id": "sense:world-then-sequence",
+        "kind": "sense",
+        "labels": [
+          "word-sense",
+          "sequence"
+        ],
+        "attrs": {
+          "senseId": "world:then:sequence",
+          "relation": "sequence",
+          "contextCues": [],
+          "confidence": 0.9,
+          "provenance": [
+            "teacher:starter-world-v1",
+            "semantic:world-language"
+          ]
+        }
+      },
+      {
+        "id": "relation:sequence",
+        "kind": "concept",
+        "labels": [
+          "semantic-relation",
+          "sequence"
+        ],
+        "attrs": {
+          "relation": "sequence"
+        }
+      },
+      {
         "id": "grammar:english.location.went-to",
         "kind": "grammar_rule",
         "labels": [
@@ -12259,7 +13483,8 @@
         "attrs": {
           "version": 2,
           "starterEnglishLessons": 248,
-          "initializedAt": "2026-08-19T17:50:26.225Z"
+          "starterWorldLessons": 36,
+          "initializedAt": "2026-08-19T18:17:14.151Z"
         }
       }
     ],
@@ -17134,6 +18359,510 @@
         "kind": "expresses",
         "from": "sense:filesystem.env-var-env-value",
         "to": "relation:getenvvar",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:went:sense:sense:world-went-located_in",
+        "kind": "has_sense",
+        "from": "lexeme:en:went",
+        "to": "sense:world-went-located_in",
+        "confidence": 0.95
+      },
+      {
+        "id": "sense:world-went-located_in:expresses:relation:located_in",
+        "kind": "expresses",
+        "from": "sense:world-went-located_in",
+        "to": "relation:located_in",
+        "confidence": 0.95
+      },
+      {
+        "id": "lexeme:en:moved:sense:sense:world-moved-located_in",
+        "kind": "has_sense",
+        "from": "lexeme:en:moved",
+        "to": "sense:world-moved-located_in",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-moved-located_in:expresses:relation:located_in",
+        "kind": "expresses",
+        "from": "sense:world-moved-located_in",
+        "to": "relation:located_in",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:travelled:sense:sense:world-travelled-located_in",
+        "kind": "has_sense",
+        "from": "lexeme:en:travelled",
+        "to": "sense:world-travelled-located_in",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-travelled-located_in:expresses:relation:located_in",
+        "kind": "expresses",
+        "from": "sense:world-travelled-located_in",
+        "to": "relation:located_in",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:is-in:sense:sense:world-is-in-located_in",
+        "kind": "has_sense",
+        "from": "lexeme:en:is-in",
+        "to": "sense:world-is-in-located_in",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-is-in-located_in:expresses:relation:located_in",
+        "kind": "expresses",
+        "from": "sense:world-is-in-located_in",
+        "to": "relation:located_in",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:carrying:sense:sense:world-carrying-possesses",
+        "kind": "has_sense",
+        "from": "lexeme:en:carrying",
+        "to": "sense:world-carrying-possesses",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-carrying-possesses:expresses:relation:possesses",
+        "kind": "expresses",
+        "from": "sense:world-carrying-possesses",
+        "to": "relation:possesses",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:picked-up:sense:sense:world-picked-up-possesses",
+        "kind": "has_sense",
+        "from": "lexeme:en:picked-up",
+        "to": "sense:world-picked-up-possesses",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-picked-up-possesses:expresses:relation:possesses",
+        "kind": "expresses",
+        "from": "sense:world-picked-up-possesses",
+        "to": "relation:possesses",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:holding:sense:sense:world-holding-possesses",
+        "kind": "has_sense",
+        "from": "lexeme:en:holding",
+        "to": "sense:world-holding-possesses",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-holding-possesses:expresses:relation:possesses",
+        "kind": "expresses",
+        "from": "sense:world-holding-possesses",
+        "to": "relation:possesses",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:has:sense:sense:world-has-possesses",
+        "kind": "has_sense",
+        "from": "lexeme:en:has",
+        "to": "sense:world-has-possesses",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-has-possesses:expresses:relation:possesses",
+        "kind": "expresses",
+        "from": "sense:world-has-possesses",
+        "to": "relation:possesses",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:gave:sense:sense:world-gave-gave_to",
+        "kind": "has_sense",
+        "from": "lexeme:en:gave",
+        "to": "sense:world-gave-gave_to",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-gave-gave_to:expresses:relation:gave_to",
+        "kind": "expresses",
+        "from": "sense:world-gave-gave_to",
+        "to": "relation:gave_to",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:is-a:sense:sense:world-is-a-is_a",
+        "kind": "has_sense",
+        "from": "lexeme:en:is-a",
+        "to": "sense:world-is-a-is_a",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-is-a-is_a:expresses:relation:is_a",
+        "kind": "expresses",
+        "from": "sense:world-is-a-is_a",
+        "to": "relation:is_a",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:where:sense:sense:world-where-query.location",
+        "kind": "has_sense",
+        "from": "lexeme:en:where",
+        "to": "sense:world-where-query.location",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-where-query.location:expresses:relation:query.location",
+        "kind": "expresses",
+        "from": "sense:world-where-query.location",
+        "to": "relation:query.location",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:who:sense:sense:world-who-query.agent",
+        "kind": "has_sense",
+        "from": "lexeme:en:who",
+        "to": "sense:world-who-query.agent",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-who-query.agent:expresses:relation:query.agent",
+        "kind": "expresses",
+        "from": "sense:world-who-query.agent",
+        "to": "relation:query.agent",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:what:sense:sense:world-what-query.generic",
+        "kind": "has_sense",
+        "from": "lexeme:en:what",
+        "to": "sense:world-what-query.generic",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-what-query.generic:expresses:relation:query.generic",
+        "kind": "expresses",
+        "from": "sense:world-what-query.generic",
+        "to": "relation:query.generic",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:how-many:sense:sense:world-how-many-query.count",
+        "kind": "has_sense",
+        "from": "lexeme:en:how-many",
+        "to": "sense:world-how-many-query.count",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-how-many-query.count:expresses:relation:query.count",
+        "kind": "expresses",
+        "from": "sense:world-how-many-query.count",
+        "to": "relation:query.count",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:the:sense:sense:world-the-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:the",
+        "to": "sense:world-the-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-the-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-the-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:a:sense:sense:world-a-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:a",
+        "to": "sense:world-a-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-a-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-a-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:an:sense:sense:world-an-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:an",
+        "to": "sense:world-an-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-an-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-an-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:to:sense:sense:world-to-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:to",
+        "to": "sense:world-to-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-to-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-to-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:in:sense:sense:world-in-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:in",
+        "to": "sense:world-in-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-in-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-in-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:by:sense:sense:world-by-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:by",
+        "to": "sense:world-by-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-by-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-by-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:from:sense:sense:world-from-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:from",
+        "to": "sense:world-from-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-from-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-from-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:of:sense:sense:world-of-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:of",
+        "to": "sense:world-of-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-of-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-of-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:at:sense:sense:world-at-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:at",
+        "to": "sense:world-at-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-at-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-at-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:on:sense:sense:world-on-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:on",
+        "to": "sense:world-on-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-on-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-on-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:is:sense:sense:world-is-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:is",
+        "to": "sense:world-is-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-is-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-is-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:are:sense:sense:world-are-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:are",
+        "to": "sense:world-are-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-are-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-are-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:was:sense:sense:world-was-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:was",
+        "to": "sense:world-was-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-was-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-was-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:were:sense:sense:world-were-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:were",
+        "to": "sense:world-were-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-were-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-were-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:this:sense:sense:world-this-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:this",
+        "to": "sense:world-this-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-this-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-this-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:that:sense:sense:world-that-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:that",
+        "to": "sense:world-that-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-that-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-that-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:these:sense:sense:world-these-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:these",
+        "to": "sense:world-these-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-these-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-these-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:those:sense:sense:world-those-structural",
+        "kind": "has_sense",
+        "from": "lexeme:en:those",
+        "to": "sense:world-those-structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-those-structural:expresses:relation:structural",
+        "kind": "expresses",
+        "from": "sense:world-those-structural",
+        "to": "relation:structural",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:not:sense:sense:world-not-negation",
+        "kind": "has_sense",
+        "from": "lexeme:en:not",
+        "to": "sense:world-not-negation",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-not-negation:expresses:relation:negation",
+        "kind": "expresses",
+        "from": "sense:world-not-negation",
+        "to": "relation:negation",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:no:sense:sense:world-no-negation",
+        "kind": "has_sense",
+        "from": "lexeme:en:no",
+        "to": "sense:world-no-negation",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-no-negation:expresses:relation:negation",
+        "kind": "expresses",
+        "from": "sense:world-no-negation",
+        "to": "relation:negation",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:and:sense:sense:world-and-conjunction",
+        "kind": "has_sense",
+        "from": "lexeme:en:and",
+        "to": "sense:world-and-conjunction",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-and-conjunction:expresses:relation:conjunction",
+        "kind": "expresses",
+        "from": "sense:world-and-conjunction",
+        "to": "relation:conjunction",
+        "confidence": 0.9
+      },
+      {
+        "id": "lexeme:en:then:sense:sense:world-then-sequence",
+        "kind": "has_sense",
+        "from": "lexeme:en:then",
+        "to": "sense:world-then-sequence",
+        "confidence": 0.9
+      },
+      {
+        "id": "sense:world-then-sequence:expresses:relation:sequence",
+        "kind": "expresses",
+        "from": "sense:world-then-sequence",
+        "to": "relation:sequence",
         "confidence": 0.9
       }
     ]

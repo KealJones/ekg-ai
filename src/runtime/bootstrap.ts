@@ -1,7 +1,7 @@
 import type { GraphStore } from "../graph/graph.js";
 import type { CapabilityRegistry } from "./capabilities.js";
 import { seedPortableSubstrateKnowledge } from "./portable-knowledge.js";
-import { teachStarterEnglishLexicon } from "../intent/lexicon.js";
+import { teachStarterEnglishLexicon, teachStarterWorldLexicon } from "../intent/lexicon.js";
 import { storeGrammarRule, storePredicateDefinition, storeInferenceRule, storeEventFrameDefinition, starterLocationGrammar, starterPossessionGrammar, possessionLocationInference, starterSpatialPredicates, starterSpatialGrammar, starterGivingFrame, starterGivingGrammar, starterTruthGrammar, starterCountSetGrammar, starterNegationGrammar, starterConjunctionGrammar, starterDeductionGrammar, spatialTransitivityInference, starterPositionalPredicates, starterPositionalGrammar, starterSizePredicates, starterSizeGrammar, sizeTransitivityInference } from "../language/world-language.js";
 
 export const EKG_BOOTSTRAP_MARKER = "state:bootstrap:ekg-core-v1";
@@ -9,6 +9,7 @@ export const EKG_BOOTSTRAP_MARKER = "state:bootstrap:ekg-core-v1";
 export interface EkgBootstrapResult {
   initialized:boolean;
   starterEnglishLessons:number;
+  starterWorldLessons:number;
 }
 
 /**
@@ -17,17 +18,18 @@ export interface EkgBootstrapResult {
  * or rewrite bootstrap knowledge on every process start.
  */
 export function ensureEkgBootstrap(graph:GraphStore,caps:CapabilityRegistry):EkgBootstrapResult{
-  if(graph.getEntity(EKG_BOOTSTRAP_MARKER)) return {initialized:false,starterEnglishLessons:0};
+  if(graph.getEntity(EKG_BOOTSTRAP_MARKER)) return {initialized:false,starterEnglishLessons:0,starterWorldLessons:0};
   seedPortableSubstrateKnowledge(graph,caps);
   const starterEnglishLessons=teachStarterEnglishLexicon(graph);
+  const starterWorldLessons=teachStarterWorldLexicon(graph);
   installWorldLanguageGrammar(graph);
   graph.putEntity({
     id:EKG_BOOTSTRAP_MARKER,
     kind:"state_model",
     labels:["ekg-bootstrap","portable-substrate","starter-english","world-language-grammar"],
-    attrs:{version:2,starterEnglishLessons,initializedAt:new Date().toISOString()}
+    attrs:{version:2,starterEnglishLessons,starterWorldLessons,initializedAt:new Date().toISOString()}
   });
-  return {initialized:true,starterEnglishLessons};
+  return {initialized:true,starterEnglishLessons,starterWorldLessons};
 }
 
 function installWorldLanguageGrammar(graph:GraphStore):void{
