@@ -13,6 +13,7 @@ import { buildIntentTeacherContext } from "../intent/language-impasse.js";
 import { runProgram } from "../runtime/interpreter.js";
 import { teachSynonym } from "../intent/lexicon.js";
 import { dispatchUtterance } from "../intent/semantic-dispatch.js";
+import { askTeacher, isTeacherAvailable } from "./teacher-transport.js";
 import type { IntentInterpretation } from "../intent/intent.js";
 import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
 import type { Type } from "../ir/types.js";
@@ -113,6 +114,13 @@ export class EkgCli {
       if(!this.teacherEnabled){
         this.io.line(`Unresolved (Teacher OFF): ${interpreted.reason}`);
         return;
+      }
+      if(isTeacherAvailable()){
+        const response=askTeacher(rawUtterance);
+        if(response){
+          this.io.line(response.answer);
+          return;
+        }
       }
       const context=buildIntentTeacherContext(rawUtterance,interpreted,this.caps);
       this.io.line(`Teacher needed: ${interpreted.reason}`);
