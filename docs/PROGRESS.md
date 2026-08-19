@@ -608,3 +608,42 @@ This milestone also makes an important protocol constraint executable: if the ch
 - Full fast suite: **186/186 passing**.
 - Frozen v0.1 report remains 4/5 held-out solved vs 0/5 memorize baseline.
 - Search v2 historical `16x` guard rerun: legacy ~6.40s vs v2 ~120ms in the final v0.9.6 run (~53.2x), 7,204 scored legacy candidates vs 208 behaviorally distinct v2 candidates.
+
+## 2026-08-19 - v0.9.7 LadybugDB durable graph backend + audit fixes
+
+### Audit
+- Comprehensive v0.9.6 audit performed: 16 findings documented in `docs/AUDIT_V0.9.6.md`.
+- All critical and UX issues addressed in this release.
+
+### LadybugDB integration
+- LadybugDB (maintained Kuzu fork, `@ladybugdb/core`) is now the preferred embedded graph backend.
+- `GraphStore` interface widened with `snapshot()` and optional `sandbox()`.
+- `Brain` interface introduced - both `FileBrain` (JSON) and `LadybugBrain` (.lbdb) implement it.
+- Auto-detection: uses LadybugDB when available, falls back to FileBrain if not.
+- Auto-migration: existing `brain.json` migrates to `.lbdb` on first launch when native module present.
+- CLI `--backend memory|ladybug|auto` flag and `EKG_GRAPH_BACKEND` env var.
+- Platform-specific native module fallback (`@ladybugdb/core-{platform}-{arch}`).
+- `grounding-lesson.ts` sandbox hack replaced with proper `sandbox()` interface method.
+
+### Cypher pushdown optimizations
+- `activeTriples()` uses Cypher `MATCH (f:EKGEntity) WHERE f.kind='fact'` when backend supports it.
+- `deriveWorldFacts()` caches triple results per round instead of O(n^2) repeated scans.
+- `experienceEntities()` uses promoted `subjectId` column for indexed episode lookups via Cypher.
+
+### Seed brain
+- `ekg-data/seed-brain.json` ships with the repo: pre-installed English curriculum + portable substrate.
+- Fresh brains load from seed for instant language understanding on first run.
+- Both `FileBrain` and `LadybugBrain` check for seed.
+
+### Audit quick fixes
+- SIGINT handler saves brain on Ctrl+C.
+- Debounced `FileBrain` saves (dirty flag + 25ms timer) - eliminates 200+ file rewrites during bootstrap.
+- Synonym overwrite guard prevents ambiguating existing grounded forms.
+- `/exit` works during input prompts and clarification loops.
+- Ghost LadybugDB doctrine references cleaned up and replaced with real integration.
+
+### Evidence
+- Full fast suite: **190/190 passing, 0 skipped** (with native module installed).
+- LadybugDB integration test: real embedded round-trip with persistence across process restart.
+- Auto-migration tested: JSON brain -> LadybugDB with synonym preservation.
+- Search v2 benchmark unchanged.

@@ -26,8 +26,10 @@ Read [`docs/PROJECT_GOSPEL.md`](docs/PROJECT_GOSPEL.md) before making architectu
 - bounded process execution and Bash as explicit effectful host capabilities;
 - reference execution plus TypeScript/Rust backend support where applicable;
 - graph-native concepts/capabilities/teaching traces/evidence;
-- typed synthesis and learned-program reuse;
+- typed synthesis (Search v2) and learned-program reuse;
 - early natural-language grounding and correction learning;
+- **LadybugDB** embedded graph backend with OpenCypher queries (auto-fallback to in-memory JSON);
+- **seed brain** with pre-installed English curriculum for instant language understanding;
 - **EKGBench**, including all 20 bAbI prerequisite families plus personal aspirational program milestones.
 
 ## EKGBench
@@ -53,7 +55,17 @@ npm install
 npm run ekg
 ```
 
-The CLI loads or creates `ekg-data/brain.json`, so learned graph state, executable procedures, execution traces, and controller episodes survive process restarts. Example:
+On first run, EKG loads the **seed brain** (`ekg-data/seed-brain.json`) containing the starter English curriculum, so language understanding works immediately. If `@ladybugdb/core` is installed (included as an optional dependency), the brain auto-upgrades to LadybugDB's embedded graph database (`.lbdb`). Otherwise it runs on an in-memory graph backed by a JSON file.
+
+You can control the backend explicitly:
+
+```bash
+npm run ekg -- --backend ladybug    # force LadybugDB
+npm run ekg -- --backend memory     # force JSON file
+npm run ekg -- --backend auto       # default: LadybugDB if available
+```
+
+Example session:
 
 ```text
 EKG> deduct six from this number
@@ -69,9 +81,11 @@ Type `/help` inside the CLI for `/brain`, `/capabilities`, `/programs`, `/experi
 Development/test commands:
 
 ```bash
-npm test
-npm run benchmark:ekg
-npm run benchmark:search-v2
+npm test                          # full suite (190 tests)
+npm run benchmark:ekg             # developmental report card
+npm run benchmark:search-v2       # synthesis engine benchmark
+npm run test:ladybug              # LadybugDB mock tests
+npm run test:ladybug:integration  # real native round-trip (needs @ladybugdb/core)
 ```
 
 ## Historical experiments
@@ -135,11 +149,17 @@ If a learned capability's live implementation and executable snapshot are missin
 
 This is intentionally stronger than ordinary backup/restore: **lived experience is itself recovery evidence.** Teacher escalation is a last resort after durable implementation memory and accumulated usage evidence cannot repair the chain.
 
-### Current graph backend: in-process graph + local brain file
+### Graph backend: LadybugDB or in-memory fallback
 
-EKG runs on `MemoryGraphStore` and the in-process program/episode stores, with `FileBrain` persisting their complete state to one ordinary JSON file. This keeps the runtime zero-service and fully executable anywhere Node can run while still preserving learned competence across restarts.
+EKG's preferred graph backend is **LadybugDB** (the maintained Kuzu fork) - an embedded, serverless graph database with native OpenCypher support. `GraphStore` remains the semantic boundary; LadybugDB is a host realization, not EKG's identity.
 
-`GraphStore` remains the semantic boundary. A query-optimized backend may be added later only if it earns its complexity; restart persistence is already provided by `ekg-data/brain.json`.
+Two backends ship:
+- **`LadybugBrain`** (default when `@ladybugdb/core` is installed): embedded `.lbdb` database with OpenCypher queries, indexed episode lookups, and Cypher-pushdown optimizations for world-language fact queries. Programs and episodes persist in a sidecar JSON file alongside the `.lbdb`.
+- **`FileBrain`** (fallback): in-memory `MemoryGraphStore` with debounced atomic JSON file persistence. Zero native dependencies.
+
+Both implement the `Brain` interface. The CLI auto-detects which backend is available and auto-migrates from JSON to LadybugDB on first run when the native module is present.
+
+A **seed brain** (`ekg-data/seed-brain.json`) ships with the repo containing the baseline English curriculum and portable substrate. Fresh brains start from this seed rather than bootstrapping from code. See [`docs/LADYBUGDB.md`](docs/LADYBUGDB.md).
 
 ### Search v2 benchmark
 

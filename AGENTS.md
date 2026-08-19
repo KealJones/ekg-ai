@@ -183,6 +183,16 @@ When a developmental task requires multi-hop reasoning, prefer a general durable
 
 Select the next lesson because it teaches a reusable concept or procedure the learner is missing, not because it is the shortest path to making a benchmark green. Benchmarks are sensors for missing prerequisites. If a task reveals a need for inverse relations, argument roles, relation composition, temporal ordering, negation, counting, or another general concept, teach that concept directly and let any benchmark improvement be a consequence. Do not add benchmark-family-specific solvers or task-shaped knowledge unless the domain itself genuinely requires that abstraction.
 
+## Graph backend doctrine
+
+- Read `docs/LADYBUGDB.md` and the storage doctrine in `docs/PROJECT_GOSPEL.md` before changing graph persistence/retrieval.
+- `GraphStore` semantics are canonical; LadybugDB is the preferred embedded durable backend, not EKG's identity.
+- Keep `MemoryGraphStore` working as bootstrap/test/fallback.
+- Use OpenCypher for graph-native retrieval when the backend supports it; do not reimplement graph traversal with whole-store JS scans when Cypher can answer the query directly.
+- Search v2 may consume graph/history priors, but executable correctness remains grounded in EKG evaluation, not database ranking.
+- A **seed brain** (`ekg-data/seed-brain.json`) ships with the repo. Update the seed when baseline knowledge grows. The seed is the reproducible starting intelligence; runtime brains accumulate on top.
+- Both `FileBrain` (JSON) and `LadybugBrain` (.lbdb) implement the `Brain` interface. The CLI auto-detects backend availability and auto-migrates from JSON to LadybugDB.
+
 ## Resilience is a product invariant
 
 Do not treat learned-program/library entries as disposable single points of failure. Validated learned capabilities must preserve enough executable state in durable graph memory to be reconstructed. Normal EKG execution should use self-healing program lookup / resilient preflight when learned-program chains are involved. Repair from existing validated knowledge first; revalidate; record the repair. If recovery is impossible, escalate with a concrete broken-dependency diagnosis. Do not silently invent replacements, and do not abandon an entire chain merely because one live implementation pointer disappeared.
