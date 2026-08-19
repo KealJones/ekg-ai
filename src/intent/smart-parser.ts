@@ -313,15 +313,21 @@ function smartParseInner(
     }
   }
 
-  // 5. Try running any learned zero-arg program whose phrases match
+  // 5. Try running any learned zero-arg program whose name/description/phrases overlap with utterance
   if (programs) {
+    const utteranceWords = new Set(correctedLower.split(/\s+/).filter(w => w.length > 2));
+    let bestProg: ProgramBlueprint | undefined;
+    let bestScore = 0;
     for (const prog of programs.all()) {
       if (prog.inputs.length > 0) continue;
       const progEntity = store.getEntity(`program:${prog.id}`);
-      const desc = typeof progEntity?.attrs?.description === "string" ? String(progEntity.attrs.description).toLowerCase() : "";
-      if (desc && correctedLower.includes(desc.replace(/^learned from: /, "").slice(0, 20))) {
-        try { return {status: "executed", value: runProgram(prog, [], caps, programs), program: prog}; } catch {}
-      }
+      const searchable = [prog.id, prog.name ?? "", typeof progEntity?.attrs?.description === "string" ? String(progEntity.attrs.description) : ""].join(" ").toLowerCase();
+      const searchWords = searchable.split(/[\s_.\-:]+/).filter(w => w.length > 2);
+      const overlap = searchWords.filter(w => utteranceWords.has(w)).length;
+      if (overlap > bestScore) { bestScore = overlap; bestProg = prog; }
+    }
+    if (bestProg && bestScore >= 1) {
+      try { return {status: "executed", value: runProgram(bestProg, [], caps, programs), program: bestProg}; } catch {}
     }
   }
 
