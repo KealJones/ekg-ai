@@ -4,3 +4,4 @@ node_modules/
 
 ekg-data/*
 !ekg-data/seed-brain.json
+!ekg-data/wordnet-curated.json

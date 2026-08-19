@@ -97,6 +97,10 @@ export class EkgCli {
       this.persistLearnedProgram(dispatch.program,intentId,rawUtterance);
       return;
     }
+    if(dispatch.status==="conversational"){
+      this.io.line(dispatch.response);
+      return;
+    }
 
     // Fall back to legacy intent system (handles clarification, teacher, prompting, THEN composition)
     let interpreted:IntentInterpretation = dispatch.status==="intent" ? dispatch.interpretation : interpretComposedIntent(rawUtterance,this.brain.graph);

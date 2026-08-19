@@ -3,7 +3,7 @@ import { contextualLexicalSensesForText, lexicalSensesForText, type LexicalSense
 import { descriptorForRelation } from "./semantic-catalog.js";
 import { bestFuzzyMatch } from "./fuzzy.js";
 
-export type TokenRole = "action" | "entity" | "value" | "question" | "negation" | "conjunction" | "structural" | "unknown";
+export type TokenRole = "action" | "entity" | "value" | "question" | "negation" | "conjunction" | "structural" | "conversational" | "unknown";
 
 export interface ClassifiedToken {
   text: string;
@@ -24,7 +24,8 @@ export const numberWords: Record<string, number> = {
   twice:2, double:2, triple:3, quadruple:4, half:0.5,
 };
 
-const NON_ACTION_RELATIONS = new Set(["structural", "negation", "conjunction", "sequence"]);
+const NON_ACTION_RELATIONS = new Set(["structural", "negation", "conjunction", "sequence", "greeting", "farewell", "gratitude", "affirmative", "help-request"]);
+const CONVERSATIONAL_RELATIONS = new Set(["greeting", "farewell", "gratitude", "affirmative", "help-request"]);
 
 export function tokenize(utterance: string): string[] {
   return norm(utterance).split(/\s+/).filter(Boolean);
@@ -40,6 +41,7 @@ function roleFromRelation(relation: string, store?: GraphStore): TokenRole {
   if (relation === "negation") return "negation";
   if (relation === "conjunction" || relation === "sequence") return "conjunction";
   if (relation === "structural") return "structural";
+  if (CONVERSATIONAL_RELATIONS.has(relation)) return "conversational";
   if (descriptorForRelation(relation)) return "action";
   if (store) {
     const rid = `relation:${relation.toLowerCase()}`;

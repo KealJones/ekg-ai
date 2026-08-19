@@ -100,6 +100,12 @@ const STARTER_WORLD_LEXICON:WorldLexiconEntry[] = [
   // Connectors
   {forms:["and"],relation:"conjunction"},
   {forms:["then"],relation:"sequence"},
+  // Conversational / social cues
+  {forms:["hi","hello","hey","howdy","greetings"],relation:"greeting"},
+  {forms:["bye","goodbye","see you","later"],relation:"farewell"},
+  {forms:["thanks","thank you"],relation:"gratitude"},
+  {forms:["yes","yeah","yep","sure","ok"],relation:"affirmative"},
+  {forms:["help","what can you do"],relation:"help-request"},
 ];
 
 /** Initial world-language lessons supplied by Teacher: action verbs, question words, and structural words used by the semantic parser. */

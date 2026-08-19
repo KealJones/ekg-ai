@@ -2,10 +2,13 @@ import type { GraphStore } from "../graph/graph.js";
 import { classifyTokens, type ClassifiedToken } from "./token-classifier.js";
 import { descriptorForRelation } from "./semantic-catalog.js";
 
+export type ConversationalIntent = "greeting" | "farewell" | "gratitude" | "affirmative" | "help-request";
+
 export type ParsedUtterance =
   | {kind:"fact-assert"; subject:string; predicate:string; object:string; negated:boolean; confidence:number; provenance:string[]}
   | {kind:"fact-query"; queryType:"object"|"truth"|"count"|"set"|"predicate-family"; subject:string; predicate:string; object?:string; predicateFamily?:string; confidence:number; provenance:string[]}
   | {kind:"capability-command"; relation:string; args:ParsedArg[]; confidence:number; provenance:string[]}
+  | {kind:"conversational"; intent:ConversationalIntent; confidence:number; provenance:string[]}
   | {kind:"composed"; parts:ParsedUtterance[]}
   | {kind:"unresolved"; reason:string; tokens:ClassifiedToken[]};
 
@@ -51,12 +54,18 @@ export function parseUtterance(store: GraphStore | undefined, utterance: string)
   const entities = tokens.filter(t => t.role === "entity");
   const values = tokens.filter(t => t.role === "value");
   const questions = tokens.filter(t => t.role === "question");
+  const conversational = tokens.filter(t => t.role === "conversational");
   const hasNegation = tokens.some(t => t.role === "negation");
   const hasQuestionMark = utterance.trim().endsWith("?");
   const isQuestion = questions.length > 0 || hasQuestionMark;
 
   const provenance = ["semantic-parser:v0.1", ...tokens.filter(t => t.fuzzy).map(t => `fuzzy:${t.fuzzy!.original}->${t.fuzzy!.correctedTo}`)];
   const confidence = tokens.reduce((c, t) => t.fuzzy ? c * (1 - t.fuzzy.distance * 0.15) : c, 0.9);
+
+  if (actions.length === 0 && questions.length === 0 && conversational.length > 0) {
+    const intent = conversational[0]!.senses[0]?.relation as ConversationalIntent;
+    return {kind: "conversational", intent, confidence, provenance};
+  }
 
   if (actions.length === 0 && questions.length === 0) {
     return {kind: "unresolved", reason: "no recognized action or question word", tokens};

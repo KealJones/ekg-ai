@@ -2,6 +2,9 @@ import type { GraphStore } from "../graph/graph.js";
 import type { CapabilityRegistry } from "./capabilities.js";
 import { seedPortableSubstrateKnowledge } from "./portable-knowledge.js";
 import { teachStarterEnglishLexicon, teachStarterWorldLexicon } from "../intent/lexicon.js";
+import { importWordNetEntries, type WordNetExport } from "../intent/wordnet-import.js";
+import fs from "node:fs";
+import path from "node:path";
 import { storeGrammarRule, storePredicateDefinition, storeInferenceRule, storeEventFrameDefinition, starterLocationGrammar, starterPossessionGrammar, possessionLocationInference, starterSpatialPredicates, starterSpatialGrammar, starterGivingFrame, starterGivingGrammar, starterTruthGrammar, starterCountSetGrammar, starterNegationGrammar, starterConjunctionGrammar, starterDeductionGrammar, spatialTransitivityInference, starterPositionalPredicates, starterPositionalGrammar, starterSizePredicates, starterSizeGrammar, sizeTransitivityInference } from "../language/world-language.js";
 
 export const EKG_BOOTSTRAP_MARKER = "state:bootstrap:ekg-core-v1";
@@ -22,12 +25,13 @@ export function ensureEkgBootstrap(graph:GraphStore,caps:CapabilityRegistry):Ekg
   seedPortableSubstrateKnowledge(graph,caps);
   const starterEnglishLessons=teachStarterEnglishLexicon(graph);
   const starterWorldLessons=teachStarterWorldLexicon(graph);
+  const wordnetLessons=installWordNetVocabulary(graph);
   installWorldLanguageGrammar(graph);
   graph.putEntity({
     id:EKG_BOOTSTRAP_MARKER,
     kind:"state_model",
     labels:["ekg-bootstrap","portable-substrate","starter-english","world-language-grammar"],
-    attrs:{version:2,starterEnglishLessons,starterWorldLessons,initializedAt:new Date().toISOString()}
+    attrs:{version:3,starterEnglishLessons,starterWorldLessons,wordnetLessons,initializedAt:new Date().toISOString()}
   });
   return {initialized:true,starterEnglishLessons,starterWorldLessons};
 }
@@ -51,4 +55,19 @@ function installWorldLanguageGrammar(graph:GraphStore):void{
   for(const def of starterSizePredicates()) storePredicateDefinition(graph,def);
   for(const rule of starterSizeGrammar()) storeGrammarRule(graph,rule);
   storeInferenceRule(graph,sizeTransitivityInference());
+}
+
+function installWordNetVocabulary(graph:GraphStore):number{
+  const candidates=[
+    path.join(process.cwd(),"ekg-data","wordnet-curated.json"),
+    path.join(path.dirname(new URL(import.meta.url).pathname),"..","..","ekg-data","wordnet-curated.json"),
+  ];
+  for(const p of candidates){
+    try{
+      if(!fs.existsSync(p)) continue;
+      const data=JSON.parse(fs.readFileSync(p,"utf8")) as WordNetExport;
+      return importWordNetEntries(graph,data);
+    }catch{}
+  }
+  return 0;
 }
