@@ -1,7 +1,7 @@
 {
   "format": "ekg-brain",
   "version": 1,
-  "savedAt": "2026-08-19T18:17:14.151Z",
+  "savedAt": "2026-08-19T18:20:07.856Z",
   "graph": {
     "entities": [
       {
@@ -13484,7 +13484,7 @@
           "version": 2,
           "starterEnglishLessons": 248,
           "starterWorldLessons": 36,
-          "initializedAt": "2026-08-19T18:17:14.151Z"
+          "initializedAt": "2026-08-19T18:20:07.855Z"
         }
       }
     ],
