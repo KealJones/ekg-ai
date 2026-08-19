@@ -13,7 +13,7 @@ import { buildIntentTeacherContext } from "../intent/language-impasse.js";
 import { runProgram } from "../runtime/interpreter.js";
 import { teachSynonym } from "../intent/lexicon.js";
 import type { IntentInterpretation } from "../intent/intent.js";
-import type { Value } from "../ir/blueprint.js";
+import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
 import type { Type } from "../ir/types.js";
 import { formatCliValue,parseCliUtterance,parseTypedCliValue,renderType,validateCliInputs } from "./input.js";
 
@@ -104,6 +104,19 @@ export class EkgCli {
       .map(s=>s.type);
     const inputs=providedInputs??await this.promptInputs(inputTypes);
     validateCliInputs(inputs,inputTypes);
+
+    const intentId=interpreted.intent.id;
+    const learnedId=`intent-plan:${intentId}`;
+
+    // RUN: check if we already have a learned program for this exact intent
+    const existing=this.programs.get(learnedId);
+    if(existing){
+      const output=runProgram(existing,inputs,this.caps,this.programs);
+      this.io.line(formatCliValue(output));
+      return;
+    }
+
+    // PLAN + BUILD: create a new program and persist it
     const plan=planIntent(interpreted.intent,this.caps,this.brain.graph,this.programs);
     if(plan.status!=="planned" || !plan.program){
       this.io.line(`Unsupported: ${plan.reason??"could not construct a plan"}`);
@@ -111,6 +124,28 @@ export class EkgCli {
     }
     const output=runProgram(plan.program,inputs,this.caps,this.programs);
     this.io.line(formatCliValue(output));
+    this.persistLearnedProgram(plan.program,intentId,rawUtterance);
+  }
+
+  private persistLearnedProgram(program:ProgramBlueprint,intentId:string,utterance:string):void{
+    const safe=(s:string)=>s.replace(/[^a-zA-Z0-9._-]+/g,"-").replace(/^-|-$/g,"").slice(0,120);
+    const stored=this.programs.put({...program,provenance:[...(program.provenance??[]),"cli:interactive-execution"]});
+    const programEntityId=`program:${stored.id}`;
+    const conceptId=`concept:learned:${safe(intentId)}`;
+    const abilityId=`capability:learned:${stored.id}`;
+    const typeName=(t:any):string=>t.kind==="list"?`List<${typeName(t.item)}>`:t.kind;
+    if(!this.brain.graph.getEntity(programEntityId)){
+      this.brain.graph.putEntity({id:programEntityId,kind:"program",labels:["learned-program",stored.id],attrs:{programId:stored.id,description:`Learned from: ${utterance}`,inputs:stored.inputs.map(typeName),output:typeName(stored.output),provenance:stored.provenance,blueprintSnapshot:structuredClone(stored),inputTypeSnapshots:structuredClone(stored.inputs),outputTypeSnapshot:structuredClone(stored.output),snapshotStatus:"validated"}});
+    }
+    if(!this.brain.graph.getEntity(conceptId)){
+      this.brain.graph.putEntity({id:conceptId,kind:"concept",labels:["learned-concept",intentId],attrs:{concept:intentId,description:`Learned from: ${utterance}`}});
+    }
+    if(!this.brain.graph.getEntity(abilityId)){
+      this.brain.graph.putEntity({id:abilityId,kind:"capability",labels:["learned-capability",stored.id],attrs:{programId:stored.id,learned:true,durable:true,status:"active",inputs:stored.inputs.map(typeName),output:typeName(stored.output),provenance:stored.provenance}});
+      this.brain.graph.putRelation({id:`${conceptId}:implemented:${abilityId}`,kind:"implemented_by",from:conceptId,to:abilityId,confidence:1});
+      this.brain.graph.putRelation({id:`${abilityId}:program:${programEntityId}`,kind:"implemented_by_program",from:abilityId,to:programEntityId,confidence:1});
+      this.brain.graph.putRelation({id:`${programEntityId}:acquired:${abilityId}`,kind:"acquired_as_capability",from:programEntityId,to:abilityId,confidence:1});
+    }
   }
 
   private async promptInputs(types:Type[]):Promise<Value[]>{
