@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  MemoryGraphStore,MemoryProgramLibrary,babyCapabilities,seedPortableSubstrateKnowledge,
+  MemoryGraphStore,MemoryProgramLibrary,ekgCapabilities,seedPortableSubstrateKnowledge,
   storeLexicalSense,contextualLexicalSensesForText,interpretIntent,TeacherSchool,LanguageController
 } from '../dist/index.js';
 
@@ -18,7 +18,7 @@ test('same lexical form can retain multiple senses until context is learned',()=
 });
 
 test('Teacher can add durable context evidence without deleting either sense',()=>{
-  const graph=new MemoryGraphStore(), caps=babyCapabilities(), programs=new MemoryProgramLibrary();
+  const graph=new MemoryGraphStore(), caps=ekgCapabilities(), programs=new MemoryProgramLibrary();
   seedPortableSubstrateKnowledge(graph,caps); ambiguousBoost(graph);
   const school=new TeacherSchool(graph,caps,programs);
   assert.equal(school.teachContext('boost','Add',['amount'],['teacher:context-lesson'],'ScalarAddition').accepted,true);
@@ -29,7 +29,7 @@ test('Teacher can add durable context evidence without deleting either sense',()
 });
 
 test('context changes the chosen meaning of the same word and execution follows the chosen sense',()=>{
-  const graph=new MemoryGraphStore(), caps=babyCapabilities(), programs=new MemoryProgramLibrary();
+  const graph=new MemoryGraphStore(), caps=ekgCapabilities(), programs=new MemoryProgramLibrary();
   seedPortableSubstrateKnowledge(graph,caps); ambiguousBoost(graph);
   const school=new TeacherSchool(graph,caps,programs);
   school.teachContext('boost','Add',['amount'],['teacher:test'],'ScalarAddition');

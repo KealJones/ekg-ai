@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  MemoryGraphStore,babyCapabilities,seedPortableSubstrateKnowledge,teachStarterEnglishLexicon,
+  MemoryGraphStore,ekgCapabilities,seedPortableSubstrateKnowledge,teachStarterEnglishLexicon,
   teachSynonym,storeLexicalSense,lexicalSensesForText,interpretIntent,planIntent,runProgram,
   LanguageController
 } from '../dist/index.js';
 
 test('portable capability semantics live in graph and English can be explicitly taught over them',()=>{
-  const graph=new MemoryGraphStore(); const caps=babyCapabilities();
+  const graph=new MemoryGraphStore(); const caps=ekgCapabilities();
   seedPortableSubstrateKnowledge(graph,caps);
   assert.equal(graph.outgoing('relation:subtract','denotes_concept')[0].to,'concept:semantic:math.subtract');
   assert.equal(graph.outgoing('concept:semantic:math.subtract','implemented_by')[0].to,'capability:core.sub_int');
@@ -18,7 +18,7 @@ test('portable capability semantics live in graph and English can be explicitly 
 });
 
 test('before education deduct is unknown; after education graph grounding executes subtraction',()=>{
-  const graph=new MemoryGraphStore(); const caps=babyCapabilities();
+  const graph=new MemoryGraphStore(); const caps=ekgCapabilities();
   seedPortableSubstrateKnowledge(graph,caps);
   assert.equal(interpretIntent('deduct six from this number',graph).status,'teacher');
   teachStarterEnglishLexicon(graph);
@@ -32,7 +32,7 @@ test('before education deduct is unknown; after education graph grounding execut
 });
 
 test('a new synonym becomes durable lexical knowledge and needs no hard-coded planner change',()=>{
-  const graph=new MemoryGraphStore(); const caps=babyCapabilities();
+  const graph=new MemoryGraphStore(); const caps=ekgCapabilities();
   seedPortableSubstrateKnowledge(graph,caps); teachStarterEnglishLexicon(graph);
   assert.equal(interpretIntent('dock six from this number',graph).status,'teacher');
   teachSynonym(graph,{form:'dock',knownForm:'subtract',provenance:['teacher:test']});
@@ -52,7 +52,7 @@ test('polysemous lexical form retains multiple senses and asks rather than silen
 });
 
 test('semantic graph records explicit antonymy for opposed learned concepts',()=>{
-  const graph=new MemoryGraphStore(); const caps=babyCapabilities();
+  const graph=new MemoryGraphStore(); const caps=ekgCapabilities();
   seedPortableSubstrateKnowledge(graph,caps);
   assert.equal(graph.outgoing('relation:subtract','antonym_of')[0].to,'relation:add');
   assert.equal(graph.outgoing('relation:minimum','antonym_of')[0].to,'relation:maximum');

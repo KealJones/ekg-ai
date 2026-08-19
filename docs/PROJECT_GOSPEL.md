@@ -1,5 +1,10 @@
 # EKG Project Gospel
 
+## Learning survives process restarts
+
+Acquired competence and lived experience are not merely in-memory state. The runnable EKG brain must persist its graph, learned executable Blueprints, execution traces (successes and failures), and controller episodes to disk and load them again on startup. A capability is not “durable” if killing the process erases it. The current zero-dependency implementation uses one ordinary local brain file; external databases are optional future scale choices, not prerequisites for memory.
+
+
 ## North star
 
 EKG is **not an LLM** and should not be developed as though it were one.
@@ -7,7 +12,7 @@ EKG is **not an LLM** and should not be developed as though it were one.
 It is a lifelong, executable learning system whose growing body of concepts, language groundings, programs, capabilities, episodes, corrections, tests, and relationships is part of the intelligence itself.
 
 - Knowledge is **not expected out of the box**. Learning machinery may bootstrap early; knowledge and understanding are acquired through education and experience.
-- Zero-shot performance is not the product goal. A baby that has never been taught is allowed to be ignorant.
+- Zero-shot performance is not the product goal. An EKG instance that has never been taught is allowed to be ignorant.
 - Teacher interaction is normal. The important trajectory is that teaching leaves durable reusable knowledge and future related tasks require less help.
 - The graph is not an accessory cache. It is long-lived semantic and procedural memory: part of the system's lived experience.
 - EKG should not depend on a giant prompt/context window to remember what it knows. Relevant context should be retrieved from its accumulated experience.
@@ -74,6 +79,21 @@ The neural intent layer is not required to contain the whole world in frozen wei
 
 Validated Teacher corrections become supervision for both graph growth and optional later retraining/distillation of the small neural layer.
 
+
+### Blueprints as executable semantics
+
+Treat it as a live architectural hypothesis that **Blueprints may serve multiple compatible functions**: executable plans, semantic structures, learned procedures, and an interlingua between natural language and cognition.
+
+A target developmental loop is:
+
+`language -> typed semantic/executable Blueprint -> reasoning/retrieval/execution -> result Blueprint -> language`
+
+Language parsing and realization may themselves become learned reusable procedures/capabilities. Teacher demonstrations should therefore be mined not only for answers, but for durable transformations between surface language and structured meaning.
+
+Do **not** impose a one-layer rule. A separate linguistic/semantic IR is allowed whenever it earns its keep—for example by preserving ambiguity, discourse/pragmatics, morphology, incomplete meaning, multilingual surface structure, or a materially cheaper representation. Conversely, do not invent a second layer merely because conventional NLP architectures have one if Blueprint can express the same semantics cleanly.
+
+**Prefer shared semantics over duplicated semantics; prefer useful boundaries over minimal layer count.** See `docs/LANGUAGE_BLUEPRINTS.md`.
+
 ## Capability doctrine
 
 Pure primitives should cover boring portable computation. Host capabilities expose the environment: files, paths, processes/shell, clocks, etc.
@@ -86,7 +106,7 @@ A task-level convenience operation should preferably be learned/composed rather 
 
 Expected-red tests are first-class.
 
-BabyBench includes:
+EKGBench includes:
 
 - the twenty bAbI prerequisite skill families as long-term language/reasoning probes;
 - personal EKG milestones such as structured-object access;
@@ -98,7 +118,7 @@ When a long-red probe turns green without directly gifting its solution, treat t
 
 ## The sentence to remember
 
-**Give baby an alphabet, teach it for years, let every durable concept and capability become part of what it is, and watch that living competence revise and grow through experience.**
+**Give EKG an alphabet, teach it for years, let every durable concept and capability become part of what it is, and watch that living competence revise and grow through experience.**
 
 ## Resilience doctrine
 
@@ -116,12 +136,13 @@ A durable learned capability must not become a single brittle pointer whose disa
 
 ## Storage is an implementation detail; graph semantics are cognition
 
-- EKG's durable semantic/experiential graph is part of cognition, but **no specific database product is part of EKG's identity**.
-- Prefer a capable open property-graph backend when the environment supports one. **LadybugDB is the current preferred grown-up local backend** because it is embedded, native, persistent, Cypher-capable, and replaceable behind `GraphStore`. ArcadeDB remains a valid optional network/server realization rather than the canonical brain.
-- `MemoryGraphStore` remains a zero-install bootstrap/test/fallback brain. EKG must be able to hydrate/adapt when a durable backend becomes available.
-- Use Cypher aggressively for semantic traversal, language sense context, provenance, lived-experience recovery, and search priors. Do **not** use the database as a substitute for executable synthesis.
-- The learner should exploit the best storage/query substrate available in its environment without becoming dependent on that substrate for its ontology.
+- EKG's semantic/experiential graph is part of cognition, but **no specific database product is part of EKG's identity**.
+- The active v0 realization is `MemoryGraphStore`: synchronous, zero-dependency, in-process, and fully runnable in constrained/local environments.
+- Prefer the simplest storage substrate that lets the learner actually run, learn, execute, repair, and be tested end-to-end. Do not add infrastructure merely because a more powerful database exists.
+- `GraphStore` semantics are canonical. A future persistent or query-optimized backend may implement the same boundary if it provides enough benefit to justify its operational cost.
+- Search v2 may consume graph/history priors, but executable correctness remains grounded in EKG evaluation rather than database ranking.
+- Runtime graph/program/episode stores remain in-process for speed and portability, while `FileBrain` persists them to one local JSON brain file and reloads them at startup. Restart persistence is tested across separate Node processes.
 
 ## Storage is a host realization, not the mind's identity
 
-EKG's accumulated executable knowledge and lived experience belong to EKG, not to a database vendor. The semantic boundary is `GraphStore` / property-graph meaning. A capable host may realize that boundary with embedded LadybugDB and Cypher; a tiny host may use memory; another host may use a compatible graph database. Backend choice may improve retrieval and durability but must not redefine what EKG can mean or learn. Native/portable exports and reproducible reconstruction remain required so the learner's experience can move with it.
+EKG's accumulated executable knowledge and lived experience belong to EKG, not to a storage vendor. The semantic boundary is `GraphStore` / property-graph meaning. Today that boundary is realized by `MemoryGraphStore` plus the `FileBrain` snapshot wrapper; later hosts may add another graph engine without redefining what EKG can mean or learn. **Runability and portability outrank database sophistication.**

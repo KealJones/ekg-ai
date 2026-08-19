@@ -67,6 +67,8 @@ export function teachSynonym(store:GraphStore,args:{form:string;knownForm:string
   const known=lexicalSensesForText(store,args.knownForm).find(s=>norm(s.form)===norm(args.knownForm));
   if(!known) throw new Error(`cannot teach synonym from unknown form: ${args.knownForm}`);
   const learned={form:args.form,senseId:`${known.senseId}:syn:${safe(args.form)}`,relation:known.relation,definition:`Synonym of ${args.knownForm}: ${known.definition??known.relation}`,impliedValue:known.impliedValue,confidence:args.confidence??.9,provenance:[...args.provenance,`synonym-of:${args.knownForm}`]};
+  const existing=lexicalSensesForText(store,args.form).find(s=>norm(s.form)===norm(args.form)&&s.relation!==known.relation);
+  if(existing) throw new Error(`form '${args.form}' already has grounded sense '${existing.relation}'; teaching it as '${known.relation}' would create ambiguity`);
   storeLexicalSense(store,learned);
   const a=`lexeme:en:${safe(args.form)}`, b=`lexeme:en:${safe(args.knownForm)}`;
   if(store.getEntity(a)&&store.getEntity(b)&&!store.outgoing(a,"synonym_of").some(r=>r.to===b)) store.putRelation({id:`${a}:synonym:${b}`,kind:"synonym_of",from:a,to:b,confidence:learned.confidence});

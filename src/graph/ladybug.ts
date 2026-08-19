@@ -1,5 +1,6 @@
 import { createRequire } from 'node:module';
-import type { Entity, EntityKind, GraphStore, Relation } from './graph.js';
+import { MemoryGraphStore } from './graph.js';
+import type { Entity, EntityKind, GraphStore, MemoryGraphState, Relation } from './graph.js';
 
 export interface LadybugQueryResultLike {
   getAllSync(): Record<string, unknown>[];
@@ -29,14 +30,16 @@ export interface LadybugOpenOptions {
 const require = createRequire(import.meta.url);
 
 function loadLadybugModule(): LadybugModuleLike {
-  try {
-    return require('@ladybugdb/core') as LadybugModuleLike;
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error);
-    throw new Error(
-      `LadybugDB native module is not installed. Run \"npm install @ladybugdb/core\" in this environment. (${detail})`,
-    );
+  const candidates = [
+    '@ladybugdb/core',
+    `@ladybugdb/core-${process.platform}-${process.arch}`,
+  ];
+  for (const name of candidates) {
+    try { return require(name) as LadybugModuleLike; } catch {}
   }
+  throw new Error(
+    `LadybugDB native module is not installed. Run "npm install @ladybugdb/core" in this environment.`,
+  );
 }
 
 function asRows(result: LadybugQueryResultLike | LadybugQueryResultLike[]): Record<string, unknown>[] {
@@ -244,6 +247,19 @@ export class LadybugGraphStore implements GraphStore {
   close(): void {
     this.connection.close?.();
     this.database.close?.();
+  }
+
+  snapshot(): MemoryGraphState {
+    return { entities: this.allEntities(), relations: this.allRelations() };
+  }
+
+  /**
+   * Short-lived validation copy used for grounding-lesson checks. A tiny
+   * in-memory store is sufficient since sandboxes are throwaway and never
+   * need Ladybug's durability or Cypher surface.
+   */
+  sandbox(): GraphStore {
+    return new MemoryGraphStore(this.snapshot());
   }
 }
 

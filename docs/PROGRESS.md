@@ -580,7 +580,7 @@ This milestone also makes an important protocol constraint executable: if the ch
 - Recursive JSON/object values added to the IR/value universe.
 - Portable object primitives include parse/type/keys/get/has plus string split/list access building blocks.
 - Bounded process execution and Bash added as explicit effectful host capabilities.
-- BabyBench added with all 20 bAbI prerequisite families and personal object milestones.
+- EKGBench added with all 20 bAbI prerequisite families and personal object milestones.
 - OBJECT-001 passes; dot-path and variable-depth path milestones intentionally remain red.
 - 154/154 tests pass.
 
@@ -590,3 +590,21 @@ This milestone also makes an important protocol constraint executable: if the ch
 - Reconstruction uses historically observed capability/program neighborhoods to constrain synthesis before any broader fallback.
 - Reconstructed programs are validated against remembered successful usages and persisted back into durable graph memory with explicit provenance.
 - Added regression coverage proving recovery after deleting both the live program and all executable snapshots.
+
+## 2026-08-18 — v0.9.5 persistent local brain
+- Added `FileBrain`, a zero-service local persistence wrapper around the in-process graph, program library, execution experience, and controller episode stores.
+- Brain state is atomically written to one ordinary JSON file (`ekg-data/brain.json` by default) and loaded automatically at startup.
+- Native/host capability implementations remain runtime infrastructure and are reconstructed from the host; acquired graph/program/experience state persists.
+- Added a real two-process restart test: process A teaches a novel executable procedure and records experience; process B starts fresh from the same brain file, Teacher OFF, restores the procedure/graph identity/history, executes it successfully, and continues episode numbering.
+- This corrected earlier misuse of "durable" for state that had only been RAM-resident.
+
+## 2026-08-18 — v0.9.6 EKG CLI + terminology cleanup
+- Standardized active system terminology on **EKG** across code, tests, benchmark/API names, and current docs. The practical capability pack is `ekgCapabilities()` and the developmental report card is `EKGBench`.
+- Added `npm run ekg`, a persistent local REPL backed by `FileBrain`.
+- CLI supports typed input prompting and inline `utterance :: [inputs]` syntax, plus `/brain`, `/capabilities`, `/programs`, `/experience`, `/run`, `/teach synonym`, `/teacher`, `/save`, and `/exit`.
+- New brains install the portable substrate + starter English curriculum exactly once via a graph bootstrap marker.
+- Added a direct language-planning path from learned lexical grounding to acquired `ProgramBlueprint` calls when signatures match; learned procedures can therefore participate in language execution rather than only synthesis/reuse.
+- Added negative parsing/type tests, CLI process tests, persisted synonym teaching across restart, typed prompt tests, and learned-language program-call tests.
+- Full fast suite: **186/186 passing**.
+- Frozen v0.1 report remains 4/5 held-out solved vs 0/5 memorize baseline.
+- Search v2 historical `16x` guard rerun: legacy ~6.40s vs v2 ~120ms in the final v0.9.6 run (~53.2x), 7,204 scored legacy candidates vs 208 behaviorally distinct v2 candidates.

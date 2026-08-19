@@ -35,6 +35,10 @@ export interface MutableProgramLibrary extends ProgramLibrary {
   remove?(id:string):boolean;
 }
 
+function hasCypher(g: GraphStore): g is GraphStore & {cypher(q:string,p?:Record<string,unknown>):Record<string,unknown>[]} {
+  return typeof (g as any).cypher === "function";
+}
+
 const clone=<T>(x:T):T=>structuredClone(x);
 const safe=(s:string)=>s.replace(/[^a-zA-Z0-9._-]+/g,"-").replace(/^-|-$/g,"").slice(0,120)||"repair";
 
@@ -53,6 +57,19 @@ function recordRepair(graph:GraphStore,event:RepairEvent):void{
 
 
 function experienceEntities(graph:GraphStore,subjectId:string):ExecutionExperience[]{
+  if(hasCypher(graph)){
+    const rows=graph.cypher("MATCH (e:EKGEntity) WHERE e.kind='episode' AND e.subjectId=$subjectId RETURN e.id AS id, e.kind AS kind, e.labelsJson AS labelsJson, e.attrsJson AS attrsJson",{subjectId});
+    const results:ExecutionExperience[]=[];
+    for(const row of rows){
+      const labelsJson=row.labelsJson, attrsJson=row.attrsJson;
+      if(typeof labelsJson!=="string"||typeof attrsJson!=="string") continue;
+      let labels:unknown, attrs:unknown;
+      try{labels=JSON.parse(labelsJson);attrs=JSON.parse(attrsJson)}catch{continue}
+      if(!Array.isArray(labels)||!labels.includes("execution-experience")) continue;
+      results.push(clone(attrs as ExecutionExperience));
+    }
+    return results.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
+  }
   return graph.entitiesByKind("episode")
     .filter(e=>e.labels?.includes("execution-experience") && e.attrs?.subjectId===subjectId)
     .map(e=>clone(e.attrs as unknown as ExecutionExperience))

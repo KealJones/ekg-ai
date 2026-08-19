@@ -1,6 +1,10 @@
 import type { GraphStore } from "../graph/graph.js";
 import type { JsonValue } from "../ir/blueprint.js";
 
+function hasCypher(g: GraphStore): g is GraphStore & {cypher(q:string,p?:Record<string,unknown>):Record<string,unknown>[]} {
+  return typeof (g as any).cypher === "function";
+}
+
 const norm=(x:string)=>x.trim().toLowerCase().replace(/[?.!,]+$/g,"").replace(/\s+/g," ");
 const safe=(x:string)=>norm(x).replace(/[^a-z0-9._-]+/g,"-").replace(/^-|-$/g,"");
 
@@ -188,6 +192,20 @@ export function storeInferenceRule(graph:GraphStore,rule:InferenceRule):void{
 
 interface Triple {subject:string;predicate:string;object:string;factId:string;sequence:number}
 function activeTriples(graph:GraphStore):Triple[]{
+  if(hasCypher(graph)){
+    const rows=graph.cypher("MATCH (f:EKGEntity) WHERE f.kind='fact' RETURN f.id AS id, f.attrsJson AS attrsJson");
+    const triples:Triple[]=[];
+    for(const row of rows){
+      const id=String(row.id);
+      const attrsJson=row.attrsJson;
+      if(typeof attrsJson!=="string") continue;
+      let attrs:Record<string,unknown>;
+      try{attrs=JSON.parse(attrsJson)}catch{continue}
+      if(attrs.active===false) continue;
+      triples.push({subject:String(attrs.subject),predicate:String(attrs.predicate),object:String(attrs.object),factId:id,sequence:Number(attrs.sequence??0)});
+    }
+    return triples;
+  }
   return graph.entitiesByKind("fact").filter(f=>f.attrs?.active!==false).map(f=>({subject:String(f.attrs!.subject),predicate:String(f.attrs!.predicate),object:String(f.attrs!.object),factId:f.id,sequence:Number(f.attrs!.sequence??0)}));
 }
 const variable=(x:string)=>x.startsWith("?");
@@ -207,30 +225,35 @@ function subst(x:string,b:Record<string,string>):string|undefined{return variabl
 export function deriveWorldFacts(graph:GraphStore,maxRounds=6):string[]{
   const created:string[]=[];
   // Relation properties are durable learned semantics. Materialize inverse relations generically.
-  for(const fact of activeTriples(graph)){
+  let triples=activeTriples(graph);
+  for(const fact of triples){
     const def=graph.getEntity(`predicate:${safe(fact.predicate)}`);
     const inverse=typeof def?.attrs?.inverseOf==="string"?String(def.attrs.inverseOf):undefined;
     if(!inverse) continue;
-    if(activeTriples(graph).some(f=>f.subject===fact.object&&f.predicate===inverse&&f.object===fact.subject)) continue;
-    created.push(assertWorldFact(graph,{subject:fact.object,predicate:inverse,object:fact.subject,provenance:[...(Array.isArray(def?.attrs?.provenance)?def!.attrs!.provenance as string[]:[]),`inverse-of:${fact.predicate}`,`derived-from:${fact.factId}`]}));
+    if(triples.some(f=>f.subject===fact.object&&f.predicate===inverse&&f.object===fact.subject)) continue;
+    const factId=assertWorldFact(graph,{subject:fact.object,predicate:inverse,object:fact.subject,provenance:[...(Array.isArray(def?.attrs?.provenance)?def!.attrs!.provenance as string[]:[]),`inverse-of:${fact.predicate}`,`derived-from:${fact.factId}`]});
+    created.push(factId);
+    triples=[...triples,{subject:fact.object,predicate:inverse,object:fact.subject,factId,sequence:triples.length}];
   }
   const ruleEntities=graph.entitiesByKind("inference_rule").filter(r=>r.attrs?.status!=="deprecated");
   for(let round=0;round<maxRounds;round++){
     let changed=false;
+    triples=activeTriples(graph);
     for(const entity of ruleEntities){
       const rule=entity.attrs as unknown as InferenceRule;
       let bindings:Record<string,string>[]=[{}];
       for(const premise of rule.premises){
-        const facts=activeTriples(graph); const next:Record<string,string>[]=[];
+        const facts=triples; const next:Record<string,string>[]=[];
         for(const b of bindings) for(const f of facts){const u=unifyAtom(premise,f,b);if(u)next.push(u)}
         bindings=next; if(!bindings.length)break;
       }
       for(const b of bindings){
         const subject=subst(rule.conclusion.subject,b), object=subst(rule.conclusion.object,b);
         if(!subject||!object) continue;
-        if(activeTriples(graph).some(f=>f.subject===subject&&f.predicate===rule.conclusion.predicate&&f.object===object)) continue;
+        if(triples.some(f=>f.subject===subject&&f.predicate===rule.conclusion.predicate&&f.object===object)) continue;
         const factId=assertWorldFact(graph,{subject,predicate:rule.conclusion.predicate,object,provenance:[...rule.provenance,`derived-by:${rule.id}`]});
         created.push(factId); changed=true;
+        triples=[...triples,{subject,predicate:rule.conclusion.predicate,object,factId,sequence:triples.length}];
       }
     }
     if(!changed)break;

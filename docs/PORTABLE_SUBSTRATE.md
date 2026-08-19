@@ -10,7 +10,7 @@ Two layers are separate on purpose:
 - **Host capabilities**: explicit OS/runtime boundaries (filesystem, environment, path, clock).
 
 Experimental checkpoints may continue to use `defaultCapabilities()`.
-Interactive development should use `babyCapabilities()`.
+Interactive development should use `ekgCapabilities()`.
 
 ## Surface comparison
 

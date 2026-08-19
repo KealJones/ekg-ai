@@ -5,11 +5,6 @@ const experimental = new Set([
   "v0.4-phase0.test.mjs",
   "v0.5-phase0.test.mjs",
 ]);
-const integration = new Set([
-  "arcade-integration.test.mjs",
-  "ladybug-integration.test.mjs",
-]);
-
 const mode = process.argv[2] ?? "fast";
 const all = readdirSync(new URL("../tests/", import.meta.url))
   .filter(name => name.endsWith(".test.mjs"))
@@ -18,13 +13,10 @@ const all = readdirSync(new URL("../tests/", import.meta.url))
 let selected;
 switch (mode) {
   case "fast":
-    selected = all.filter(name => !experimental.has(name) && !integration.has(name));
+    selected = all.filter(name => !experimental.has(name));
     break;
   case "experiments":
     selected = all.filter(name => experimental.has(name));
-    break;
-  case "integration":
-    selected = all.filter(name => integration.has(name));
     break;
   case "all":
     selected = all;

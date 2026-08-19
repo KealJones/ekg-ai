@@ -6,7 +6,7 @@ EKG-AI is an experiment in **lifelong executable intelligence**: a system whose 
 
 ## North star
 
-- **Education, not zero-shot miracles.** Baby is allowed to start ignorant and get taught.
+- **Education, not zero-shot miracles.** EKG is allowed to start ignorant and get taught.
 - **Ever-learning.** Useful knowledge is not frozen permanently into model weights.
 - **Executable knowledge.** Concepts can ground into typed programs and host capabilities.
 - **Makes tools from tools.** Reusable learned compositions become capabilities of the growing system rather than temporary agent-tool calls.
@@ -17,7 +17,7 @@ EKG-AI is an experiment in **lifelong executable intelligence**: a system whose 
 
 Read [`docs/PROJECT_GOSPEL.md`](docs/PROJECT_GOSPEL.md) before making architectural tradeoffs. It is the current product/research doctrine.
 
-## What baby has now
+## What EKG has now
 
 - language-neutral typed Blueprint IR;
 - recursive JSON/object values;
@@ -28,14 +28,14 @@ Read [`docs/PROJECT_GOSPEL.md`](docs/PROJECT_GOSPEL.md) before making architectu
 - graph-native concepts/capabilities/teaching traces/evidence;
 - typed synthesis and learned-program reuse;
 - early natural-language grounding and correction learning;
-- **BabyBench**, including all 20 bAbI prerequisite families plus personal aspirational program milestones.
+- **EKGBench**, including all 20 bAbI prerequisite families plus personal aspirational program milestones.
 
-## BabyBench
+## EKGBench
 
 Developmental tests are allowed to be red. That is the point.
 
 ```bash
-npm run benchmark:baby
+npm run benchmark:ekg
 ```
 
 The object ladder currently begins with:
@@ -44,13 +44,34 @@ The object ladder currently begins with:
 2. `foo.bar` nested access;
 3. variable-depth nested access.
 
-The latter tests are intended to remain red until education/runtime growth enables baby to write the program.
+The latter tests are intended to remain red until education/runtime growth enables EKG to write the program.
 
-## Run
+## Run locally
+
+```bash
+npm install
+npm run ekg
+```
+
+The CLI loads or creates `ekg-data/brain.json`, so learned graph state, executable procedures, execution traces, and controller episodes survive process restarts. Example:
+
+```text
+EKG> deduct six from this number
+input[0] (int)> 20
+14
+
+EKG> deduct six from this number :: [20]
+14
+```
+
+Type `/help` inside the CLI for `/brain`, `/capabilities`, `/programs`, `/experience`, `/run`, `/teach synonym`, Teacher-display controls, save, and exit commands. See [`docs/CLI.md`](docs/CLI.md).
+
+Development/test commands:
 
 ```bash
 npm test
-npm run benchmark:baby
+npm run benchmark:ekg
+npm run benchmark:search-v2
 ```
 
 ## Historical experiments
@@ -86,7 +107,7 @@ This is the intended development model: **red -> teaching/experience -> durable 
 
 The curriculum is chosen for **general reuse**, not benchmark convenience. A red task should tell us which prerequisite concept is missing; we then teach that concept itself. For example, bAbI #4/#5 are valuable next targets because they expose broadly useful ideas like inverse relations, argument roles, and relation composition—not because those benchmark numbers need to turn green.
 
-## BabyBench school: graph-native facts and learned grammar
+## EKGBench school: graph-native facts and learned grammar
 
 The bAbI-style developmental suite is a curriculum, not a zero-shot exam. v0.8 introduces graph-native world facts plus durable symbolic grammar rules. Before location-language education, `BABI-01` abstains. Teaching two reusable rules (`{subject} went to the {place}` and `Where is {subject}?`) turns `BABI-01` green while multi-fact possession tasks remain red. This staged learning curve is desirable evidence of education, not failure.
 
@@ -96,7 +117,7 @@ The next curriculum layer teaches possession as a separate relation plus a gener
 
 `possesses(holder, item) AND located_in(holder, place) -> located_in(item, place)`
 
-With only location language taught, BabyBench 1–3 score `[pass, fail, fail]`. After possession grammar and the reusable inference rule are taught, the same probes score `[pass, pass, pass]`. The inference engine is generic over graph-stored binary Horn-style rules; the bAbI answers are not hard-coded.
+With only location language taught, EKGBench 1–3 score `[pass, fail, fail]`. After possession grammar and the reusable inference rule are taught, the same probes score `[pass, pass, pass]`. The inference engine is generic over graph-stored binary Horn-style rules; the bAbI answers are not hard-coded.
 
 ## v0.8.2 — Self-healing learned capability chains
 
@@ -114,14 +135,12 @@ If a learned capability's live implementation and executable snapshot are missin
 
 This is intentionally stronger than ordinary backup/restore: **lived experience is itself recovery evidence.** Teacher escalation is a last resort after durable implementation memory and accumulated usage evidence cannot repair the chain.
 
-### Durable brain: ArcadeDB + OpenCypher
+### Current graph backend: in-process graph + local brain file
 
-EKG now has an optional ArcadeDB-backed durable cognition layer. `HybridGraphStore` keeps a fast synchronous in-memory working graph while mirroring durable state to `ArcadeGraphStore`; a restarted learner can hydrate its graph from ArcadeDB. OpenCypher is available for semantic traversal, provenance, lived-experience recovery, and Search v2 priors. ArcadeDB is preferred when available, **not required**—the learner's ontology remains backend-independent.
+EKG runs on `MemoryGraphStore` and the in-process program/episode stores, with `FileBrain` persisting their complete state to one ordinary JSON file. This keeps the runtime zero-service and fully executable anywhere Node can run while still preserving learned competence across restarts.
+
+`GraphStore` remains the semantic boundary. A query-optimized backend may be added later only if it earns its complexity; restart persistence is already provided by `ekg-data/brain.json`.
 
 ### Search v2 benchmark
 
-On the historical depth-3 `16x` guard task, legacy exhaustive syntactic search took ~13.95s and explored 7,204 scored candidates. Search v2 completed the same unsolved proof in ~277ms, scoring 208 behaviorally distinct candidates after pruning 904 redundant expressions: ~50.3x faster on this machine. See `benchmarks/v0.9-search-v2-report.json`.
-
-## Embedded durable brain (LadybugDB)
-
-The preferred durable graph backend is now LadybugDB: an embedded Cypher property-graph engine. `MemoryGraphStore` remains the zero-install fallback; ArcadeDB remains an optional network adapter. Run the real integration locally with `npm install @ladybugdb/core` followed by `npm run test:ladybug:integration`. An internet-enabled GitHub Actions lane lives at `.github/workflows/ekg-remote-lab.yml`.
+On the historical depth-3 `16x` guard task, the latest v0.9.6 run measured legacy search at ~6.40s versus Search v2 at ~120ms (~53.2x faster), with 7,204 scored legacy candidates versus 208 behaviorally distinct v2 candidates. See `benchmarks/v0.9-search-v2-report.json`.

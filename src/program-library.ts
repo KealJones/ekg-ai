@@ -15,14 +15,28 @@ export interface ProgramLibrary {
   experiencesFor?(subjectId: string): ExecutionExperience[];
 }
 
+export interface MemoryProgramLibraryState {
+  programs: ProgramBlueprint[];
+  experiences: ExecutionExperience[];
+}
+
 export class MemoryProgramLibrary implements ProgramLibrary {
   private readonly programs = new Map<string, ProgramBlueprint>();
   private readonly experience = new Map<string, ExecutionExperience[]>();
+  constructor(initial?: MemoryProgramLibraryState, private readonly onChange?: () => void) {
+    for (const p of initial?.programs ?? []) this.programs.set(p.id, structuredClone(p));
+    for (const e of initial?.experiences ?? []) {
+      const xs=this.experience.get(e.subjectId)??[];
+      xs.push(structuredClone(e));
+      this.experience.set(e.subjectId,xs);
+    }
+  }
 
   put(program: ProgramBlueprint): ProgramBlueprint {
     const existingById = this.programs.get(program.id);
     if (existingById) {
       this.programs.set(program.id, structuredClone(program));
+      this.onChange?.();
       return structuredClone(program);
     }
 
@@ -35,6 +49,7 @@ export class MemoryProgramLibrary implements ProgramLibrary {
     }
 
     this.programs.set(program.id, structuredClone(program));
+    this.onChange?.();
     return structuredClone(program);
   }
 
@@ -51,7 +66,7 @@ export class MemoryProgramLibrary implements ProgramLibrary {
     return p ? structuredClone(p) : undefined;
   }
 
-  remove(id: string): boolean { return this.programs.delete(id); }
+  remove(id: string): boolean { const removed=this.programs.delete(id); if(removed) this.onChange?.(); return removed; }
 
   all(): ProgramBlueprint[] {
     return [...this.programs.values()].map(p => structuredClone(p));
@@ -61,10 +76,18 @@ export class MemoryProgramLibrary implements ProgramLibrary {
     const xs=this.experience.get(experience.subjectId)??[];
     xs.push(structuredClone(experience));
     this.experience.set(experience.subjectId,xs);
+    this.onChange?.();
   }
 
   experiencesFor(subjectId: string): ExecutionExperience[] {
     return (this.experience.get(subjectId)??[]).map(x=>structuredClone(x));
+  }
+
+  snapshot(): MemoryProgramLibraryState {
+    return {
+      programs:this.all(),
+      experiences:[...this.experience.values()].flat().map(e=>structuredClone(e))
+    };
   }
 
   compatible(inputs: Type[], output: Type): ProgramBlueprint[] {

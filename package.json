@@ -1,6 +1,6 @@
 {
   "name": "ekg-ai-v0",
-  "version": "0.9.1",
+  "version": "0.9.6",
   "private": true,
   "type": "module",
   "scripts": {
@@ -26,19 +26,24 @@
     "benchmark:v0.4-phase0": "npm run build && node benchmarks/v0.4-phase0.mjs",
     "benchmark:v0.5-phase0": "npm run build && node benchmarks/v0.5-phase0.mjs",
     "benchmark:portable-play": "npm run build && node benchmarks/v0.6-portable-play.mjs",
-    "benchmark:baby": "npm run build && node benchmarks/babybench.mjs",
+    "benchmark:ekg": "npm run build && node benchmarks/ekgbench.mjs",
     "benchmark:language-school": "npm run build && node benchmarks/v0.7-language-school.mjs",
     "benchmark:object-school": "npm run build && node benchmarks/v0.7-object-school.mjs",
     "benchmark:babi-school": "npm run build && node benchmarks/v0.8-babi-school.mjs",
     "benchmark:possession-school": "npm run build && node benchmarks/v0.8-possession-school.mjs",
     "benchmark:resilience": "npm run build && node benchmarks/v0.8-resilience.mjs",
     "benchmark:relations-roles-school": "npm run build && node benchmarks/v0.8-relations-roles-school.mjs",
-    "test:arcade": "npm run build && node --test tests/arcade-graph.test.mjs",
-    "test:arcade:integration": "npm run build && node --test tests/arcade-integration.test.mjs",
     "test:experiments": "npm run build && node scripts/run-tests.mjs experiments",
     "benchmark:search-v2": "npm run build && node benchmarks/v0.9-search-v2.mjs",
+    "ekg": "npm run build && node dist/cli/main.js",
+    "start": "npm run ekg",
     "test:ladybug": "npm run build && node --test tests/ladybug-graph.test.mjs",
-    "test:ladybug:integration": "npm run build && node --test tests/ladybug-integration.test.mjs",
-    "test:remote": "npm run test:ladybug:integration && npm test"
+    "test:ladybug:integration": "npm run build && node --test tests/ladybug-integration.test.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "optionalDependencies": {
+    "@ladybugdb/core": "^0.19.1"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "benchmark": "BabyBench",
+  "benchmark": "EKGBench",
   "version": "0.1",
   "philosophy": "Developmental probes are allowed to fail. A newly passing locked probe is a capability event, not a reason to rewrite history.",
   "babi20": {
@@ -132,7 +132,7 @@
     {
       "id": "OBJECT-001-single-property",
       "passed": true,
-      "candidatesExplored": 3,
+      "candidatesExplored": 2,
       "maxDepthReached": 1,
       "program": {
         "kind": "call",
@@ -161,13 +161,13 @@
     {
       "id": "OBJECT-PATH-001-dot-nested",
       "passed": false,
-      "candidatesExplored": 53,
+      "candidatesExplored": 2,
       "maxDepthReached": 2
     },
     {
       "id": "OBJECT-PATH-002-variable-depth",
       "passed": false,
-      "candidatesExplored": 53,
+      "candidatesExplored": 3,
       "maxDepthReached": 2
     }
   ]
