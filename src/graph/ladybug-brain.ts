@@ -27,10 +27,16 @@ export class LadybugBrain implements Brain {
     this.filePath = lbdbPath ?? process.env.EKG_LADYBUG_PATH ?? "ekg-data/brain.lbdb";
     this.metaPath = `${this.filePath}.meta.json`;
     this.seedIfNeeded();
+    this.cleanStaleWal();
     this.graph = LadybugGraphStore.open({ ...openOptions, path: this.filePath });
     const meta = this.readMeta();
     this.programs = new MemoryProgramLibrary(meta?.programs);
     this.episodes = new MemoryEpisodeStore(meta?.episodes);
+  }
+
+  private cleanStaleWal(): void {
+    const walPath = `${this.filePath}.wal`;
+    try { if (fs.existsSync(walPath)) fs.unlinkSync(walPath); } catch {}
   }
 
   private seedIfNeeded(): void {
