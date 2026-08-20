@@ -144,14 +144,13 @@ Types: {"kind":"int"}, {"kind":"string"}, {"kind":"bool"}, {"kind":"json"}, {"ki
 
 host.bash(command) returns json with stdout/stderr/exitCode - use it for anything the typed capabilities can't do directly (formatting, system commands, file operations, etc).
 
-TEACHING PRIORITY:
-1. blueprints - if the task needs composing capabilities or running commands
-2. capabilityMappings - if ONE word maps directly to ONE capability
-3. groundings - teach word meanings for the lexicon
-4. facts - ONLY timeless knowledge (NEVER current time/date/weather/prices)
-5. answer - ONLY when EKG genuinely cannot handle this with its capabilities
-
-CRITICAL: Use ONLY capability IDs from the list. Never invent IDs. All arrays can be empty.`;
+TEACHING RULES:
+- If an EXISTING learned program can handle the task (check the list above), DO NOT create a new blueprint. Instead teach groundings/synonyms/capabilityMappings that help EKG FIND the existing program.
+- Only create a NEW blueprint when no existing program does what's needed, or the task requires a genuinely different procedure.
+- If the user's request is a VARIANT of something EKG can already do (like "12 hour format" vs "24 hour"), create a new blueprint ONLY for the variant, with a DIFFERENT id, and teach a grounding that distinguishes the variant from the base.
+- Use ONLY capability IDs from the list. Never invent IDs.
+- facts are ONLY for timeless knowledge (NEVER current time/date/weather/prices).
+- All arrays can be empty. Prefer teaching the minimum needed.`;
 
   const result = config.run(prompt);
   if (!result) return undefined;
