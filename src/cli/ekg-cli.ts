@@ -46,12 +46,16 @@ export interface EkgCliIo {
   question(prompt:string):Promise<string>;
 }
 
+const CORRECTION_WORDS = new Set(["wrong","nope","incorrect","thats wrong","not right","try again","redo","retry"]);
+
 export class EkgCli {
   readonly brain:Brain;
   readonly caps=ekgCapabilities();
   readonly programs:SelfHealingProgramLibrary;
   teacherEnabled:boolean;
   private running=true;
+  private lastUtterance?:string;
+  private lastResult?:string;
   readonly bootstrap:{initialized:boolean;starterEnglishLessons:number;starterWorldLessons:number};
 
   constructor(private readonly io:EkgCliIo,options:EkgCliOptions={}){
@@ -86,6 +90,15 @@ export class EkgCli {
   }
 
   private async executeUtterance(rawUtterance:string,providedInputs?:Value[]):Promise<void>{
+    // Detect corrections: "wrong", "nope", "try again" etc.
+    const lower=rawUtterance.trim().toLowerCase().replace(/['.!?]/g,"");
+    if(this.lastUtterance && CORRECTION_WORDS.has(lower)){
+      this.io.line(`Re-evaluating: "${this.lastUtterance}"`);
+      rawUtterance=this.lastUtterance;
+      this.lastUtterance=undefined;
+      this.lastResult=undefined;
+    }
+
     const MAX_LEARN_ROUNDS = 2;
     let previousLearnedKeys = "";
     let teacherAnswer = "";
@@ -93,12 +106,13 @@ export class EkgCli {
     for(let round=0; round<=MAX_LEARN_ROUNDS; round++){
       const dispatch=dispatchUtterance(this.brain.graph,this.caps,this.programs,rawUtterance,providedInputs);
 
-      if(dispatch.status==="fact-recorded"){ this.io.line(dispatch.message); return; }
-      if(dispatch.status==="answer"){ this.io.line(formatCliValue(dispatch.value)); return; }
+      if(dispatch.status==="fact-recorded"){ this.io.line(dispatch.message); this.lastUtterance=rawUtterance; this.lastResult=dispatch.message; return; }
+      if(dispatch.status==="answer"){ this.io.line(formatCliValue(dispatch.value)); this.lastUtterance=rawUtterance; this.lastResult=String(dispatch.value); return; }
       if(dispatch.status==="conversational"){ this.io.line(dispatch.response); return; }
       if(dispatch.status==="executed"){
         this.io.line(formatCliValue(dispatch.value));
         this.persistLearnedProgram(dispatch.program,`semantic:${rawUtterance.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,80)}`,rawUtterance);
+        this.lastUtterance=rawUtterance; this.lastResult=formatCliValue(dispatch.value);
         return;
       }
 
