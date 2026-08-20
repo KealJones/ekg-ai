@@ -3,6 +3,7 @@ import type { GraphStore } from "../graph/graph.js";
 import type { Intent, IntentInterpretation } from "./intent.js";
 import { learnedPhraseGroundings, type PhraseGrounding } from "./phrase-grounding.js";
 import { contextualLexicalSensesForText } from "./lexicon.js";
+import { descriptorForRelation } from "./semantic-catalog.js";
 
 const numberWords:Record<string,number>={
   zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,
@@ -40,10 +41,17 @@ export function interpretIntent(rawUtterance:string,store?:GraphStore):IntentInt
     const escaped=phrase.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
     return new RegExp(`(?:^|\\b)${escaped}(?:\\b|$)`,"i").test(lower);
   };
-  // World-language function words (articles, prepositions, copulas, negation, connectors, question words)
-  // are grounded for the semantic parser but are never themselves a requested numeric/computation action.
   const nonActionRelations=new Set(["structural","negation","conjunction","sequence"]);
-  const isActionable=(relation:string)=>!nonActionRelations.has(relation) && !relation.startsWith("query.") && !relation.startsWith("wordnet.");
+  const isActionable=(relation:string)=>{
+    if(nonActionRelations.has(relation)) return false;
+    if(relation.startsWith("query.") || relation.startsWith("wordnet.")) return false;
+    if(descriptorForRelation(relation)) return true;
+    if(store){
+      const rid=`relation:${relation.toLowerCase()}`;
+      for(const rc of store.outgoing(rid,"denotes_concept")) if(store.outgoing(rc.to,"implemented_by").length>0) return true;
+    }
+    return false;
+  };
   const matched=groundings.filter(g=>isActionable(g.relation)&&phraseMatches(g.phrase)).sort((a,b)=>b.confidence-a.confidence);
   const distinctRelations=[...new Set(matched.map(g=>g.relation))];
 
