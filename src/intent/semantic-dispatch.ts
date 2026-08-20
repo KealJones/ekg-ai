@@ -121,9 +121,27 @@ export function dispatchUtterance(
     const allValues = parsed.args.every(a => a.kind === "value");
     if (allValues) {
       const result = buildIntentFromCapabilityCommand(parsed, store, caps, programs);
-      if ("error" in result) return {status: "unresolved", reason: result.error};
-      const output = runProgram(result.program, result.inputs, caps, programs);
-      return {status: "executed", value: output, program: result.program, inputs: result.inputs};
+      if (!("error" in result)) {
+        const output = runProgram(result.program, result.inputs, caps, programs);
+        return {status: "executed", value: output, program: result.program, inputs: result.inputs};
+      }
+      // Planner couldn't resolve relation - check learned programs by name match
+      if (programs) {
+        const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+        const relationNorm = normalize(parsed.relation);
+        const match = programs.all().find(p => {
+          const idNorm = normalize(p.id);
+          return idNorm.includes(relationNorm) || relationNorm.includes(idNorm.replace("learned", ""));
+        });
+        if (match) {
+          const inputs = parsed.args.map(a => (a as Extract<ParsedArg, {kind:"value"}>).value);
+          try {
+            const output = runProgram(match, inputs, caps, programs);
+            return {status: "executed", value: output, program: match, inputs};
+          } catch {}
+        }
+      }
+      return {status: "unresolved", reason: result.error};
     }
     // Has input placeholders - fall through to legacy intent system which handles prompting
   }
