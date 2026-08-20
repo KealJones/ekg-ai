@@ -133,8 +133,9 @@ export class EkgCli {
       const capSummary=allCaps.length>50?allCaps.slice(0,50).join("\n")+`\n... and ${allCaps.length-50} more`:allCaps.join("\n");
       const knownRelations=[...new Set(PORTABLE_SEMANTIC_CATALOG.map(d=>d.relation))];
 
+      const existingProgs=this.brain.programs.all().map(p=>`${p.id}: ${p.name??""} (${p.inputs.map(renderType).join(",")}) -> ${renderType(p.output)}`);
       this.io.line(round===0?"Asking Teacher...":"Retrying with new knowledge...");
-      const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations);
+      const lesson=askTeacherStructured(rawUtterance,capSummary,knownRelations,existingProgs);
       if(!lesson) break;
 
       teacherAnswer=lesson.answer;
@@ -188,6 +189,7 @@ export class EkgCli {
     const safe=(s:string)=>s.toLowerCase().replace(/[^a-z0-9._-]+/g,"-").replace(/^-|-$/g,"").slice(0,100);
     for(const bp of lesson.blueprints??[]){
       try{
+        if(this.programs.get(bp.id)) continue;
         const program={id:bp.id,name:bp.description,inputs:bp.inputs as any[],output:bp.output as any,body:bp.body,provenance:["teacher:llm-blueprint",`utterance:${utterance}`]};
         validateProgram(program,this.caps,this.programs);
         const relation=`Learned_${safe(bp.id)}`;

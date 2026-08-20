@@ -92,7 +92,7 @@ export function teacherProviderName(provider?: TeacherProvider): string {
   return findAvailableProvider(provider ?? "auto")?.name ?? "none";
 }
 
-export function askTeacherStructured(utterance: string, capabilitySummary: string, knownRelations: string[], provider?: TeacherProvider): TeacherLesson | undefined {
+export function askTeacherStructured(utterance: string, capabilitySummary: string, knownRelations: string[], existingPrograms?: string[], provider?: TeacherProvider): TeacherLesson | undefined {
   const config = findAvailableProvider(provider ?? (process.env.EKG_TEACHER as TeacherProvider | undefined) ?? "auto");
   if (!config) return undefined;
 
@@ -101,7 +101,10 @@ export function askTeacherStructured(utterance: string, capabilitySummary: strin
 After you respond, EKG will learn what you taught and RETRY the utterance. If it still fails, you'll be called again. Teach one useful thing per round.
 
 USER SAID: "${utterance}"
-
+${existingPrograms && existingPrograms.length > 0 ? `
+EKG ALREADY HAS THESE LEARNED PROGRAMS (do NOT re-teach these, use them instead):
+${existingPrograms.join("\n")}
+` : ""}
 EKG'S CAPABILITIES (use EXACT IDs only):
 ${capabilitySummary}
 
