@@ -13,9 +13,10 @@ import { buildIntentTeacherContext } from "../intent/language-impasse.js";
 import { runProgram } from "../runtime/interpreter.js";
 import { teachSynonym, storeLexicalSense, lexicalSensesForText } from "../intent/lexicon.js";
 import { dispatchUtterance } from "../intent/semantic-dispatch.js";
-import { askTeacherStructured, isTeacherAvailable, type TeacherBlueprint } from "./teacher-transport.js";
+import { askTeacherStructured, isTeacherAvailable, type TeacherBlueprint, type TeacherConstruction } from "./teacher-transport.js";
 import { assertWorldFact } from "../language/world-language.js";
 import { PORTABLE_SEMANTIC_CATALOG } from "../intent/semantic-catalog.js";
+import { parseConstructionPattern, storeConstruction, type ConstructionMeaning } from "../intent/construction.js";
 import { validateProgram } from "../ir/validate.js";
 import type { IntentInterpretation } from "../intent/intent.js";
 import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
@@ -184,7 +185,7 @@ export class EkgCli {
     this.persistLearnedProgram(plan.program,interpreted.intent.id,rawUtterance,interpreted.intent.constraints.map(c=>c.relation));
   }
 
-  private learnFromTeacher(lesson:{groundings:Array<{form:string;relation:string;definition?:string;impliedValue?:number;questionFor?:string}>;capabilityMappings?:Array<{form:string;capabilityId:string;relation:string;definition?:string}>;blueprints?:Array<TeacherBlueprint>;facts:Array<{subject:string;predicate:string;object:string}>;synonyms:Array<{newForm:string;knownForm:string}>},utterance:string):string[]{
+  private learnFromTeacher(lesson:{groundings:Array<{form:string;relation:string;definition?:string;impliedValue?:number;questionFor?:string}>;capabilityMappings?:Array<{form:string;capabilityId:string;relation:string;definition?:string}>;blueprints?:Array<TeacherBlueprint>;constructions?:Array<TeacherConstruction>;facts:Array<{subject:string;predicate:string;object:string}>;synonyms:Array<{newForm:string;knownForm:string}>},utterance:string):string[]{
     const learned:string[]=[];
     const safe=(s:string)=>s.toLowerCase().replace(/[^a-z0-9._-]+/g,"-").replace(/^-|-$/g,"").slice(0,100);
     for(const bp of lesson.blueprints??[]){
@@ -241,6 +242,14 @@ export class EkgCli {
         if(existing.length>0) continue;
         teachSynonym(this.brain.graph,{form:s.newForm,knownForm:s.knownForm,provenance:["teacher:llm-structured",`utterance:${utterance}`]});
         learned.push(`synonym: ${s.newForm} = ${s.knownForm}`);
+      }catch{}
+    }
+    for(const c of lesson.constructions??[]){
+      try{
+        const pattern=parseConstructionPattern(c.pattern);
+        const id=`construction:teacher:${safe(c.pattern)}`;
+        storeConstruction(this.brain.graph,{id,pattern,meaning:c.meaning as ConstructionMeaning,confidence:.85,provenance:["teacher:llm-construction",`utterance:${utterance}`],examples:c.examples});
+        learned.push(`grammar: ${c.pattern}`);
       }catch{}
     }
     return learned;
