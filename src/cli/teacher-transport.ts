@@ -145,12 +145,12 @@ Types: {"kind":"int"}, {"kind":"string"}, {"kind":"bool"}, {"kind":"json"}, {"ki
 host.bash(command) returns json with stdout/stderr/exitCode - use it for anything the typed capabilities can't do directly (formatting, system commands, file operations, etc).
 
 TEACHING RULES:
-- If an EXISTING learned program can handle the task (check the list above), DO NOT create a new blueprint. Instead teach groundings/synonyms/capabilityMappings that help EKG FIND the existing program.
-- Only create a NEW blueprint when no existing program does what's needed, or the task requires a genuinely different procedure.
-- If the user's request is a VARIANT of something EKG can already do (like "12 hour format" vs "24 hour"), create a new blueprint ONLY for the variant, with a DIFFERENT id, and teach a grounding that distinguishes the variant from the base.
+- If an EXISTING learned program can handle the task, DO NOT create a new blueprint. Instead teach groundings/synonyms that help EKG FIND the existing program.
+- Only create a NEW blueprint when no existing program does what's needed.
+- If the task is a VARIANT (like "12h format" vs "24h"), create a new blueprint with a DIFFERENT id.
 - Use ONLY capability IDs from the list. Never invent IDs.
 - facts are ONLY for timeless knowledge (NEVER current time/date/weather/prices).
-- All arrays can be empty. Prefer teaching the minimum needed.`;
+- BE GENEROUS WITH GROUNDINGS. Teach as many word meanings, synonyms, and related terms as you can think of. Every word you ground is one less future Teacher call. Think of all the ways a user might phrase this request and ground every key word. Include verb forms, noun forms, adjectives, slang, abbreviations, and related concepts.`;
 
   const result = config.run(prompt);
   if (!result) return undefined;
