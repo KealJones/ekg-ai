@@ -15,11 +15,19 @@ export interface TeacherBlueprint {
   phrases?: string[];
 }
 
+export interface TeacherConstruction {
+  pattern: string;
+  meaningKind: "fact-assert" | "fact-query" | "capability-command" | "conversational";
+  meaning: Record<string, unknown>;
+  examples?: string[];
+}
+
 export interface TeacherLesson {
   answer: string;
   groundings: Array<{form: string; relation: string; definition?: string; impliedValue?: number; questionFor?: string}>;
   capabilityMappings: Array<{form: string; capabilityId: string; relation: string; definition?: string}>;
   blueprints: Array<TeacherBlueprint>;
+  constructions: Array<TeacherConstruction>;
   facts: Array<{subject: string; predicate: string; object: string}>;
   synonyms: Array<{newForm: string; knownForm: string}>;
 }
@@ -116,6 +124,7 @@ Respond with ONLY valid JSON (no markdown, no backticks, no extra text):
   "groundings": [{"form": "word", "relation": "Relation", "definition": "meaning"}],
   "capabilityMappings": [{"form": "trigger_word", "capabilityId": "exact.cap.id", "relation": "RelationName", "definition": "what it does"}],
   "blueprints": [<see format below>],
+  "constructions": [<see format below>],
   "facts": [{"subject": "entity", "predicate": "relation", "object": "value"}],
   "synonyms": [{"newForm": "new_word", "knownForm": "known_word"}]
 }
@@ -144,13 +153,23 @@ Types: {"kind":"int"}, {"kind":"string"}, {"kind":"bool"}, {"kind":"json"}, {"ki
 
 host.bash(command) returns json with stdout/stderr/exitCode - use it for anything the typed capabilities can't do directly (formatting, system commands, file operations, etc).
 
+CONSTRUCTION FORMAT - grammar patterns that map sentence structures to meanings:
+{
+  "pattern": "{subject:entity} wants to {action:action} the {object:entity}",
+  "meaningKind": "fact-assert",
+  "meaning": {"predicate": "wants_to", "subject": "subject", "object": "object"},
+  "examples": ["Ava wants to eat the apple", "Liam wants to read the book"]
+}
+Pattern slots: {name:type} where type is entity|action|value|modifier|question. Add * for multi-word: {mod*} matches multiple words. Constructions teach EKG new sentence structures so it can understand novel phrasings without a Teacher call.
+
 TEACHING RULES:
 - If an EXISTING learned program can handle the task, DO NOT create a new blueprint. Instead teach groundings/synonyms that help EKG FIND the existing program.
 - Only create a NEW blueprint when no existing program does what's needed.
 - If the task is a VARIANT (like "12h format" vs "24h"), create a new blueprint with a DIFFERENT id.
 - Use ONLY capability IDs from the list. Never invent IDs.
 - facts are ONLY for timeless knowledge (NEVER current time/date/weather/prices).
-- BE GENEROUS WITH GROUNDINGS. Teach as many word meanings, synonyms, and related terms as you can think of. Every word you ground is one less future Teacher call. Think of all the ways a user might phrase this request and ground every key word. Include verb forms, noun forms, adjectives, slang, abbreviations, and related concepts.`;
+- BE GENEROUS WITH GROUNDINGS. Teach as many word meanings, synonyms, and related terms as you can think of. Every word you ground is one less future Teacher call. Include verb forms, noun forms, adjectives, slang, abbreviations.
+- TEACH CONSTRUCTIONS for new sentence patterns EKG doesn't recognize yet. Every construction you teach is an entire category of future utterances EKG can handle without you. Think about the general pattern, not just the specific sentence.`;
 
   const result = config.run(prompt);
   if (!result) return undefined;
@@ -162,10 +181,11 @@ TEACHING RULES:
     parsed.groundings = Array.isArray(parsed.groundings) ? parsed.groundings.filter(g => typeof g.form === "string" && typeof g.relation === "string") : [];
     parsed.capabilityMappings = Array.isArray(parsed.capabilityMappings) ? parsed.capabilityMappings.filter(m => typeof m.form === "string" && typeof m.capabilityId === "string" && typeof m.relation === "string") : [];
     parsed.blueprints = Array.isArray(parsed.blueprints) ? parsed.blueprints.filter(b => typeof b.id === "string" && b.body && Array.isArray(b.inputs) && b.output) : [];
+    parsed.constructions = Array.isArray(parsed.constructions) ? parsed.constructions.filter(c => typeof c.pattern === "string" && typeof c.meaningKind === "string" && c.meaning) : [];
     parsed.facts = Array.isArray(parsed.facts) ? parsed.facts.filter(f => typeof f.subject === "string" && typeof f.predicate === "string" && typeof f.object === "string") : [];
     parsed.synonyms = Array.isArray(parsed.synonyms) ? parsed.synonyms.filter(s => typeof s.newForm === "string" && typeof s.knownForm === "string") : [];
     return parsed;
   } catch {
-    return { answer: result, groundings: [], capabilityMappings: [], blueprints: [], facts: [], synonyms: [] };
+    return { answer: result, groundings: [], capabilityMappings: [], blueprints: [], constructions: [], facts: [], synonyms: [] };
   }
 }
