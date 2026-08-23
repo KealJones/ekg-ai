@@ -17,6 +17,8 @@ import { askTeacherStructured, isTeacherAvailable, type TeacherBlueprint, type T
 import { assertWorldFact } from "../language/world-language.js";
 import { PORTABLE_SEMANTIC_CATALOG } from "../intent/semantic-catalog.js";
 import { parseConstructionPattern, storeConstruction, type ConstructionMeaning } from "../intent/construction.js";
+import { installSeedConstructions } from "../intent/construction-catalog.js";
+import { teachStarterWorldLexicon } from "../intent/lexicon.js";
 import { validateProgram } from "../ir/validate.js";
 import type { IntentInterpretation } from "../intent/intent.js";
 import type { Value, ProgramBlueprint } from "../ir/blueprint.js";
@@ -317,6 +319,7 @@ export class EkgCli {
       case "/experience": return this.experience(args);
       case "/save": this.brain.save(); this.io.line(`Saved ${this.brain.filePath}`); return;
       case "/export-seed": return this.exportSeed(args);
+      case "/rebuild": return this.rebuild();
       case "/teacher": return this.teacher(args);
       case "/teach": return this.teach(args);
       case "/run": return this.runLearned(args);
