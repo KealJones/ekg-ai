@@ -212,15 +212,15 @@ A lexical form is not its meaning. EKG keeps explicit senses and may learn conte
 ### Prerequisites
 
 - Node.js 18+
-- npm
+- pnpm
 
 ### Install and run
 
 ```bash
 git clone https://github.com/kealjones/ekg-ai.git
 cd ekg-ai
-npm install
-npm run ekg
+pnpm install
+pnpm run ekg
 ```
 
 On first run, EKG loads a **seed brain** with a pre-installed English vocabulary (~248 lexemes, grammar rules, and inference rules), so it understands language immediately - no training step required.
@@ -314,16 +314,16 @@ notes.txt                            (second time: runs learned program directly
 By default, EKG uses an in-memory graph backed by a JSON file. If you install the optional LadybugDB native module, it auto-upgrades to an embedded graph database with OpenCypher queries.
 
 ```bash
-npm run ekg -- --backend ladybug    # force LadybugDB (needs @ladybugdb/core)
-npm run ekg -- --backend memory     # force JSON file
-npm run ekg -- --backend auto       # default: LadybugDB if available, else JSON
+pnpm run ekg -- --backend ladybug    # force LadybugDB (needs @ladybugdb/core)
+pnpm run ekg -- --backend memory     # force JSON file
+pnpm run ekg -- --backend auto       # default: LadybugDB if available, else JSON
 ```
 
 ### Run the benchmarks
 
 ```bash
-npm run benchmark:ekg             # developmental report card (bAbI + object milestones)
-npm run benchmark:search-v2       # synthesis engine speed comparison
+pnpm run benchmark:ekg             # developmental report card (bAbI + object milestones)
+pnpm run benchmark:search-v2       # synthesis engine speed comparison
 ```
 
 EKGBench is a developmental curriculum, not a pass/fail exam. Red benchmarks tell you which concepts haven't been taught yet.
@@ -331,11 +331,11 @@ EKGBench is a developmental curriculum, not a pass/fail exam. Red benchmarks tel
 ## Development
 
 ```bash
-npm test                          # full suite (190 tests)
-npm run benchmark:ekg             # developmental report card
-npm run benchmark:search-v2       # synthesis engine benchmark
-npm run test:ladybug              # LadybugDB mock tests
-npm run test:ladybug:integration  # real native round-trip (needs @ladybugdb/core)
+pnpm test                          # full suite (190 tests)
+pnpm run benchmark:ekg             # developmental report card
+pnpm run benchmark:search-v2       # synthesis engine benchmark
+pnpm run test:ladybug              # LadybugDB mock tests
+pnpm run test:ladybug:integration  # real native round-trip (needs @ladybugdb/core)
 ```
 
 ## Further reading
